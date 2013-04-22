@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>eu.inmite.android.lib</groupId>
+	<artifactId>android-styled-dialogs</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>apklib</packaging>
+
+	<name>Android StyledDialogs library</name>
+	<description>This library makes styling dialogs easy. They are compatible with Holo design and Android Design
+		Guidelines, but allow custom colors and same look from Android 2.2+, which is normally hard to do. The library
+		also contains some most common dialogs like MessageDialog, YesNoDialog etc.
+	</description>
+
+
+	<properties>
+		<apk.skipProguard>true</apk.skipProguard>
+	</properties>
+
+
+	<organization>
+		<name>Inmite.eu</name>
+		<url>http://www.inmite.eu</url>
+	</organization>
+
+	<developers>
+		<developer>
+			<name>David Vávra</name>
+			<email>david@inmite.eu</email>
+			<roles>
+				<role>developer</role>
+			</roles>
+		</developer>
+	</developers>
+	<url>https://bitbucket.org/inmite/android-styleddialogs</url>
+
+	<issueManagement>
+		<system>Bitbucket</system>
+		<url>https://bitbucket.org/inmite/android-styleddialogs/issues?status=new&amp;status=open</url>
+	</issueManagement>
+
+
+	<dependencies>
+
+	<!--	<dependency>
+			<groupId>com.google.android</groupId>
+			<artifactId>android</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.android</groupId>
+			<artifactId>support-v4</artifactId>
+		</dependency>    -->
+
+		<dependency>
+			<groupId>com.actionbarsherlock</groupId>
+			<artifactId>library</artifactId>
+			<version>4.2.0</version>
+			<type>apklib</type>
+		</dependency>
+
+	</dependencies>
+
+</project>
