@@ -12,6 +12,7 @@ gen
 *.ipr
 *.iws
 classes
+.idea
 out
 gen-external-apklibs
 
