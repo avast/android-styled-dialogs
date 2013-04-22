@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/sdl__button_panel"
+	style="@style/SDL.Group"
+	>
+
+	<View style="@style/SDL.HorizontalSeparator"/>
+
+	<LinearLayout
+		android:id="@+id/dialog_button_panel"
+		style="@style/SDL.Group.Horizontal">
+	</LinearLayout>
+</LinearLayout>

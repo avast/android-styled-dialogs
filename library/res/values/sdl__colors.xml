@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+	<color name="sdl__button_text">#FFFFFF</color>
+	<color name="sdl__message_text">#FFFFFF</color>
+	<color name="sdl__title_text">#F8A500</color>
+</resources>

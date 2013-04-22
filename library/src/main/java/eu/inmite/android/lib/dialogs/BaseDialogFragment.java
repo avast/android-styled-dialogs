@@ -1,39 +1,37 @@
-package eu.inmite.android.lib.dialogs;
+package main.java.eu.inmite.android.lib.dialogs;
 
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
-import com.actionbarsherlock.app.SherlockDialogFragment;
-import eu.inmite.android.fw.activity.BaseActivity;
-import eu.inmite.apps.smsjizdenka.R;
+import eu.inmite.android.lib.dialogs.R;
 
 import java.util.List;
 
 /**
- * Custom dialog, same design on Android 2.2+.
+ * Base dialog fragment for all your dialogs, stylable and same design on Android 2.2+.
  *
  * @author David Vávra (david@inmite.eu)
  */
-public abstract class BaseDialogFragment extends SherlockDialogFragment {
+public abstract class BaseDialogFragment extends DialogFragment {
 
-	protected BaseActivity c;
+	protected FragmentActivity c;
 
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		this.c = (BaseActivity) activity;
+		this.c = (FragmentActivity) activity;
 	}
 
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		return new Dialog(c, R.style.dialog);
+		return new Dialog(c, R.style.SDL_Dialog);
 	}
 
 	@Override
@@ -160,11 +158,11 @@ public abstract class BaseDialogFragment extends SherlockDialogFragment {
 		public View create() {
 			View v = getDialogLayoutAndInitTitle();
 
-			LinearLayout content = (LinearLayout) v.findViewById(R.id.content);
+			LinearLayout content = (LinearLayout) v.findViewById(R.id.sdl__content);
 
 			if (mMessage != null) {
 				View viewMessage = mInflater.inflate(R.layout.dialog_part_message, content, false);
-				TextView tvMessage = (TextView) viewMessage.findViewById(R.id.message);
+				TextView tvMessage = (TextView) viewMessage.findViewById(R.id.sdl__message);
 				tvMessage.setText(mMessage);
 				content.addView(viewMessage);
 			}
@@ -172,7 +170,7 @@ public abstract class BaseDialogFragment extends SherlockDialogFragment {
 			if (mView != null) {
 				if (mView != null) {
 					FrameLayout customPanel = (FrameLayout) mInflater.inflate(R.layout.dialog_part_custom, content, false);
-					FrameLayout custom = (FrameLayout) customPanel.findViewById(R.id.custom);
+					FrameLayout custom = (FrameLayout) customPanel.findViewById(R.id.sdl__custom);
 					custom.addView(mView, new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 					if (mViewSpacingSpecified) {
 						custom.setPadding(mViewSpacingLeft, mViewSpacingTop, mViewSpacingRight, mViewSpacingBottom);
@@ -182,13 +180,15 @@ public abstract class BaseDialogFragment extends SherlockDialogFragment {
 			}
 
 			if (mItemsList != null) {
+				/**
+				 * TODO
 				ListAdapter adapter = new ArrayAdapter<String>(mContext, R.layout.item_city, R.id.list_item_text,
 						mItemsList);
 
 				ListView list = (ListView) mInflater.inflate(R.layout.dialog_part_list, content, false);
 				list.setAdapter(adapter);
 				list.setOnItemClickListener(mOnItemClickListener);
-				content.addView(list);
+				content.addView(list);   */
 			}
 			addButtons(content);
 
@@ -197,8 +197,8 @@ public abstract class BaseDialogFragment extends SherlockDialogFragment {
 
 		private View getDialogLayoutAndInitTitle() {
 			View v = mInflater.inflate(R.layout.dialog_part_title, mContainer, false);
-			TextView tvTitle = (TextView) v.findViewById(R.id.title);
-			View viewTitleDivider = v.findViewById(R.id.titleDivider);
+			TextView tvTitle = (TextView) v.findViewById(R.id.sdl__title);
+			View viewTitleDivider = v.findViewById(R.id.sdl__titleDivider);
 			if (mTitle != null) {
 				tvTitle.setText(mTitle);
 			} else {
@@ -206,18 +206,6 @@ public abstract class BaseDialogFragment extends SherlockDialogFragment {
 				viewTitleDivider.setVisibility(View.GONE);
 			}
 			return v;
-		}
-
-		/**
-		 * Allow enable/disable possitive button.
-		 * This methos is available after call {@link #create()}.
-		 *
-		 * @param enabled
-		 */
-		public void setPossitiveButtonEnabled(boolean enabled) {
-			if (vPossitiveButton != null) {
-				vPossitiveButton.setEnabled(enabled);
-			}
 		}
 
 		private void addButtons(LinearLayout llListDialog) {
@@ -244,7 +232,7 @@ public abstract class BaseDialogFragment extends SherlockDialogFragment {
 					if (mNegativeButtonText != null || mNeutralButtonText != null) {
 						addDivider(llButtonPanel);
 					}
-					vPossitiveButton = (Button) mInflater.inflate(R.layout.dialog_part_button_important, llButtonPanel, false);
+					vPossitiveButton = (Button) mInflater.inflate(R.layout.dialog_part_button, llButtonPanel, false);
 					vPossitiveButton.setText(mPositiveButtonText);
 					vPossitiveButton.setOnClickListener(mPositiveButtonListener);
 					llButtonPanel.addView(vPossitiveButton);

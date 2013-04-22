@@ -4,6 +4,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
+	<parent>
+		<groupId>eu.inmite.maven</groupId>
+		<artifactId>imt-maven-android</artifactId>
+		<version>0.1.0-SNAPSHOT</version>
+	</parent>
+
 	<groupId>eu.inmite.android.lib</groupId>
 	<artifactId>android-styled-dialogs</artifactId>
 	<version>1.0-SNAPSHOT</version>
@@ -45,22 +51,16 @@
 
 	<dependencies>
 
-	<!--	<dependency>
+		<dependency>
 			<groupId>com.google.android</groupId>
 			<artifactId>android</artifactId>
 			<scope>provided</scope>
 		</dependency>
 
-		<dependency>
+
+        <dependency>
 			<groupId>com.google.android</groupId>
 			<artifactId>support-v4</artifactId>
-		</dependency>    -->
-
-		<dependency>
-			<groupId>com.actionbarsherlock</groupId>
-			<artifactId>actionbarsherlock</artifactId>
-			<version>4.3.0</version>
-			<type>apklib</type>
 		</dependency>
 
 	</dependencies>

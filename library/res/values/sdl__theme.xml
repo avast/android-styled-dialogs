@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<style name="SDL"/>
+
+	<style name="SDL.Dialog">
+		<item name="android:windowFrame">@null</item>
+		<item name="android:windowIsFloating">true</item>
+		<item name="android:windowNoTitle">true</item>
+		<item name="android:windowBackground">@drawable/dialog_bg</item>
+	</style>
+
+	<style name="SDL.Group">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">match_parent</item>
+		<item name="android:orientation">vertical</item>
+	</style>
+
+	<style name="SDL.Group.Content">
+		<item name="android:layout_height">0dp</item>
+		<item name="android:layout_weight">1</item>
+		<item name="android:gravity">center</item>
+	</style>
+
+	<style name="SDL.Group.Horizontal">
+		<item name="android:orientation">horizontal</item>
+	</style>
+
+	<style name="SDL.Group.Wrap">
+		<item name="android:layout_height">wrap_content</item>
+	</style>
+
+	<style name="SDL.HorizontalSeparator">
+		<item name="android:layout_width">1dp</item>
+		<item name="android:layout_height">match_parent</item>
+		<item name="android:layout_marginBottom">1dp</item>
+		<item name="android:background">@drawable/dialog_separator</item>
+	</style>
+
+	<style name="SDL.ButtonSeparator">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">1dp</item>
+		<item name="android:background">@drawable/dialog_separator</item>
+	</style>
+
+	<style name="SDL.TitleSeparator">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">2dp</item>
+		<item name="android:background">@drawable/dialog_separator_header</item>
+	</style>
+
+	<style name="SDL.Button" parent="@android:style/Widget.Button">
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:textColor">@color/sdl__button_text</item>
+		<item name="android:padding">@dimen/grid_3</item>
+		<item name="android:minHeight">48dip</item>
+		<item name="android:minWidth">64dip</item>
+		<item name="android:paddingLeft">4dip</item>
+		<item name="android:paddingRight">4dip</item>
+		<item name="android:layout_width">0dp</item>
+		<item name="android:layout_weight">1</item>
+		<item name="android:background">@drawable/dialog_button</item>
+		<item name="android:textSize">15dp</item>
+		<item name="android:textStyle">normal</item>
+	</style>
+
+	<style name="SDL.DatePicker">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_gravity">center</item>
+		<item name="android:spinnersShown">true</item>
+		<item name="android:calendarViewShown">false</item>
+	</style>
+
+	<style name="SDL.ListView">
+		<item name="android:divider">@drawable/dialog_separator</item>
+	</style>
+
+	<style name="SDL.TextView" parent="@android:style/Widget.TextView">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+	</style>
+
+	<style name="SDL.TextView.Message">
+		<item name="android:textColor">@color/sdl__message_text</item>
+		<item name="android:textSize">15dp</item>
+		<item name="android:layout_marginTop">@dimen/grid_3</item>
+		<item name="android:layout_marginBottom">@dimen/grid_5</item>
+		<item name="android:layout_marginLeft">@dimen/grid_4</item>
+		<item name="android:layout_marginRight">@dimen/grid_4</item>
+	</style>
+
+	<style name="SDL.TextView.Title">
+		<item name="android:maxLines">1</item>
+		<item name="android:scrollHorizontally">true</item>
+		<item name="android:textColor">@color/sdl__title_text</item>
+		<item name="android:textSize">23dp</item>
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_marginLeft">@dimen/grid_4</item>
+		<item name="android:layout_marginRight">@dimen/grid_4</item>
+		<item name="android:layout_marginTop">@dimen/grid_6</item>
+		<item name="android:layout_marginBottom">@dimen/grid_5</item>
+	</style>
+
+</resources>
