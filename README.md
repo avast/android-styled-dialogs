@@ -2,7 +2,7 @@
 
 This library makes styling dialogs easy. They are compatible with Holo design and Android Design Guidelines, but allow custom colors and same look from Android 2.2+, which is normally hard to do. Dialogs have same API as native Android DialogFragments.
 
-The library also contains SimpleDialogFragment class, which makes creating custom dialogs one-line of code. It also contains demo app which shows all posibilities of the library. 
+The library also contains `SimpleDialogFragment` class, which makes creating custom dialogs one-line of code. It also contains demo app which shows all posibilities of the library. 
 
 ## How to include it in your project:
 
@@ -26,7 +26,7 @@ Simply put colors you want to change into your colors.xml. Everything is optiona
 	<color name="dialog_button_focused">#4C0099cc</color> <!-- 30 % opacity -->
 	<color name="dialog_button_separator">#12ffffff</color> <!-- 7% opacity -->
 
-Only drawable resource is dialog_bg.9.png - put it in your project to override default background of the dialog.
+Only drawable resource is `dialog_bg.9.png` - put it in your project to override default background of the dialog.
 
 ## How to create simple dialogs:
 
@@ -45,14 +45,14 @@ Easy:
 
 ### How to react on button press in your Activity/Fragment:
 
-Simply implement interface ISimpleDialogFragmentListener in your Activity/Fragment. I recommend similar pattern in your other (non-simple) DialogFragments.
+Simply implement interface `ISimpleDialogFragmentListener` in your Activity/Fragment. I recommend similar pattern in your other (non-simple) DialogFragments.
 
 ## How to create other (non-simple) DialogFragments:
 
 Extend BaseDialogFragment class and look at demo app implementation. It shows two types of those implementations:
 
- - FavoriteCharacterDialogFragment: showing list in the dialog using extending BaseDialogFragment
- - JayneHatDialogFragment: showing a custom view in the dialog using extending SimpleDialogFragment
+ - `FavoriteCharacterDialogFragment`: showing list in the dialog using extending `BaseDialogFragment`
+ - `JayneHatDialogFragment`: showing a custom view in the dialog using extending `SimpleDialogFragment`
 
 ### What can you set in a DialogFragment
  - title
