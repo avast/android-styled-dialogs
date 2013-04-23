@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <resources>
-	<color name="sdl__button_text">#FFFFFF</color>
-	<color name="sdl__message_text">#FFFFFF</color>
-	<color name="sdl__title_text">#F8A500</color>
+	<color name="dialog_message_text">#FFFFFF</color>
+	<color name="dialog_title_text">#ff0099cc</color>
+	<color name="dialog_title_separator">#ff0099cc</color>
+	<color name="dialog_button_text">#FFFFFF</color>
+	<color name="dialog_button_normal">@android:color/transparent</color>
+	<color name="dialog_button_pressed">#990099cc</color> <!-- 60 % opacity -->
+	<color name="dialog_button_focused">#4C0099cc</color> <!-- 30 % opacity -->
+	<color name="dialog_button_separator">#12ffffff</color> <!-- 7% opacity -->
 </resources>

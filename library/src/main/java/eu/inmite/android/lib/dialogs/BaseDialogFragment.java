@@ -1,18 +1,25 @@
+/**
+ * Copyright (activity) ${year}, Inmite s.r.o. (www.inmite.eu). All rights reserved.
+ * <p/>
+ * This source code can be used only for purposes specified by the given license contract
+ * signed by the rightful deputy of Inmite s.r.o. This source code can be used only
+ * by the owner of the license.
+ * <p/>
+ * Any disputes arising in respect of this agreement (license) shall be brought
+ * before the Municipal Court of Prague.
+ */
+
 package main.java.eu.inmite.android.lib.dialogs;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 import eu.inmite.android.lib.dialogs.R;
-
-import java.util.List;
 
 /**
  * Base dialog fragment for all your dialogs, stylable and same design on Android 2.2+.
@@ -21,18 +28,18 @@ import java.util.List;
  */
 public abstract class BaseDialogFragment extends DialogFragment {
 
-	protected FragmentActivity c;
-
-	@Override
-	public void onAttach(Activity activity) {
-		super.onAttach(activity);
-		this.c = (FragmentActivity) activity;
-	}
-
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		return new Dialog(c, R.style.SDL_Dialog);
+		return new Dialog(getActivity(), R.style.SDL_Dialog);
 	}
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		Builder builder = new Builder(this, getActivity(), inflater, container);
+		return build(builder).create();
+	}
+
+	public abstract Builder build(Builder initialBuilder);
 
 	@Override
 	public void onDestroyView() {
@@ -42,6 +49,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
 		}
 		super.onDestroyView();
 	}
+
 	/**
 	 * Custom dialog builder
 	 */
@@ -66,7 +74,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
 		private int mViewSpacingRight;
 		private int mViewSpacingBottom;
 		private Button vPossitiveButton;
-		private List<String> mItemsList;
+		private ListAdapter mListAdapter;
 		private AdapterView.OnItemClickListener mOnItemClickListener;
 
 		public Builder(DialogFragment dialogFragment, Context context, LayoutInflater inflater, ViewGroup container) {
@@ -132,8 +140,8 @@ public abstract class BaseDialogFragment extends DialogFragment {
 			return this;
 		}
 
-		public Builder setItems(List<String> itemsList, final AdapterView.OnItemClickListener listener) {
-			mItemsList = itemsList;
+		public Builder setItems(ListAdapter listAdapter, final AdapterView.OnItemClickListener listener) {
+			mListAdapter = listAdapter;
 			mOnItemClickListener = listener;
 			return this;
 		}
@@ -168,27 +176,20 @@ public abstract class BaseDialogFragment extends DialogFragment {
 			}
 
 			if (mView != null) {
-				if (mView != null) {
-					FrameLayout customPanel = (FrameLayout) mInflater.inflate(R.layout.dialog_part_custom, content, false);
-					FrameLayout custom = (FrameLayout) customPanel.findViewById(R.id.sdl__custom);
-					custom.addView(mView, new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-					if (mViewSpacingSpecified) {
-						custom.setPadding(mViewSpacingLeft, mViewSpacingTop, mViewSpacingRight, mViewSpacingBottom);
-					}
-					content.addView(customPanel);
+				FrameLayout customPanel = (FrameLayout) mInflater.inflate(R.layout.dialog_part_custom, content, false);
+				FrameLayout custom = (FrameLayout) customPanel.findViewById(R.id.sdl__custom);
+				custom.addView(mView, new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+				if (mViewSpacingSpecified) {
+					custom.setPadding(mViewSpacingLeft, mViewSpacingTop, mViewSpacingRight, mViewSpacingBottom);
 				}
+				content.addView(customPanel);
 			}
 
-			if (mItemsList != null) {
-				/**
-				 * TODO
-				ListAdapter adapter = new ArrayAdapter<String>(mContext, R.layout.item_city, R.id.list_item_text,
-						mItemsList);
-
+			if (mListAdapter != null) {
 				ListView list = (ListView) mInflater.inflate(R.layout.dialog_part_list, content, false);
-				list.setAdapter(adapter);
+				list.setAdapter(mListAdapter);
 				list.setOnItemClickListener(mOnItemClickListener);
-				content.addView(list);   */
+				content.addView(list);
 			}
 			addButtons(content);
 

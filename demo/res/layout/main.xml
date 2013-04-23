@@ -7,10 +7,32 @@
 	>
 
 	<Button
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:text="Show message dialog"
-		android:id="@+id/show_message_dialog"
+		style="@style/Button"
+		android:text="SimpleDialog: message"
+		android:id="@+id/message_dialog"
+		/>
+
+	<Button
+		android:text="SimpleDialog: message and title"
+		android:id="@+id/message_title_dialog"
+		style="@style/Button"/>
+
+	<Button
+		style="@style/Button"
+		android:text="SimpleDialog: message, title and custom buttons"
+		android:id="@+id/message_title_buttons_dialog"
+		/>
+
+	<Button
+		style="@style/Button"
+		android:text="Dialog with list"
+		android:id="@+id/list_dialog"
+		/>
+
+	<Button
+		style="@style/Button"
+		android:text="Dialog with custom view"
+		android:id="@+id/custom_dialog"
 		/>
 </LinearLayout>
 
