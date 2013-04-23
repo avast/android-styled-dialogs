@@ -13,10 +13,10 @@ package eu.inmite.demo.dialogs;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
-import main.java.eu.inmite.android.lib.dialogs.SimpleDialogFragment;
+import eu.inmite.android.lib.dialogs.SimpleDialogFragment;
 
 /**
- * Sample implementation of BaseDialogFragment - custom view by extending {@link SimpleDialogFragment}.
+ * Sample implementation of eu.inmite.android.lib.dialogs.BaseDialogFragment - custom view by extending {@link SimpleDialogFragment}.
  *
  * @author David Vávra (david@inmite.eu)
  */

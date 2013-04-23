@@ -1,3 +1,4 @@
+package eu.inmite.android.lib.dialogs;
 /**
  * Copyright (activity) ${year}, Inmite s.r.o. (www.inmite.eu). All rights reserved.
  * <p/>
@@ -8,7 +9,6 @@
  * Any disputes arising in respect of this agreement (license) shall be brought
  * before the Municipal Court of Prague.
  */
-package main.java.eu.inmite.android.lib.dialogs;
 
 /**
  * Implement this interface in Activity or Fragment to react to positive and negative buttons.

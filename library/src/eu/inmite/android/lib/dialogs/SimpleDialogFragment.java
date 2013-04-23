@@ -1,3 +1,4 @@
+package eu.inmite.android.lib.dialogs;
 /*
  * Copyright (c) 2013. Inmite s.r.o. (www.inmite.eu).
  * All rights reserved. This source code can be used only for purposes specified
@@ -7,14 +8,11 @@
  * before the Municipal Court of Prague.
  */
 
-package main.java.eu.inmite.android.lib.dialogs;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 import android.view.View;
-import eu.inmite.android.lib.dialogs.R;
 
 /**
  * Dialog for displaying simple message, message with title or message with title and two buttons. Implement {@link

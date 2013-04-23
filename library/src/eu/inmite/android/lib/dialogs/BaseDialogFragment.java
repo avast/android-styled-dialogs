@@ -1,3 +1,4 @@
+package eu.inmite.android.lib.dialogs;
 /**
  * Copyright (activity) ${year}, Inmite s.r.o. (www.inmite.eu). All rights reserved.
  * <p/>
@@ -9,8 +10,6 @@
  * before the Municipal Court of Prague.
  */
 
-package main.java.eu.inmite.android.lib.dialogs;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -19,7 +18,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
-import eu.inmite.android.lib.dialogs.R;
 
 /**
  * Base dialog fragment for all your dialogs, stylable and same design on Android 2.2+.

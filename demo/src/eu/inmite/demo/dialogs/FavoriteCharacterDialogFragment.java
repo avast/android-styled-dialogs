@@ -17,10 +17,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
-import main.java.eu.inmite.android.lib.dialogs.BaseDialogFragment;
+import eu.inmite.android.lib.dialogs.BaseDialogFragment;
 
 /**
- * Sample implementation of BaseDialogFragment - styled list of items.
+ * Sample implementation of eu.inmite.android.lib.dialogs.BaseDialogFragment - styled list of items.
  *
  * @author David Vávra (david@inmite.eu)
  */
