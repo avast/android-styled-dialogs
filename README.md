@@ -34,15 +34,14 @@ Easy:
 
 ### Dialog with a simple message and Close button:
 
-   SimpleDialogFragment.show(this, R.string.message_1);
+	SimpleDialogFragment.show(this, R.string.message_1);
 
 ### Dialog with a title, message and Close button:
 
-   SimpleDialogFragment.show(this, R.string.message_2, R.string.title); 
+	SimpleDialogFragment.show(this, R.string.message_2, R.string.title); 
 
-### Dialog with a title, message and two buttons:
-
-   SimpleDialogFragment.show(this, c.getString(R.string.message_3), this.getString(R.string.title), this.getString(R.string.positive_button), this.getString(R.string.negative_button));
+### Dialog with a title, message and two buttons:	
+	SimpleDialogFragment.show(this, c.getString(R.string.message_3), this.getString(R.string.title), this.getString(R.string.positive_button), this.getString(R.string.negative_button));
 
 ### How to react on button press in your Activity/Fragment:
 
@@ -50,9 +49,10 @@ Simply implement interface ISimpleDialogFragmentListener in your Activity/Fragme
 
 ## How to create other (non-simple) DialogFragments:
 
-Extend BaseDialogFragment class - look at demo app implementation - it shows two types of those implementations:
- - FavoriteCharacterDialogFragment - showing list in the dialog using extending BaseDialogFragment
- - JayneHatDialogFragment - showing a custom view in the dialog using extending SimpleDialogFragment
+Extend BaseDialogFragment class and look at demo app implementation. It shows two types of those implementations:
+
+ - FavoriteCharacterDialogFragment: showing list in the dialog using extending BaseDialogFragment
+ - JayneHatDialogFragment: showing a custom view in the dialog using extending SimpleDialogFragment
 
 ### What can you set in a DialogFragment
  - title
