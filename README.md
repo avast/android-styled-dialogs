@@ -1,8 +1,13 @@
 # StyledDialogs library
 
-This library makes styling dialogs easy. They are compatible with Holo design and Android Design Guidelines, but allow custom colors and same look from Android 2.2+, which is normally hard to do. Dialogs have same API as native Android DialogFragments.
+This library makes styling and using dialogs _piece of cake_.
 
-The library also contains `SimpleDialogFragment` class, which makes creating custom dialogs one-line of code. It also contains demo app which shows all posibilities of the library. 
+Features:
+ - Compatible with Holo style and *Android Design Guidelines*
+ - Changing style for all dialogs by only changing *few color resources*
+ - Same look for *Android 2.2+*
+ - *Same API* as native Android DialogFragments
+ - `SimpleDialogFragment` class, which makes displaying simple dialogs *one line of code*
 
 ## How to include it in your project:
 
@@ -45,16 +50,16 @@ Easy:
 
 ### How to react on button press in your Activity/Fragment:
 
-Simply implement interface `ISimpleDialogFragmentListener` in your Activity/Fragment. I recommend similar pattern in your other (non-simple) DialogFragments.
+Simply implement interface `ISimpleDialogFragmentListener` in your Activity/Fragment. Similar pattern in your other DialogFragments is recommended.
 
 ## How to create other (non-simple) DialogFragments:
 
-Extend BaseDialogFragment class and look at demo app implementation. It shows two types of those implementations:
+Extend `BaseDialogFragment` and look at demo app implementation. It shows two types of those implementations:
 
- - `FavoriteCharacterDialogFragment`: showing list in the dialog using extending `BaseDialogFragment`
- - `JayneHatDialogFragment`: showing a custom view in the dialog using extending `SimpleDialogFragment`
+ - `FavoriteCharacterDialogFragment` shows list in the dialog using extending `BaseDialogFragment`
+ - `JayneHatDialogFragment` shows a custom view in the dialog using extending `SimpleDialogFragment`
 
-### What can you set in a DialogFragment
+### What can you setup in the dialog builder:
  - title
  - message
  - three buttons (positive, negative, neutral)
