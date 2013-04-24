@@ -3,13 +3,14 @@
 This library makes styling and using dialogs _piece of cake_.
 
 Features:
- * Compatible with Holo style and **Android Design Guidelines**
- * Changing style for all dialogs by only changing **few color resources**
- * Same look for **Android 2.2+**
- * **Same API** as native Android DialogFragments
- * `SimpleDialogFragment` class, which makes displaying simple dialogs **one line of code**
 
- ![Screenshot of the dialogs](screenshot.png)
+ - Compatible with Holo style and **Android Design Guidelines**
+ - Changing style for all dialogs by only changing **few color resources**
+ - Same look for **Android 2.2+**
+ - **Same API** as native Android DialogFragments
+ - `SimpleDialogFragment` class, which makes displaying simple dialogs **one line of code**
+
+ ![Screenshot of the dialogs](https://bitbucket.org/inmite/android-styleddialogs/downloads/screenshot.png)
 
 ## How to include it in your project:
 
