@@ -1,6 +1,6 @@
 # StyledDialogs library
 
-This library makes styling and using dialogs _piece of cake_.
+This library makes styling and using dialogs _a piece of cake_.
 
 Features:
 
@@ -9,6 +9,8 @@ Features:
  - Same look for **Android 2.2+**
  - **Same API** as native Android DialogFragments
  - `SimpleDialogFragment` class, which makes displaying simple dialogs **one line of code**
+
+ Screenshots:
 
  ![Screenshot of the dialogs](https://bitbucket.org/inmite/android-styleddialogs/downloads/screenshot.png)
 
