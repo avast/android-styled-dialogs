@@ -3,11 +3,13 @@
 This library makes styling and using dialogs _piece of cake_.
 
 Features:
- - Compatible with Holo style and *Android Design Guidelines*
- - Changing style for all dialogs by only changing *few color resources*
- - Same look for *Android 2.2+*
- - *Same API* as native Android DialogFragments
- - `SimpleDialogFragment` class, which makes displaying simple dialogs *one line of code*
+ * Compatible with Holo style and **Android Design Guidelines**
+ * Changing style for all dialogs by only changing **few color resources**
+ * Same look for **Android 2.2+**
+ * **Same API** as native Android DialogFragments
+ * `SimpleDialogFragment` class, which makes displaying simple dialogs **one line of code**
+
+ ![Screenshot of the dialogs](screenshot.png)
 
 ## How to include it in your project:
 
@@ -56,7 +58,7 @@ Simply implement interface `ISimpleDialogFragmentListener` in your Activity/Frag
 
 Extend `BaseDialogFragment` and look at demo app implementation. It shows two types of those implementations:
 
- - `FavoriteCharacterDialogFragment` shows list in the dialog using extending `BaseDialogFragment`
+ - `FavoriteCharacterDialogFragment` shows a list in the dialog using extending `BaseDialogFragment`
  - `JayneHatDialogFragment` shows a custom view in the dialog using extending `SimpleDialogFragment`
 
 ### What can you setup in the dialog builder:
