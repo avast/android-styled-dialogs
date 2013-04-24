@@ -5,12 +5,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>eu.inmite.maven</groupId>
-		<artifactId>imt-maven-android</artifactId>
-		<version>0.1.0-SNAPSHOT</version>
+		<groupId>eu.inmite.android.lib</groupId>
+		<artifactId>android-styled-dialogs-parent</artifactId>
+		<relativePath>../pom.xml</relativePath>
+		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
-	<groupId>eu.inmite.android.lib</groupId>
 	<artifactId>android-styled-dialogs</artifactId>
 	<version>0.5</version>
 	<packaging>apklib</packaging>
@@ -18,7 +18,7 @@
 	<name>Android StyledDialogs library</name>
 	<description>This library makes styling dialogs easy. They are compatible with Holo design and Android Design
 		Guidelines, but allow custom colors and same look from Android 2.2+, which is normally hard to do. The library
-		also contains some most common dialogs like MessageDialog, YesNoDialog etc.
+		also contains some most common dialogs.
 	</description>
 
 
@@ -56,7 +56,6 @@
 			<artifactId>android</artifactId>
 			<scope>provided</scope>
 		</dependency>
-
 
         <dependency>
 			<groupId>com.google.android</groupId>
