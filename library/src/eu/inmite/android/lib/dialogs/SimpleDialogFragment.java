@@ -24,10 +24,12 @@ import android.view.View;
 public class SimpleDialogFragment extends BaseDialogFragment {
 
 	public static String TAG = "message";
+
 	private static String ARG_MESSAGE = "message";
 	private static String ARG_TITLE = "title";
 	private static String ARG_POSITIVE_BUTTON = "positive_button";
 	private static String ARG_NEGATIVE_BUTTON = "negative_button";
+
 	protected ISimpleDialogListener mListener;
 
 	/**
@@ -36,8 +38,8 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 	 * @param activity parent Activity
 	 * @param message  message to display
 	 */
-	public static void show(FragmentActivity activity, String message) {
-		show(activity, message, null, activity.getString(R.string.dialog_close), null);
+	public static void show(FragmentActivity activity, Fragment fragment, String message) {
+		show(activity, fragment, message, null, activity.getString(R.string.dialog_close), null);
 	}
 
 	/**
@@ -46,8 +48,8 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 	 * @param activity  parent Activity
 	 * @param messageId message to display
 	 */
-	public static void show(FragmentActivity activity, int messageId) {
-		show(activity, activity.getString(messageId), null, activity.getString(R.string.dialog_close), null);
+	public static void show(FragmentActivity activity, Fragment fragment, int messageId) {
+		show(activity, fragment, activity.getString(messageId), null, activity.getString(R.string.dialog_close), null);
 	}
 
 	/**
@@ -57,8 +59,8 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 	 * @param message  message to display
 	 * @param title    title to display
 	 */
-	public static void show(FragmentActivity activity, String message, String title) {
-		show(activity, message, title, activity.getString(R.string.dialog_close), null);
+	public static void show(FragmentActivity activity, Fragment fragment, String message, String title) {
+		show(activity, fragment, message, title, activity.getString(R.string.dialog_close), null);
 	}
 
 	/**
@@ -68,8 +70,8 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 	 * @param messageId message to display
 	 * @param titleId   title to display
 	 */
-	public static void show(FragmentActivity activity, int messageId, int titleId) {
-		show(activity, activity.getString(messageId), activity.getString(titleId),
+	public static void show(FragmentActivity activity, Fragment fragment, int messageId, int titleId) {
+		show(activity, fragment, activity.getString(messageId), activity.getString(titleId),
 				activity.getString(R.string.dialog_close), null);
 	}
 
@@ -81,7 +83,7 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 	 * @param message  message to display
 	 * @param title    title to display
 	 */
-	public static void show(FragmentActivity activity, String message, String title, String positiveButtonText,
+	public static void show(FragmentActivity activity, Fragment targetFragment, String message, String title, String positiveButtonText,
 	                        String negativeButtonText) {
 		Bundle args = new Bundle();
 		args.putString(ARG_MESSAGE, message);
@@ -90,6 +92,9 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 		args.putString(ARG_NEGATIVE_BUTTON, negativeButtonText);
 		BaseDialogFragment fragment = new SimpleDialogFragment();
 		fragment.setArguments(args);
+		if (targetFragment != null) {
+			fragment.setTargetFragment(targetFragment, 0);
+		}
 		fragment.show(activity.getSupportFragmentManager(), TAG);
 	}
 

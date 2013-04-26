@@ -18,19 +18,19 @@ public class MyActivity extends FragmentActivity implements ISimpleDialogListene
 		findViewById(R.id.message_dialog).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				SimpleDialogFragment.show(c, R.string.message_1);
+				SimpleDialogFragment.show(c, null, R.string.message_1);
 			}
 		});
 		findViewById(R.id.message_title_dialog).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				SimpleDialogFragment.show(c, R.string.message_2, R.string.title);
+				SimpleDialogFragment.show(c, null, R.string.message_2, R.string.title);
 			}
 		});
 		findViewById(R.id.message_title_buttons_dialog).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				SimpleDialogFragment.show(c, c.getString(R.string.message_3),
+				SimpleDialogFragment.show(c, null, c.getString(R.string.message_3),
 						c.getString(R.string.title), c.getString(R.string.positive_button), c.getString(R.string.negative_button));
 			}
 		});
