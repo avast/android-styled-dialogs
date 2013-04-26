@@ -44,14 +44,14 @@ Easy:
 
 ### Dialog with a simple message and Close button:
 
-	SimpleDialogFragment.show(this, R.string.message_1);
+	SimpleDialogFragment.show(this, null, R.string.message_1);
 
 ### Dialog with a title, message and Close button:
 
-	SimpleDialogFragment.show(this, R.string.message_2, R.string.title); 
+	SimpleDialogFragment.show(this, null, R.string.message_2, R.string.title);
 
 ### Dialog with a title, message and two buttons:	
-	SimpleDialogFragment.show(this, c.getString(R.string.message_3), this.getString(R.string.title), this.getString(R.string.positive_button), this.getString(R.string.negative_button));
+	SimpleDialogFragment.show(this, null, c.getString(R.string.message_3), this.getString(R.string.title), this.getString(R.string.positive_button), this.getString(R.string.negative_button));
 
 ### How to react on button press in your Activity/Fragment:
 
