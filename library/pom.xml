@@ -12,7 +12,7 @@
 	</parent>
 
 	<artifactId>android-styled-dialogs</artifactId>
-	<version>0.5.1</version>
+	<version>0.5.2</version>
 	<packaging>apklib</packaging>
 
 	<name>Android StyledDialogs library</name>

@@ -23,6 +23,10 @@
 		<item name="android:orientation">vertical</item>
 	</style>
 
+	<style name="SDL.Group.ButtonPanel">
+		<item name="android:layout_height">wrap_content</item>
+	</style>
+
 	<style name="SDL.Group.Content">
 		<item name="android:layout_height">0dp</item>
 		<item name="android:layout_weight">1</item>
@@ -31,6 +35,10 @@
 
 	<style name="SDL.Group.Horizontal">
 		<item name="android:orientation">horizontal</item>
+	</style>
+
+	<style name="SDL.Group.Horizontal.ButtonPanel">
+		<item name="android:layout_height">wrap_content</item>
 	</style>
 
 	<style name="SDL.Group.Wrap">
@@ -80,7 +88,8 @@
 
 	<style name="SDL.ListView" parent="@android:style/Widget.ListView">
 		<item name="android:layout_width">match_parent</item>
-		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_height">match_parent</item>
+		<item name="android:layout_weight">1</item>
 		<item name="android:fadeScrollbars">true</item>
 		<item name="android:cacheColorHint">@null</item>
 		<item name="android:background">@android:color/transparent</item>

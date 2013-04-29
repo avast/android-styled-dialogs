@@ -66,6 +66,12 @@ public class FavoriteCharacterDialogFragment extends BaseDialogFragment {
 				}
 			}
 		});
+		builder.setPositiveButton("Cancel", new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+		   	    dismiss();
+			}
+		});
 		return builder;
 	}
 

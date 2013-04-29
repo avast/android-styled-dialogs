@@ -2,13 +2,13 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@+id/sdl__button_panel"
-	style="@style/SDL.Group"
+	style="@style/SDL.Group.ButtonPanel"
 	>
 
 	<View style="@style/SDL.HorizontalSeparator"/>
 
 	<LinearLayout
 		android:id="@+id/dialog_button_panel"
-		style="@style/SDL.Group.Horizontal">
+		style="@style/SDL.Group.Horizontal.ButtonPanel">
 	</LinearLayout>
 </LinearLayout>
