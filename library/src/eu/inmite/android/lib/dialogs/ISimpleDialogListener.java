@@ -1,6 +1,6 @@
 package eu.inmite.android.lib.dialogs;
 /**
- * Copyright (activity) ${year}, Inmite s.r.o. (www.inmite.eu). All rights reserved.
+ * Copyright (activity) 2013, Inmite s.r.o. (www.inmite.eu). All rights reserved.
  * <p/>
  * This source code can be used only for purposes specified by the given license contract
  * signed by the rightful deputy of Inmite s.r.o. This source code can be used only

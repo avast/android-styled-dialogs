@@ -23,7 +23,7 @@ import android.view.View;
  */
 public class SimpleDialogFragment extends BaseDialogFragment {
 
-	public static String TAG = "message";
+	public static String TAG = "simple_dialog";
 
 	private static String ARG_MESSAGE = "message";
 	private static String ARG_TITLE = "title";
