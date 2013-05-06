@@ -19,7 +19,7 @@ Features:
 	<dependency>
 		<groupId>eu.inmite.android.lib</groupId>
 		<artifactId>android-styled-dialogs</artifactId>
-		<version>0.5.2</version>
+		<version>0.5.3</version>
 		<type>apklib</type>
 	</dependency>
 

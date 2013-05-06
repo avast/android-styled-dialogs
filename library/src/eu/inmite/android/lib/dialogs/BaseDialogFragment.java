@@ -73,6 +73,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
 		private int mViewSpacingBottom;
 		private Button vPossitiveButton;
 		private ListAdapter mListAdapter;
+		private int mListCheckedItemIdx;
 		private AdapterView.OnItemClickListener mOnItemClickListener;
 
 		public Builder(DialogFragment dialogFragment, Context context, LayoutInflater inflater, ViewGroup container) {
@@ -138,9 +139,17 @@ public abstract class BaseDialogFragment extends DialogFragment {
 			return this;
 		}
 
-		public Builder setItems(ListAdapter listAdapter, final AdapterView.OnItemClickListener listener) {
+		/** Set list
+		 *
+		 * @param listAdapter
+		 * @param checkedItemIdx Item check by default, -1 if no item should be checked
+		 * @param listener
+		 * @return
+		 */
+		public Builder setItems(ListAdapter listAdapter, int checkedItemIdx, final AdapterView.OnItemClickListener listener) {
 			mListAdapter = listAdapter;
 			mOnItemClickListener = listener;
+			mListCheckedItemIdx = checkedItemIdx;
 			return this;
 		}
 
@@ -187,8 +196,12 @@ public abstract class BaseDialogFragment extends DialogFragment {
 				ListView list = (ListView) mInflater.inflate(R.layout.dialog_part_list, content, false);
 				list.setAdapter(mListAdapter);
 				list.setOnItemClickListener(mOnItemClickListener);
+				if (mListCheckedItemIdx != -1) {
+					list.setSelection(mListCheckedItemIdx);
+				}
 				content.addView(list);
 			}
+
 			addButtons(content);
 
 			return v;

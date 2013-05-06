@@ -57,7 +57,7 @@ public class FavoriteCharacterDialogFragment extends BaseDialogFragment {
 		ListAdapter adapter = new ArrayAdapter<String>(getActivity(), R.layout.item_list,
 				R.id.list_item_text,
 				getItems());
-		builder.setItems(adapter, new AdapterView.OnItemClickListener() {
+		builder.setItems(adapter, 0, new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				if (mListener != null) {

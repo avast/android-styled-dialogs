@@ -46,8 +46,7 @@ public class MyActivity extends FragmentActivity implements ISimpleDialogListene
 			public void onClick(View v) {
 				JayneHatDialogFragment.show(c);
 			}
-		}
-		);
+		});
 	}
 
 	@Override
