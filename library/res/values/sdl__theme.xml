@@ -113,8 +113,6 @@
 	</style>
 
 	<style name="SDL.TextView.Title">
-		<item name="android:maxLines">1</item>
-		<item name="android:scrollHorizontally">true</item>
 		<item name="android:textColor">@color/dialog_title_text</item>
 		<item name="android:textSize">23dp</item>
 		<item name="android:layout_width">match_parent</item>

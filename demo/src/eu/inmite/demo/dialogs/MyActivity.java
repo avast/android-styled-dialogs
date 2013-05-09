@@ -37,7 +37,7 @@ public class MyActivity extends FragmentActivity implements ISimpleDialogListene
 		findViewById(R.id.list_dialog).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				FavoriteCharacterDialogFragment.show(c, "Your favorite character:", new String[]{"Jayne", "Malcolm", "Kaylee",
+				FavoriteCharacterDialogFragment.show(c, "Your favorite character (some text added to make it longer):", new String[]{"Jayne", "Malcolm", "Kaylee",
 						"Wash", "Zoe", "River"});
 			}
 		});
