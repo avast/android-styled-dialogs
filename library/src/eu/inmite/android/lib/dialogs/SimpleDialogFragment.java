@@ -8,6 +8,7 @@ package eu.inmite.android.lib.dialogs;
  * before the Municipal Court of Prague.
  */
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -29,8 +30,11 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 	private static String ARG_TITLE = "title";
 	private static String ARG_POSITIVE_BUTTON = "positive_button";
 	private static String ARG_NEGATIVE_BUTTON = "negative_button";
+	private static String ARG_REQUEST_CODE = "request_code";
 
 	protected ISimpleDialogListener mListener;
+	protected ISimpleDialogCancelListener mCancelListener;
+	protected int mRequestCode;
 
 	/**
 	 * Shows dialog with supplied message and Close button.
@@ -85,16 +89,29 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 	 */
 	public static void show(FragmentActivity activity, Fragment targetFragment, String message, String title, String positiveButtonText,
 	                        String negativeButtonText) {
+		show(activity, targetFragment, 0, message, title, positiveButtonText, negativeButtonText);
+	}
+
+	public static void show(FragmentActivity activity, Fragment targetFragment, int requestCode, String message, String title, String positiveButtonText,
+	                        String negativeButtonText) {
+		show(activity, targetFragment, requestCode, message, title, positiveButtonText, negativeButtonText, true);
+	}
+
+	public static void show(FragmentActivity activity, Fragment targetFragment, int requestCode, String message, String title, String positiveButtonText,
+				String negativeButtonText, boolean cancelable) {
 		Bundle args = new Bundle();
 		args.putString(ARG_MESSAGE, message);
 		args.putString(ARG_TITLE, title);
 		args.putString(ARG_POSITIVE_BUTTON, positiveButtonText);
 		args.putString(ARG_NEGATIVE_BUTTON, negativeButtonText);
 		BaseDialogFragment fragment = new SimpleDialogFragment();
-		fragment.setArguments(args);
 		if (targetFragment != null) {
-			fragment.setTargetFragment(targetFragment, 0);
+			fragment.setTargetFragment(targetFragment, requestCode);
+		} else {
+			args.putInt(ARG_REQUEST_CODE, requestCode);
 		}
+		fragment.setArguments(args);
+		fragment.setCancelable(cancelable);
 		fragment.show(activity.getSupportFragmentManager(), TAG);
 	}
 
@@ -103,11 +120,27 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		final Fragment targetFragment = getTargetFragment();
-		if (targetFragment != null && targetFragment instanceof ISimpleDialogListener) {
-			mListener = (ISimpleDialogListener) targetFragment;
-		} else if (getActivity() instanceof ISimpleDialogListener) {
-			mListener = (ISimpleDialogListener) getActivity();
+		if (targetFragment != null) {
+			if (targetFragment instanceof ISimpleDialogListener) {
+				mListener = (ISimpleDialogListener) targetFragment;
+			}
+			if (targetFragment instanceof ISimpleDialogCancelListener) {
+				mCancelListener = (ISimpleDialogCancelListener) targetFragment;
+			}
+			mRequestCode = getTargetRequestCode();
+		} else {
+			if (getActivity() instanceof ISimpleDialogListener) {
+				mListener = (ISimpleDialogListener) getActivity();
+			}
+			if (getActivity() instanceof ISimpleDialogCancelListener) {
+				mCancelListener = (ISimpleDialogCancelListener) getActivity();
+			}
+			Bundle args = getArguments();
+			if (args != null) {
+				mRequestCode = args.getInt(ARG_REQUEST_CODE, 0);
+			}
 		}
+
 	}
 
 	/**
@@ -125,7 +158,7 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 				@Override
 				public void onClick(View view) {
 					if (mListener != null) {
-						mListener.onPositiveButtonClicked();
+						mListener.onPositiveButtonClicked(mRequestCode);
 					}
 					dismiss();
 				}
@@ -136,7 +169,7 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 				@Override
 				public void onClick(View view) {
 					if (mListener != null) {
-						mListener.onNegativeButtonClicked();
+						mListener.onNegativeButtonClicked(mRequestCode);
 					}
 					dismiss();
 				}
@@ -159,5 +192,13 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 
 	private String getNegativeButtonText() {
 		return getArguments().getString(ARG_NEGATIVE_BUTTON);
+	}
+
+	@Override
+	public void onCancel(DialogInterface dialog) {
+		super.onCancel(dialog);
+		if (mCancelListener != null) {
+			mCancelListener.onCancelled(mRequestCode);
+		}
 	}
 }

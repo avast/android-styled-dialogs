@@ -15,6 +15,6 @@ package eu.inmite.android.lib.dialogs;
  * @author David Vávra (david@inmite.eu)
  */
 public interface ISimpleDialogListener {
-	public void onPositiveButtonClicked();
-	public void onNegativeButtonClicked();
+	public void onPositiveButtonClicked(int requestCode);
+	public void onNegativeButtonClicked(int requestCode);
 }

@@ -36,7 +36,7 @@ public class JayneHatDialogFragment extends SimpleDialogFragment {
 			@Override
 			public void onClick(View v) {
 				if (mListener != null) {
-					mListener.onPositiveButtonClicked();
+					mListener.onPositiveButtonClicked(0);
 				}
 				dismiss();
 			}

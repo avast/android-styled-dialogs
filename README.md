@@ -19,7 +19,7 @@ Features:
 	<dependency>
 		<groupId>eu.inmite.android.lib</groupId>
 		<artifactId>android-styled-dialogs</artifactId>
-		<version>0.5.4</version>
+		<version>(insert latest version)</version>
 		<type>apklib</type>
 	</dependency>
 
@@ -55,7 +55,28 @@ Easy:
 
 ### How to react on button press in your Activity/Fragment:
 
-Simply implement interface `ISimpleDialogFragmentListener` in your Activity/Fragment. Similar pattern in your other DialogFragments is recommended.
+Simply implement interface `ISimpleDialogListener` in your Activity/Fragment. Similar pattern in your other DialogFragments is recommended.
+
+### How to handle more callback in one Activity/Fragment:
+
+Use listener's callbacks have `requestCode` parameter.
+
+### How to react on cancelling the dialog:
+
+Implement interface `ISimpleDialogCancelListener` in your Activity/Fragment.
+
+
+## How create SimpleDialogFragment more easily using SimpleDialogFragmentBuilder:
+
+    SimpleDialogFragmentBuilder builder = new SimpleDialogFragmentBuilder(MyActivity.this);
+	builder.setTitle("Some title")
+			.setMessage(R.string.message_3)
+			.setPositiveButtonText(R.string.ok)
+			.setNegativeButtonText("Cancel")
+			.setCancelable(true)
+			.setRequestCode(1)
+			.build();
+
 
 ## How to create other (non-simple) DialogFragments:
 

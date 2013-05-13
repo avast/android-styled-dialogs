@@ -4,10 +4,15 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Toast;
+import eu.inmite.android.lib.dialogs.ISimpleDialogCancelListener;
 import eu.inmite.android.lib.dialogs.ISimpleDialogListener;
 import eu.inmite.android.lib.dialogs.SimpleDialogFragment;
+import eu.inmite.android.lib.dialogs.SimpleDialogFragmentBuilder;
 
-public class MyActivity extends FragmentActivity implements ISimpleDialogListener, IFavoriteCharacterDialogListener {
+public class MyActivity extends FragmentActivity implements 
+		ISimpleDialogListener, 
+		IFavoriteCharacterDialogListener,
+		ISimpleDialogCancelListener {
 
 	MyActivity c = this;
 
@@ -47,20 +52,42 @@ public class MyActivity extends FragmentActivity implements ISimpleDialogListene
 				JayneHatDialogFragment.show(c);
 			}
 		});
-	}
-
-	@Override
-	public void onPositiveButtonClicked() {
-		Toast.makeText(c, "Positive button clicked", Toast.LENGTH_SHORT).show();
-	}
-
-	@Override
-	public void onNegativeButtonClicked() {
-		Toast.makeText(c, "Negative button clicked", Toast.LENGTH_SHORT).show();
+		findViewById(R.id.with_callbacks_dialog).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				SimpleDialogFragmentBuilder builder = new SimpleDialogFragmentBuilder(MyActivity.this);
+				builder.setTitle("Some title")
+						.setMessage(R.string.message_3)
+						.setPositiveButtonText("OK")
+						.setNegativeButtonText("Cancel")
+						.setCancelable(true)
+						.setRequestCode(1)
+						.build();
+			}
+		});
 	}
 
 	@Override
 	public void onListItemSelected(String value, int number) {
 		Toast.makeText(c, "Selected: "+value, Toast.LENGTH_SHORT).show();
+	}
+
+	// ISimpleDialogCancelListener
+
+	@Override
+	public void onCancelled(int requestCode) {
+		Toast.makeText(c, "Dialog cancelled", Toast.LENGTH_SHORT).show();
+	}
+
+	// ISimpleDialogListener
+
+	@Override
+	public void onPositiveButtonClicked(int requestCode) {
+		Toast.makeText(c, "Positive button clicked", Toast.LENGTH_SHORT).show();
+	}
+
+	@Override
+	public void onNegativeButtonClicked(int requestCode) {
+		Toast.makeText(c, "Negative button clicked", Toast.LENGTH_SHORT).show();
 	}
 }
