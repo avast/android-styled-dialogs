@@ -62,7 +62,7 @@ public class MyActivity extends FragmentActivity implements
 						.setNegativeButtonText("Cancel")
 						.setCancelable(true)
 						.setRequestCode(1)
-						.build();
+						.buildAndShow();
 			}
 		});
 	}

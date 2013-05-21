@@ -43,6 +43,7 @@
 
 	<style name="SDL.Group.Wrap">
 		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_weight">1</item>
 	</style>
 
 	<style name="SDL.HorizontalSeparator">
@@ -105,21 +106,21 @@
 
 	<style name="SDL.TextView.Message">
 		<item name="android:textColor">@color/dialog_message_text</item>
-		<item name="android:textSize">15dp</item>
-		<item name="android:layout_marginTop">@dimen/grid_3</item>
-		<item name="android:layout_marginBottom">@dimen/grid_5</item>
-		<item name="android:layout_marginLeft">@dimen/grid_4</item>
-		<item name="android:layout_marginRight">@dimen/grid_4</item>
+		<item name="android:textSize">16dp</item>
+		<item name="android:paddingTop">@dimen/grid_4</item>
+		<item name="android:paddingBottom">@dimen/grid_4</item>
+		<item name="android:paddingLeft">@dimen/grid_4</item>
+		<item name="android:paddingRight">@dimen/grid_4</item>
 	</style>
 
 	<style name="SDL.TextView.Title">
 		<item name="android:textColor">@color/dialog_title_text</item>
 		<item name="android:textSize">23dp</item>
 		<item name="android:layout_width">match_parent</item>
-		<item name="android:layout_marginLeft">@dimen/grid_4</item>
-		<item name="android:layout_marginRight">@dimen/grid_4</item>
-		<item name="android:layout_marginTop">@dimen/grid_6</item>
-		<item name="android:layout_marginBottom">@dimen/grid_5</item>
+		<item name="android:paddingLeft">@dimen/grid_4</item>
+		<item name="android:paddingRight">@dimen/grid_4</item>
+		<item name="android:paddingTop">@dimen/grid_6</item>
+		<item name="android:paddingBottom">@dimen/grid_5</item>
 	</style>
 
 </resources>

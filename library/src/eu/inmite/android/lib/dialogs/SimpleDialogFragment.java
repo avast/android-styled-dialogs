@@ -26,11 +26,11 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 
 	public static String TAG = "simple_dialog";
 
-	private static String ARG_MESSAGE = "message";
-	private static String ARG_TITLE = "title";
-	private static String ARG_POSITIVE_BUTTON = "positive_button";
-	private static String ARG_NEGATIVE_BUTTON = "negative_button";
-	private static String ARG_REQUEST_CODE = "request_code";
+	protected static String ARG_MESSAGE = "message";
+	protected static String ARG_TITLE = "title";
+	protected static String ARG_POSITIVE_BUTTON = "positive_button";
+	protected static String ARG_NEGATIVE_BUTTON = "negative_button";
+	protected static String ARG_REQUEST_CODE = "request_code";
 
 	protected ISimpleDialogListener mListener;
 	protected ISimpleDialogCancelListener mCancelListener;
@@ -146,7 +146,8 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 	/**
 	 * Children can extend this to add more things to builder.
 	 */
-	public Builder build(Builder builder) {
+	@Override
+	protected Builder build(Builder builder) {
 		if (!TextUtils.isEmpty(getTitle())) {
 			builder.setTitle(getTitle());
 		}

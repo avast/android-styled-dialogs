@@ -37,7 +37,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
 		return build(builder).create();
 	}
 
-	public abstract Builder build(Builder initialBuilder);
+	protected abstract Builder build(Builder initialBuilder);
 
 	@Override
 	public void onDestroyView() {
@@ -51,7 +51,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
 	/**
 	 * Custom dialog builder
 	 */
-	public static class Builder {
+	protected static class Builder {
 
 		private DialogFragment mDialogFragment;
 		private Context mContext;
@@ -71,7 +71,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
 		private int mViewSpacingTop;
 		private int mViewSpacingRight;
 		private int mViewSpacingBottom;
-		private Button vPossitiveButton;
+		private Button vPositiveButton;
 		private ListAdapter mListAdapter;
 		private int mListCheckedItemIdx;
 		private AdapterView.OnItemClickListener mOnItemClickListener;
@@ -244,10 +244,10 @@ public abstract class BaseDialogFragment extends DialogFragment {
 					if (mNegativeButtonText != null || mNeutralButtonText != null) {
 						addDivider(llButtonPanel);
 					}
-					vPossitiveButton = (Button) mInflater.inflate(R.layout.dialog_part_button, llButtonPanel, false);
-					vPossitiveButton.setText(mPositiveButtonText);
-					vPossitiveButton.setOnClickListener(mPositiveButtonListener);
-					llButtonPanel.addView(vPossitiveButton);
+					vPositiveButton = (Button) mInflater.inflate(R.layout.dialog_part_button, llButtonPanel, false);
+					vPositiveButton.setText(mPositiveButtonText);
+					vPositiveButton.setOnClickListener(mPositiveButtonListener);
+					llButtonPanel.addView(vPositiveButton);
 				}
 
 				llListDialog.addView(viewButtonPanel);

@@ -1,6 +1,5 @@
 package eu.inmite.android.lib.dialogs;
 
-import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 
@@ -81,8 +80,14 @@ public class SimpleDialogFragmentBuilder {
 		return this;
 	}
 
-
+	@Deprecated
 	public void build() {
+		SimpleDialogFragment.show(mActivity, mTargetFragment, mRequestCode,
+				mMessage, mTitle, mPositiveButtonText, mNegativeButtonText,
+				mCancelable);
+	}
+
+	public void buildAndShow() {
 		SimpleDialogFragment.show(mActivity, mTargetFragment, mRequestCode,
 				mMessage, mTitle, mPositiveButtonText, mNegativeButtonText,
 				mCancelable);

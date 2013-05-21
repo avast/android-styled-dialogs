@@ -35,7 +35,7 @@
 		<dependency>
 			<groupId>eu.inmite.android.lib</groupId>
 			<artifactId>android-styled-dialogs</artifactId>
-			<version>0.5.5</version>
+			<version>0.5.6</version>
 			<type>apklib</type>
 		</dependency>
 	</dependencies>
