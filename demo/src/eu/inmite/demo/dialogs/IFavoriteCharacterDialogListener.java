@@ -1,15 +1,21 @@
+/*
+ * Copyright 2013 Inmite s.r.o. (www.inmite.eu).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package eu.inmite.demo.dialogs;
 
-/**
- * Copyright (c) ${year}, Inmite s.r.o. (www.inmite.eu). All rights reserved.
- * <p/>
- * This source code can be used only for purposes specified by the given license contract
- * signed by the rightful deputy of Inmite s.r.o. This source code can be used only
- * by the owner of the license.
- * <p/>
- * Any disputes arising in respect of this agreement (license) shall be brought
- * before the Municipal Court of Prague.
- */
 public interface IFavoriteCharacterDialogListener {
 	public void onListItemSelected(String value, int number);
 }
