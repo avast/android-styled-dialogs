@@ -12,7 +12,7 @@ Features:
 
  Screenshots:
 
- ![Screenshot of the dialogs](https://bitbucket.org/inmite/android-styleddialogs/downloads/screenshot.png)
+ ![Screenshot of the dialogs](https://github.com/inmite/android-styled-dialogs/blob/master/screenshot.png)
 
 ## How to include it in your project:
 
