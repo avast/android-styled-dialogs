@@ -33,7 +33,7 @@
 	<name>Android StyledDialogs Parent</name>
 	<description>Android library for creating styleable dialogs easily</description>
 	<inceptionYear>2013</inceptionYear>
-	<url>https://bitbucket.org/inmite/android-styleddialogs</url>
+	<url>https://github.com/inmite/android-styled-dialogs/</url>
 
 	<organization>
 		<name>Inmite.eu</name>
@@ -57,9 +57,15 @@
 		</developer>
 	</developers>
 
+	<scm>
+		<connection>scm:git:https://github.com/inmite/android-styled-dialogs.git</connection>
+		<developerConnection>scm:git:https://github.com/inmite/android-styled-dialogs.git</developerConnection>
+		<url>https://github.com/inmite/android-styled-dialogs</url>
+	</scm>
+
 	<issueManagement>
-		<system>Bitbucket</system>
-		<url>https://bitbucket.org/inmite/android-styleddialogs/issues?status=new&amp;status=open</url>
+		<system>Github</system>
+		<url>https://github.com/inmite/android-styled-dialogs/issues</url>
 	</issueManagement>
 
 	<properties>
