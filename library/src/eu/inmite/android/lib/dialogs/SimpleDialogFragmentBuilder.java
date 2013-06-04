@@ -36,6 +36,10 @@ public class SimpleDialogFragmentBuilder {
 	private Fragment mTargetFragment;
 	private int mRequestCode;
 
+	public static SimpleDialogFragmentBuilder from(FragmentActivity activity) {
+		return new SimpleDialogFragmentBuilder(activity);
+	}
+
 	public SimpleDialogFragmentBuilder(FragmentActivity activity) {
 		mActivity = activity;
 	}

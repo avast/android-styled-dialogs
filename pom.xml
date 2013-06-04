@@ -28,7 +28,7 @@
 	<groupId>eu.inmite.android.lib</groupId>
 	<artifactId>android-styled-dialogs-parent</artifactId>
 	<packaging>pom</packaging>
-	<version>0.5.6</version>
+	<version>0.5.7</version>
 
 	<name>Android StyledDialogs Parent</name>
 	<description>Android library for creating styleable dialogs easily</description>
@@ -75,7 +75,7 @@
 		<apk.skipProguard>true</apk.skipProguard>
 		<android.version>4.2.2_r2</android.version>
 		<android.platform>17</android.platform>
-		<android.support.version>12</android.support.version>
+		<android.support.version>r7</android.support.version>
 	</properties>
 
 	<modules>
@@ -154,10 +154,41 @@
 				<artifactId>maven-release-plugin</artifactId>
 				<version>2.4</version>
 				<configuration>
+					<mavenExecutorId>forked-path</mavenExecutorId>
 					<autoVersionSubmodules>true</autoVersionSubmodules>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
+
+	<profiles>
+		<profile>
+			<id>release-sign-artifacts</id>
+			<activation>
+				<property>
+					<name>performRelease</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>1.1</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 </project>
