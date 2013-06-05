@@ -1,27 +1,33 @@
-# StyledDialogs library
+# StyledDialogs for Android
 
 This library makes styling and using dialogs _a piece of cake_.
+
+ ![Screenshot of the dialogs](https://raw.github.com/inmite/android-styled-dialogs/master/screenshot.png)
 
 Features:
 
  - Compatible with Holo style and **Android Design Guidelines**
- - Changing style for all dialogs by only changing **few color resources**
+ - Change style for all dialogs only by changing a **few color resources**
  - Same look for **Android 2.2+**
  - **Same API** as native Android DialogFragments
- - `SimpleDialogFragment` class, which makes displaying simple dialogs **one line of code**
-
- Screenshots:
-
- ![Screenshot of the dialogs](https://raw.github.com/inmite/android-styled-dialogs/master/screenshot.png)
+ - `SimpleDialogFragment` class, which makes displaying simple dialogs a **one line of code**
 
 ## How to include it in your project:
+
+With Maven:
 
 	<dependency>
 		<groupId>eu.inmite.android.lib</groupId>
 		<artifactId>android-styled-dialogs</artifactId>
-		<version>(insert latest version)</version>
+		<version>0.5.7</version>
 		<type>apklib</type>
 	</dependency>
+
+Or:
+
+ - clone the project
+ - add it as library project in your IDE
+ - include latest support library
 
 ## How to style all dialogs:
 
@@ -56,17 +62,13 @@ Easy:
 ### How to react on button press in your Activity/Fragment:
 
 Simply implement interface `ISimpleDialogListener` in your Activity/Fragment. Similar pattern in your other DialogFragments is recommended.
-
-### How to handle more callback in one Activity/Fragment:
-
-Use listener's callbacks have `requestCode` parameter.
+Listener's callbacks have `requestCode` parameter - you can use it if you have more dialogs in one Activity/Fragment.
 
 ### How to react on cancelling the dialog:
 
 Implement interface `ISimpleDialogCancelListener` in your Activity/Fragment.
 
-
-## How create SimpleDialogFragment more easily using SimpleDialogFragmentBuilder:
+## How create more complex SimpleDialogFragment:
 
     SimpleDialogFragmentBuilder builder = new SimpleDialogFragmentBuilder(MyActivity.this);
 	builder.setTitle("Some title")
@@ -78,26 +80,21 @@ Implement interface `ISimpleDialogCancelListener` in your Activity/Fragment.
 			.build();
 
 
-## How to create other (non-simple) DialogFragments:
+## How to create all other DialogFragments:
 
 Extend `BaseDialogFragment` and look at demo app implementation. It shows two types of those implementations:
 
  - `FavoriteCharacterDialogFragment` shows a list in the dialog using extending `BaseDialogFragment`
  - `JayneHatDialogFragment` shows a custom view in the dialog using extending `SimpleDialogFragment`
 
-### What can you setup in the dialog builder:
- - title
- - message
- - three buttons (positive, negative, neutral)
- - list of items
- - custom view
+## Wishlist
 
-### What is missing/TODO:
+The library could be improved with more common dialogs. Pull requests are encouraged!
+
+### Possible candidates:
+ - progress dialog
  - date picker (spinners or calendar)
  - time picker
- - edit field
- - password field
+ - edittext dialog
+ - password dialog
  - ...
-
-		
-
