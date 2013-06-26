@@ -16,10 +16,11 @@
 
 package eu.inmite.android.lib.dialogs;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
 import android.view.View;
 
@@ -39,123 +40,29 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 	protected static String ARG_POSITIVE_BUTTON = "positive_button";
 	protected static String ARG_NEGATIVE_BUTTON = "negative_button";
 	protected static String ARG_REQUEST_CODE = "request_code";
+	public static int DEFAULT_REQUEST_CODE = -42;
 
-	protected ISimpleDialogListener mListener;
-	protected ISimpleDialogCancelListener mCancelListener;
 	protected int mRequestCode;
-
-	/**
-	 * Shows dialog with supplied message and Close button.
-	 *
-	 * @param activity parent Activity
-	 * @param message  message to display
-	 */
-	public static void show(FragmentActivity activity, Fragment fragment, String message) {
-		show(activity, fragment, message, null, activity.getString(R.string.dialog_close), null);
-	}
-
-	/**
-	 * Shows dialog with supplied message and Close button.
-	 *
-	 * @param activity  parent Activity
-	 * @param messageId message to display
-	 */
-	public static void show(FragmentActivity activity, Fragment fragment, int messageId) {
-		show(activity, fragment, activity.getString(messageId), null, activity.getString(R.string.dialog_close), null);
-	}
-
-	/**
-	 * Shows dialog with supplied message, title and Close button.
-	 *
-	 * @param activity parent Activity
-	 * @param message  message to display
-	 * @param title    title to display
-	 */
-	public static void show(FragmentActivity activity, Fragment fragment, String message, String title) {
-		show(activity, fragment, message, title, activity.getString(R.string.dialog_close), null);
-	}
-
-	/**
-	 * Shows dialog with supplied message, title and Close button.
-	 *
-	 * @param activity  parent Activity
-	 * @param messageId message to display
-	 * @param titleId   title to display
-	 */
-	public static void show(FragmentActivity activity, Fragment fragment, int messageId, int titleId) {
-		show(activity, fragment, activity.getString(messageId), activity.getString(titleId),
-				activity.getString(R.string.dialog_close), null);
-	}
-
-
-	/**
-	 * Shows dialog with supplied message, title and custom
-	 *
-	 * @param activity parent Activity
-	 * @param message  message to display
-	 * @param title    title to display
-	 */
-	public static void show(FragmentActivity activity, Fragment targetFragment, String message, String title, String positiveButtonText,
-	                        String negativeButtonText) {
-		show(activity, targetFragment, 0, message, title, positiveButtonText, negativeButtonText);
-	}
-
-	public static void show(FragmentActivity activity, Fragment targetFragment, int requestCode, String message, String title, String positiveButtonText,
-	                        String negativeButtonText) {
-		show(activity, targetFragment, requestCode, message, title, positiveButtonText, negativeButtonText, true);
-	}
-
-	public static void show(FragmentActivity activity, Fragment targetFragment, int requestCode, String message, String title, String positiveButtonText,
-				String negativeButtonText, boolean cancelable) {
-		Bundle args = new Bundle();
-		args.putString(ARG_MESSAGE, message);
-		args.putString(ARG_TITLE, title);
-		args.putString(ARG_POSITIVE_BUTTON, positiveButtonText);
-		args.putString(ARG_NEGATIVE_BUTTON, negativeButtonText);
-		BaseDialogFragment fragment = new SimpleDialogFragment();
-		if (targetFragment != null) {
-			fragment.setTargetFragment(targetFragment, requestCode);
-		} else {
-			args.putInt(ARG_REQUEST_CODE, requestCode);
-		}
-		fragment.setArguments(args);
-		fragment.setCancelable(cancelable);
-		fragment.show(activity.getSupportFragmentManager(), TAG);
-	}
-
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		final Fragment targetFragment = getTargetFragment();
 		if (targetFragment != null) {
-			if (targetFragment instanceof ISimpleDialogListener) {
-				mListener = (ISimpleDialogListener) targetFragment;
-			}
-			if (targetFragment instanceof ISimpleDialogCancelListener) {
-				mCancelListener = (ISimpleDialogCancelListener) targetFragment;
-			}
 			mRequestCode = getTargetRequestCode();
 		} else {
-			if (getActivity() instanceof ISimpleDialogListener) {
-				mListener = (ISimpleDialogListener) getActivity();
-			}
-			if (getActivity() instanceof ISimpleDialogCancelListener) {
-				mCancelListener = (ISimpleDialogCancelListener) getActivity();
-			}
 			Bundle args = getArguments();
 			if (args != null) {
 				mRequestCode = args.getInt(ARG_REQUEST_CODE, 0);
 			}
 		}
-
 	}
 
 	/**
-	 * Children can extend this to add more things to builder.
+	 * Children can extend this to add more things to base builder.
 	 */
 	@Override
-	protected Builder build(Builder builder) {
+	protected BaseDialogFragment.Builder build(BaseDialogFragment.Builder builder) {
 		if (!TextUtils.isEmpty(getTitle())) {
 			builder.setTitle(getTitle());
 		}
@@ -166,8 +73,9 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 			builder.setPositiveButton(getPositiveButtonText(), new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					if (mListener != null) {
-						mListener.onPositiveButtonClicked(mRequestCode);
+					ISimpleDialogListener listener = getDialogListener();
+					if (listener != null) {
+						listener.onPositiveButtonClicked(mRequestCode);
 					}
 					dismiss();
 				}
@@ -177,8 +85,9 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 			builder.setNegativeButton(getNegativeButtonText(), new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					if (mListener != null) {
-						mListener.onNegativeButtonClicked(mRequestCode);
+					ISimpleDialogListener listener = getDialogListener();
+					if (listener != null) {
+						listener.onNegativeButtonClicked(mRequestCode);
 					}
 					dismiss();
 				}
@@ -206,8 +115,134 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 	@Override
 	public void onCancel(DialogInterface dialog) {
 		super.onCancel(dialog);
-		if (mCancelListener != null) {
-			mCancelListener.onCancelled(mRequestCode);
+		ISimpleDialogCancelListener listener = getCancelListener();
+		if (listener != null) {
+			listener.onCancelled(mRequestCode);
+		}
+	}
+
+	protected ISimpleDialogListener getDialogListener() {
+		final Fragment targetFragment = getTargetFragment();
+		if (targetFragment != null) {
+			if (targetFragment instanceof ISimpleDialogListener) {
+				return (ISimpleDialogListener) targetFragment;
+			}
+		} else {
+			if (getActivity() instanceof ISimpleDialogListener) {
+				return (ISimpleDialogListener) getActivity();
+			}
+		}
+		return null;
+	}
+
+	protected ISimpleDialogCancelListener getCancelListener() {
+		final Fragment targetFragment = getTargetFragment();
+		if (targetFragment != null) {
+			if (targetFragment instanceof ISimpleDialogCancelListener) {
+				return (ISimpleDialogCancelListener) targetFragment;
+			}
+		} else {
+			if (getActivity() instanceof ISimpleDialogCancelListener) {
+				return (ISimpleDialogCancelListener) getActivity();
+			}
+		}
+		return null;
+	}
+
+	public static class Builder {
+
+		private Context mContext;
+
+		private String mTitle;
+		private String mMessage;
+		private String mPositiveButtonText;
+		private String mNegativeButtonText;
+		private boolean mCancelable = true;
+		private Fragment mTargetFragment;
+		private int mRequestCode = SimpleDialogFragment.DEFAULT_REQUEST_CODE;
+		private FragmentManager mFragmentManager;
+
+		public Builder(Context context, FragmentManager fragmentManager) {
+			mContext = context.getApplicationContext();
+			mFragmentManager = fragmentManager;
+		}
+
+		public Builder setTitle(int titleResourceId) {
+			mTitle = mContext.getString(titleResourceId);
+			return this;
+		}
+
+		public Builder setTitle(String title) {
+			mTitle = title;
+			return this;
+		}
+
+		public Builder setMessage(int messageResourceId) {
+			mMessage = mContext.getString(messageResourceId);
+			return this;
+		}
+
+		public Builder setMessage(String message) {
+			mMessage = message;
+			return this;
+		}
+
+		public Builder setPositiveButtonText(int textResourceId) {
+			mPositiveButtonText = mContext.getString(textResourceId);
+			return this;
+		}
+
+		public Builder setPositiveButtonText(String text) {
+			mPositiveButtonText = text;
+			return this;
+		}
+
+		public Builder setNegativeButtonText(int textResourceId) {
+			mNegativeButtonText = mContext.getString(textResourceId);
+			return this;
+		}
+
+		public Builder setNegativeButtonText(String text) {
+			mNegativeButtonText = text;
+			return this;
+		}
+
+		public Builder setCancelable(boolean cancelable) {
+			mCancelable = cancelable;
+			return this;
+		}
+
+		public Builder setTargetFragment(Fragment fragment, int requestCode) {
+			mTargetFragment = fragment;
+			mRequestCode = requestCode;
+			return this;
+		}
+
+		public Builder setRequestCode(int requestCode) {
+			mRequestCode = requestCode;
+			return this;
+		}
+
+		public void show() {
+			// close button by default
+			if (mPositiveButtonText == null && mNegativeButtonText == null) {
+				mPositiveButtonText = mContext.getString(R.string.dialog_close);
+			}
+			Bundle args = new Bundle();
+			args.putString(SimpleDialogFragment.ARG_MESSAGE, mMessage);
+			args.putString(SimpleDialogFragment.ARG_TITLE, mTitle);
+			args.putString(SimpleDialogFragment.ARG_POSITIVE_BUTTON, mPositiveButtonText);
+			args.putString(SimpleDialogFragment.ARG_NEGATIVE_BUTTON, mNegativeButtonText);
+			BaseDialogFragment fragment = new SimpleDialogFragment();
+			if (mTargetFragment != null) {
+				fragment.setTargetFragment(mTargetFragment, mRequestCode);
+			} else {
+				args.putInt(SimpleDialogFragment.ARG_REQUEST_CODE, mRequestCode);
+			}
+			fragment.setArguments(args);
+			fragment.setCancelable(mCancelable);
+			fragment.show(mFragmentManager, SimpleDialogFragment.TAG);
+
 		}
 	}
 }

@@ -18,6 +18,9 @@ package eu.inmite.demo.dialogs;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
+
+import eu.inmite.android.lib.dialogs.BaseDialogFragment;
+import eu.inmite.android.lib.dialogs.ISimpleDialogListener;
 import eu.inmite.android.lib.dialogs.SimpleDialogFragment;
 
 /**
@@ -34,14 +37,15 @@ public class JayneHatDialogFragment extends SimpleDialogFragment {
 	}
 
 	@Override
-	public Builder build(Builder builder) {
+	public BaseDialogFragment.Builder build(BaseDialogFragment.Builder builder) {
 		builder.setTitle("Jayne's hat");
 		builder.setView(LayoutInflater.from(getActivity()).inflate(R.layout.item_jayne_hat, null));
 		builder.setPositiveButton("I want one", new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (mListener != null) {
-					mListener.onPositiveButtonClicked(0);
+				ISimpleDialogListener listener = getDialogListener();
+				if (listener != null) {
+					listener.onPositiveButtonClicked(0);
 				}
 				dismiss();
 			}
