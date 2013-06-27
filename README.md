@@ -19,7 +19,7 @@ With Maven:
 	<dependency>
 		<groupId>eu.inmite.android.lib</groupId>
 		<artifactId>android-styled-dialogs</artifactId>
-		<version>0.5.7</version>
+		<version>1.0</version>
 		<type>apklib</type>
 	</dependency>
 
@@ -31,18 +31,28 @@ Or:
 
 ## How to style all dialogs:
 
-Simply put colors you want to change into your colors.xml. Everything is optional, if you leave anything you get default Holo Dark design. Here are default values:
+Add following into your application theme:
 
-	<color name="dialog_message_text">#FFFFFF</color>
-	<color name="dialog_title_text">#ff0099cc</color>
-	<color name="dialog_title_separator">#ff0099cc</color>
-	<color name="dialog_button_text">#FFFFFF</color>
-	<color name="dialog_button_normal">@android:color/transparent</color>
-	<color name="dialog_button_pressed">#990099cc</color> <!-- 60 % opacity -->
-	<color name="dialog_button_focused">#4C0099cc</color> <!-- 30 % opacity -->
-	<color name="dialog_button_separator">#12ffffff</color> <!-- 7% opacity -->
+	<item name="sdlDialogStyle">@style/DialogStyleLight.Custom</item>
 
-Only drawable resource is `dialog_bg.9.png` - put it in your project to override default background of the dialog.
+or
+
+	<item name="sdlDialogStyle">@style/DialogStyleDark.Custom</item>
+
+Define your dialog style, example for light theme:
+
+	<style name="DialogStyleLight.Custom">
+		<!-- anything can be left out: -->
+		<item name="titleTextColor">@color/dialog_title_text</item>
+		<item name="titleSeparatorColor">@color/dialog_title_separator</item>
+		<item name="messageTextColor">@color/dialog_message_text</item>
+		<item name="buttonTextColor">@color/dialog_button_text</item>
+		<item name="buttonSeparatorColor">@color/dialog_button_separator</item>
+		<item name="buttonBackgroundColorNormal">@color/dialog_button_normal</item>
+		<item name="buttonBackgroundColorPressed">@color/dialog_button_pressed</item>
+		<item name="buttonBackgroundColorFocused">@color/dialog_button_focused</item>
+		<item name="dialogBackground">@drawable/dialog_background</item>
+	</style>
 
 ## How to create simple dialogs:
 
@@ -50,35 +60,25 @@ Easy:
 
 ### Dialog with a simple message and Close button:
 
-	SimpleDialogFragment.show(this, null, R.string.message_1);
+	SimpleDialogFragment(this, getSupportFragmentManager()).setMessage(R.string.message).show();
 
 ### Dialog with a title, message and Close button:
 
-	SimpleDialogFragment.show(this, null, R.string.message_2, R.string.title);
+	SimpleDialogFragment(this, getSupportFragmentManager()).setTitle(R.string.title).setMessage(R.string.message).show();
 
 ### Dialog with a title, message and two buttons:	
-	SimpleDialogFragment.show(this, null, c.getString(R.string.message_3), this.getString(R.string.title), this.getString(R.string.positive_button), this.getString(R.string.negative_button));
+
+	SimpleDialogFragment(this, getSupportFragmentManager()).setTitle(R.string.title).setMessage(R.string.message).setPositiveButtonText(R.string.positive_button).setNegativeButtonText(R.string
+	.negative_button).show();
 
 ### How to react on button press in your Activity/Fragment:
 
-Simply implement interface `ISimpleDialogListener` in your Activity/Fragment. Similar pattern in your other DialogFragments is recommended.
-Listener's callbacks have `requestCode` parameter - you can use it if you have more dialogs in one Activity/Fragment.
+Simply implement interface `ISimpleDialogListener` in your Activity/Fragment. Listener's callbacks have `requestCode` parameter - you can use it if you have more dialogs in one Activity/Fragment.
+For Fragments use setTargetFragment() method in the builder.
 
 ### How to react on cancelling the dialog:
 
 Implement interface `ISimpleDialogCancelListener` in your Activity/Fragment.
-
-## How create more complex SimpleDialogFragment:
-
-    SimpleDialogFragmentBuilder builder = new SimpleDialogFragmentBuilder(MyActivity.this);
-	builder.setTitle("Some title")
-			.setMessage(R.string.message_3)
-			.setPositiveButtonText(R.string.ok)
-			.setNegativeButtonText("Cancel")
-			.setCancelable(true)
-			.setRequestCode(1)
-			.build();
-
 
 ## How to create all other DialogFragments:
 
@@ -92,7 +92,6 @@ Extend `BaseDialogFragment` and look at demo app implementation. It shows two ty
 The library could be improved with more common dialogs. Pull requests are encouraged!
 
 ### Possible candidates:
- - progress dialog
  - date picker (spinners or calendar)
  - time picker
  - edittext dialog

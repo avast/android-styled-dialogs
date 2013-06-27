@@ -28,7 +28,7 @@
 	<groupId>eu.inmite.android.lib</groupId>
 	<artifactId>android-styled-dialogs-parent</artifactId>
 	<packaging>pom</packaging>
-	<version>0.5.8-SNAPSHOT</version>
+	<version>1.0</version>
 
 	<name>Android StyledDialogs Parent</name>
 	<description>Android library for creating styleable dialogs easily</description>
