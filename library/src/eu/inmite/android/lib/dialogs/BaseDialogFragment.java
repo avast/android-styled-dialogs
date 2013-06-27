@@ -23,6 +23,7 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
@@ -87,7 +88,6 @@ public abstract class BaseDialogFragment extends DialogFragment {
 		private int mViewSpacingTop;
 		private int mViewSpacingRight;
 		private int mViewSpacingBottom;
-		private Button vPositiveButton;
 		private ListAdapter mListAdapter;
 		private int mListCheckedItemIdx;
 		private AdapterView.OnItemClickListener mOnItemClickListener;
@@ -277,39 +277,71 @@ public abstract class BaseDialogFragment extends DialogFragment {
 				LinearLayout llButtonPanel = (LinearLayout) viewButtonPanel.findViewById(R.id.dialog_button_panel);
 				viewButtonPanel.findViewById(R.id.dialog_horizontal_separator).setBackgroundDrawable(new ColorDrawable(mButtonSeparatorColor));
 
-				if (mNegativeButtonText != null) {
-					Button btn = (Button) mInflater.inflate(R.layout.dialog_part_button, llButtonPanel, false);
-					btn.setText(mNegativeButtonText);
-					btn.setTextColor(mButtonTextColor);
-					btn.setBackgroundDrawable(getButtonBackground());
-					btn.setOnClickListener(mNegativeButtonListener);
-					llButtonPanel.addView(btn);
+				boolean addDivider = false;
+
+				if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+					addDivider = addPositiveButton(llButtonPanel, addDivider);
+				} else {
+					addDivider = addNegativeButton(llButtonPanel, addDivider);
 				}
-				if (mNeutralButtonText != null) {
-					if (mNegativeButtonText != null) {
-						addDivider(llButtonPanel);
-					}
-					Button btn = (Button) mInflater.inflate(R.layout.dialog_part_button, llButtonPanel, false);
-					btn.setText(mNeutralButtonText);
-					btn.setTextColor(mButtonTextColor);
-					btn.setBackgroundDrawable(getButtonBackground());
-					btn.setOnClickListener(mNeutralButtonListener);
-					llButtonPanel.addView(btn);
-				}
-				if (mPositiveButtonText != null) {
-					if (mNegativeButtonText != null || mNeutralButtonText != null) {
-						addDivider(llButtonPanel);
-					}
-					vPositiveButton = (Button) mInflater.inflate(R.layout.dialog_part_button, llButtonPanel, false);
-					vPositiveButton.setText(mPositiveButtonText);
-					vPositiveButton.setTextColor(mButtonTextColor);
-					vPositiveButton.setBackgroundDrawable(getButtonBackground());
-					vPositiveButton.setOnClickListener(mPositiveButtonListener);
-					llButtonPanel.addView(vPositiveButton);
+				addDivider = addNeutralButton(llButtonPanel, addDivider);
+
+				if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+					addNegativeButton(llButtonPanel, addDivider);
+				} else {
+					addPositiveButton(llButtonPanel, addDivider);
 				}
 
 				llListDialog.addView(viewButtonPanel);
 			}
+		}
+
+		private boolean addNegativeButton(ViewGroup parent, boolean addDivider) {
+			if (mNegativeButtonText != null) {
+				if (addDivider) {
+					addDivider(parent);
+				}
+				Button btn = (Button) mInflater.inflate(R.layout.dialog_part_button, parent, false);
+				btn.setText(mNegativeButtonText);
+				btn.setTextColor(mButtonTextColor);
+				btn.setBackgroundDrawable(getButtonBackground());
+				btn.setOnClickListener(mNegativeButtonListener);
+				parent.addView(btn);
+				return true;
+			}
+			return addDivider;
+		}
+
+		private boolean addPositiveButton(ViewGroup parent, boolean addDivider) {
+			if (mPositiveButtonText != null) {
+				if (addDivider) {
+					addDivider(parent);
+				}
+				Button btn = (Button) mInflater.inflate(R.layout.dialog_part_button, parent, false);
+				btn.setText(mPositiveButtonText);
+				btn.setTextColor(mButtonTextColor);
+				btn.setBackgroundDrawable(getButtonBackground());
+				btn.setOnClickListener(mPositiveButtonListener);
+				parent.addView(btn);
+				return true;
+			}
+			return addDivider;
+		}
+
+		private boolean addNeutralButton(ViewGroup parent, boolean addDivider) {
+			if (mNeutralButtonText != null) {
+				if (addDivider) {
+					addDivider(parent);
+				}
+				Button btn = (Button) mInflater.inflate(R.layout.dialog_part_button, parent, false);
+				btn.setText(mNeutralButtonText);
+				btn.setTextColor(mButtonTextColor);
+				btn.setBackgroundDrawable(getButtonBackground());
+				btn.setOnClickListener(mNeutralButtonListener);
+				parent.addView(btn);
+				return true;
+			}
+			return addDivider;
 		}
 
 		private void addDivider(ViewGroup parent) {
