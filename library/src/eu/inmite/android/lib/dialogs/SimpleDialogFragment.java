@@ -44,6 +44,10 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 
 	protected int mRequestCode;
 
+	public static SimpleDialogBuilder createBuilder(Context context, FragmentManager fragmentManager) {
+		return new SimpleDialogBuilder(context, fragmentManager);
+	}
+
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
@@ -149,7 +153,7 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 		return null;
 	}
 
-	public static class Builder {
+	public static class SimpleDialogBuilder {
 
 		private Context mContext;
 
@@ -162,63 +166,63 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 		private int mRequestCode = SimpleDialogFragment.DEFAULT_REQUEST_CODE;
 		private FragmentManager mFragmentManager;
 
-		public Builder(Context context, FragmentManager fragmentManager) {
+		private SimpleDialogBuilder(Context context, FragmentManager fragmentManager) {
 			mContext = context.getApplicationContext();
 			mFragmentManager = fragmentManager;
 		}
 
-		public Builder setTitle(int titleResourceId) {
+		public SimpleDialogBuilder setTitle(int titleResourceId) {
 			mTitle = mContext.getString(titleResourceId);
 			return this;
 		}
 
-		public Builder setTitle(String title) {
+		public SimpleDialogBuilder setTitle(String title) {
 			mTitle = title;
 			return this;
 		}
 
-		public Builder setMessage(int messageResourceId) {
+		public SimpleDialogBuilder setMessage(int messageResourceId) {
 			mMessage = mContext.getString(messageResourceId);
 			return this;
 		}
 
-		public Builder setMessage(String message) {
+		public SimpleDialogBuilder setMessage(String message) {
 			mMessage = message;
 			return this;
 		}
 
-		public Builder setPositiveButtonText(int textResourceId) {
+		public SimpleDialogBuilder setPositiveButtonText(int textResourceId) {
 			mPositiveButtonText = mContext.getString(textResourceId);
 			return this;
 		}
 
-		public Builder setPositiveButtonText(String text) {
+		public SimpleDialogBuilder setPositiveButtonText(String text) {
 			mPositiveButtonText = text;
 			return this;
 		}
 
-		public Builder setNegativeButtonText(int textResourceId) {
+		public SimpleDialogBuilder setNegativeButtonText(int textResourceId) {
 			mNegativeButtonText = mContext.getString(textResourceId);
 			return this;
 		}
 
-		public Builder setNegativeButtonText(String text) {
+		public SimpleDialogBuilder setNegativeButtonText(String text) {
 			mNegativeButtonText = text;
 			return this;
 		}
 
-		public Builder setCancelable(boolean cancelable) {
+		public SimpleDialogBuilder setCancelable(boolean cancelable) {
 			mCancelable = cancelable;
 			return this;
 		}
 
-		public Builder setTargetFragment(Fragment fragment, int requestCode) {
+		public SimpleDialogBuilder setTargetFragment(Fragment fragment, int requestCode) {
 			mTargetFragment = fragment;
 			mRequestCode = requestCode;
 			return this;
 		}
 
-		public Builder setRequestCode(int requestCode) {
+		public SimpleDialogBuilder setRequestCode(int requestCode) {
 			mRequestCode = requestCode;
 			return this;
 		}

@@ -16,6 +16,7 @@
 
 package eu.inmite.demo.dialogs;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
@@ -28,55 +29,77 @@ import eu.inmite.android.lib.dialogs.SimpleDialogFragment;
 public class MyActivity extends FragmentActivity implements
 	ISimpleDialogListener,
 	IFavoriteCharacterDialogListener,
-	ISimpleDialogCancelListener{
+	ISimpleDialogCancelListener {
+
+	public static final int THEME_DEFAULT_DARK = 0;
+	public static final int THEME_DEFAULT_LIGHT = 1;
+	public static final int THEME_CUSTOM_DARK = 2;
+	public static final int THEME_CUSTOM_LIGHT = 3;
+	public static final String EXTRA_THEME = "theme";
 
 	MyActivity c = this;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		setThemeOnCreate();
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		findViewById(R.id.message_dialog).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				new SimpleDialogFragment.Builder(c, getSupportFragmentManager()).setMessage(R.string.message_1).show();
+				SimpleDialogFragment.createBuilder(c, getSupportFragmentManager()).setMessage(R.string.message_1).show();
 			}
 		});
 		findViewById(R.id.message_title_dialog).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				new SimpleDialogFragment.Builder(c, getSupportFragmentManager()).setTitle(R.string.title).setMessage(R.string.message_2).show();
+				SimpleDialogFragment.createBuilder(c, getSupportFragmentManager()).setTitle(R.string.title).setMessage(R.string.message_2).show();
 			}
 		});
 		findViewById(R.id.message_title_buttons_dialog).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				new SimpleDialogFragment.Builder(c, getSupportFragmentManager()).setTitle(R.string.title).setMessage(R.string.message_3).setPositiveButtonText(R.string.positive_button)
-					.setNegativeButtonText(R.string.negative_button).show();
+				SimpleDialogFragment.createBuilder(c, getSupportFragmentManager()).setTitle(R.string.title).setMessage(R.string.message_3).setPositiveButtonText(R.string.positive_button)
+					.setNegativeButtonText(R.string.negative_button).setRequestCode(42).show();
 			}
 		});
+		/*
+		List dialog is not styled - removing for now, TODO: add it to the library
 		findViewById(R.id.list_dialog).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				FavoriteCharacterDialogFragment.show(c, "Your favorite character (some text added to make it longer):", new String[]{"Jayne", "Malcolm", "Kaylee",
 					"Wash", "Zoe", "River"});
 			}
-		});
+		});*/
 		findViewById(R.id.custom_dialog).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				JayneHatDialogFragment.show(c);
 			}
 		});
-		findViewById(R.id.with_callbacks_dialog).setOnClickListener(new View.OnClickListener() {
+		findViewById(R.id.default_dark_theme).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				new SimpleDialogFragment.Builder(c, getSupportFragmentManager()).setTitle("Some title")
-					.setMessage(R.string.message_3)
-					.setPositiveButtonText("OK")
-					.setNegativeButtonText("Cancel")
-					.setRequestCode(42)
-					.show();
+				setCurrentTheme(THEME_DEFAULT_DARK);
+			}
+		});
+		findViewById(R.id.default_light_theme).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				setCurrentTheme(THEME_DEFAULT_LIGHT);
+			}
+		});
+		findViewById(R.id.custom_dark_theme).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				setCurrentTheme(THEME_CUSTOM_DARK);
+			}
+		});
+		findViewById(R.id.custom_light_theme).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				setCurrentTheme(THEME_CUSTOM_LIGHT);
 			}
 		});
 	}
@@ -108,6 +131,32 @@ public class MyActivity extends FragmentActivity implements
 	public void onNegativeButtonClicked(int requestCode) {
 		if (requestCode == 42) {
 			Toast.makeText(c, "Negative button clicked", Toast.LENGTH_SHORT).show();
+		}
+	}
+
+	private void setCurrentTheme(int theme) {
+		Intent i = new Intent(c, MyActivity.class);
+		i.putExtra(EXTRA_THEME, theme);
+		startActivity(i);
+		finish();
+		overridePendingTransition(0, 0);
+	}
+
+	private void setThemeOnCreate() {
+		int theme = getIntent().getIntExtra(EXTRA_THEME, THEME_CUSTOM_DARK);
+		switch (theme) {
+			case THEME_DEFAULT_DARK:
+				setTheme(R.style.DefaultDarkTheme);
+				break;
+			case THEME_DEFAULT_LIGHT:
+				setTheme(R.style.DefaultLightTheme);
+				break;
+			case THEME_CUSTOM_DARK:
+				setTheme(R.style.CustomDarkTheme);
+				break;
+			case THEME_CUSTOM_LIGHT:
+				setTheme(R.style.CustomLightTheme);
+				break;
 		}
 	}
 }

@@ -10,7 +10,7 @@
 	<application
 		android:label="@string/app_name"
 		android:icon="@drawable/ic_launcher"
-		android:theme="@style/MyTheme">
+		android:theme="@style/CustomDarkTheme">
 		<activity
 			android:name=".MyActivity"
 			android:label="@string/app_name">

@@ -2,7 +2,7 @@
 
 This library makes styling and using dialogs _a piece of cake_.
 
- ![Screenshot of the dialogs](https://raw.github.com/inmite/android-styled-dialogs/master/screenshot.png)
+ ![Screenshot of the dialogs](https://raw.github.com/inmite/android-styled-dialogs/preparing-v1.0/library/graphics/screenshot-small.png)
 
 Features:
 
