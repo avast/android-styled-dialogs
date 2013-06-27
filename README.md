@@ -68,8 +68,7 @@ Easy:
 
 ### Dialog with a title, message and two buttons:	
 
-	SimpleDialogFragment(this, getSupportFragmentManager()).setTitle(R.string.title).setMessage(R.string.message).setPositiveButtonText(R.string.positive_button).setNegativeButtonText(R.string
-	.negative_button).show();
+	SimpleDialogFragment(this, getSupportFragmentManager()).setTitle(R.string.title).setMessage(R.string.message).setPositiveButtonText(R.string.positive_button).setNegativeButtonText(R.string.negative_button).show();
 
 ### How to react on button press in your Activity/Fragment:
 
