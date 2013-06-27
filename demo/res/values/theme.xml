@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<style name="MyTheme" parent="android:Theme">
+		<item name="sdlDialogStyle">@style/DialogStyleLight.Custom</item>
+	</style>
+
+	<style name="DialogStyleLight.Custom">
+		<!-- anything can be left out: -->
+		<item name="titleTextColor">@color/dialog_title_text</item>
+		<item name="titleSeparatorColor">@color/dialog_title_separator</item>
+		<item name="messageTextColor">@color/dialog_message_text</item>
+		<item name="buttonTextColor">@color/dialog_button_text</item>
+		<item name="buttonSeparatorColor">@color/dialog_button_separator</item>
+		<item name="buttonBackgroundColorNormal">@color/dialog_button_normal</item>
+		<item name="buttonBackgroundColorPressed">@color/dialog_button_pressed</item>
+		<item name="buttonBackgroundColorFocused">@color/dialog_button_focused</item>
+	</style>
+
+</resources>

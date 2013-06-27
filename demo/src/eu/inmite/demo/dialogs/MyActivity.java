@@ -28,7 +28,7 @@ import eu.inmite.android.lib.dialogs.SimpleDialogFragment;
 public class MyActivity extends FragmentActivity implements
 	ISimpleDialogListener,
 	IFavoriteCharacterDialogListener,
-	ISimpleDialogCancelListener {
+	ISimpleDialogCancelListener{
 
 	MyActivity c = this;
 

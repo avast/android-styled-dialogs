@@ -18,6 +18,11 @@ package eu.inmite.android.lib.dialogs;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.StateListDrawable;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
@@ -34,7 +39,12 @@ public abstract class BaseDialogFragment extends DialogFragment {
 
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		return new Dialog(getActivity(), R.style.SDL_Dialog);
+		Dialog dialog = new Dialog(getActivity(), R.style.SDL_Dialog);
+		// custom dialog background
+		final TypedArray a = getActivity().getTheme().obtainStyledAttributes(null, R.styleable.DialogStyle, R.attr.sdlDialogStyle, 0);
+		Drawable dialogBackground = a.getDrawable(R.styleable.DialogStyle_dialogBackground);
+		dialog.getWindow().setBackgroundDrawable(dialogBackground);
+		return dialog;
 	}
 
 	@Override
@@ -81,6 +91,17 @@ public abstract class BaseDialogFragment extends DialogFragment {
 		private ListAdapter mListAdapter;
 		private int mListCheckedItemIdx;
 		private AdapterView.OnItemClickListener mOnItemClickListener;
+		/**
+		 * Styling: *
+		 */
+		private int mTitleTextColor;
+		private int mTitleSeparatorColor;
+		private int mMessageTextColor;
+		private int mButtonTextColor;
+		private int mButtonSeparatorColor;
+		private int mButtonBackgroundColorNormal;
+		private int mButtonBackgroundColorPressed;
+		private int mButtonBackgroundColorFocused;
 
 		public Builder(DialogFragment dialogFragment, Context context, LayoutInflater inflater, ViewGroup container) {
 			this.mDialogFragment = dialogFragment;
@@ -145,7 +166,8 @@ public abstract class BaseDialogFragment extends DialogFragment {
 			return this;
 		}
 
-		/** Set list
+		/**
+		 * Set list
 		 *
 		 * @param listAdapter
 		 * @param checkedItemIdx Item check by default, -1 if no item should be checked
@@ -177,6 +199,26 @@ public abstract class BaseDialogFragment extends DialogFragment {
 		}
 
 		public View create() {
+			final Resources res = mContext.getResources();
+			final int defaultTitleTextColor = res.getColor(R.color.sdl_title_text_dark);
+			final int defaultTitleSeparatorColor = res.getColor(R.color.sdl_title_separator_dark);
+			final int defaultMessageTextColor = res.getColor(R.color.sdl_message_text_dark);
+			final int defaultButtonTextColor = res.getColor(R.color.sdl_button_text_dark);
+			final int defaultButtonSeparatorColor = res.getColor(R.color.sdl_button_separator_dark);
+			final int defaultButtonBackgroundColorNormal = res.getColor(R.color.sdl_button_normal_dark);
+			final int defaultButtonBackgroundColorPressed = res.getColor(R.color.sdl_button_pressed_dark);
+			final int defaultButtonBackgroundColorFocused = res.getColor(R.color.sdl_button_focused_dark);
+
+			final TypedArray a = mContext.getTheme().obtainStyledAttributes(null, R.styleable.DialogStyle, R.attr.sdlDialogStyle, 0);
+			mTitleTextColor = a.getColor(R.styleable.DialogStyle_titleTextColor, defaultTitleTextColor);
+			mTitleSeparatorColor = a.getColor(R.styleable.DialogStyle_titleSeparatorColor, defaultTitleSeparatorColor);
+			mMessageTextColor = a.getColor(R.styleable.DialogStyle_messageTextColor, defaultMessageTextColor);
+			mButtonTextColor = a.getColor(R.styleable.DialogStyle_buttonTextColor, defaultButtonTextColor);
+			mButtonSeparatorColor = a.getColor(R.styleable.DialogStyle_buttonSeparatorColor, defaultButtonSeparatorColor);
+			mButtonBackgroundColorNormal = a.getColor(R.styleable.DialogStyle_buttonBackgroundColorNormal, defaultButtonBackgroundColorNormal);
+			mButtonBackgroundColorPressed = a.getColor(R.styleable.DialogStyle_buttonBackgroundColorPressed, defaultButtonBackgroundColorPressed);
+			mButtonBackgroundColorFocused = a.getColor(R.styleable.DialogStyle_buttonBackgroundColorFocused, defaultButtonBackgroundColorFocused);
+
 			View v = getDialogLayoutAndInitTitle();
 
 			LinearLayout content = (LinearLayout) v.findViewById(R.id.sdl__content);
@@ -185,6 +227,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
 				View viewMessage = mInflater.inflate(R.layout.dialog_part_message, content, false);
 				TextView tvMessage = (TextView) viewMessage.findViewById(R.id.sdl__message);
 				tvMessage.setText(mMessage);
+				tvMessage.setTextColor(mMessageTextColor);
 				content.addView(viewMessage);
 			}
 
@@ -219,6 +262,8 @@ public abstract class BaseDialogFragment extends DialogFragment {
 			View viewTitleDivider = v.findViewById(R.id.sdl__titleDivider);
 			if (mTitle != null) {
 				tvTitle.setText(mTitle);
+				tvTitle.setTextColor(mTitleTextColor);
+				viewTitleDivider.setBackgroundDrawable(new ColorDrawable(mTitleSeparatorColor));
 			} else {
 				tvTitle.setVisibility(View.GONE);
 				viewTitleDivider.setVisibility(View.GONE);
@@ -230,10 +275,13 @@ public abstract class BaseDialogFragment extends DialogFragment {
 			if (mNegativeButtonText != null || mNeutralButtonText != null || mPositiveButtonText != null) {
 				View viewButtonPanel = mInflater.inflate(R.layout.dialog_part_button_panel, llListDialog, false);
 				LinearLayout llButtonPanel = (LinearLayout) viewButtonPanel.findViewById(R.id.dialog_button_panel);
+				viewButtonPanel.findViewById(R.id.dialog_horizontal_separator).setBackgroundDrawable(new ColorDrawable(mButtonSeparatorColor));
 
 				if (mNegativeButtonText != null) {
 					Button btn = (Button) mInflater.inflate(R.layout.dialog_part_button, llButtonPanel, false);
 					btn.setText(mNegativeButtonText);
+					btn.setTextColor(mButtonTextColor);
+					btn.setBackgroundDrawable(getButtonBackground());
 					btn.setOnClickListener(mNegativeButtonListener);
 					llButtonPanel.addView(btn);
 				}
@@ -243,6 +291,8 @@ public abstract class BaseDialogFragment extends DialogFragment {
 					}
 					Button btn = (Button) mInflater.inflate(R.layout.dialog_part_button, llButtonPanel, false);
 					btn.setText(mNeutralButtonText);
+					btn.setTextColor(mButtonTextColor);
+					btn.setBackgroundDrawable(getButtonBackground());
 					btn.setOnClickListener(mNeutralButtonListener);
 					llButtonPanel.addView(btn);
 				}
@@ -252,6 +302,8 @@ public abstract class BaseDialogFragment extends DialogFragment {
 					}
 					vPositiveButton = (Button) mInflater.inflate(R.layout.dialog_part_button, llButtonPanel, false);
 					vPositiveButton.setText(mPositiveButtonText);
+					vPositiveButton.setTextColor(mButtonTextColor);
+					vPositiveButton.setBackgroundDrawable(getButtonBackground());
 					vPositiveButton.setOnClickListener(mPositiveButtonListener);
 					llButtonPanel.addView(vPositiveButton);
 				}
@@ -261,7 +313,22 @@ public abstract class BaseDialogFragment extends DialogFragment {
 		}
 
 		private void addDivider(ViewGroup parent) {
-			mInflater.inflate(R.layout.dialog_part_button_separator, parent, true);
+			View view = mInflater.inflate(R.layout.dialog_part_button_separator, parent, true);
+			view.findViewById(R.id.dialog_button_separator).setBackgroundDrawable(new ColorDrawable(mButtonSeparatorColor));
+		}
+
+		private StateListDrawable getButtonBackground() {
+			int[] pressedState = {android.R.attr.state_pressed};
+			int[] focusedState = {android.R.attr.state_focused};
+			int[] defaultState = {android.R.attr.state_enabled};
+			ColorDrawable colorDefault = new ColorDrawable(mButtonBackgroundColorNormal);
+			ColorDrawable colorPressed = new ColorDrawable(mButtonBackgroundColorPressed);
+			ColorDrawable colorFocused = new ColorDrawable(mButtonBackgroundColorFocused);
+			StateListDrawable background = new StateListDrawable();
+			background.addState(pressedState, colorPressed);
+			background.addState(focusedState, colorFocused);
+			background.addState(defaultState, colorDefault);
+			return background;
 		}
 	}
 }
