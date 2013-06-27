@@ -8,7 +8,7 @@ June 27, 2013
  - styling dialogs using attributes
  - light theme
  - show methods for SimpleDialogFragment removed in favor of Builder
- - change button order before Honeycomb
+ - change button order before ICS
  - SimpleDialogFragment.Builder requires Context and FragmentManager, not Activity
  - fixed vertical align for buttons
  - fix for #1 and #2

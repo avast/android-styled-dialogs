@@ -279,14 +279,14 @@ public abstract class BaseDialogFragment extends DialogFragment {
 
 				boolean addDivider = false;
 
-				if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+				if (Build.VERSION.SDK_INT < Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
 					addDivider = addPositiveButton(llButtonPanel, addDivider);
 				} else {
 					addDivider = addNegativeButton(llButtonPanel, addDivider);
 				}
 				addDivider = addNeutralButton(llButtonPanel, addDivider);
 
-				if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+				if (Build.VERSION.SDK_INT < Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
 					addNegativeButton(llButtonPanel, addDivider);
 				} else {
 					addPositiveButton(llButtonPanel, addDivider);
