@@ -126,7 +126,7 @@
 	</style>
 
 	<style name="SDL.TextView.Message">
-		<item name="android:textSize">16dp</item>
+		<item name="android:textSize">16sp</item>
 		<item name="android:paddingTop">@dimen/grid_4</item>
 		<item name="android:paddingBottom">@dimen/grid_4</item>
 		<item name="android:paddingLeft">@dimen/grid_4</item>
@@ -134,12 +134,12 @@
 	</style>
 
 	<style name="SDL.TextView.Title">
-		<item name="android:textSize">23dp</item>
+		<item name="android:textSize">22sp</item>
 		<item name="android:layout_width">match_parent</item>
-		<item name="android:paddingLeft">@dimen/grid_4</item>
-		<item name="android:paddingRight">@dimen/grid_4</item>
-		<item name="android:paddingTop">@dimen/grid_6</item>
-		<item name="android:paddingBottom">@dimen/grid_5</item>
+		<item name="android:paddingLeft">@dimen/grid_3</item>
+		<item name="android:paddingRight">@dimen/grid_3</item>
+		<item name="android:paddingTop">@dimen/grid_4</item>
+		<item name="android:paddingBottom">@dimen/grid_4</item>
 	</style>
 
 </resources>
