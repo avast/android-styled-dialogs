@@ -44,6 +44,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
 		// custom dialog background
 		final TypedArray a = getActivity().getTheme().obtainStyledAttributes(null, R.styleable.DialogStyle, R.attr.sdlDialogStyle, 0);
 		Drawable dialogBackground = a.getDrawable(R.styleable.DialogStyle_dialogBackground);
+		a.recycle();
 		dialog.getWindow().setBackgroundDrawable(dialogBackground);
 		return dialog;
 	}
@@ -218,6 +219,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
 			mButtonBackgroundColorNormal = a.getColor(R.styleable.DialogStyle_buttonBackgroundColorNormal, defaultButtonBackgroundColorNormal);
 			mButtonBackgroundColorPressed = a.getColor(R.styleable.DialogStyle_buttonBackgroundColorPressed, defaultButtonBackgroundColorPressed);
 			mButtonBackgroundColorFocused = a.getColor(R.styleable.DialogStyle_buttonBackgroundColorFocused, defaultButtonBackgroundColorFocused);
+			a.recycle();
 
 			View v = getDialogLayoutAndInitTitle();
 
