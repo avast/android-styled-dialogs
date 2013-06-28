@@ -33,7 +33,7 @@ import android.view.View;
  */
 public class SimpleDialogFragment extends BaseDialogFragment {
 
-	public static String TAG = "simple_dialog";
+	public static String DEFAULT_TAG = "simple_dialog";
 
 	protected static String ARG_MESSAGE = "message";
 	protected static String ARG_TITLE = "title";
@@ -165,6 +165,7 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 		private Fragment mTargetFragment;
 		private int mRequestCode = SimpleDialogFragment.DEFAULT_REQUEST_CODE;
 		private FragmentManager mFragmentManager;
+		private String mTag = SimpleDialogFragment.DEFAULT_TAG;
 
 		private SimpleDialogBuilder(Context context, FragmentManager fragmentManager) {
 			mContext = context.getApplicationContext();
@@ -227,6 +228,11 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 			return this;
 		}
 
+		public SimpleDialogBuilder setTag(String tag) {
+			mTag = tag;
+			return this;
+		}
+
 		public void show() {
 			// close button by default
 			if (mPositiveButtonText == null && mNegativeButtonText == null) {
@@ -245,7 +251,7 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 			}
 			fragment.setArguments(args);
 			fragment.setCancelable(mCancelable);
-			fragment.show(mFragmentManager, SimpleDialogFragment.TAG);
+			fragment.show(mFragmentManager, mTag);
 
 		}
 	}

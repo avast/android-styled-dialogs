@@ -59,8 +59,13 @@ public class MyActivity extends FragmentActivity implements
 		findViewById(R.id.message_title_buttons_dialog).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				SimpleDialogFragment.createBuilder(c, getSupportFragmentManager()).setTitle(R.string.title).setMessage(R.string.message_3).setPositiveButtonText(R.string.positive_button)
-					.setNegativeButtonText(R.string.negative_button).setRequestCode(42).show();
+				SimpleDialogFragment.createBuilder(c, getSupportFragmentManager())
+						.setTitle(R.string.title)
+						.setMessage(R.string.message_3)
+						.setPositiveButtonText(R.string.positive_button)
+						.setNegativeButtonText(R.string.negative_button).setRequestCode(42)
+						.setTag("custom-tag")
+						.show();
 			}
 		});
 		/*

@@ -71,10 +71,11 @@ public abstract class BaseDialogFragment extends DialogFragment {
 	 */
 	protected static class Builder {
 
-		private DialogFragment mDialogFragment;
-		private Context mContext;
-		private ViewGroup mContainer;
-		private LayoutInflater mInflater;
+		private final DialogFragment mDialogFragment;
+		private final Context mContext;
+		private final ViewGroup mContainer;
+		private final LayoutInflater mInflater;
+
 		private CharSequence mTitle = null;
 		private CharSequence mPositiveButtonText;
 		private View.OnClickListener mPositiveButtonListener;
