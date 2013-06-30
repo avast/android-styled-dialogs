@@ -62,5 +62,10 @@
 			style="@style/Button"
 			android:text="Dialog with custom view"
 			android:id="@+id/custom_dialog" />
+
+		<Button
+			style="@style/Button"
+			android:text="Progress dialog"
+			android:id="@+id/progress_dialog" />
 	</LinearLayout>
 </ScrollView>

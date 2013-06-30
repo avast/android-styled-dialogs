@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import eu.inmite.android.lib.dialogs.ISimpleDialogCancelListener;
 import eu.inmite.android.lib.dialogs.ISimpleDialogListener;
+import eu.inmite.android.lib.dialogs.ProgressDialogFragment;
 import eu.inmite.android.lib.dialogs.SimpleDialogFragment;
 
 public class MyActivity extends FragmentActivity implements
@@ -36,6 +37,8 @@ public class MyActivity extends FragmentActivity implements
 	public static final int THEME_CUSTOM_DARK = 2;
 	public static final int THEME_CUSTOM_LIGHT = 3;
 	public static final String EXTRA_THEME = "theme";
+
+	private static final int REQUEST_PROGRESS = 1;
 
 	MyActivity c = this;
 
@@ -65,6 +68,16 @@ public class MyActivity extends FragmentActivity implements
 						.setPositiveButtonText(R.string.positive_button)
 						.setNegativeButtonText(R.string.negative_button).setRequestCode(42)
 						.setTag("custom-tag")
+						.show();
+			}
+		});
+		findViewById(R.id.progress_dialog).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				ProgressDialogFragment.createBuilder(c, getSupportFragmentManager())
+						.setMessage(R.string.message_4)
+						.setRequestCode(REQUEST_PROGRESS)
+						.setTitle(R.string.app_name)
 						.show();
 			}
 		});
@@ -120,6 +133,8 @@ public class MyActivity extends FragmentActivity implements
 	public void onCancelled(int requestCode) {
 		if (requestCode == 42) {
 			Toast.makeText(c, "Dialog cancelled", Toast.LENGTH_SHORT).show();
+		} else if (requestCode == REQUEST_PROGRESS) {
+			Toast.makeText(c, "Progress dialog cancelled", Toast.LENGTH_SHORT).show();
 		}
 	}
 

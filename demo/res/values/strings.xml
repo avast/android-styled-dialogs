@@ -13,6 +13,8 @@
 	</string>
 	<string name="message_3">Jayne: "Shiny. Let's be bad guys."
 	</string>
+	<string name="message_4">Waiting for Godot…"
+	</string>
 	<string name="positive_button">Love</string>
 	<string name="negative_button">Hate</string>
 </resources>
