@@ -2,6 +2,7 @@ package eu.inmite.android.lib.dialogs;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
@@ -58,7 +59,7 @@ abstract class BaseDialogBuilder<T extends BaseDialogBuilder<T>> {
 	}
 
 
-	public void show() {
+	public DialogFragment show() {
 		Bundle args = prepareArguments();
 
 		BaseDialogFragment fragment = (BaseDialogFragment) Fragment.instantiate(mContext, mClass.getName(), args);
@@ -70,5 +71,6 @@ abstract class BaseDialogBuilder<T extends BaseDialogBuilder<T>> {
 		fragment.setCancelable(mCancelable);
 		fragment.show(mFragmentManager, mTag);
 
+		return fragment;
 	}
 }
