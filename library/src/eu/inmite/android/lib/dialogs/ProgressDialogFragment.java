@@ -38,8 +38,7 @@ public class ProgressDialogFragment extends BaseDialogFragment {
 		final TextView tvMessage = (TextView) view.findViewById(R.id.sdl__message);
 		tvMessage.setText(getArguments().getString(ARG_MESSAGE));
 
-		final int padding = getResources().getDimensionPixelSize(R.dimen.grid_4);
-		builder.setView(view, padding, padding, padding, padding);
+		builder.setView(view);
 
 		builder.setTitle(getArguments().getString(ARG_TITLE));
 
