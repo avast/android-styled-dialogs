@@ -32,7 +32,7 @@ proguard-project.txt
 .svn
 
 #Gradle
-build
+library/build
 
 #Other
 .DS_Store

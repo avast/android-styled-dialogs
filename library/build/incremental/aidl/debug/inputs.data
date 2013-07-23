@@ -1,9 +1,0 @@
-# incremental data. DO NOT EDIT.
-# format is <lastModified> <length> <SHA-1> <path>
-# Encoding is UTF-8
-1374585591000 2039 cbb0b4b6440d82934fa52c3e6fcfd0d102b32c16 /Users/ChristopheSmet/Documents/Android/android_studio_workplace/VisualVoiceMailFlavor/libraries/styleddialogs/library/src/eu/inmite/android/lib/dialogs/BaseDialogBuilder.java
-1374585591000 6906 fb060b00f71461beba8135bcc5938b0e5981e7fc /Users/ChristopheSmet/Documents/Android/android_studio_workplace/VisualVoiceMailFlavor/libraries/styleddialogs/library/src/eu/inmite/android/lib/dialogs/SimpleDialogFragment.java
-1374585591000 3759 6bd9651b5d6f742f7d6bbcc3ba50208bf9b6dc7d /Users/ChristopheSmet/Documents/Android/android_studio_workplace/VisualVoiceMailFlavor/libraries/styleddialogs/library/src/eu/inmite/android/lib/dialogs/ProgressDialogFragment.java
-1374585591000 801 3ae1ced61332bc8aa90002c7244f15b75babe35f /Users/ChristopheSmet/Documents/Android/android_studio_workplace/VisualVoiceMailFlavor/libraries/styleddialogs/library/src/eu/inmite/android/lib/dialogs/ISimpleDialogCancelListener.java
-1374585591000 952 35dc8505198d35aa3d107450d489631cf2275529 /Users/ChristopheSmet/Documents/Android/android_studio_workplace/VisualVoiceMailFlavor/libraries/styleddialogs/library/src/eu/inmite/android/lib/dialogs/ISimpleDialogListener.java
-1374585591000 13626 8aaed05d1f1bfb6dcea758acd82e009bcd080668 /Users/ChristopheSmet/Documents/Android/android_studio_workplace/VisualVoiceMailFlavor/libraries/styleddialogs/library/src/eu/inmite/android/lib/dialogs/BaseDialogFragment.java
