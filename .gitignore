@@ -31,6 +31,9 @@ proguard-project.txt
 #SVN
 .svn
 
+#Gradle
+library/build
+
 #Other
 .DS_Store
 tmp

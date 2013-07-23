@@ -15,11 +15,14 @@
  */
 
 package eu.inmite.android.lib.dialogs;
+
 /**
  * Implement this interface in Activity or Fragment to react to positive and negative buttons.
+ *
  * @author David Vávra (david@inmite.eu)
  */
 public interface ISimpleDialogListener {
-	public void onPositiveButtonClicked(int requestCode);
-	public void onNegativeButtonClicked(int requestCode);
+    public void onPositiveButtonClicked(int requestCode);
+
+    public void onNegativeButtonClicked(int requestCode);
 }
