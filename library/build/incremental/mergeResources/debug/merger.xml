@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger>
+
+    <dataSet config="main" >
+        <source path="/Users/ChristopheSmet/Documents/Android/android_studio_workplace/VisualVoiceMailFlavor/libraries/styleddialogs/library/res" >
+            <file
+                name="sdl_background_dark"
+                path="/Users/ChristopheSmet/Documents/Android/android_studio_workplace/VisualVoiceMailFlavor/libraries/styleddialogs/library/res/drawable-hdpi/sdl_background_dark.9.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="sdl_background_light"
+                path="/Users/ChristopheSmet/Documents/Android/android_studio_workplace/VisualVoiceMailFlavor/libraries/styleddialogs/library/res/drawable-hdpi/sdl_background_light.9.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="sdl_background_dark"
+                path="/Users/ChristopheSmet/Documents/Android/android_studio_workplace/VisualVoiceMailFlavor/libraries/styleddialogs/library/res/drawable-mdpi/sdl_background_dark.9.png"
+                qualifiers="mdpi"
+                type="drawable" />
+            <file
+                name="sdl_background_light"
+                path="/Users/ChristopheSmet/Documents/Android/android_studio_workplace/VisualVoiceMailFlavor/libraries/styleddialogs/library/res/drawable-mdpi/sdl_background_light.9.png"
+                qualifiers="mdpi"
+                type="drawable" />
+            <file
+                name="sdl_background_dark"
+                path="/Users/ChristopheSmet/Documents/Android/android_studio_workplace/VisualVoiceMailFlavor/libraries/styleddialogs/library/res/drawable-xhdpi/sdl_background_dark.9.png"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="sdl_background_light"
+                path="/Users/ChristopheSmet/Documents/Android/android_studio_workplace/VisualVoiceMailFlavor/libraries/styleddialogs/library/res/drawable-xhdpi/sdl_background_light.9.png"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="dialog_part_button"
+                path="/Users/ChristopheSmet/Documents/Android/android_studio_workplace/VisualVoiceMailFlavor/libraries/styleddialogs/library/res/layout/dialog_part_button.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="dialog_part_button_panel"
+                path="/Users/ChristopheSmet/Documents/Android/android_studio_workplace/VisualVoiceMailFlavor/libraries/styleddialogs/library/res/layout/dialog_part_button_panel.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="dialog_part_button_separator"
+                path="/Users/ChristopheSmet/Documents/Android/android_studio_workplace/VisualVoiceMailFlavor/libraries/styleddialogs/library/res/layout/dialog_part_button_separator.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="dialog_part_custom"
+                path="/Users/ChristopheSmet/Documents/Android/android_studio_workplace/VisualVoiceMailFlavor/libraries/styleddialogs/library/res/layout/dialog_part_custom.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="dialog_part_datepicker"
+                path="/Users/ChristopheSmet/Documents/Android/android_studio_workplace/VisualVoiceMailFlavor/libraries/styleddialogs/library/res/layout/dialog_part_datepicker.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="dialog_part_list"
+                path="/Users/ChristopheSmet/Documents/Android/android_studio_workplace/VisualVoiceMailFlavor/libraries/styleddialogs/library/res/layout/dialog_part_list.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="dialog_part_message"
+                path="/Users/ChristopheSmet/Documents/Android/android_studio_workplace/VisualVoiceMailFlavor/libraries/styleddialogs/library/res/layout/dialog_part_message.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="dialog_part_progress"
+                path="/Users/ChristopheSmet/Documents/Android/android_studio_workplace/VisualVoiceMailFlavor/libraries/styleddialogs/library/res/layout/dialog_part_progress.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="dialog_part_title"
+                path="/Users/ChristopheSmet/Documents/Android/android_studio_workplace/VisualVoiceMailFlavor/libraries/styleddialogs/library/res/layout/dialog_part_title.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                path="/Users/ChristopheSmet/Documents/Android/android_studio_workplace/VisualVoiceMailFlavor/libraries/styleddialogs/library/res/values/sdl__attrs.xml"
+                qualifiers="" >
+                <declare-styleable name="DialogStyle" >
+                    <attr
+                        name="dialogBackground"
+                        format="reference" />
+                    <attr
+                        name="titleTextColor"
+                        format="color|reference" />
+                    <attr
+                        name="titleSeparatorColor"
+                        format="color|reference" />
+                    <attr
+                        name="messageTextColor"
+                        format="color|reference" />
+                    <attr
+                        name="buttonTextColor"
+                        format="color|reference" />
+                    <attr
+                        name="buttonSeparatorColor"
+                        format="color|reference" />
+                    <attr
+                        name="buttonBackgroundColorNormal"
+                        format="color|reference" />
+                    <attr
+                        name="buttonBackgroundColorPressed"
+                        format="color|reference" />
+                    <attr
+                        name="buttonBackgroundColorFocused"
+                        format="color|reference" />
+                </declare-styleable>
+                <declare-styleable name="StyledDialogs" >
+                    <attr
+                        name="sdlDialogStyle"
+                        format="reference" />
+                </declare-styleable>
+            </file>
+            <file
+                path="/Users/ChristopheSmet/Documents/Android/android_studio_workplace/VisualVoiceMailFlavor/libraries/styleddialogs/library/res/values/sdl__defaults.xml"
+                qualifiers="" >
+                <color name="sdl_button_separator_dark" >#12ffffff
+                </color>
+                <color name="sdl_button_normal_light" >@android:color/transparent
+                </color>
+                <color name="sdl_button_focused_dark" >#4C0099cc
+                </color>
+                <color name="sdl_button_normal_dark" >@android:color/transparent
+                </color>
+                <color name="sdl_title_separator_light" >#33B5E5
+                </color>
+                <color name="sdl_button_focused_light" >#4C33B5E5
+                </color>
+                <color name="sdl_button_pressed_light" >#9933B5E5
+                </color>
+                <color name="sdl_message_text_dark" >#FFFFFF
+                </color>
+                <color name="sdl_button_text_light" >#333333
+                </color>
+                <color name="sdl_message_text_light" >#333333
+                </color>
+                <color name="sdl_title_separator_dark" >#ff0099cc
+                </color>
+                <color name="sdl_button_text_dark" >#FFFFFF
+                </color>
+                <color name="sdl_button_separator_light" >#25000000
+                </color>
+                <color name="sdl_button_pressed_dark" >#990099cc
+                </color>
+                <color name="sdl_title_text_light" >#33B5E5
+                </color>
+                <color name="sdl_title_text_dark" >#ff0099cc
+                </color>
+            </file>
+            <file
+                path="/Users/ChristopheSmet/Documents/Android/android_studio_workplace/VisualVoiceMailFlavor/libraries/styleddialogs/library/res/values/sdl__dimens.xml"
+                qualifiers="" >
+                <dimen name="grid_26" >104dp
+                </dimen>
+                <dimen name="grid_20" >80dp
+                </dimen>
+                <dimen name="grid_4" >16dp
+                </dimen>
+                <dimen name="grid_3" >12dp
+                </dimen>
+                <dimen name="grid_6" >24dp
+                </dimen>
+                <dimen name="grid_5" >20dp
+                </dimen>
+                <dimen name="grid_8" >32dp
+                </dimen>
+                <dimen name="grid_7" >28dp
+                </dimen>
+                <dimen name="grid_9" >36dp
+                </dimen>
+                <dimen name="grid_43" >172dp
+                </dimen>
+                <dimen name="grid_44" >176dp
+                </dimen>
+                <dimen name="grid_18" >72dp
+                </dimen>
+                <dimen name="grid_45" >180dp
+                </dimen>
+                <dimen name="grid_46" >184dp
+                </dimen>
+                <dimen name="grid_2" >8dp
+                </dimen>
+                <dimen name="grid_16" >64dp
+                </dimen>
+                <dimen name="grid_1" >4dp
+                </dimen>
+                <dimen name="grid_17" >68dp
+                </dimen>
+                <dimen name="grid_13" >52dp
+                </dimen>
+                <dimen name="grid_12" >48dp
+                </dimen>
+                <dimen name="grid_15" >60dp
+                </dimen>
+                <dimen name="grid_28" >112dp
+                </dimen>
+                <dimen name="grid_14" >56dp
+                </dimen>
+                <dimen name="grid_27" >108dp
+                </dimen>
+                <dimen name="grid_11" >44dp
+                </dimen>
+                <dimen name="grid_10" >40dp
+                </dimen>
+                <dimen name="grid_58" >232dp
+                </dimen>
+                <dimen name="grid_57" >228dp
+                </dimen>
+                <dimen name="grid_90" >360dp
+                </dimen>
+                <dimen name="grid_55" >220dp
+                </dimen>
+            </file>
+            <file
+                path="/Users/ChristopheSmet/Documents/Android/android_studio_workplace/VisualVoiceMailFlavor/libraries/styleddialogs/library/res/values/sdl__strings.xml"
+                qualifiers="" >
+                <string name="dialog_close" >Close
+                </string>
+            </file>
+            <file
+                path="/Users/ChristopheSmet/Documents/Android/android_studio_workplace/VisualVoiceMailFlavor/libraries/styleddialogs/library/res/values/sdl__theme.xml"
+                qualifiers="" >
+
+                <style
+                    name="SDL.Progress"
+                    parent="@android:style/Widget.ProgressBar" >
+                    <item name="android:layout_width">
+wrap_content
+                    </item>
+                    <item name="android:layout_height">
+wrap_content
+                    </item>
+                    <item name="android:layout_marginRight">
+0dp
+                    </item>
+                    <item name="android:layout_marginLeft">
+@dimen/grid_4
+                    </item>
+                    <item name="android:layout_marginTop">
+@dimen/grid_4
+                    </item>
+                    <item name="android:layout_marginBottom">
+@dimen/grid_4
+                    </item>
+                </style>
+
+                <style name="SDL.DatePicker" >
+                    <item name="android:layout_width">
+match_parent
+                    </item>
+                    <item name="android:layout_height">
+wrap_content
+                    </item>
+                    <item name="android:layout_gravity">
+center
+                    </item>
+                    <item name="android:spinnersShown">
+true
+                    </item>
+                    <item name="android:calendarViewShown">
+false
+                    </item>
+                </style>
+
+                <style name="SDL.TitleSeparator" >
+                    <item name="android:layout_width">
+match_parent
+                    </item>
+                    <item name="android:layout_height">
+2dp
+                    </item>
+                </style>
+
+                <style name="SDL.ButtonSeparator" >
+                    <item name="android:layout_width">
+1dp
+                    </item>
+                    <item name="android:layout_height">
+match_parent
+                    </item>
+                </style>
+
+                <style name="SDL.Group.ButtonPanel" >
+                    <item name="android:layout_height">
+wrap_content
+                    </item>
+                </style>
+
+                <style
+                    name="SDL.Dialog"
+                    parent="android:Theme" >
+                    <item name="android:windowFrame">
+@null
+                    </item>
+                    <item name="android:windowIsFloating">
+true
+                    </item>
+                    <item name="android:windowNoTitle">
+true
+                    </item>
+                    <item name="android:windowContentOverlay">
+@null
+                    </item>
+                    <item name="android:windowSoftInputMode">
+stateUnspecified|adjustPan
+                    </item>
+                    <item name="android:windowActionBar">
+false
+                    </item>
+                    <item name="android:windowActionModeOverlay">
+true
+                    </item>
+                    <item name="android:windowCloseOnTouchOutside">
+true
+                    </item>
+                    <item name="android:backgroundDimAmount">
+0.6
+                    </item>
+                    <item name="android:colorBackgroundCacheHint">
+@null
+                    </item>
+                    <item name="sdlDialogStyle">
+@style/DialogStyleDark
+                    </item>
+                </style>
+
+                <style name="SDL.Group.Horizontal.ButtonPanel" >
+                    <item name="android:layout_height">
+wrap_content
+                    </item>
+                </style>
+
+                <style name="SDL.Group.Wrap" >
+                    <item name="android:layout_height">
+wrap_content
+                    </item>
+                    <item name="android:layout_weight">
+1
+                    </item>
+                </style>
+
+                <style name="SDL.TextView.Message" >
+                    <item name="android:textSize">
+16sp
+                    </item>
+                    <item name="android:paddingTop">
+@dimen/grid_3
+                    </item>
+                    <item name="android:paddingBottom">
+@dimen/grid_3
+                    </item>
+                    <item name="android:paddingLeft">
+@dimen/grid_4
+                    </item>
+                    <item name="android:paddingRight">
+@dimen/grid_4
+                    </item>
+                </style>
+
+                <style
+                    name="SDL.TextView"
+                    parent="@android:style/Widget.TextView" >
+                    <item name="android:layout_width">
+wrap_content
+                    </item>
+                    <item name="android:layout_height">
+wrap_content
+                    </item>
+                </style>
+
+                <style name="SDL.Group.Horizontal" >
+                    <item name="android:orientation">
+horizontal
+                    </item>
+                </style>
+
+                <style name="SDL" />
+
+                <style name="DialogStyleDark" >
+                    <item name="dialogBackground">
+@drawable/sdl_background_dark
+                    </item>
+                    <item name="titleTextColor">
+@color/sdl_title_text_dark
+                    </item>
+                    <item name="titleSeparatorColor">
+@color/sdl_title_separator_dark
+                    </item>
+                    <item name="messageTextColor">
+@color/sdl_message_text_dark
+                    </item>
+                    <item name="buttonTextColor">
+@color/sdl_button_text_dark
+                    </item>
+                    <item name="buttonSeparatorColor">
+@color/sdl_button_separator_dark
+                    </item>
+                    <item name="buttonBackgroundColorNormal">
+@color/sdl_button_normal_dark
+                    </item>
+                    <item name="buttonBackgroundColorPressed">
+@color/sdl_button_pressed_dark
+                    </item>
+                    <item name="buttonBackgroundColorFocused">
+@color/sdl_button_focused_dark
+                    </item>
+                </style>
+
+                <style name="SDL.TextView.Title" >
+                    <item name="android:textSize">
+22sp
+                    </item>
+                    <item name="android:layout_width">
+match_parent
+                    </item>
+                    <item name="android:paddingLeft">
+@dimen/grid_4
+                    </item>
+                    <item name="android:paddingRight">
+@dimen/grid_4
+                    </item>
+                    <item name="android:paddingTop">
+@dimen/grid_4
+                    </item>
+                    <item name="android:paddingBottom">
+@dimen/grid_4
+                    </item>
+                </style>
+
+                <style
+                    name="SDL.Button"
+                    parent="@android:style/Widget.Button" >
+                    <item name="android:layout_height">
+wrap_content
+                    </item>
+                    <item name="android:paddingTop">
+@dimen/grid_3
+                    </item>
+                    <item name="android:paddingBottom">
+@dimen/grid_3
+                    </item>
+                    <item name="android:minHeight">
+48dip
+                    </item>
+                    <item name="android:minWidth">
+64dip
+                    </item>
+                    <item name="android:paddingLeft">
+4dip
+                    </item>
+                    <item name="android:paddingRight">
+4dip
+                    </item>
+                    <item name="android:layout_width">
+0dp
+                    </item>
+                    <item name="android:layout_weight">
+1
+                    </item>
+                    <item name="android:textSize">
+15sp
+                    </item>
+                    <item name="android:textStyle">
+normal
+                    </item>
+                    <item name="android:layout_gravity">
+center_vertical
+                    </item>
+                </style>
+
+                <style
+                    name="SDL.ListView"
+                    parent="@android:style/Widget.ListView" >
+                    <item name="android:layout_width">
+match_parent
+                    </item>
+                    <item name="android:layout_height">
+match_parent
+                    </item>
+                    <item name="android:layout_weight">
+1
+                    </item>
+                    <item name="android:fadeScrollbars">
+true
+                    </item>
+                    <item name="android:cacheColorHint">
+@null
+                    </item>
+                    <item name="android:background">
+@android:color/transparent
+                    </item>
+                    <item name="android:listSelector">
+@android:color/transparent
+                    </item>
+                    <item name="android:fastScrollEnabled">
+true
+                    </item>
+                </style>
+
+                <style name="SDL.HorizontalSeparator" >
+                    <item name="android:layout_width">
+match_parent
+                    </item>
+                    <item name="android:layout_height">
+1dp
+                    </item>
+                </style>
+
+                <style name="SDL.Group" >
+                    <item name="android:layout_width">
+match_parent
+                    </item>
+                    <item name="android:layout_height">
+match_parent
+                    </item>
+                    <item name="android:orientation">
+vertical
+                    </item>
+                </style>
+
+                <style name="SDL.Group.Content" >
+                    <item name="android:layout_height">
+0dp
+                    </item>
+                    <item name="android:layout_weight">
+1
+                    </item>
+                    <item name="android:gravity">
+center
+                    </item>
+                </style>
+
+                <style name="DialogStyleLight" >
+                    <item name="dialogBackground">
+@drawable/sdl_background_light
+                    </item>
+                    <item name="titleTextColor">
+@color/sdl_title_text_light
+                    </item>
+                    <item name="titleSeparatorColor">
+@color/sdl_title_separator_light
+                    </item>
+                    <item name="messageTextColor">
+@color/sdl_message_text_light
+                    </item>
+                    <item name="buttonTextColor">
+@color/sdl_button_text_light
+                    </item>
+                    <item name="buttonSeparatorColor">
+@color/sdl_button_separator_light
+                    </item>
+                    <item name="buttonBackgroundColorNormal">
+@color/sdl_button_normal_light
+                    </item>
+                    <item name="buttonBackgroundColorPressed">
+@color/sdl_button_pressed_light
+                    </item>
+                    <item name="buttonBackgroundColorFocused">
+@color/sdl_button_focused_light
+                    </item>
+                </style>
+            </file>
+            <file
+                path="/Users/ChristopheSmet/Documents/Android/android_studio_workplace/VisualVoiceMailFlavor/libraries/styleddialogs/library/res/values-v11/sdl__theme.xml"
+                qualifiers="v11" >
+
+                <style
+                    name="SDL.Progress"
+                    parent="@android:style/Widget.Holo.ProgressBar" >
+                    <item name="android:layout_width">
+wrap_content
+                    </item>
+                    <item name="android:layout_height">
+wrap_content
+                    </item>
+                    <item name="android:layout_marginRight">
+0dp
+                    </item>
+                    <item name="android:layout_marginLeft">
+@dimen/grid_4
+                    </item>
+                    <item name="android:layout_marginTop">
+@dimen/grid_4
+                    </item>
+                    <item name="android:layout_marginBottom">
+@dimen/grid_4
+                    </item>
+                </style>
+            </file>
+        </source>
+        <source path="/Users/ChristopheSmet/Documents/Android/android_studio_workplace/VisualVoiceMailFlavor/libraries/styleddialogs/library/build/res/rs/debug" />
+    </dataSet>
+    <dataSet config="debug" >
+        <source path="/Users/ChristopheSmet/Documents/Android/android_studio_workplace/VisualVoiceMailFlavor/libraries/styleddialogs/library/src/debug/res" />
+    </dataSet>
+
+</merger>

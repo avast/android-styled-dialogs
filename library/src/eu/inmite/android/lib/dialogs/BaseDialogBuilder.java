@@ -13,64 +13,64 @@ import android.support.v4.app.FragmentManager;
  */
 abstract class BaseDialogBuilder<T extends BaseDialogBuilder<T>> {
 
-	public static String ARG_REQUEST_CODE = "request_code";
-	public static String DEFAULT_TAG = "simple_dialog";
-	public static int DEFAULT_REQUEST_CODE = -42;
+    public static String ARG_REQUEST_CODE = "request_code";
+    public static String DEFAULT_TAG = "simple_dialog";
+    public static int DEFAULT_REQUEST_CODE = -42;
 
-	protected final Context mContext;
-	protected final FragmentManager mFragmentManager;
-	protected final Class<? extends BaseDialogFragment> mClass;
+    protected final Context mContext;
+    protected final FragmentManager mFragmentManager;
+    protected final Class<? extends BaseDialogFragment> mClass;
 
-	private Fragment mTargetFragment;
-	private boolean mCancelable = true;
+    private Fragment mTargetFragment;
+    private boolean mCancelable = true;
 
-	private String mTag = DEFAULT_TAG;
-	private int mRequestCode = DEFAULT_REQUEST_CODE;
+    private String mTag = DEFAULT_TAG;
+    private int mRequestCode = DEFAULT_REQUEST_CODE;
 
-	public BaseDialogBuilder(Context context, FragmentManager fragmentManager, Class<? extends BaseDialogFragment> clazz) {
-		mFragmentManager = fragmentManager;
-		mContext = context.getApplicationContext();
-		mClass = clazz;
-	}
+    public BaseDialogBuilder(Context context, FragmentManager fragmentManager, Class<? extends BaseDialogFragment> clazz) {
+        mFragmentManager = fragmentManager;
+        mContext = context.getApplicationContext();
+        mClass = clazz;
+    }
 
-	protected abstract T self();
+    protected abstract T self();
 
-	protected abstract Bundle prepareArguments();
+    protected abstract Bundle prepareArguments();
 
-	public T setCancelable(boolean cancelable) {
-		mCancelable = cancelable;
-		return self();
-	}
+    public T setCancelable(boolean cancelable) {
+        mCancelable = cancelable;
+        return self();
+    }
 
-	public T setTargetFragment(Fragment fragment, int requestCode) {
-		mTargetFragment = fragment;
-		mRequestCode = requestCode;
-		return self();
-	}
+    public T setTargetFragment(Fragment fragment, int requestCode) {
+        mTargetFragment = fragment;
+        mRequestCode = requestCode;
+        return self();
+    }
 
-	public T setRequestCode(int requestCode) {
-		mRequestCode = requestCode;
-		return self();
-	}
+    public T setRequestCode(int requestCode) {
+        mRequestCode = requestCode;
+        return self();
+    }
 
-	public T setTag(String tag) {
-		mTag = tag;
-		return self();
-	}
+    public T setTag(String tag) {
+        mTag = tag;
+        return self();
+    }
 
 
-	public DialogFragment show() {
-		Bundle args = prepareArguments();
+    public DialogFragment show() {
+        Bundle args = prepareArguments();
 
-		BaseDialogFragment fragment = (BaseDialogFragment) Fragment.instantiate(mContext, mClass.getName(), args);
-		if (mTargetFragment != null) {
-			fragment.setTargetFragment(mTargetFragment, mRequestCode);
-		} else {
-			args.putInt(ARG_REQUEST_CODE, mRequestCode);
-		}
-		fragment.setCancelable(mCancelable);
-		fragment.show(mFragmentManager, mTag);
+        BaseDialogFragment fragment = (BaseDialogFragment) Fragment.instantiate(mContext, mClass.getName(), args);
+        if (mTargetFragment != null) {
+            fragment.setTargetFragment(mTargetFragment, mRequestCode);
+        } else {
+            args.putInt(ARG_REQUEST_CODE, mRequestCode);
+        }
+        fragment.setCancelable(mCancelable);
+        fragment.show(mFragmentManager, mTag);
 
-		return fragment;
-	}
+        return fragment;
+    }
 }
