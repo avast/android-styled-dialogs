@@ -224,7 +224,7 @@ public class SimpleDialogFragment extends BaseDialogFragment {
         @Override
         protected Bundle prepareArguments() {
             // close button by default
-            if (!mHideCloseButton) {
+            if (mHideCloseButton) {
                 if (mPositiveButtonText == null && mNegativeButtonText == null) {
                     mPositiveButtonText = mContext.getString(R.string.dialog_close);
                 }
