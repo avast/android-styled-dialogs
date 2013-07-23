@@ -348,8 +348,9 @@ public abstract class BaseDialogFragment extends DialogFragment {
 		}
 
 		private void addDivider(ViewGroup parent) {
-			View view = mInflater.inflate(R.layout.dialog_part_button_separator, parent, true);
+			View view = mInflater.inflate(R.layout.dialog_part_button_separator, parent, false);
 			view.findViewById(R.id.dialog_button_separator).setBackgroundDrawable(new ColorDrawable(mButtonSeparatorColor));
+			parent.addView(view);
 		}
 
 		private StateListDrawable getButtonBackground() {
