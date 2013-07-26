@@ -28,7 +28,7 @@
 	<groupId>eu.inmite.android.lib</groupId>
 	<artifactId>android-styled-dialogs-parent</artifactId>
 	<packaging>pom</packaging>
-	<version>1.1-SNAPSHOT</version>
+	<version>1.0.1-SNAPSHOT</version>
 
 	<name>Android StyledDialogs Parent</name>
 	<description>Android library for creating styleable dialogs easily</description>
@@ -120,7 +120,7 @@
 				<plugin>
 					<groupId>com.jayway.maven.plugins.android.generation2</groupId>
 					<artifactId>android-maven-plugin</artifactId>
-					<version>3.5.3</version>
+					<version>3.6.0</version>
 					<configuration>
 						<nativeLibrariesDirectory>ignored</nativeLibrariesDirectory>
 						<sdk>
