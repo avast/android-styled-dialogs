@@ -60,9 +60,9 @@ abstract class BaseDialogBuilder<T extends BaseDialogBuilder<T>> {
 
 
     public DialogFragment show() {
-        Bundle args = prepareArguments();
+        final Bundle args = prepareArguments();
 
-        BaseDialogFragment fragment = (BaseDialogFragment) Fragment.instantiate(mContext, mClass.getName(), args);
+        final BaseDialogFragment fragment = (BaseDialogFragment) Fragment.instantiate(mContext, mClass.getName(), args);
         if (mTargetFragment != null) {
             fragment.setTargetFragment(mTargetFragment, mRequestCode);
         } else {
