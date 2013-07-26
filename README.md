@@ -2,7 +2,7 @@
 
 This library makes styling and using dialogs _a piece of cake_.
 
- ![Screenshot of the dialogs](https://raw.github.com/inmite/android-styled-dialogs/preparing-v1.0/library/graphics/screenshot-small.png)
+ ![Screenshot of the dialogs](https://raw.github.com/inmite/android-styled-dialogs/master/library/graphics/screenshot-small.png)
 
 Features:
 
@@ -19,7 +19,7 @@ With Maven:
 	<dependency>
 		<groupId>eu.inmite.android.lib</groupId>
 		<artifactId>android-styled-dialogs</artifactId>
-		<version>1.0</version>
+		<version>1.0.1</version>
 		<type>apklib</type>
 	</dependency>
 

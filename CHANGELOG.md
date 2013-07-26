@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.1
+
+July 26, 2013
+
+ - Gradle support (#3)
+ - fixed paddings to better match native style
+ - fixed horizontal separator for neutral button (#7)
+ - posibility to remove Close button in simple dialogs
+
 ## 1.0
 
 June 27, 2013
