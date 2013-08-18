@@ -25,7 +25,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
+import android.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -226,8 +226,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
 
 			LinearLayout content = (LinearLayout) v.findViewById(R.id.sdl__content);
 
-			if (mMessage != null) {
-				View viewMessage = mInflater.inflate(R.layout.dialog_part_message, content, false);
+			if (mMessage != null) {				View viewMessage = mInflater.inflate(R.layout.dialog_part_message, content, false);
 				TextView tvMessage = (TextView) viewMessage.findViewById(R.id.sdl__message);
 				tvMessage.setText(mMessage);
 				tvMessage.setTextColor(mMessageTextColor);

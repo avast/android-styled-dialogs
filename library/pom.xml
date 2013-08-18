@@ -4,12 +4,12 @@
 
 	<parent>
 		<groupId>eu.inmite.android.lib</groupId>
-		<artifactId>android-styled-dialogs-parent</artifactId>
+		<artifactId>android-styled-dialogs-parent-no-support</artifactId>
 		<relativePath>../pom.xml</relativePath>
 		<version>1.0.2-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>android-styled-dialogs</artifactId>
+	<artifactId>android-styled-dialogs-no-support</artifactId>
 	<packaging>apklib</packaging>
 
 	<name>Android StyledDialogs library</name>
@@ -52,11 +52,6 @@
 			<groupId>com.google.android</groupId>
 			<artifactId>android</artifactId>
 			<scope>provided</scope>
-		</dependency>
-
-        <dependency>
-			<groupId>com.google.android</groupId>
-			<artifactId>support-v4</artifactId>
 		</dependency>
 
 	</dependencies>

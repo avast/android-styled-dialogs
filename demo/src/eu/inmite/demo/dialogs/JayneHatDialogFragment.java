@@ -15,7 +15,7 @@
  */
 package eu.inmite.demo.dialogs;
 
-import android.support.v4.app.FragmentActivity;
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -32,8 +32,8 @@ public class JayneHatDialogFragment extends SimpleDialogFragment {
 
 	public static String TAG = "jayne";
 
-	public static void show(FragmentActivity activity) {
-		new JayneHatDialogFragment().show(activity.getSupportFragmentManager(), TAG);
+	public static void show(Activity activity) {
+		new JayneHatDialogFragment().show(activity.getFragmentManager(), TAG);
 	}
 
 	@Override

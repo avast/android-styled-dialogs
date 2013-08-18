@@ -4,12 +4,12 @@
 
 	<parent>
 		<groupId>eu.inmite.android.lib</groupId>
-		<artifactId>android-styled-dialogs-parent</artifactId>
+		<artifactId>android-styled-dialogs-parent-no-support</artifactId>
 		<relativePath>../pom.xml</relativePath>
 		<version>1.0.2-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>android-styled-dialogs-demo</artifactId>
+	<artifactId>android-styled-dialogs-demo-no-support</artifactId>
 	<packaging>apk</packaging>
 
 	<name>Styled Dialogs Demo</name>
@@ -26,13 +26,8 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.google.android</groupId>
-			<artifactId>support-v4</artifactId>
-		</dependency>
-
-		<dependency>
 			<groupId>eu.inmite.android.lib</groupId>
-			<artifactId>android-styled-dialogs</artifactId>
+			<artifactId>android-styled-dialogs-no-support</artifactId>
 			<version>1.0.2-SNAPSHOT</version>
 			<type>apklib</type>
 		</dependency>

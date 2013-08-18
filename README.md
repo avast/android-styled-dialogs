@@ -60,15 +60,15 @@ Easy:
 
 ### Dialog with a simple message and Close button:
 
-	SimpleDialogFragment.createBuilder(this, getSupportFragmentManager()).setMessage(R.string.message).show();
+	SimpleDialogFragment.createBuilder(this, getFragmentManager()).setMessage(R.string.message).show();
 
 ### Dialog with a title, message and Close button:
 
-	SimpleDialogFragment.createBuilder(this, getSupportFragmentManager()).setTitle(R.string.title).setMessage(R.string.message).show();
+	SimpleDialogFragment.createBuilder(this, getFragmentManager()).setTitle(R.string.title).setMessage(R.string.message).show();
 
 ### Dialog with a title, message and two buttons:	
 
-	SimpleDialogFragment.createBuilder(this, getSupportFragmentManager()).setTitle(R.string.title).setMessage(R.string.message).setPositiveButtonText(R.string.positive_button).setNegativeButtonText(R.string.negative_button).show();
+	SimpleDialogFragment.createBuilder(this, getFragmentManager()).setTitle(R.string.title).setMessage(R.string.message).setPositiveButtonText(R.string.positive_button).setNegativeButtonText(R.string.negative_button).show();
 
 ### How to react on button press in your Activity/Fragment:
 

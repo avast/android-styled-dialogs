@@ -26,7 +26,7 @@
 	</parent>
 
 	<groupId>eu.inmite.android.lib</groupId>
-	<artifactId>android-styled-dialogs-parent</artifactId>
+	<artifactId>android-styled-dialogs-parent-no-support</artifactId>
 	<packaging>pom</packaging>
 	<version>1.0.2-SNAPSHOT</version>
 
@@ -76,7 +76,6 @@
 		<apk.skipProguard>true</apk.skipProguard>
 		<android.version>4.1.1.4</android.version>
 		<android.platform>16</android.platform>
-		<android.support.version>r7</android.support.version>
 	</properties>
 
 	<modules>
@@ -91,11 +90,6 @@
 				<artifactId>android</artifactId>
 				<version>${android.version}</version>
 				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>com.google.android</groupId>
-				<artifactId>support-v4</artifactId>
-				<version>${android.support.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

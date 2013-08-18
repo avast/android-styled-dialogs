@@ -18,7 +18,7 @@ package eu.inmite.demo.dialogs;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.app.Activity;
 import android.view.View;
 import android.widget.Toast;
 
@@ -27,7 +27,7 @@ import eu.inmite.android.lib.dialogs.ISimpleDialogListener;
 import eu.inmite.android.lib.dialogs.ProgressDialogFragment;
 import eu.inmite.android.lib.dialogs.SimpleDialogFragment;
 
-public class MyActivity extends FragmentActivity implements
+public class MyActivity extends Activity implements
 	ISimpleDialogListener,
 	IFavoriteCharacterDialogListener,
 	ISimpleDialogCancelListener {
@@ -50,19 +50,19 @@ public class MyActivity extends FragmentActivity implements
 		findViewById(R.id.message_dialog).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				SimpleDialogFragment.createBuilder(c, getSupportFragmentManager()).setMessage(R.string.message_1).show();
+				SimpleDialogFragment.createBuilder(c, getFragmentManager()).setMessage(R.string.message_1).show();
 			}
 		});
 		findViewById(R.id.message_title_dialog).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				SimpleDialogFragment.createBuilder(c, getSupportFragmentManager()).setTitle(R.string.title).setMessage(R.string.message_2).show();
+				SimpleDialogFragment.createBuilder(c, getFragmentManager()).setTitle(R.string.title).setMessage(R.string.message_2).show();
 			}
 		});
 		findViewById(R.id.message_title_buttons_dialog).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				SimpleDialogFragment.createBuilder(c, getSupportFragmentManager())
+				SimpleDialogFragment.createBuilder(c, getFragmentManager())
 						.setTitle(R.string.title)
 						.setMessage(R.string.message_3)
 						.setPositiveButtonText(R.string.positive_button)
@@ -74,7 +74,7 @@ public class MyActivity extends FragmentActivity implements
 		findViewById(R.id.progress_dialog).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ProgressDialogFragment.createBuilder(c, getSupportFragmentManager())
+				ProgressDialogFragment.createBuilder(c, getFragmentManager())
 						.setMessage(R.string.message_4)
 						.setRequestCode(REQUEST_PROGRESS)
 						.setTitle(R.string.app_name)

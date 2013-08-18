@@ -16,8 +16,8 @@
 package eu.inmite.demo.dialogs;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
+import android.app.Fragment;
+import android.app.Activity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -36,13 +36,13 @@ public class FavoriteCharacterDialogFragment extends BaseDialogFragment {
 	private static String ARG_ITEMS = "items";
 	IFavoriteCharacterDialogListener mListener;
 
-	public static void show(FragmentActivity activity, String title, String[] items) {
+	public static void show(Activity activity, String title, String[] items) {
 		FavoriteCharacterDialogFragment dialog = new FavoriteCharacterDialogFragment();
 		Bundle args = new Bundle();
 		args.putString(ARG_TITLE, title);
 		args.putStringArray(ARG_ITEMS, items);
 		dialog.setArguments(args);
-		dialog.show(activity.getSupportFragmentManager(), TAG);
+		dialog.show(activity.getFragmentManager(), TAG);
 	}
 
 	@Override
