@@ -18,6 +18,7 @@ package eu.inmite.android.lib.dialogs;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.ColorDrawable;
@@ -58,13 +59,37 @@ public abstract class BaseDialogFragment extends DialogFragment {
 	protected abstract Builder build(Builder initialBuilder);
 
 	@Override
-	public void onDestroyView() {
-		// bug in the compatibility library
-		if (getDialog() != null && getRetainInstance()) {
-			getDialog().setDismissMessage(null);
-		}
-		super.onDestroyView();
-	}
+    public void onDestroyView() {
+        // bug in the compatibility library
+        if (getDialog() != null && getRetainInstance()) {
+            getDialog().setDismissMessage(null);
+        }
+        super.onDestroyView();
+    }
+
+    protected Button getPositiveButton() {
+        if (getView() != null) {
+            return (Button) getView().findViewById(R.id.sdl__positive_button);
+        } else {
+            return null;
+        }
+    }
+
+    protected Button getNegativeButton() {
+        if (getView() != null) {
+            return (Button) getView().findViewById(R.id.sdl__negative_button);
+        } else {
+            return null;
+        }
+    }
+
+    protected Button getNeutralButton() {
+        if (getView() != null) {
+            return (Button) getView().findViewById(R.id.sdl__neutral_button);
+        } else {
+            return null;
+        }
+    }
 
 	/**
 	 * Custom dialog builder
@@ -99,7 +124,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
 		private int mTitleTextColor;
 		private int mTitleSeparatorColor;
 		private int mMessageTextColor;
-		private int mButtonTextColor;
+		private ColorStateList mButtonTextColor;
 		private int mButtonSeparatorColor;
 		private int mButtonBackgroundColorNormal;
 		private int mButtonBackgroundColorPressed;
@@ -205,7 +230,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
 			final int defaultTitleTextColor = res.getColor(R.color.sdl_title_text_dark);
 			final int defaultTitleSeparatorColor = res.getColor(R.color.sdl_title_separator_dark);
 			final int defaultMessageTextColor = res.getColor(R.color.sdl_message_text_dark);
-			final int defaultButtonTextColor = res.getColor(R.color.sdl_button_text_dark);
+			final ColorStateList defaultButtonTextColor = res.getColorStateList(R.color.sdl_button_text_dark);
 			final int defaultButtonSeparatorColor = res.getColor(R.color.sdl_button_separator_dark);
 			final int defaultButtonBackgroundColorNormal = res.getColor(R.color.sdl_button_normal_dark);
 			final int defaultButtonBackgroundColorPressed = res.getColor(R.color.sdl_button_pressed_dark);
@@ -215,7 +240,10 @@ public abstract class BaseDialogFragment extends DialogFragment {
 			mTitleTextColor = a.getColor(R.styleable.DialogStyle_titleTextColor, defaultTitleTextColor);
 			mTitleSeparatorColor = a.getColor(R.styleable.DialogStyle_titleSeparatorColor, defaultTitleSeparatorColor);
 			mMessageTextColor = a.getColor(R.styleable.DialogStyle_messageTextColor, defaultMessageTextColor);
-			mButtonTextColor = a.getColor(R.styleable.DialogStyle_buttonTextColor, defaultButtonTextColor);
+			mButtonTextColor = a.getColorStateList(R.styleable.DialogStyle_buttonTextColor);
+            if (mButtonTextColor == null) {
+                mButtonTextColor = defaultButtonTextColor;
+            }
 			mButtonSeparatorColor = a.getColor(R.styleable.DialogStyle_buttonSeparatorColor, defaultButtonSeparatorColor);
 			mButtonBackgroundColorNormal = a.getColor(R.styleable.DialogStyle_buttonBackgroundColorNormal, defaultButtonBackgroundColorNormal);
 			mButtonBackgroundColorPressed = a.getColor(R.styleable.DialogStyle_buttonBackgroundColorPressed, defaultButtonBackgroundColorPressed);
@@ -305,6 +333,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
 					addDivider(parent);
 				}
 				Button btn = (Button) mInflater.inflate(R.layout.dialog_part_button, parent, false);
+                btn.setId(R.id.sdl__negative_button);
 				btn.setText(mNegativeButtonText);
 				btn.setTextColor(mButtonTextColor);
 				btn.setBackgroundDrawable(getButtonBackground());
@@ -321,7 +350,8 @@ public abstract class BaseDialogFragment extends DialogFragment {
 					addDivider(parent);
 				}
 				Button btn = (Button) mInflater.inflate(R.layout.dialog_part_button, parent, false);
-				btn.setText(mPositiveButtonText);
+                btn.setId(R.id.sdl__positive_button);
+                btn.setText(mPositiveButtonText);
 				btn.setTextColor(mButtonTextColor);
 				btn.setBackgroundDrawable(getButtonBackground());
 				btn.setOnClickListener(mPositiveButtonListener);
@@ -337,6 +367,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
 					addDivider(parent);
 				}
 				Button btn = (Button) mInflater.inflate(R.layout.dialog_part_button, parent, false);
+                btn.setId(R.id.sdl__neutral_button);
 				btn.setText(mNeutralButtonText);
 				btn.setTextColor(mButtonTextColor);
 				btn.setBackgroundDrawable(getButtonBackground());
