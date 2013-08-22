@@ -14,12 +14,12 @@ dependencies {
 }
 
 android {
-    compileSdkVersion 17
-    buildToolsVersion "17"
+    compileSdkVersion 18
+    buildToolsVersion "18"
 
     defaultConfig {
         minSdkVersion 8
-        targetSdkVersion 17
+        targetSdkVersion 18
     }
     sourceSets {
         main {
