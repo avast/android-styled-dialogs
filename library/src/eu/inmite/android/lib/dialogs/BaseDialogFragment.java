@@ -67,6 +67,9 @@ public abstract class BaseDialogFragment extends DialogFragment {
         super.onDestroyView();
     }
 
+    /**
+     * @return the positive button if specified and the view is created, null otherwise
+     */
     protected Button getPositiveButton() {
         if (getView() != null) {
             return (Button) getView().findViewById(R.id.sdl__positive_button);
@@ -75,6 +78,9 @@ public abstract class BaseDialogFragment extends DialogFragment {
         }
     }
 
+    /**
+     * @return the negative button if specified and the view is created, null otherwise
+     */
     protected Button getNegativeButton() {
         if (getView() != null) {
             return (Button) getView().findViewById(R.id.sdl__negative_button);
@@ -83,6 +89,9 @@ public abstract class BaseDialogFragment extends DialogFragment {
         }
     }
 
+    /**
+     * @return the neutral button if specified and the view is created, null otherwise
+     */
     protected Button getNeutralButton() {
         if (getView() != null) {
             return (Button) getView().findViewById(R.id.sdl__neutral_button);
