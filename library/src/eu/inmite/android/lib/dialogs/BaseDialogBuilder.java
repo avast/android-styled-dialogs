@@ -23,6 +23,7 @@ abstract class BaseDialogBuilder<T extends BaseDialogBuilder<T>> {
 
 	private Fragment mTargetFragment;
 	private boolean mCancelable = true;
+	private boolean mCancelableOnOutsideTouch = true;
 
 	private String mTag = DEFAULT_TAG;
 	private int mRequestCode = DEFAULT_REQUEST_CODE;
@@ -39,6 +40,11 @@ abstract class BaseDialogBuilder<T extends BaseDialogBuilder<T>> {
 
 	public T setCancelable(boolean cancelable) {
 		mCancelable = cancelable;
+		return self();
+	}
+	
+	public T setCancelableOnOutsideTouch(boolean cancelable) {
+		mCancelableOnOutsideTouch = cancelable;
 		return self();
 	}
 
@@ -70,7 +76,12 @@ abstract class BaseDialogBuilder<T extends BaseDialogBuilder<T>> {
 		}
 		fragment.setCancelable(mCancelable);
 		fragment.show(mFragmentManager, mTag);
-
+		
+		if (mCancelable != mCancelableOnOutsideTouch) {
+			mFragmentManager.executePendingTransactions();
+			if (fragment.getDialog()!=null)
+				fragment.getDialog().setCanceledOnTouchOutside(mCancelableOnOutsideTouch);
+		}
 		return fragment;
 	}
 }
