@@ -14,6 +14,7 @@ import android.support.v4.app.FragmentManager;
 abstract class BaseDialogBuilder<T extends BaseDialogBuilder<T>> {
 
 	public static String ARG_REQUEST_CODE = "request_code";
+	public static String ARG_CANCELABLE_ON_TOUCH_OUTSIDE = "cancelable_oto";
 	public static String DEFAULT_TAG = "simple_dialog";
 	public static int DEFAULT_REQUEST_CODE = -42;
 
@@ -69,6 +70,9 @@ abstract class BaseDialogBuilder<T extends BaseDialogBuilder<T>> {
 		final Bundle args = prepareArguments();
 
 		final BaseDialogFragment fragment = (BaseDialogFragment) Fragment.instantiate(mContext, mClass.getName(), args);
+	
+		args.putBoolean(ARG_CANCELABLE_ON_TOUCH_OUTSIDE, mCancelableOnTouchOutside);
+		
 		if (mTargetFragment != null) {
 			fragment.setTargetFragment(mTargetFragment, mRequestCode);
 		} else {
@@ -76,16 +80,6 @@ abstract class BaseDialogBuilder<T extends BaseDialogBuilder<T>> {
 		}
 		fragment.setCancelable(mCancelable);
 		fragment.show(mFragmentManager, mTag);
-		
-		// @author Petr Simek
-		// Calling this part of code makes sense only when mCancelable and mCancelableOnOutsideTouch are different 
-		// because foregoing fragment.setCancelable() sets fragment.getDialog().setCanceledOnTouchOutside() 
-		// to the same value too
-		if (mCancelable != mCancelableOnTouchOutside) {
-			mFragmentManager.executePendingTransactions();
-			if (fragment.getDialog()!=null)
-				fragment.getDialog().setCanceledOnTouchOutside(mCancelableOnTouchOutside);
-		}
 		
 		return fragment;
 	}
