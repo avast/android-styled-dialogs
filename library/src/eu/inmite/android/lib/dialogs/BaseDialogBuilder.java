@@ -46,6 +46,9 @@ abstract class BaseDialogBuilder<T extends BaseDialogBuilder<T>> {
 	
 	public T setCancelableOnTouchOutside(boolean cancelable) {
 		mCancelableOnTouchOutside = cancelable;
+        if (cancelable) {
+            mCancelable = cancelable;
+        }
 		return self();
 	}
 
