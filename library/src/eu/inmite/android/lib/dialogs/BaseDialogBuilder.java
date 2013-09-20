@@ -14,6 +14,7 @@ import android.support.v4.app.FragmentManager;
 abstract class BaseDialogBuilder<T extends BaseDialogBuilder<T>> {
 
 	public static String ARG_REQUEST_CODE = "request_code";
+	public static String ARG_CANCELABLE_ON_TOUCH_OUTSIDE = "cancelable_oto";
 	public static String DEFAULT_TAG = "simple_dialog";
 	public static int DEFAULT_REQUEST_CODE = -42;
 
@@ -23,6 +24,7 @@ abstract class BaseDialogBuilder<T extends BaseDialogBuilder<T>> {
 
 	private Fragment mTargetFragment;
 	private boolean mCancelable = true;
+	private boolean mCancelableOnTouchOutside = true;
 
 	private String mTag = DEFAULT_TAG;
 	private int mRequestCode = DEFAULT_REQUEST_CODE;
@@ -39,6 +41,14 @@ abstract class BaseDialogBuilder<T extends BaseDialogBuilder<T>> {
 
 	public T setCancelable(boolean cancelable) {
 		mCancelable = cancelable;
+		return self();
+	}
+	
+	public T setCancelableOnTouchOutside(boolean cancelable) {
+		mCancelableOnTouchOutside = cancelable;
+		if (cancelable) {
+			mCancelable = cancelable;
+		}
 		return self();
 	}
 
@@ -63,6 +73,9 @@ abstract class BaseDialogBuilder<T extends BaseDialogBuilder<T>> {
 		final Bundle args = prepareArguments();
 
 		final BaseDialogFragment fragment = (BaseDialogFragment) Fragment.instantiate(mContext, mClass.getName(), args);
+	
+		args.putBoolean(ARG_CANCELABLE_ON_TOUCH_OUTSIDE, mCancelableOnTouchOutside);
+		
 		if (mTargetFragment != null) {
 			fragment.setTargetFragment(mTargetFragment, mRequestCode);
 		} else {
@@ -70,7 +83,7 @@ abstract class BaseDialogBuilder<T extends BaseDialogBuilder<T>> {
 		}
 		fragment.setCancelable(mCancelable);
 		fragment.show(mFragmentManager, mTag);
-
+		
 		return fragment;
 	}
 }
