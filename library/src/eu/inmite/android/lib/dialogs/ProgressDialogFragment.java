@@ -2,6 +2,7 @@ package eu.inmite.android.lib.dialogs;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -33,10 +34,16 @@ public class ProgressDialogFragment extends BaseDialogFragment {
 
 	@Override
 	protected Builder build(Builder builder) {
-		final LayoutInflater inflater = LayoutInflater.from(getActivity());
+		final int defaultMessageTextColor = getResources().getColor(R.color.sdl_message_text_dark);
+		final TypedArray a = getActivity().getTheme().obtainStyledAttributes(null, R.styleable.DialogStyle, R.attr.sdlDialogStyle, 0);
+		final int messageTextColor = a.getColor(R.styleable.DialogStyle_messageTextColor, defaultMessageTextColor);
+		a.recycle();
+
+		final LayoutInflater inflater = builder.getLayoutInflater();
 		final View view = inflater.inflate(R.layout.dialog_part_progress, null, false);
 		final TextView tvMessage = (TextView) view.findViewById(R.id.sdl__message);
 		tvMessage.setText(getArguments().getString(ARG_MESSAGE));
+		tvMessage.setTextColor(messageTextColor);
 
 		builder.setView(view);
 
