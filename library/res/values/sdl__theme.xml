@@ -16,6 +16,7 @@
 		<item name="android:colorBackgroundCacheHint">@null</item>
 
         <item name="sdlTitleTextStyle">@style/SDL.TextView.Title</item>
+        <item name="sdlMessageTextStyle">@style/SDL.TextView.Message</item>
 
 		<item name="sdlDialogStyle">@style/DialogStyleDark</item>
 	</style>
