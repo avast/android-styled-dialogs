@@ -308,9 +308,14 @@ public abstract class BaseDialogFragment extends DialogFragment {
 			View v = mInflater.inflate(R.layout.dialog_part_title, mContainer, false);
 			TextView tvTitle = (TextView) v.findViewById(R.id.sdl__title);
 			View viewTitleDivider = v.findViewById(R.id.sdl__titleDivider);
+			final TypedArray a = mContext.getTheme().obtainStyledAttributes(null, R.styleable.DialogStyle, R.attr.sdlDialogStyle, 0);
+			Drawable icon = a.getDrawable(R.styleable.DialogStyle_titleIcon);
+			a.recycle();
+
 			if (mTitle != null) {
 				tvTitle.setText(mTitle);
 				tvTitle.setTextColor(mTitleTextColor);
+				tvTitle.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
 				viewTitleDivider.setBackgroundDrawable(new ColorDrawable(mTitleSeparatorColor));
 			} else {
 				tvTitle.setVisibility(View.GONE);
