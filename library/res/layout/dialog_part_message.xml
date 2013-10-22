@@ -3,5 +3,5 @@
               android:id="@+id/sdl__contentPanel"
               style="@style/SDL.Group.Wrap">
     <TextView android:id="@+id/sdl__message"
-              style="@style/SDL.TextView.Message" />
+              style="?attr/sdlMessageTextStyle" />
 </ScrollView>

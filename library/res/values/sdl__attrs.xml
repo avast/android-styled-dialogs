@@ -3,6 +3,8 @@
 
 	<declare-styleable name="StyledDialogs">
 		<attr name="sdlDialogStyle" format="reference" />
+        <attr name="sdlTitleTextStyle" format="reference" />
+        <attr name="sdlMessageTextStyle" format="reference" />
 	</declare-styleable>
 
 	<declare-styleable name="DialogStyle">

@@ -3,7 +3,7 @@
 	style="@style/SDL.Group">
 	<TextView
 		android:id="@+id/sdl__title"
-		style="@style/SDL.TextView.Title"/>
+		style="?attr/sdlTitleTextStyle"/>
 
 	<View
 		android:id="@+id/sdl__titleDivider"
