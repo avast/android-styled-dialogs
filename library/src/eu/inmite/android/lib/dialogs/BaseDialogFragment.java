@@ -274,8 +274,8 @@ public abstract class BaseDialogFragment extends DialogFragment {
 			if (mMessage != null) {
 				View viewMessage = mInflater.inflate(R.layout.dialog_part_message, content, false);
 				TextView tvMessage = (TextView) viewMessage.findViewById(R.id.sdl__message);
-				tvMessage.setText(mMessage);
-				tvMessage.setTextColor(mMessageTextColor);
+                                tvMessage.setTextColor(mMessageTextColor);
+                                tvMessage.setText(Html.fromHtml(mMessage.toString()));
 				content.addView(viewMessage);
 			}
 
