@@ -30,7 +30,13 @@ import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.*;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 
 /**
  * Base dialog fragment for all your dialogs, stylable and same design on Android 2.2+.
@@ -274,8 +280,8 @@ public abstract class BaseDialogFragment extends DialogFragment {
 			if (mMessage != null) {
 				View viewMessage = mInflater.inflate(R.layout.dialog_part_message, content, false);
 				TextView tvMessage = (TextView) viewMessage.findViewById(R.id.sdl__message);
-				tvMessage.setText(mMessage);
 				tvMessage.setTextColor(mMessageTextColor);
+				tvMessage.setText(mMessage);
 				content.addView(viewMessage);
 			}
 

@@ -21,6 +21,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.text.Html;
 import android.text.TextUtils;
 import android.view.View;
 
@@ -68,7 +69,7 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 			builder.setTitle(title);
 		}
 
-		final String message = getMessage();
+		final CharSequence message = getMessage();
 		if (!TextUtils.isEmpty(message)) {
 			builder.setMessage(message);
 		}
@@ -103,8 +104,8 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 		return builder;
 	}
 
-	protected String getMessage() {
-		return getArguments().getString(ARG_MESSAGE);
+	protected CharSequence getMessage() {
+		return getArguments().getCharSequence(ARG_MESSAGE);
 	}
 
 	protected String getTitle() {
@@ -159,7 +160,7 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 	public static class SimpleDialogBuilder extends BaseDialogBuilder<SimpleDialogBuilder> {
 
 		private String mTitle;
-		private String mMessage;
+		private CharSequence mMessage;
 		private String mPositiveButtonText;
 		private String mNegativeButtonText;
 
@@ -194,6 +195,16 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 			mMessage = message;
 			return this;
 		}
+
+        public SimpleDialogBuilder setHtmlMessage(int htmlMessageResourceId) {
+            mMessage = Html.fromHtml(mContext.getText(htmlMessageResourceId).toString());
+            return this;
+        }
+
+        public SimpleDialogBuilder setHtmlMessage(String htmlMessage) {
+            mMessage = Html.fromHtml(htmlMessage);
+            return this;
+        }
 
 		public SimpleDialogBuilder setPositiveButtonText(int textResourceId) {
 			mPositiveButtonText = mContext.getString(textResourceId);
@@ -232,7 +243,7 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 			}
 
 			Bundle args = new Bundle();
-			args.putString(SimpleDialogFragment.ARG_MESSAGE, mMessage);
+			args.putCharSequence( SimpleDialogFragment.ARG_MESSAGE, mMessage);
 			args.putString(SimpleDialogFragment.ARG_TITLE, mTitle);
 			args.putString(SimpleDialogFragment.ARG_POSITIVE_BUTTON, mPositiveButtonText);
 			args.putString(SimpleDialogFragment.ARG_NEGATIVE_BUTTON, mNegativeButtonText);
