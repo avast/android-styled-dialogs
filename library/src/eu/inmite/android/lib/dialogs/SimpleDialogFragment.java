@@ -212,21 +212,10 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 			return this;
 		}
 
-		public SimpleDialogBuilder setHtmlMessage(int htmlMessageResourceId) {
-			mMessage = mContext.getText(htmlMessageResourceId);
-			return this;
-		}
-
-		public SimpleDialogBuilder setHtmlMessage(String htmlMessage) {
-			mMessage = Html.fromHtml(htmlMessage);
-			return this;
-		}
-
 		public SimpleDialogBuilder setPositiveButtonText(int textResourceId) {
 			mPositiveButtonText = mContext.getString(textResourceId);
 			return this;
 		}
-
 
 		public SimpleDialogBuilder setPositiveButtonText(String text) {
 			mPositiveButtonText = text;
