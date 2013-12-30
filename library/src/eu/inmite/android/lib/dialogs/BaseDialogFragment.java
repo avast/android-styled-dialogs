@@ -137,6 +137,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
 		private ListAdapter mListAdapter;
 		private int mListCheckedItemIdx;
 		private AdapterView.OnItemClickListener mOnItemClickListener;
+		private Drawable mIcon;
 		/**
 		 * Styling: *
 		 */
@@ -248,6 +249,16 @@ public abstract class BaseDialogFragment extends DialogFragment {
 			return this;
 		}
 
+		public Builder setIcon(int resourceId) {
+			mIcon = mContext.getResources().getDrawable(resourceId);
+			return this;
+		}
+
+		public Builder setIcon(Drawable drawable) {
+			mIcon = drawable;
+			return this;
+		}
+
 		public View create() {
 			final Resources res = mContext.getResources();
 			final int defaultTitleTextColor = res.getColor(R.color.sdl_title_text_dark);
@@ -317,6 +328,10 @@ public abstract class BaseDialogFragment extends DialogFragment {
 			if (mTitle != null) {
 				tvTitle.setText(mTitle);
 				tvTitle.setTextColor(mTitleTextColor);
+				if (mIcon != null) {
+					tvTitle.setCompoundDrawablesWithIntrinsicBounds(mIcon, null, null, null);
+					tvTitle.setCompoundDrawablePadding(mContext.getResources().getDimensionPixelSize(R.dimen.grid_2));
+				}
 				viewTitleDivider.setBackgroundDrawable(new ColorDrawable(mTitleSeparatorColor));
 			} else {
 				tvTitle.setVisibility(View.GONE);

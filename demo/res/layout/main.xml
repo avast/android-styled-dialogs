@@ -53,10 +53,10 @@
 			android:text="SimpleDialog with callbacks"
 			android:id="@+id/message_title_buttons_dialog" />
 
-		<!--<Button
+		<Button
 			style="@style/Button"
 			android:text="Dialog with list"
-			android:id="@+id/list_dialog" />-->
+			android:id="@+id/list_dialog" />
 
 		<Button
 			style="@style/Button"

@@ -81,15 +81,14 @@ public class MyActivity extends FragmentActivity implements
 						.show();
 			}
 		});
-		/*
-		List dialog is not styled - removing for now, TODO: add it to the library
+
 		findViewById(R.id.list_dialog).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				FavoriteCharacterDialogFragment.show(c, "Your favorite character (some text added to make it longer):", new String[]{"Jayne", "Malcolm", "Kaylee",
+				FavoriteCharacterDialogFragment.show(c, "Your favorite character:", new String[]{"Jayne", "Malcolm", "Kaylee",
 					"Wash", "Zoe", "River"});
 			}
-		});*/
+		});
 		findViewById(R.id.custom_dialog).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
