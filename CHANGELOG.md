@@ -2,9 +2,13 @@
 
 ## 1.1.1
 
- - aar support (Library will be released as aar from now on)
+December 30 2013
+
+ - AAR support (Library will be released as .aar from now on)
 
 ## 1.1
+
+December 30 2013
 
  - support for icon next to title
  - support for HTML in the message
