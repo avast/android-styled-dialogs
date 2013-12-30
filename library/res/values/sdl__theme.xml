@@ -116,11 +116,8 @@
 		<item name="android:layout_width">match_parent</item>
 		<item name="android:layout_height">match_parent</item>
 		<item name="android:layout_weight">1</item>
-		<item name="android:fadeScrollbars">true</item>
 		<item name="android:cacheColorHint">@null</item>
 		<item name="android:background">@android:color/transparent</item>
-		<item name="android:listSelector">@android:color/transparent</item>
-		<item name="android:fastScrollEnabled">true</item>
 	</style>
 
 	<style name="SDL.TextView" parent="@android:style/Widget.TextView">
