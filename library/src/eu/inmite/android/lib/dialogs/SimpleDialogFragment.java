@@ -136,9 +136,6 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 			if (targetFragment instanceof ISimpleDialogListener) {
 				return (ISimpleDialogListener) targetFragment;
 			}
-		} else if (getParentFragment() != null
-				&& getParentFragment() instanceof ISimpleDialogListener) {
-			return (ISimpleDialogListener) getParentFragment();
 		} else {
 			if (getActivity() instanceof ISimpleDialogListener) {
 				return (ISimpleDialogListener) getActivity();
@@ -153,9 +150,6 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 			if (targetFragment instanceof ISimpleDialogCancelListener) {
 				return (ISimpleDialogCancelListener) targetFragment;
 			}
-		} else if (getParentFragment() != null
-				&& getParentFragment() instanceof ISimpleDialogCancelListener) {
-			return (ISimpleDialogCancelListener) getParentFragment();
 		} else {
 			if (getActivity() instanceof ISimpleDialogCancelListener) {
 				return (ISimpleDialogCancelListener) getActivity();
