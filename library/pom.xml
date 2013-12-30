@@ -10,7 +10,7 @@
 	</parent>
 
 	<artifactId>android-styled-dialogs</artifactId>
-	<packaging>apklib</packaging>
+	<packaging>aar</packaging>
 
 	<name>Android StyledDialogs library</name>
 	<description>This library makes styling dialogs easy. They are compatible with Holo design and Android Design
