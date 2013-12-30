@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.1.1
+
+ - aar support (Library will be released as aar from now on)
+
+## 1.1
+
+ - support for icon next to title
+ - support for HTML in the message
+ - support for controlling cancelable behaviour
+ - bugfixes
+
 ## 1.0.1
 
 July 26, 2013
