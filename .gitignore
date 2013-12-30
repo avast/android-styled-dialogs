@@ -38,3 +38,5 @@ library/.gradle
 #Other
 .DS_Store
 tmp
+
+demo/project.properties
