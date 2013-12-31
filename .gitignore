@@ -40,3 +40,7 @@ library/.gradle
 tmp
 
 demo/project.properties
+
+demo/project.properties
+
+library/project.properties

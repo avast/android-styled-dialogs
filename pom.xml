@@ -96,6 +96,7 @@
 				<groupId>com.google.android</groupId>
 				<artifactId>support-v4</artifactId>
 				<version>${android.support.version}</version>
+				<scope>provided</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -120,7 +121,7 @@
 				<plugin>
 					<groupId>com.jayway.maven.plugins.android.generation2</groupId>
 					<artifactId>android-maven-plugin</artifactId>
-					<version>3.8.1</version>
+					<version>3.8.2</version>
 					<configuration>
 						<nativeLibrariesDirectory>ignored</nativeLibrariesDirectory>
 						<sdk>
