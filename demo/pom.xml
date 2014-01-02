@@ -6,7 +6,7 @@
 		<groupId>eu.inmite.android.lib</groupId>
 		<artifactId>android-styled-dialogs-parent</artifactId>
 		<relativePath>../pom.xml</relativePath>
-		<version>1.1.2-SNAPSHOT</version>
+		<version>1.1.2</version>
 	</parent>
 
 	<artifactId>android-styled-dialogs-demo</artifactId>
@@ -33,7 +33,7 @@
 		<dependency>
 			<groupId>eu.inmite.android.lib</groupId>
 			<artifactId>android-styled-dialogs</artifactId>
-			<version>1.1.2-SNAPSHOT</version>
+			<version>1.1.2</version>
 			<type>aar</type>
 		</dependency>
 	</dependencies>
