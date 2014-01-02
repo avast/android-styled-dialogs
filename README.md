@@ -14,17 +14,22 @@ Features:
 
 ## How to include it in your project:
 
+With Gradle:
+```groovy
+compile 'eu.inmite.android.lib:android-styled-dialogs:1.1.2@aar'
+```    
+
 With Maven:
 ```xml
 <dependency>
 	<groupId>eu.inmite.android.lib</groupId>
 	<artifactId>android-styled-dialogs</artifactId>
-	<version>1.0.1</version>
+	<version>1.1.2</version>
 	<type>apklib</type>
 </dependency>
 ```
 
-Or:
+Manually:
 
  - clone the project
  - add it as library project in your IDE
