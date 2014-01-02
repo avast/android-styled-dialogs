@@ -10,7 +10,7 @@
 	</parent>
 
 	<artifactId>android-styled-dialogs</artifactId>
-	<packaging>aar</packaging>
+	<packaging>apklib</packaging>
 
 	<name>Android StyledDialogs library</name>
 	<description>This library makes styling dialogs easy. They are compatible with Holo design and Android Design
@@ -57,19 +57,24 @@
         <dependency>
 			<groupId>com.google.android</groupId>
 			<artifactId>support-v4</artifactId>
-	        <scope>provided</scope>
 		</dependency>
 
 	</dependencies>
 
 	<build>
-		<sourceDirectory>src</sourceDirectory>
+		<sourceDirectory>src/main/java</sourceDirectory>
 
 		<plugins>
 			<plugin>
 				<groupId>com.jayway.maven.plugins.android.generation2</groupId>
 				<artifactId>android-maven-plugin</artifactId>
 				<extensions>true</extensions>
+				<configuration>
+					<lazyLibraryUnpack>true</lazyLibraryUnpack>
+					<androidManifestFile>${project.basedir}/src/main/AndroidManifest.xml</androidManifestFile>
+					<resourceDirectory>${project.basedir}/src/main/res</resourceDirectory>
+					<assetsDirectory>${project.basedir}/src/main/assets</assetsDirectory>
+				</configuration>
 			</plugin>
 
 			<plugin>
