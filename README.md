@@ -108,6 +108,6 @@ The library could be improved with more common dialogs. Pull requests are encour
 
 <img src="http://img.radio.cz/pictures/osobnosti/cimrman_jarax.jpg" width="70"  align="right"/>
 
-Theodor Dialogs was a famous Czech painter, uncle of [Jára Cimrman](http://en.wikipedia.org/wiki/J%C3%A1ra_Cimrman). Jára Cimrman was a playwright, philospher, inventor, teacher, poet, matematitian and more but he lacked painting skills. That's why Teodor was helping him with many projects. Just like Android and this library.
+Theodor Dialogs was a famous Czech painter, uncle of [Jára Cimrman](http://en.wikipedia.org/wiki/J%C3%A1ra_Cimrman). Jára Cimrman was a playwright, philosopher, inventor, teacher, poet, mathematician and more but he lacked painting skills. That's why Theodor was helping him with many projects. Just like Android and this library do.
 
 See [**our other Czech personalities**](http://inmite.github.io) who help with [#AndroidDev](https://plus.google.com/s/%23AndroidDev).
