@@ -4,6 +4,7 @@
 	<color name="sdl_message_text_dark">#FFFFFF</color>
 	<color name="sdl_title_text_dark">#ff0099cc</color>
 	<color name="sdl_title_separator_dark">#ff0099cc</color>
+    <color name="sdl_title_background_dark">@android:color/transparent</color>
 	<color name="sdl_button_text_dark">@color/sdl_primary_text_holo_dark</color>
 	<color name="sdl_button_normal_dark">@android:color/transparent</color>
 	<color name="sdl_button_pressed_dark">#990099cc</color> <!-- 60 % opacity -->
@@ -13,6 +14,7 @@
 	<color name="sdl_message_text_light">#333333</color>
 	<color name="sdl_title_text_light">#33B5E5</color>
 	<color name="sdl_title_separator_light">#33B5E5</color>
+    <color name="sdl_title_background_light">@android:color/transparent</color>
 	<color name="sdl_button_text_light">@color/sdl_primary_text_holo_light</color>
 	<color name="sdl_button_normal_light">@android:color/transparent</color>
 	<color name="sdl_button_pressed_light">#9933B5E5</color> <!-- 60 % opacity -->
