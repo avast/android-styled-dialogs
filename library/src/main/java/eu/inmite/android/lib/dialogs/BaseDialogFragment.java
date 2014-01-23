@@ -142,6 +142,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
 		 * Styling: *
 		 */
 		private int mTitleTextColor;
+        private int mTitleBackgroundColor;
 		private int mTitleSeparatorColor;
 		private int mMessageTextColor;
 		private ColorStateList mButtonTextColor;
@@ -263,6 +264,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
 			final Resources res = mContext.getResources();
 			final int defaultTitleTextColor = res.getColor(R.color.sdl_title_text_dark);
 			final int defaultTitleSeparatorColor = res.getColor(R.color.sdl_title_separator_dark);
+            final int defaultTitleBackgroundColor = res.getColor(R.color.sdl_title_background_dark);
 			final int defaultMessageTextColor = res.getColor(R.color.sdl_message_text_dark);
 			final ColorStateList defaultButtonTextColor = res.getColorStateList(R.color.sdl_button_text_dark);
 			final int defaultButtonSeparatorColor = res.getColor(R.color.sdl_button_separator_dark);
@@ -272,6 +274,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
 
 			final TypedArray a = mContext.getTheme().obtainStyledAttributes(null, R.styleable.DialogStyle, R.attr.sdlDialogStyle, 0);
 			mTitleTextColor = a.getColor(R.styleable.DialogStyle_titleTextColor, defaultTitleTextColor);
+            mTitleBackgroundColor = a.getColor(R.styleable.DialogStyle_titleBackgroundColor, defaultTitleBackgroundColor);
 			mTitleSeparatorColor = a.getColor(R.styleable.DialogStyle_titleSeparatorColor, defaultTitleSeparatorColor);
 			mMessageTextColor = a.getColor(R.styleable.DialogStyle_messageTextColor, defaultMessageTextColor);
 			mButtonTextColor = a.getColorStateList(R.styleable.DialogStyle_buttonTextColor);
@@ -328,6 +331,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
 			if (mTitle != null) {
 				tvTitle.setText(mTitle);
 				tvTitle.setTextColor(mTitleTextColor);
+                tvTitle.setBackgroundColor(mTitleBackgroundColor);
 				if (mIcon != null) {
 					tvTitle.setCompoundDrawablesWithIntrinsicBounds(mIcon, null, null, null);
 					tvTitle.setCompoundDrawablePadding(mContext.getResources().getDimensionPixelSize(R.dimen.grid_2));

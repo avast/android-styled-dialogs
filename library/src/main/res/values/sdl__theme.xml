@@ -24,6 +24,7 @@
 	<style name="DialogStyleDark">
 		<item name="dialogBackground">@drawable/sdl_background_dark</item>
 		<item name="titleTextColor">@color/sdl_title_text_dark</item>
+        <item name="titleBackgroundColor">@color/sdl_title_background_dark</item>
 		<item name="titleSeparatorColor">@color/sdl_title_separator_dark</item>
 		<item name="messageTextColor">@color/sdl_message_text_dark</item>
 		<item name="buttonTextColor">@color/sdl_button_text_dark</item>
@@ -36,6 +37,7 @@
 	<style name="DialogStyleLight">
 		<item name="dialogBackground">@drawable/sdl_background_light</item>
 		<item name="titleTextColor">@color/sdl_title_text_light</item>
+        <item name="titleBackgroundColor">@color/sdl_title_background_light</item>
 		<item name="titleSeparatorColor">@color/sdl_title_separator_light</item>
 		<item name="messageTextColor">@color/sdl_message_text_light</item>
 		<item name="buttonTextColor">@color/sdl_button_text_light</item>
