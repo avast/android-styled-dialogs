@@ -149,6 +149,14 @@ public abstract class BaseDialogFragment extends DialogFragment {
 		private int mButtonBackgroundColorNormal;
 		private int mButtonBackgroundColorPressed;
 		private int mButtonBackgroundColorFocused;
+		private int mListItemSeparatorColor;
+		private int mListItemBackgroundColorNormal;
+		private int mListItemBackgroundColorPressed;
+		private int mListItemBackgroundColorFocused;
+
+        private final static int[] pressedState = {android.R.attr.state_pressed};
+        private final static int[] focusedState = {android.R.attr.state_focused};
+        private final static int[] defaultState = {android.R.attr.state_enabled};
 
 		public Builder(DialogFragment dialogFragment, Context context, LayoutInflater inflater, ViewGroup container) {
 			this.mDialogFragment = dialogFragment;
@@ -282,6 +290,16 @@ public abstract class BaseDialogFragment extends DialogFragment {
 			mButtonBackgroundColorNormal = a.getColor(R.styleable.DialogStyle_buttonBackgroundColorNormal, defaultButtonBackgroundColorNormal);
 			mButtonBackgroundColorPressed = a.getColor(R.styleable.DialogStyle_buttonBackgroundColorPressed, defaultButtonBackgroundColorPressed);
 			mButtonBackgroundColorFocused = a.getColor(R.styleable.DialogStyle_buttonBackgroundColorFocused, defaultButtonBackgroundColorFocused);
+            if(mListAdapter!=null){
+                final int defaultListItemSeparatorColor = res.getColor(R.color.sdl_list_item_separator_dark);
+                final int defaultListItemBackgroundColorNormal = res.getColor(R.color.sdl_button_normal_dark);
+                final int defaultListItemBackgroundColorFocused = res.getColor(R.color.sdl_button_focused_dark);
+                final int defaultListItemBackgroundColorPressed = res.getColor(R.color.sdl_button_pressed_dark);
+                mListItemSeparatorColor = a.getColor(R.styleable.DialogStyle_listItemSeparatorColor, defaultListItemSeparatorColor);
+                mListItemBackgroundColorNormal = a.getColor(R.styleable.DialogStyle_listItemColorNormal, defaultListItemBackgroundColorNormal);
+                mListItemBackgroundColorFocused = a.getColor(R.styleable.DialogStyle_listItemColorFocused, defaultListItemBackgroundColorFocused);
+                mListItemBackgroundColorPressed = a.getColor(R.styleable.DialogStyle_listItemColorPressed, defaultListItemBackgroundColorPressed);
+            }
 			a.recycle();
 
 			View v = getDialogLayoutAndInitTitle();
@@ -307,13 +325,14 @@ public abstract class BaseDialogFragment extends DialogFragment {
 			}
 
 			if (mListAdapter != null) {
-				ListView list = (ListView) mInflater.inflate(R.layout.dialog_part_list, content, false);
-				list.setAdapter(mListAdapter);
-				list.setOnItemClickListener(mOnItemClickListener);
+				ListView listView = (ListView) mInflater.inflate(R.layout.dialog_part_list, content, false);
+				listView.setAdapter(mListAdapter);
+                listView.setSelector(getListItemSelector());
+				listView.setOnItemClickListener(mOnItemClickListener);
 				if (mListCheckedItemIdx != -1) {
-					list.setSelection(mListCheckedItemIdx);
+					listView.setSelection(mListCheckedItemIdx);
 				}
-				content.addView(list);
+				content.addView(listView);
 			}
 
 			addButtons(content);
@@ -423,9 +442,6 @@ public abstract class BaseDialogFragment extends DialogFragment {
 		}
 
 		private StateListDrawable getButtonBackground() {
-			int[] pressedState = {android.R.attr.state_pressed};
-			int[] focusedState = {android.R.attr.state_focused};
-			int[] defaultState = {android.R.attr.state_enabled};
 			ColorDrawable colorDefault = new ColorDrawable(mButtonBackgroundColorNormal);
 			ColorDrawable colorPressed = new ColorDrawable(mButtonBackgroundColorPressed);
 			ColorDrawable colorFocused = new ColorDrawable(mButtonBackgroundColorFocused);
@@ -435,5 +451,16 @@ public abstract class BaseDialogFragment extends DialogFragment {
 			background.addState(defaultState, colorDefault);
 			return background;
 		}
+
+        private StateListDrawable getListItemSelector(){
+            ColorDrawable colorDefault = new ColorDrawable(mListItemBackgroundColorNormal);
+            ColorDrawable colorPressed = new ColorDrawable(mListItemBackgroundColorPressed);
+            ColorDrawable colorFocused = new ColorDrawable(mListItemBackgroundColorFocused);
+            StateListDrawable background = new StateListDrawable();
+            background.addState(pressedState, colorPressed);
+            background.addState(focusedState, colorFocused);
+            background.addState(defaultState, colorDefault);
+            return background;
+        }
 	}
 }

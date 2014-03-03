@@ -26,6 +26,7 @@ import eu.inmite.android.lib.dialogs.ISimpleDialogCancelListener;
 import eu.inmite.android.lib.dialogs.ISimpleDialogListener;
 import eu.inmite.android.lib.dialogs.ProgressDialogFragment;
 import eu.inmite.android.lib.dialogs.SimpleDialogFragment;
+import eu.inmite.android.lib.dialogs.SimpleListDialogFragment;
 
 public class MyActivity extends FragmentActivity implements
 	ISimpleDialogListener,
@@ -48,11 +49,11 @@ public class MyActivity extends FragmentActivity implements
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		findViewById(R.id.message_dialog).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				SimpleDialogFragment.createBuilder(c, getSupportFragmentManager()).setMessage(R.string.message_1).show();
-			}
-		});
+            @Override
+            public void onClick(View v) {
+                SimpleDialogFragment.createBuilder(c, getSupportFragmentManager()).setMessage(R.string.message_1).show();
+            }
+        });
 		findViewById(R.id.message_title_dialog).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -79,6 +80,16 @@ public class MyActivity extends FragmentActivity implements
 						.setRequestCode(REQUEST_PROGRESS)
 						.setTitle(R.string.app_name)
 						.show();
+			}
+		});
+		findViewById(R.id.simple_list_dialog).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				SimpleListDialogFragment.createBuilder(c, getSupportFragmentManager())
+                        .setTitle("Latest Android desserts")
+                        .setItems(new String[]{"Honeycomb", "Ice Cream Sandwich", "Jelly Bean", "Kit-kat"})
+                        .setCancelButtonText("DONE")
+                        .show();
 			}
 		});
 
