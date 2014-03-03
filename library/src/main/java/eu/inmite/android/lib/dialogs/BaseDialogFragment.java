@@ -327,6 +327,8 @@ public abstract class BaseDialogFragment extends DialogFragment {
 			if (mListAdapter != null) {
 				ListView listView = (ListView) mInflater.inflate(R.layout.dialog_part_list, content, false);
 				listView.setAdapter(mListAdapter);
+                listView.setDivider(getColoredListItemsDivider());
+                listView.setDividerHeight(1);
                 listView.setSelector(getListItemSelector());
 				listView.setOnItemClickListener(mOnItemClickListener);
 				if (mListCheckedItemIdx != -1) {
@@ -461,6 +463,11 @@ public abstract class BaseDialogFragment extends DialogFragment {
             background.addState(focusedState, colorFocused);
             background.addState(defaultState, colorDefault);
             return background;
+        }
+
+        private ColorDrawable getColoredListItemsDivider(){
+            ColorDrawable colorDividerDrawable = new ColorDrawable(mListItemSeparatorColor);
+            return colorDividerDrawable;
         }
 	}
 }

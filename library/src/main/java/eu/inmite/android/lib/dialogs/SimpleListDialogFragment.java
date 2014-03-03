@@ -67,6 +67,11 @@ public class SimpleListDialogFragment extends BaseDialogFragment {
             return this;
         }
 
+        public SimpleListDialogBuilder setOnItemSelectedListener(OnItemSelectedListener onItemSelectedListener) {
+            sListener = onItemSelectedListener;
+            return this;
+        }
+
         /**
          * When there is neither positive nor negative button, default "close" button is created if it was enabled.<br/>
          * Default is true.
@@ -143,7 +148,4 @@ public class SimpleListDialogFragment extends BaseDialogFragment {
         public void onListItemSelected(String value, int number);
     }
 
-    public static void setOnItemSelectedListener(OnItemSelectedListener onItemSelectedListener) {
-        sListener = onItemSelectedListener;
-    }
 }

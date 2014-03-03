@@ -18,6 +18,7 @@ package eu.inmite.demo.dialogs;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Toast;
@@ -85,10 +86,16 @@ public class MyActivity extends FragmentActivity implements
 		findViewById(R.id.simple_list_dialog).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				SimpleListDialogFragment.createBuilder(c, getSupportFragmentManager())
+                DialogFragment listDialogFragment = SimpleListDialogFragment.createBuilder(c, getSupportFragmentManager())
                         .setTitle("Latest Android desserts")
                         .setItems(new String[]{"Honeycomb", "Ice Cream Sandwich", "Jelly Bean", "Kit-kat"})
                         .setCancelButtonText("DONE")
+                        .setOnItemSelectedListener(new SimpleListDialogFragment.OnItemSelectedListener() {
+                            @Override
+                            public void onListItemSelected(String value, int number) {
+                                showSelectedItem(value, number);
+                            }
+                        })
                         .show();
 			}
 		});
@@ -134,8 +141,12 @@ public class MyActivity extends FragmentActivity implements
 
 	@Override
 	public void onListItemSelected(String value, int number) {
-		Toast.makeText(c, "Selected: " + value, Toast.LENGTH_SHORT).show();
+        showSelectedItem(value, number);
 	}
+
+    public void showSelectedItem(String value, int number){
+        Toast.makeText(c, "Selected: " + value, Toast.LENGTH_SHORT).show();
+    }
 
 	// ISimpleDialogCancelListener
 
