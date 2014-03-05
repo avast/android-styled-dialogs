@@ -1,6 +1,7 @@
 package eu.inmite.android.lib.dialogs;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -51,9 +52,17 @@ public class SimpleListDialogFragment extends BaseDialogFragment {
             return this;
         }
 
+        private Resources getResources(){
+            return mContext.getResources();
+        }
 
         public SimpleListDialogBuilder setTitle(String title) {
             this.title = title;
+            return this;
+        }
+
+        public SimpleListDialogBuilder setTitle(int titleResID) {
+            this.title = getResources().getString(titleResID);
             return this;
         }
 
@@ -62,8 +71,18 @@ public class SimpleListDialogFragment extends BaseDialogFragment {
             return this;
         }
 
+        public SimpleListDialogBuilder setItems(int itemsArrayResID) {
+            this.items = getResources().getStringArray(itemsArrayResID);
+            return this;
+        }
+
         public SimpleListDialogBuilder setCancelButtonText(String text) {
             this.cancelButtonText = text;
+            return this;
+        }
+
+        public SimpleListDialogBuilder setCancelButtonText(int cancelBttTextResID) {
+            this.cancelButtonText = getResources().getString(cancelBttTextResID);
             return this;
         }
 
