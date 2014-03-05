@@ -3,6 +3,7 @@ package eu.inmite.android.lib.dialogs;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -86,9 +87,9 @@ public class SimpleListDialogFragment extends BaseDialogFragment {
             return this;
         }
 
-        public SimpleListDialogBuilder setOnItemSelectedListener(OnItemSelectedListener onItemSelectedListener) {
-            sListener = onItemSelectedListener;
-            return this;
+        @Override
+        public SimpleListDialogFragment show() {
+            return (SimpleListDialogFragment)super.show();
         }
 
         /**
@@ -149,6 +150,10 @@ public class SimpleListDialogFragment extends BaseDialogFragment {
             });
         }
         return builder;
+    }
+
+    public void setOnItemSelectedListener(OnItemSelectedListener onItemSelectedListener) {
+        sListener = onItemSelectedListener;
     }
 
     private String getTitle() {
