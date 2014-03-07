@@ -16,21 +16,27 @@
 
 package eu.inmite.demo.dialogs;
 
+import java.text.DateFormat;
+import java.util.Date;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Toast;
-
 import eu.inmite.android.lib.dialogs.ISimpleDialogCancelListener;
+import eu.inmite.android.lib.dialogs.ISimpleDialogDateListener;
 import eu.inmite.android.lib.dialogs.ISimpleDialogListener;
 import eu.inmite.android.lib.dialogs.ProgressDialogFragment;
+import eu.inmite.android.lib.dialogs.SimpleDatePickerDialogFragment;
 import eu.inmite.android.lib.dialogs.SimpleDialogFragment;
+import eu.inmite.android.lib.dialogs.SimpleTimePickerDialogFragment;
 
 public class MyActivity extends FragmentActivity implements
 	ISimpleDialogListener,
 	IFavoriteCharacterDialogListener,
-	ISimpleDialogCancelListener {
+	ISimpleDialogCancelListener ,
+	ISimpleDialogDateListener{
 
 	public static final int THEME_DEFAULT_DARK = 0;
 	public static final int THEME_DEFAULT_LIGHT = 1;
@@ -119,6 +125,32 @@ public class MyActivity extends FragmentActivity implements
 				setCurrentTheme(THEME_CUSTOM_LIGHT);
 			}
 		});
+		findViewById(R.id.time_picker).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				SimpleTimePickerDialogFragment
+				.createBuilder(MyActivity.this, getSupportFragmentManager())
+				.setDate(new Date())
+				.set24hour(true)
+				.setPositiveButtonText(android.R.string.ok)
+				.setNegativeButtonText(android.R.string.cancel)
+				.setRequestCode(13)
+				.show();
+			}
+		});
+		findViewById(R.id.date_picker).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				SimpleDatePickerDialogFragment
+				.createBuilder(MyActivity.this, getSupportFragmentManager())
+				.setDate(new Date())
+				.set24hour(true)
+				.setPositiveButtonText(android.R.string.ok)
+				.setNegativeButtonText(android.R.string.cancel)
+				.setRequestCode(12)
+				.show();
+			}
+		});
 	}
 
 	@Override
@@ -177,5 +209,31 @@ public class MyActivity extends FragmentActivity implements
 				setTheme(R.style.CustomLightTheme);
 				break;
 		}
+	}
+
+	@Override
+	public void onNegativeButtonClicked(int resultCode, Date date) {
+		String text="";
+		if (resultCode==12) {
+			text="Date ";
+		} else if (resultCode==13) {
+			text="Time ";
+		}
+		
+		DateFormat dateFormat= DateFormat.getDateInstance(DateFormat.DEFAULT);
+		Toast.makeText(this,text+"Cancelled "+ dateFormat.format(date),Toast.LENGTH_SHORT).show();
+	}
+
+	@Override
+	public void onPositiveButtonClicked(int resultCode, Date date) {
+		String text="";
+		if (resultCode==12) {
+			text="Date ";
+		} else if (resultCode==13) {
+			text="Time ";
+		}
+		
+		DateFormat dateFormat= DateFormat.getDateTimeInstance();
+		Toast.makeText(this,text+ "Success! "+ dateFormat.format(date),Toast.LENGTH_SHORT).show();
 	}
 }
