@@ -35,6 +35,20 @@ public class SimpleDatePickerDialogFragment extends BaseDialogFragment {
 		return new SimpleDialogBuilder(context, fragmentManager, SimpleDatePickerDialogFragment.class);
 	}
 	
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		final Fragment targetFragment = getTargetFragment();
+		if (targetFragment != null) {
+			mRequestCode = getTargetRequestCode();
+		} else {
+			Bundle args = getArguments();
+			if (args != null) {
+				mRequestCode = args.getInt(BaseDialogBuilder.ARG_REQUEST_CODE, 0);
+			}
+		}
+	}
+	
 	protected ISimpleDialogDateListener getDialogListener() {
 		final Fragment targetFragment = getTargetFragment();
 		if (targetFragment != null) {
