@@ -3,4 +3,5 @@
 	package="eu.inmite.android.lib.dialogs"
 	android:versionCode="1"
 	android:versionName="1.0">
+    <uses-sdk android:targetSdkVersion="19" android:minSdkVersion="4"/>
 </manifest>

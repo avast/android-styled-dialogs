@@ -67,5 +67,15 @@
 			style="@style/Button"
 			android:text="Progress dialog"
 			android:id="@+id/progress_dialog" />
+		
+		<Button
+			style="@style/Button"
+			android:id="@+id/time_picker"
+			android:text="Time Picker" />
+
+		<Button
+			style="@style/Button"
+			android:id="@+id/date_picker"
+			android:text="Date Picker"/>
 	</LinearLayout>
 </ScrollView>
