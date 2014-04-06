@@ -11,7 +11,7 @@ import android.support.v4.app.FragmentManager;
  *
  * @author Tomas Vondracek
  */
-abstract class BaseDialogBuilder<T extends BaseDialogBuilder<T>> {
+public abstract class BaseDialogBuilder<T extends BaseDialogBuilder<T>> {
 
 	public static String ARG_REQUEST_CODE = "request_code";
 	public static String ARG_CANCELABLE_ON_TOUCH_OUTSIDE = "cancelable_oto";
