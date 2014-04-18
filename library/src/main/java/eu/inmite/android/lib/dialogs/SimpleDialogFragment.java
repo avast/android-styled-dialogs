@@ -35,10 +35,10 @@ import android.view.View;
  */
 public class SimpleDialogFragment extends BaseDialogFragment {
 
-	protected static String ARG_MESSAGE = "message";
-	protected static String ARG_TITLE = "title";
-	protected static String ARG_POSITIVE_BUTTON = "positive_button";
-	protected static String ARG_NEGATIVE_BUTTON = "negative_button";
+	protected final static String ARG_MESSAGE = "message";
+	protected final static String ARG_TITLE = "title";
+	protected final static String ARG_POSITIVE_BUTTON = "positive_button";
+	protected final static String ARG_NEGATIVE_BUTTON = "negative_button";
 
 	protected int mRequestCode;
 
