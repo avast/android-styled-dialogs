@@ -13,10 +13,10 @@ import android.support.v4.app.FragmentManager;
  */
 abstract class BaseDialogBuilder<T extends BaseDialogBuilder<T>> {
 
-	public static String ARG_REQUEST_CODE = "request_code";
-	public static String ARG_CANCELABLE_ON_TOUCH_OUTSIDE = "cancelable_oto";
-	public static String DEFAULT_TAG = "simple_dialog";
-	public static int DEFAULT_REQUEST_CODE = -42;
+	public final static String ARG_REQUEST_CODE = "request_code";
+	public final static String ARG_CANCELABLE_ON_TOUCH_OUTSIDE = "cancelable_oto";
+	public final static String DEFAULT_TAG = "simple_dialog";
+	public final static int DEFAULT_REQUEST_CODE = -42;
 
 	protected final Context mContext;
 	protected final FragmentManager mFragmentManager;
