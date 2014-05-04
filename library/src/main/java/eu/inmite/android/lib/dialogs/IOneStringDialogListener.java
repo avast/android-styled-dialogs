@@ -21,8 +21,8 @@ package eu.inmite.android.lib.dialogs;
  *
  * @author David Vávra (david@inmite.eu)
  */
-public interface ITwoStringDialogListener {
-	public void onPositiveButtonClicked(int requestCode,String string1, String string2);
+public interface IOneStringDialogListener {
+	public void onPositiveButtonClicked(int requestCode,String string1);
 
-	public void onNegativeButtonClicked(int requestCode,String string1, String string2);
+	public void onNegativeButtonClicked(int requestCode,String string1 );
 }

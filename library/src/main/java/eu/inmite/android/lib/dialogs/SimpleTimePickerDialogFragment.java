@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.TimeZone;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.widget.TimePicker;

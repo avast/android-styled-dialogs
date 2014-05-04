@@ -14,7 +14,7 @@ import android.widget.TextView;
 import android.widget.EditText;
 
 
-public class UsernamePasswordDialogFragment extends BaseDialogFragment {
+public class PasswordDialogFragment extends BaseDialogFragment {
 	
 	protected static String ARG_MESSAGE = "message";
 	protected static String ARG_TITLE = "title";
@@ -23,13 +23,11 @@ public class UsernamePasswordDialogFragment extends BaseDialogFragment {
 	
 	protected int mRequestCode;
 	
-	private String mUserName;
 	private String mPassword;
 	private EditText mPasswordText;
-	private EditText mUserNameText;
 	
 	public static SimpleDialogBuilder createBuilder(Context context, FragmentManager fragmentManager) {
-		return new SimpleDialogBuilder(context, fragmentManager, UsernamePasswordDialogFragment.class);
+		return new SimpleDialogBuilder(context, fragmentManager, PasswordDialogFragment.class);
 	}
 	
 	@Override
@@ -52,8 +50,7 @@ public class UsernamePasswordDialogFragment extends BaseDialogFragment {
 	 */
 	@Override
 	protected BaseDialogFragment.Builder build(BaseDialogFragment.Builder builder) {
-		View view= LayoutInflater.from(getActivity()).inflate(R.layout.dialog_username_password,null);
-		mUserNameText=((EditText)view.findViewById(R.id.username));
+		View view= LayoutInflater.from(getActivity()).inflate(R.layout.dialog_password,null);
 		mPasswordText=((EditText)view.findViewById(R.id.password));
 		
 		builder.setView(view);
@@ -80,9 +77,9 @@ public class UsernamePasswordDialogFragment extends BaseDialogFragment {
 				@Override
 				public void onClick(View view) {
 					populateUsernamePassword();
-					ITwoStringDialogListener listener = getDialogListener();
+					IOneStringDialogListener listener = getDialogListener();
 					if (listener != null) {
-						listener.onPositiveButtonClicked(mRequestCode,mUserName,mPassword);
+						listener.onPositiveButtonClicked(mRequestCode,mPassword);
 					}
 					dismiss();
 				}
@@ -95,9 +92,9 @@ public class UsernamePasswordDialogFragment extends BaseDialogFragment {
 				@Override
 				public void onClick(View view) {
 					populateUsernamePassword();
-					ITwoStringDialogListener listener = getDialogListener();
+					IOneStringDialogListener listener = getDialogListener();
 					if (listener != null) {
-						listener.onNegativeButtonClicked(mRequestCode,mUserName,mPassword);
+						listener.onNegativeButtonClicked(mRequestCode,mPassword);
 					}
 					dismiss();
 				}
@@ -107,7 +104,6 @@ public class UsernamePasswordDialogFragment extends BaseDialogFragment {
 	}
 	
 	protected void populateUsernamePassword() {
-		mUserName=mUserNameText.getText().toString();
 		mPassword=mPasswordText.getText().toString();
 		
 	}
@@ -137,15 +133,15 @@ public class UsernamePasswordDialogFragment extends BaseDialogFragment {
 		}
 	}
 
-	protected ITwoStringDialogListener getDialogListener() {
+	protected IOneStringDialogListener getDialogListener() {
 		final Fragment targetFragment = getTargetFragment();
 		if (targetFragment != null) {
-			if (targetFragment instanceof ITwoStringDialogListener) {
-				return (ITwoStringDialogListener) targetFragment;
+			if (targetFragment instanceof IOneStringDialogListener) {
+				return (IOneStringDialogListener) targetFragment;
 			}
 		} else {
-			if (getActivity() instanceof ITwoStringDialogListener) {
-				return (ITwoStringDialogListener) getActivity();
+			if (getActivity() instanceof IOneStringDialogListener) {
+				return (IOneStringDialogListener) getActivity();
 			}
 		}
 		return null;
