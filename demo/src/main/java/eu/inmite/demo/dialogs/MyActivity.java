@@ -153,6 +153,13 @@ public class MyActivity extends FragmentActivity implements
 		}
 	}
 
+    @Override
+    public void onNeutralButtonClicked(int requestCode) {
+        if (requestCode == 42) {
+            Toast.makeText(c, "Neutral button clicked", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 	private void setCurrentTheme(int theme) {
 		Intent i = new Intent(c, MyActivity.class);
 		i.putExtra(EXTRA_THEME, theme);
