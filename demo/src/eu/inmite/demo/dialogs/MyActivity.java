@@ -18,26 +18,31 @@ package eu.inmite.demo.dialogs;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Toast;
 
 import eu.inmite.android.lib.dialogs.ISimpleDialogCancelListener;
 import eu.inmite.android.lib.dialogs.ISimpleDialogListener;
+import eu.inmite.android.lib.dialogs.OnListItemSelectedListener;
 import eu.inmite.android.lib.dialogs.ProgressDialogFragment;
 import eu.inmite.android.lib.dialogs.SimpleDialogFragment;
 import eu.inmite.android.lib.dialogs.SimpleListDialogFragment;
 
 public class MyActivity extends FragmentActivity implements
-        ISimpleDialogListener,
-        IFavoriteCharacterDialogListener,
-        ISimpleDialogCancelListener {
+	ISimpleDialogListener,
+	IFavoriteCharacterDialogListener,
+	ISimpleDialogCancelListener,
+	OnListItemSelectedListener {
 
     public static final int THEME_DEFAULT_DARK = 0;
+
     public static final int THEME_DEFAULT_LIGHT = 1;
+
     public static final int THEME_CUSTOM_DARK = 2;
+
     public static final int THEME_CUSTOM_LIGHT = 3;
+
     public static final String EXTRA_THEME = "theme";
 
     private static final int REQUEST_PROGRESS = 1;
@@ -46,159 +51,159 @@ public class MyActivity extends FragmentActivity implements
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        setThemeOnCreate();
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
-        findViewById(R.id.message_dialog).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SimpleDialogFragment.createBuilder(c, getSupportFragmentManager()).setMessage(R.string.message_1).show();
-            }
-        });
-        findViewById(R.id.message_title_dialog).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SimpleDialogFragment.createBuilder(c, getSupportFragmentManager()).setTitle(R.string.title).setMessage(R.string.message_2).show();
-            }
-        });
-        findViewById(R.id.message_title_buttons_dialog).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SimpleDialogFragment.createBuilder(c, getSupportFragmentManager())
-                        .setTitle(R.string.title)
-                        .setMessage(R.string.message_3)
-                        .setPositiveButtonText(R.string.positive_button)
-                        .setNegativeButtonText(R.string.negative_button).setRequestCode(42)
-                        .setTag("custom-tag")
-                        .show();
-            }
-        });
-        findViewById(R.id.progress_dialog).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ProgressDialogFragment.createBuilder(c, getSupportFragmentManager())
-                        .setMessage(R.string.message_4)
-                        .setRequestCode(REQUEST_PROGRESS)
-                        .setTitle(R.string.app_name)
-                        .show();
-            }
-        });
-        findViewById(R.id.simple_list_dialog).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SimpleListDialogFragment listDialogFragment = SimpleListDialogFragment.createBuilder(c, getSupportFragmentManager())
-                        .setTitle("Latest Android desserts")
-                        .setItems(new String[]{"Honeycomb", "Ice Cream Sandwich", "Jelly Bean", "Kit-kat"})
-                        .setCancelButtonText("DONE")
-                        .show();
+	setThemeOnCreate();
+	super.onCreate(savedInstanceState);
+	setContentView(R.layout.main);
+	findViewById(R.id.message_dialog).setOnClickListener(new View.OnClickListener() {
+	    @Override
+	    public void onClick(View v) {
+		SimpleDialogFragment.createBuilder(c, getSupportFragmentManager())
+			.setMessage(R.string.message_1).show();
+	    }
+	});
+	findViewById(R.id.message_title_dialog).setOnClickListener(new View.OnClickListener() {
+	    @Override
+	    public void onClick(View v) {
+		SimpleDialogFragment.createBuilder(c, getSupportFragmentManager())
+			.setTitle(R.string.title).setMessage(R.string.message_2).show();
+	    }
+	});
+	findViewById(R.id.message_title_buttons_dialog)
+		.setOnClickListener(new View.OnClickListener() {
+		    @Override
+		    public void onClick(View v) {
+			SimpleDialogFragment.createBuilder(c, getSupportFragmentManager())
+				.setTitle(R.string.title)
+				.setMessage(R.string.message_3)
+				.setPositiveButtonText(R.string.positive_button)
+				.setNegativeButtonText(R.string.negative_button).setRequestCode(42)
+				.setTag("custom-tag")
+				.show();
+		    }
+		});
+	findViewById(R.id.progress_dialog).setOnClickListener(new View.OnClickListener() {
+	    @Override
+	    public void onClick(View v) {
+		ProgressDialogFragment.createBuilder(c, getSupportFragmentManager())
+			.setMessage(R.string.message_4)
+			.setRequestCode(REQUEST_PROGRESS)
+			.setTitle(R.string.app_name)
+			.show();
+	    }
+	});
+	findViewById(R.id.simple_list_dialog).setOnClickListener(new View.OnClickListener() {
+	    @Override
+	    public void onClick(View v) {
+		SimpleListDialogFragment listDialogFragment = SimpleListDialogFragment
+			.createBuilder(c, getSupportFragmentManager())
+			.setTitle("Latest Android desserts")
+			.setItems(new String[]{"Honeycomb", "Ice Cream Sandwich", "Jelly Bean",
+				"Kit-kat", "L"})
+			.setCancelButtonText("DONE")
+			.show();
 
-                listDialogFragment.setOnItemSelectedListener(new SimpleListDialogFragment.OnItemSelectedListener() {
-                    @Override
-                    public void onListItemSelected(String value, int number) {
-                        showSelectedItem(value, number);
-                    }
-                });
-            }
-        });
+	    }
+	});
 
-        findViewById(R.id.list_dialog).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FavoriteCharacterDialogFragment.show(c, "Your favorite character:", new String[]{"Jayne", "Malcolm", "Kaylee",
-                        "Wash", "Zoe", "River"});
-            }
-        });
-        findViewById(R.id.custom_dialog).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                JayneHatDialogFragment.show(c);
-            }
-        });
-        findViewById(R.id.default_dark_theme).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setCurrentTheme(THEME_DEFAULT_DARK);
-            }
-        });
-        findViewById(R.id.default_light_theme).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setCurrentTheme(THEME_DEFAULT_LIGHT);
-            }
-        });
-        findViewById(R.id.custom_dark_theme).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setCurrentTheme(THEME_CUSTOM_DARK);
-            }
-        });
-        findViewById(R.id.custom_light_theme).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setCurrentTheme(THEME_CUSTOM_LIGHT);
-            }
-        });
+	findViewById(R.id.list_dialog).setOnClickListener(new View.OnClickListener() {
+	    @Override
+	    public void onClick(View v) {
+		FavoriteCharacterDialogFragment.show(c, "Your favorite character:",
+			new String[]{"Jayne", "Malcolm", "Kaylee",
+				"Wash", "Zoe", "River"});
+	    }
+	});
+	findViewById(R.id.custom_dialog).setOnClickListener(new View.OnClickListener() {
+	    @Override
+	    public void onClick(View v) {
+		JayneHatDialogFragment.show(c);
+	    }
+	});
+	findViewById(R.id.default_dark_theme).setOnClickListener(new View.OnClickListener() {
+	    @Override
+	    public void onClick(View v) {
+		setCurrentTheme(THEME_DEFAULT_DARK);
+	    }
+	});
+	findViewById(R.id.default_light_theme).setOnClickListener(new View.OnClickListener() {
+	    @Override
+	    public void onClick(View v) {
+		setCurrentTheme(THEME_DEFAULT_LIGHT);
+	    }
+	});
+	findViewById(R.id.custom_dark_theme).setOnClickListener(new View.OnClickListener() {
+	    @Override
+	    public void onClick(View v) {
+		setCurrentTheme(THEME_CUSTOM_DARK);
+	    }
+	});
+	findViewById(R.id.custom_light_theme).setOnClickListener(new View.OnClickListener() {
+	    @Override
+	    public void onClick(View v) {
+		setCurrentTheme(THEME_CUSTOM_LIGHT);
+	    }
+	});
     }
 
     @Override
     public void onListItemSelected(String value, int number) {
-        showSelectedItem(value, number);
+	showSelectedItem(value, number);
     }
 
     public void showSelectedItem(String value, int number) {
-        Toast.makeText(c, "Selected: " + value, Toast.LENGTH_SHORT).show();
+	Toast.makeText(c, "Selected: " + value, Toast.LENGTH_SHORT).show();
     }
 
     // ISimpleDialogCancelListener
 
     @Override
     public void onCancelled(int requestCode) {
-        if (requestCode == 42) {
-            Toast.makeText(c, "Dialog cancelled", Toast.LENGTH_SHORT).show();
-        } else if (requestCode == REQUEST_PROGRESS) {
-            Toast.makeText(c, "Progress dialog cancelled", Toast.LENGTH_SHORT).show();
-        }
+	if (requestCode == 42) {
+	    Toast.makeText(c, "Dialog cancelled", Toast.LENGTH_SHORT).show();
+	} else if (requestCode == REQUEST_PROGRESS) {
+	    Toast.makeText(c, "Progress dialog cancelled", Toast.LENGTH_SHORT).show();
+	}
     }
 
     // ISimpleDialogListener
 
     @Override
     public void onPositiveButtonClicked(int requestCode) {
-        if (requestCode == 42) {
-            Toast.makeText(c, "Positive button clicked", Toast.LENGTH_SHORT).show();
-        }
+	if (requestCode == 42) {
+	    Toast.makeText(c, "Positive button clicked", Toast.LENGTH_SHORT).show();
+	}
     }
 
     @Override
     public void onNegativeButtonClicked(int requestCode) {
-        if (requestCode == 42) {
-            Toast.makeText(c, "Negative button clicked", Toast.LENGTH_SHORT).show();
-        }
+	if (requestCode == 42) {
+	    Toast.makeText(c, "Negative button clicked", Toast.LENGTH_SHORT).show();
+	}
     }
 
     private void setCurrentTheme(int theme) {
-        Intent i = new Intent(c, MyActivity.class);
-        i.putExtra(EXTRA_THEME, theme);
-        startActivity(i);
-        finish();
-        overridePendingTransition(0, 0);
+	Intent i = new Intent(c, MyActivity.class);
+	i.putExtra(EXTRA_THEME, theme);
+	startActivity(i);
+	finish();
+	overridePendingTransition(0, 0);
     }
 
     private void setThemeOnCreate() {
-        int theme = getIntent().getIntExtra(EXTRA_THEME, THEME_CUSTOM_DARK);
-        switch (theme) {
-            case THEME_DEFAULT_DARK:
-                setTheme(R.style.DefaultDarkTheme);
-                break;
-            case THEME_DEFAULT_LIGHT:
-                setTheme(R.style.DefaultLightTheme);
-                break;
-            case THEME_CUSTOM_DARK:
-                setTheme(R.style.CustomDarkTheme);
-                break;
-            case THEME_CUSTOM_LIGHT:
-                setTheme(R.style.CustomLightTheme);
-                break;
-        }
+	int theme = getIntent().getIntExtra(EXTRA_THEME, THEME_CUSTOM_DARK);
+	switch (theme) {
+	    case THEME_DEFAULT_DARK:
+		setTheme(R.style.DefaultDarkTheme);
+		break;
+	    case THEME_DEFAULT_LIGHT:
+		setTheme(R.style.DefaultLightTheme);
+		break;
+	    case THEME_CUSTOM_DARK:
+		setTheme(R.style.CustomDarkTheme);
+		break;
+	    case THEME_CUSTOM_LIGHT:
+		setTheme(R.style.CustomLightTheme);
+		break;
+	}
     }
 }
