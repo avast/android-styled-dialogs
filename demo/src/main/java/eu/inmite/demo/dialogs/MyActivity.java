@@ -31,7 +31,6 @@ import eu.inmite.android.lib.dialogs.SimpleListDialogFragment;
 
 public class MyActivity extends FragmentActivity implements
         ISimpleDialogListener,
-        IFavoriteCharacterDialogListener,
         ISimpleDialogCancelListener,
         OnListItemSelectedListener {
 
@@ -91,27 +90,16 @@ public class MyActivity extends FragmentActivity implements
                         .show();
             }
         });
-        findViewById(R.id.simple_list_dialog).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SimpleListDialogFragment listDialogFragment = SimpleListDialogFragment
-                        .createBuilder(c, getSupportFragmentManager())
-                        .setTitle("Latest Android desserts")
-                        .setItems(new String[]{"Honeycomb", "Ice Cream Sandwich", "Jelly Bean",
-                                "Kit-kat", "L"})
-                        .setCancelButtonText("DONE")
-                        .show();
-
-            }
-        });
-
         findViewById(R.id.list_dialog).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FavoriteCharacterDialogFragment.show(c, "Your favorite character:",
-                        new String[]{"Jayne", "Malcolm", "Kaylee",
-                                "Wash", "Zoe", "River"}
-                );
+                SimpleListDialogFragment
+                        .createBuilder(c, getSupportFragmentManager())
+                        .setTitle("Your favorite character:")
+                        .setItems(new String[]{"Jayne", "Malcolm", "Kaylee",
+                                "Wash", "Zoe", "River"})
+                        .show();
+
             }
         });
         findViewById(R.id.custom_dialog).setOnClickListener(new View.OnClickListener() {
