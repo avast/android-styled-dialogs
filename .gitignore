@@ -34,10 +34,6 @@ proguard-project.txt
 #Gradle
 library/build
 library/.gradle
-gradlew/
-gradlew.bat
-gradlew
-gradle/
 .gradle/
 
 #Other
