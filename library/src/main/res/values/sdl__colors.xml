@@ -9,6 +9,7 @@
 	<color name="sdl_button_pressed_dark">#990099cc</color> <!-- 60 % opacity -->
 	<color name="sdl_button_focused_dark">#4C0099cc</color> <!-- 30 % opacity -->
 	<color name="sdl_button_separator_dark">#12ffffff</color> <!-- 7% opacity -->
+	<color name="sdl_list_item_separator_dark">#eeffffff</color>
 	<!-- light colors: -->
 	<color name="sdl_message_text_light">#333333</color>
 	<color name="sdl_title_text_light">#33B5E5</color>
@@ -18,6 +19,7 @@
 	<color name="sdl_button_pressed_light">#9933B5E5</color> <!-- 60 % opacity -->
 	<color name="sdl_button_focused_light">#4C33B5E5</color> <!-- 30 % opacity -->
 	<color name="sdl_button_separator_light">#25000000</color> <!-- 7% opacity -->
+    <color name="sdl_list_item_separator_light">#ee000000</color> <!-- 7% opacity -->
 
     <!-- holo colors: -->
     <color name="sdl_bright_foreground_holo_dark">#fff3f3f3</color>
