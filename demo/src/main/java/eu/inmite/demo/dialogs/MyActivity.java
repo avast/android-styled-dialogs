@@ -25,21 +25,21 @@ import android.widget.Toast;
 import java.text.DateFormat;
 import java.util.Date;
 
+import eu.inmite.android.lib.dialogs.DatePickerDialogFragment;
+import eu.inmite.android.lib.dialogs.IDateDialogListener;
+import eu.inmite.android.lib.dialogs.IListDialogListener;
 import eu.inmite.android.lib.dialogs.ISimpleDialogCancelListener;
-import eu.inmite.android.lib.dialogs.ISimpleDialogDateListener;
 import eu.inmite.android.lib.dialogs.ISimpleDialogListener;
-import eu.inmite.android.lib.dialogs.OnListItemSelectedListener;
+import eu.inmite.android.lib.dialogs.ListDialogFragment;
 import eu.inmite.android.lib.dialogs.ProgressDialogFragment;
-import eu.inmite.android.lib.dialogs.SimpleDatePickerDialogFragment;
 import eu.inmite.android.lib.dialogs.SimpleDialogFragment;
-import eu.inmite.android.lib.dialogs.SimpleListDialogFragment;
-import eu.inmite.android.lib.dialogs.SimpleTimePickerDialogFragment;
+import eu.inmite.android.lib.dialogs.TimePickerDialogFragment;
 
 public class MyActivity extends FragmentActivity implements
         ISimpleDialogListener,
-        ISimpleDialogDateListener,
+        IDateDialogListener,
         ISimpleDialogCancelListener,
-        OnListItemSelectedListener {
+        IListDialogListener {
 
     public static final int THEME_DEFAULT_DARK = 0;
 
@@ -100,7 +100,7 @@ public class MyActivity extends FragmentActivity implements
         findViewById(R.id.list_dialog).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SimpleListDialogFragment
+                ListDialogFragment
                         .createBuilder(c, getSupportFragmentManager())
                         .setTitle("Your favorite character:")
                         .setItems(new String[]{"Jayne", "Malcolm", "Kaylee",
@@ -142,7 +142,7 @@ public class MyActivity extends FragmentActivity implements
 		findViewById(R.id.time_picker).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				SimpleTimePickerDialogFragment
+				TimePickerDialogFragment
 					.createBuilder(MyActivity.this, getSupportFragmentManager())
 					.setDate(new Date())
 					.set24hour(true)
@@ -155,7 +155,7 @@ public class MyActivity extends FragmentActivity implements
 		findViewById(R.id.date_picker).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				SimpleDatePickerDialogFragment
+				DatePickerDialogFragment
 					.createBuilder(MyActivity.this, getSupportFragmentManager())
 					.setDate(new Date())
 					.set24hour(true)
