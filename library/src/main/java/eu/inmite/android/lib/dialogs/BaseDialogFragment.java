@@ -27,6 +27,8 @@ import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,6 +80,12 @@ public abstract class BaseDialogFragment extends DialogFragment {
 	    getDialog().setDismissMessage(null);
 	}
 	super.onDestroyView();
+    }
+
+    public void showAllowingStateLoss(FragmentManager manager, String tag) {
+        FragmentTransaction ft = manager.beginTransaction();
+        ft.add(this, tag);
+        ft.commitAllowingStateLoss();
     }
 
     /**
