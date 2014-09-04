@@ -90,6 +90,12 @@ abstract class BaseDialogBuilder<T extends BaseDialogBuilder<T>> {
 		return fragment;
 	}
 
+    /**
+     * Like show() but allows the commit to be executed after an activity's state is saved. This
+     * is dangerous because the commit can be lost if the activity needs to later be restored from
+     * its state, so this should only be used for cases where it is okay for the UI state to change
+     * unexpectedly on the user.
+     */
     public DialogFragment showAllowingStateLoss() {
         BaseDialogFragment fragment = create();
         fragment.showAllowingStateLoss(mFragmentManager, mTag);
