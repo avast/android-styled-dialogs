@@ -3,5 +3,6 @@
               android:id="@+id/sdl__contentPanel"
               style="@style/SDL.Group.Wrap">
     <TextView android:id="@+id/sdl__message"
+              android:layout_width="fill_parent"
               style="?attr/sdlMessageTextStyle" />
 </ScrollView>
