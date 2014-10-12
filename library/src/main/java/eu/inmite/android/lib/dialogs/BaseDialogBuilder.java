@@ -22,6 +22,7 @@ abstract class BaseDialogBuilder<T extends BaseDialogBuilder<T>> {
 	protected final FragmentManager mFragmentManager;
 	protected final Class<? extends BaseDialogFragment> mClass;
 
+	private BaseDialogFragment fragment = null;
 	private Fragment mTargetFragment;
 	private boolean mCancelable = true;
 	private boolean mCancelableOnTouchOutside = true;
@@ -71,7 +72,7 @@ abstract class BaseDialogBuilder<T extends BaseDialogBuilder<T>> {
     	public BaseDialogFragment create() {
         	final Bundle args = prepareArguments();
 		
-        	final BaseDialogFragment fragment = (BaseDialogFragment) Fragment.instantiate(mContext, mClass.getName(), args);
+        	fragment = (BaseDialogFragment) Fragment.instantiate(mContext, mClass.getName(), args);
 		
         	args.putBoolean(ARG_CANCELABLE_ON_TOUCH_OUTSIDE, mCancelableOnTouchOutside);
 		
@@ -85,20 +86,22 @@ abstract class BaseDialogBuilder<T extends BaseDialogBuilder<T>> {
     	}
 
 	public DialogFragment show() {
-        BaseDialogFragment fragment = create();
+        	if (fragment == null)
+        		BaseDialogFragment fragment = create();
 		fragment.show(mFragmentManager, mTag);
 		return fragment;
 	}
 
-    /**
-     * Like show() but allows the commit to be executed after an activity's state is saved. This
-     * is dangerous because the commit can be lost if the activity needs to later be restored from
-     * its state, so this should only be used for cases where it is okay for the UI state to change
-     * unexpectedly on the user.
-     */
-    public DialogFragment showAllowingStateLoss() {
-        BaseDialogFragment fragment = create();
-        fragment.showAllowingStateLoss(mFragmentManager, mTag);
-        return fragment;
-    }
+    	/**
+     	* Like show() but allows the commit to be executed after an activity's state is saved. This
+     	* is dangerous because the commit can be lost if the activity needs to later be restored from
+     	* its state, so this should only be used for cases where it is okay for the UI state to change
+     	* unexpectedly on the user.
+     	*/
+    	public DialogFragment showAllowingStateLoss() {
+        	if (fragment == null)
+        		BaseDialogFragment fragment = create();
+        	fragment.showAllowingStateLoss(mFragmentManager, mTag);
+        	return fragment;
+    	}
 }
