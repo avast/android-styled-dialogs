@@ -67,22 +67,22 @@ abstract class BaseDialogBuilder<T extends BaseDialogBuilder<T>> {
 		mTag = tag;
 		return self();
 	}
-
-    private BaseDialogFragment create() {
-        final Bundle args = prepareArguments();
-
-        final BaseDialogFragment fragment = (BaseDialogFragment) Fragment.instantiate(mContext, mClass.getName(), args);
-
-        args.putBoolean(ARG_CANCELABLE_ON_TOUCH_OUTSIDE, mCancelableOnTouchOutside);
-
-        if (mTargetFragment != null) {
-            fragment.setTargetFragment(mTargetFragment, mRequestCode);
-        } else {
-            args.putInt(ARG_REQUEST_CODE, mRequestCode);
-        }
-        fragment.setCancelable(mCancelable);
-        return fragment;
-    }
+	
+    	public BaseDialogFragment create() {
+        	final Bundle args = prepareArguments();
+		
+        	final BaseDialogFragment fragment = (BaseDialogFragment) Fragment.instantiate(mContext, mClass.getName(), args);
+		
+        	args.putBoolean(ARG_CANCELABLE_ON_TOUCH_OUTSIDE, mCancelableOnTouchOutside);
+		
+        	if (mTargetFragment != null) {
+            		fragment.setTargetFragment(mTargetFragment, mRequestCode);
+        	} else {
+            		args.putInt(ARG_REQUEST_CODE, mRequestCode);
+        	}
+        	fragment.setCancelable(mCancelable);
+        	return fragment;
+    	}
 
 	public DialogFragment show() {
         BaseDialogFragment fragment = create();
