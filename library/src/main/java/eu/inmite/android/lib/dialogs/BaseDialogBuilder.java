@@ -87,7 +87,7 @@ abstract class BaseDialogBuilder<T extends BaseDialogBuilder<T>> {
 
 	public DialogFragment show() {
         	if (fragment == null)
-        		BaseDialogFragment fragment = create();
+        		fragment = create();
 		fragment.show(mFragmentManager, mTag);
 		return fragment;
 	}
@@ -100,7 +100,7 @@ abstract class BaseDialogBuilder<T extends BaseDialogBuilder<T>> {
      	*/
     	public DialogFragment showAllowingStateLoss() {
         	if (fragment == null)
-        		BaseDialogFragment fragment = create();
+        		fragment = create();
         	fragment.showAllowingStateLoss(mFragmentManager, mTag);
         	return fragment;
     	}
