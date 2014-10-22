@@ -16,26 +16,17 @@
 
 package eu.inmite.demo.dialogs;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Toast;
+import eu.inmite.android.lib.dialogs.*;
 
 import java.text.DateFormat;
 import java.util.Date;
 
-import eu.inmite.android.lib.dialogs.DatePickerDialogFragment;
-import eu.inmite.android.lib.dialogs.IDateDialogListener;
-import eu.inmite.android.lib.dialogs.IListDialogListener;
-import eu.inmite.android.lib.dialogs.ISimpleDialogCancelListener;
-import eu.inmite.android.lib.dialogs.ISimpleDialogListener;
-import eu.inmite.android.lib.dialogs.ListDialogFragment;
-import eu.inmite.android.lib.dialogs.ProgressDialogFragment;
-import eu.inmite.android.lib.dialogs.SimpleDialogFragment;
-import eu.inmite.android.lib.dialogs.TimePickerDialogFragment;
-
-public class MyActivity extends FragmentActivity implements
+public class MyActivity extends Activity implements
         ISimpleDialogListener,
         IDateDialogListener,
         ISimpleDialogCancelListener,
@@ -63,14 +54,14 @@ public class MyActivity extends FragmentActivity implements
         findViewById(R.id.message_dialog).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SimpleDialogFragment.createBuilder(c, getSupportFragmentManager())
+                SimpleDialogFragment.createBuilder(c, getFragmentManager())
                         .setMessage(R.string.message_1).show();
             }
         });
         findViewById(R.id.message_title_dialog).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SimpleDialogFragment.createBuilder(c, getSupportFragmentManager())
+                SimpleDialogFragment.createBuilder(c, getFragmentManager())
                         .setTitle(R.string.title).setMessage(R.string.message_2).show();
             }
         });
@@ -78,7 +69,7 @@ public class MyActivity extends FragmentActivity implements
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        SimpleDialogFragment.createBuilder(c, getSupportFragmentManager())
+                        SimpleDialogFragment.createBuilder(c, getFragmentManager())
                                 .setTitle(R.string.title)
                                 .setMessage(R.string.message_3)
                                 .setPositiveButtonText(R.string.positive_button)
@@ -90,7 +81,7 @@ public class MyActivity extends FragmentActivity implements
         findViewById(R.id.progress_dialog).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ProgressDialogFragment.createBuilder(c, getSupportFragmentManager())
+                ProgressDialogFragment.createBuilder(c, getFragmentManager())
                         .setMessage(R.string.message_4)
                         .setRequestCode(REQUEST_PROGRESS)
                         .setTitle(R.string.app_name)
@@ -101,7 +92,7 @@ public class MyActivity extends FragmentActivity implements
             @Override
             public void onClick(View v) {
                 ListDialogFragment
-                        .createBuilder(c, getSupportFragmentManager())
+                        .createBuilder(c, getFragmentManager())
                         .setTitle("Your favorite character:")
                         .setItems(new String[]{"Jayne", "Malcolm", "Kaylee",
                                 "Wash", "Zoe", "River"})
@@ -143,7 +134,7 @@ public class MyActivity extends FragmentActivity implements
 			@Override
 			public void onClick(View v) {
 				TimePickerDialogFragment
-					.createBuilder(MyActivity.this, getSupportFragmentManager())
+					.createBuilder(MyActivity.this, getFragmentManager())
 					.setDate(new Date())
 					.set24hour(true)
 					.setPositiveButtonText(android.R.string.ok)
@@ -156,7 +147,7 @@ public class MyActivity extends FragmentActivity implements
 			@Override
 			public void onClick(View v) {
 				DatePickerDialogFragment
-					.createBuilder(MyActivity.this, getSupportFragmentManager())
+					.createBuilder(MyActivity.this, getFragmentManager())
 					.setDate(new Date())
 					.set24hour(true)
 					.setPositiveButtonText(android.R.string.ok)

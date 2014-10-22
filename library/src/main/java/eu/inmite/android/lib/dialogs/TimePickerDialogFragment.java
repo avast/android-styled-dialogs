@@ -1,7 +1,7 @@
 package eu.inmite.android.lib.dialogs;
 
 import android.content.Context;
-import android.support.v4.app.FragmentManager;
+import android.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.widget.TimePicker;
 
