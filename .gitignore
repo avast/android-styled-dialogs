@@ -34,7 +34,17 @@ proguard-project.txt
 #Gradle
 library/build
 library/.gradle
+.gradle/
 
 #Other
 .DS_Store
 tmp
+
+demo/project.properties
+
+demo/project.properties
+
+library/project.properties
+build
+
+demo/project.properties

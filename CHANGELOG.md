@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.1.2
+
+January 2, 2014
+
+ - Gradle support! (AAR dependency)
+ - support for icon next to title
+ - support for HTML in the message
+ - support for controlling cancelable behaviour
+ - bugfixes
+
 ## 1.0.1
 
 July 26, 2013
