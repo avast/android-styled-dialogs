@@ -34,10 +34,6 @@ proguard-project.txt
 #Gradle
 library/build
 library/.gradle
-gradlew/
-gradlew.bat
-gradlew
-gradle/
 .gradle/
 
 #Other
@@ -49,3 +45,6 @@ demo/project.properties
 demo/project.properties
 
 library/project.properties
+build
+
+demo/project.properties

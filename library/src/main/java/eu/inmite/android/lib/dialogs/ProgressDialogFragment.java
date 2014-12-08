@@ -23,8 +23,8 @@ import android.widget.TextView;
  */
 public class ProgressDialogFragment extends BaseDialogFragment {
 
-	protected static String ARG_MESSAGE = "message";
-	protected static String ARG_TITLE = "title";
+	protected final static String ARG_MESSAGE = "message";
+	protected final static String ARG_TITLE = "title";
 
 	protected int mRequestCode;
 

@@ -17,6 +17,10 @@
 		<attr name="buttonBackgroundColorNormal" format="color|reference" />
 		<attr name="buttonBackgroundColorPressed" format="color|reference" />
 		<attr name="buttonBackgroundColorFocused" format="color|reference" />
+		<attr name="listItemColorNormal" format="color|reference" />
+		<attr name="listItemColorFocused" format="color|reference" />
+		<attr name="listItemColorPressed" format="color|reference" />
+		<attr name="listItemSeparatorColor" format="color|reference" />
 	</declare-styleable>
 
 </resources>

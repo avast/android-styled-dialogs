@@ -11,12 +11,13 @@ Features:
  - Same look for **Android 2.2+**
  - **Same API** as native Android DialogFragments
  - `SimpleDialogFragment` class, which makes displaying simple dialogs a **one line of code**
+ - `ListDialogFragment`, `DatePickerDialogFragment` and `TimePickerDialogFragment`
 
 ## How to include it in your project:
 
 With Gradle:
 ```groovy
-compile 'eu.inmite.android.lib:android-styled-dialogs:1.1.2@aar'
+compile 'eu.inmite.android.lib:android-styled-dialogs:1.2.0'
 ```    
 
 With Maven:
@@ -24,8 +25,8 @@ With Maven:
 <dependency>
 	<groupId>eu.inmite.android.lib</groupId>
 	<artifactId>android-styled-dialogs</artifactId>
-	<version>1.1.2</version>
-	<type>apklib</type>
+	<version>1.2.0</version>
+	<type>aar</type>
 </dependency>
 ```
 
@@ -88,18 +89,14 @@ Implement interface `ISimpleDialogCancelListener` in your Activity/Fragment.
 
 ## How to create all other DialogFragments:
 
-Extend `BaseDialogFragment` and look at demo app implementation. It shows two types of those implementations:
+Extend `BaseDialogFragment`. 
 
- - `FavoriteCharacterDialogFragment` shows a list in the dialog using extending `BaseDialogFragment`
- - `JayneHatDialogFragment` shows a custom view in the dialog using extending `SimpleDialogFragment`
+Demo app contains a `JayneHatDialogFragment` which shows how to add custom view to a dialog.
 
-## Wishlist
+## Why 'Dialogs'?
 
-The library could be improved with more common dialogs. Pull requests are encouraged!
+<img src="http://img.radio.cz/pictures/osobnosti/cimrman_jarax.jpg" width="70"  align="right"/>
 
-### Possible candidates:
- - date picker (spinners or calendar)
- - time picker
- - edittext dialog
- - password dialog
- - ...
+Theodor Dialogs was a famous Czech painter, uncle of [Jára Cimrman](http://en.wikipedia.org/wiki/J%C3%A1ra_Cimrman). Jára Cimrman was a playwright, philosopher, inventor, teacher, poet, mathematician and more but he lacked painting skills. That's why Theodor was helping him with many projects. Just like Android and this library do.
+
+See [**our other Czech personalities**](http://inmite.github.io) who help with [#AndroidDev](https://plus.google.com/s/%23AndroidDev).

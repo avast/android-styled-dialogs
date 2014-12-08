@@ -14,8 +14,14 @@
  * limitations under the License.
  */
 
-package eu.inmite.demo.dialogs;
+package eu.inmite.android.lib.dialogs;
 
-public interface IFavoriteCharacterDialogListener {
-	public void onListItemSelected(String value, int number);
+import java.util.Date;
+
+/**
+ * @author Tomáš Kypta
+ * @since 13/05/2013
+ */
+public interface IDateDialogCancelListener {
+	public void onCancelled(int requestCode, Date date);
 }

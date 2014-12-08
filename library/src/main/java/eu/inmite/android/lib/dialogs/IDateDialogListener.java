@@ -16,15 +16,15 @@
 
 package eu.inmite.android.lib.dialogs;
 
+import java.util.Date;
+
 /**
  * Implement this interface in Activity or Fragment to react to positive and negative buttons.
  *
  * @author David Vávra (david@inmite.eu)
  */
-public interface ISimpleDialogListener {
-	public void onPositiveButtonClicked(int requestCode);
+public interface IDateDialogListener {
+	public void onPositiveButtonClicked(int requestCode, Date date);
 
-	public void onNegativeButtonClicked(int requestCode);
-
-	public void onNeutralButtonClicked(int requestCode);
+	public void onNegativeButtonClicked(int requestCode, Date date);
 }

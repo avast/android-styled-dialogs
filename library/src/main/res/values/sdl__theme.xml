@@ -31,6 +31,10 @@
 		<item name="buttonBackgroundColorNormal">@color/sdl_button_normal_dark</item>
 		<item name="buttonBackgroundColorPressed">@color/sdl_button_pressed_dark</item>
 		<item name="buttonBackgroundColorFocused">@color/sdl_button_focused_dark</item>
+        <item name="listItemColorNormal">@color/sdl_button_normal_dark</item>
+        <item name="listItemColorFocused">@color/sdl_button_focused_dark</item>
+        <item name="listItemColorPressed">@color/sdl_button_pressed_dark</item>
+        <item name="listItemSeparatorColor">@color/sdl_list_item_separator_dark</item>
 	</style>
 
 	<style name="DialogStyleLight">
@@ -43,6 +47,10 @@
 		<item name="buttonBackgroundColorNormal">@color/sdl_button_normal_light</item>
 		<item name="buttonBackgroundColorPressed">@color/sdl_button_pressed_light</item>
 		<item name="buttonBackgroundColorFocused">@color/sdl_button_focused_light</item>
+        <item name="listItemColorNormal">@color/sdl_button_normal_light</item>
+        <item name="listItemColorFocused">@color/sdl_button_focused_light</item>
+        <item name="listItemColorPressed">@color/sdl_button_pressed_light</item>
+        <item name="listItemSeparatorColor">@color/sdl_list_item_separator_light</item>
 	</style>
 
 	<style name="SDL.Group">
@@ -150,5 +158,31 @@
 		<item name="android:layout_marginTop">@dimen/grid_4</item>
 		<item name="android:layout_marginBottom">@dimen/grid_4</item>
 	</style>
+
+    <style name="SDL.ListItem">
+
+        <item name="android:layout_width">match_parent</item>
+
+        <item name="android:layout_height">?android:listPreferredItemHeight</item>
+
+        <item name="android:gravity">center_vertical|left</item>
+
+        <item name="android:orientation">horizontal</item>
+
+    </style>
+
+    <style
+        name="ListItemText"
+        parent="@android:style/Widget.TextView">
+
+        <item name="android:layout_width">wrap_content</item>
+
+        <item name="android:layout_height">wrap_content</item>
+
+        <item name="android:padding">@dimen/grid_4</item>
+
+        <item name="android:textSize">18dp</item>
+    </style>
+
 
 </resources>

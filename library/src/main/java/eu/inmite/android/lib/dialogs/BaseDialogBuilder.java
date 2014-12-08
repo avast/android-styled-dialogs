@@ -13,10 +13,10 @@ import android.support.v4.app.FragmentManager;
  */
 abstract class BaseDialogBuilder<T extends BaseDialogBuilder<T>> {
 
-	public static String ARG_REQUEST_CODE = "request_code";
-	public static String ARG_CANCELABLE_ON_TOUCH_OUTSIDE = "cancelable_oto";
-	public static String DEFAULT_TAG = "simple_dialog";
-	public static int DEFAULT_REQUEST_CODE = -42;
+	public final static String ARG_REQUEST_CODE = "request_code";
+	public final static String ARG_CANCELABLE_ON_TOUCH_OUTSIDE = "cancelable_oto";
+	public final static String DEFAULT_TAG = "simple_dialog";
+	public final static int DEFAULT_REQUEST_CODE = -42;
 
 	protected final Context mContext;
 	protected final FragmentManager mFragmentManager;
@@ -43,7 +43,7 @@ abstract class BaseDialogBuilder<T extends BaseDialogBuilder<T>> {
 		mCancelable = cancelable;
 		return self();
 	}
-	
+
 	public T setCancelableOnTouchOutside(boolean cancelable) {
 		mCancelableOnTouchOutside = cancelable;
 		if (cancelable) {
@@ -68,22 +68,37 @@ abstract class BaseDialogBuilder<T extends BaseDialogBuilder<T>> {
 		return self();
 	}
 
+    private BaseDialogFragment create() {
+        final Bundle args = prepareArguments();
+
+        final BaseDialogFragment fragment = (BaseDialogFragment) Fragment.instantiate(mContext, mClass.getName(), args);
+
+        args.putBoolean(ARG_CANCELABLE_ON_TOUCH_OUTSIDE, mCancelableOnTouchOutside);
+
+        if (mTargetFragment != null) {
+            fragment.setTargetFragment(mTargetFragment, mRequestCode);
+        } else {
+            args.putInt(ARG_REQUEST_CODE, mRequestCode);
+        }
+        fragment.setCancelable(mCancelable);
+        return fragment;
+    }
 
 	public DialogFragment show() {
-		final Bundle args = prepareArguments();
-
-		final BaseDialogFragment fragment = (BaseDialogFragment) Fragment.instantiate(mContext, mClass.getName(), args);
-	
-		args.putBoolean(ARG_CANCELABLE_ON_TOUCH_OUTSIDE, mCancelableOnTouchOutside);
-		
-		if (mTargetFragment != null) {
-			fragment.setTargetFragment(mTargetFragment, mRequestCode);
-		} else {
-			args.putInt(ARG_REQUEST_CODE, mRequestCode);
-		}
-		fragment.setCancelable(mCancelable);
+        BaseDialogFragment fragment = create();
 		fragment.show(mFragmentManager, mTag);
-		
 		return fragment;
 	}
+
+    /**
+     * Like show() but allows the commit to be executed after an activity's state is saved. This
+     * is dangerous because the commit can be lost if the activity needs to later be restored from
+     * its state, so this should only be used for cases where it is okay for the UI state to change
+     * unexpectedly on the user.
+     */
+    public DialogFragment showAllowingStateLoss() {
+        BaseDialogFragment fragment = create();
+        fragment.showAllowingStateLoss(mFragmentManager, mTag);
+        return fragment;
+    }
 }
