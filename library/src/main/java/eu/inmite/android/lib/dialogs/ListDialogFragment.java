@@ -1,6 +1,7 @@
 package eu.inmite.android.lib.dialogs;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -116,6 +117,15 @@ public class ListDialogFragment extends BaseDialogFragment {
     }
 
     @Override
+    public void onCancel(DialogInterface dialog) {
+        super.onCancel(dialog);
+        IListDialogListener onListItemSelectedListener = getDialogListener();
+        if (onListItemSelectedListener != null) {
+            onListItemSelectedListener.onCancelled();
+        }
+    }
+
+    @Override
     protected Builder build(Builder builder) {
         final String title = getTitle();
         if (!TextUtils.isEmpty(title)) {
@@ -126,6 +136,10 @@ public class ListDialogFragment extends BaseDialogFragment {
             builder.setPositiveButton(getPositiveButtonText(), new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    IListDialogListener onListItemSelectedListener = getDialogListener();
+                    if (onListItemSelectedListener != null) {
+                        onListItemSelectedListener.onCancelled();
+                    }
                     dismiss();
                 }
             });
