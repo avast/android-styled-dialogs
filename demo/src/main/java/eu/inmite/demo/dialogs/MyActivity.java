@@ -167,13 +167,16 @@ public class MyActivity extends FragmentActivity implements
 			});
     }
 
+    // IListDialogListener
+
     @Override
     public void onListItemSelected(String value, int number) {
-        showSelectedItem(value, number);
+        Toast.makeText(c, "Selected: " + value, Toast.LENGTH_SHORT).show();
     }
 
-    public void showSelectedItem(String value, int number) {
-        Toast.makeText(c, "Selected: " + value, Toast.LENGTH_SHORT).show();
+    @Override
+    public void onCancelled() {
+        Toast.makeText(c, "Nothing selected", Toast.LENGTH_SHORT).show();
     }
 
     // ISimpleDialogCancelListener
@@ -209,6 +212,8 @@ public class MyActivity extends FragmentActivity implements
             Toast.makeText(c, "Neutral button clicked", Toast.LENGTH_SHORT).show();
         }
     }
+
+    // IDateDialogListener
 
     @Override
 	public void onNegativeButtonClicked(int resultCode, Date date) {
