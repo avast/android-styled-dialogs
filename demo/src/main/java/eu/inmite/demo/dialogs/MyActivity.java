@@ -16,38 +16,22 @@
 
 package eu.inmite.demo.dialogs;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.view.View;
-import android.widget.Toast;
-
 import java.text.DateFormat;
 import java.util.Date;
 
-import eu.inmite.android.lib.dialogs.DatePickerDialogFragment;
-import eu.inmite.android.lib.dialogs.IDateDialogListener;
-import eu.inmite.android.lib.dialogs.IListDialogListener;
-import eu.inmite.android.lib.dialogs.ISimpleDialogCancelListener;
-import eu.inmite.android.lib.dialogs.ISimpleDialogListener;
-import eu.inmite.android.lib.dialogs.ListDialogFragment;
-import eu.inmite.android.lib.dialogs.ProgressDialogFragment;
-import eu.inmite.android.lib.dialogs.SimpleDialogFragment;
-import eu.inmite.android.lib.dialogs.TimePickerDialogFragment;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.view.View;
+import android.widget.Toast;
 
-public class MyActivity extends FragmentActivity implements
-        ISimpleDialogListener,
-        IDateDialogListener,
-        ISimpleDialogCancelListener,
-        IListDialogListener {
+import eu.inmite.android.lib.dialogs.*;
 
-    public static final int THEME_DEFAULT_DARK = 0;
-
-    public static final int THEME_DEFAULT_LIGHT = 1;
-
-    public static final int THEME_CUSTOM_DARK = 2;
-
-    public static final int THEME_CUSTOM_LIGHT = 3;
+public class MyActivity extends ActionBarActivity implements
+    ISimpleDialogListener,
+    IDateDialogListener,
+    ISimpleDialogCancelListener,
+    IListDialogListener {
 
     public static final String EXTRA_THEME = "theme";
 
@@ -57,55 +41,54 @@ public class MyActivity extends FragmentActivity implements
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        setThemeOnCreate();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         findViewById(R.id.message_dialog).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SimpleDialogFragment.createBuilder(c, getSupportFragmentManager())
-                        .setMessage(R.string.message_1).show();
+                    .setMessage(R.string.message_1).show();
             }
         });
         findViewById(R.id.message_title_dialog).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SimpleDialogFragment.createBuilder(c, getSupportFragmentManager())
-                        .setTitle(R.string.title).setMessage(R.string.message_2).show();
+                    .setTitle(R.string.title).setMessage(R.string.message_2).show();
             }
         });
         findViewById(R.id.message_title_buttons_dialog)
-                .setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        SimpleDialogFragment.createBuilder(c, getSupportFragmentManager())
-                                .setTitle(R.string.title)
-                                .setMessage(R.string.message_3)
-                                .setPositiveButtonText(R.string.positive_button)
-                                .setNegativeButtonText(R.string.negative_button).setRequestCode(42)
-                                .setTag("custom-tag")
-                                .show();
-                    }
-                });
+            .setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    SimpleDialogFragment.createBuilder(c, getSupportFragmentManager())
+                        .setTitle(R.string.title)
+                        .setMessage(R.string.message_3)
+                        .setPositiveButtonText(R.string.positive_button)
+                        .setNegativeButtonText(R.string.negative_button).setNeutralButtonText("WTF?").setRequestCode(42)
+                        .setTag("custom-tag")
+                        .show();
+                }
+            });
         findViewById(R.id.progress_dialog).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ProgressDialogFragment.createBuilder(c, getSupportFragmentManager())
-                        .setMessage(R.string.message_4)
-                        .setRequestCode(REQUEST_PROGRESS)
-                        .setTitle(R.string.app_name)
-                        .show();
+                    .setMessage(R.string.message_4)
+                    .setRequestCode(REQUEST_PROGRESS)
+                    .setTitle(R.string.app_name)
+                    .show();
             }
         });
         findViewById(R.id.list_dialog).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ListDialogFragment
-                        .createBuilder(c, getSupportFragmentManager())
-                        .setTitle("Your favorite character:")
-                        .setItems(new String[]{"Jayne", "Malcolm", "Kaylee",
-                                "Wash", "Zoe", "River"})
-                        .show();
+                    .createBuilder(c, getSupportFragmentManager())
+                    .setTitle("Your favorite character:")
+                    .setItems(new String[]{"Jayne", "Malcolm", "Kaylee",
+                        "Wash", "Zoe", "River"})
+                    .show();
 
             }
         });
@@ -115,56 +98,32 @@ public class MyActivity extends FragmentActivity implements
                 JayneHatDialogFragment.show(c);
             }
         });
-        findViewById(R.id.default_dark_theme).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.time_picker).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setCurrentTheme(THEME_DEFAULT_DARK);
+                TimePickerDialogFragment
+                    .createBuilder(MyActivity.this, getSupportFragmentManager())
+                    .setDate(new Date())
+                    .set24hour(true)
+                    .setPositiveButtonText(android.R.string.ok)
+                    .setNegativeButtonText(android.R.string.cancel)
+                    .setRequestCode(13)
+                    .show();
             }
         });
-        findViewById(R.id.default_light_theme).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.date_picker).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setCurrentTheme(THEME_DEFAULT_LIGHT);
+                DatePickerDialogFragment
+                    .createBuilder(MyActivity.this, getSupportFragmentManager())
+                    .setDate(new Date())
+                    .set24hour(true)
+                    .setPositiveButtonText(android.R.string.ok)
+                    .setNegativeButtonText(android.R.string.cancel)
+                    .setRequestCode(12)
+                    .show();
             }
         });
-        findViewById(R.id.custom_dark_theme).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setCurrentTheme(THEME_CUSTOM_DARK);
-            }
-        });
-        findViewById(R.id.custom_light_theme).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setCurrentTheme(THEME_CUSTOM_LIGHT);
-            }
-        });
-		findViewById(R.id.time_picker).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				TimePickerDialogFragment
-					.createBuilder(MyActivity.this, getSupportFragmentManager())
-					.setDate(new Date())
-					.set24hour(true)
-					.setPositiveButtonText(android.R.string.ok)
-					.setNegativeButtonText(android.R.string.cancel)
-					.setRequestCode(13)
-					.show();
-				}
-			});
-		findViewById(R.id.date_picker).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				DatePickerDialogFragment
-					.createBuilder(MyActivity.this, getSupportFragmentManager())
-					.setDate(new Date())
-					.set24hour(true)
-					.setPositiveButtonText(android.R.string.ok)
-					.setNegativeButtonText(android.R.string.cancel)
-					.setRequestCode(12)
-					.show();
-			}
-			});
     }
 
     // IListDialogListener
@@ -216,30 +175,30 @@ public class MyActivity extends FragmentActivity implements
     // IDateDialogListener
 
     @Override
-	public void onNegativeButtonClicked(int resultCode, Date date) {
-		String text="";
-		if (resultCode==12) {
-			text="Date ";
-		} else if (resultCode==13) {
-			text="Time ";
-		}
-	
-		DateFormat dateFormat= DateFormat.getDateInstance(DateFormat.DEFAULT);
-		Toast.makeText(this,text+"Cancelled "+ dateFormat.format(date),Toast.LENGTH_SHORT).show();
-	}
-	
-	@Override
-	public void onPositiveButtonClicked(int resultCode, Date date) {
-		String text="";
-		if (resultCode==12) {
-			text="Date ";
-		} else if (resultCode==13) {
-			text="Time ";
-		}
-		
-		DateFormat dateFormat= DateFormat.getDateTimeInstance();
-		Toast.makeText(this,text+ "Success! "+ dateFormat.format(date),Toast.LENGTH_SHORT).show();
-	}
+    public void onNegativeButtonClicked(int resultCode, Date date) {
+        String text = "";
+        if (resultCode == 12) {
+            text = "Date ";
+        } else if (resultCode == 13) {
+            text = "Time ";
+        }
+
+        DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.DEFAULT);
+        Toast.makeText(this, text + "Cancelled " + dateFormat.format(date), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onPositiveButtonClicked(int resultCode, Date date) {
+        String text = "";
+        if (resultCode == 12) {
+            text = "Date ";
+        } else if (resultCode == 13) {
+            text = "Time ";
+        }
+
+        DateFormat dateFormat = DateFormat.getDateTimeInstance();
+        Toast.makeText(this, text + "Success! " + dateFormat.format(date), Toast.LENGTH_SHORT).show();
+    }
 
     private void setCurrentTheme(int theme) {
         Intent i = new Intent(c, MyActivity.class);
@@ -247,23 +206,5 @@ public class MyActivity extends FragmentActivity implements
         startActivity(i);
         finish();
         overridePendingTransition(0, 0);
-    }
-
-    private void setThemeOnCreate() {
-        int theme = getIntent().getIntExtra(EXTRA_THEME, THEME_CUSTOM_DARK);
-        switch (theme) {
-            case THEME_DEFAULT_DARK:
-                setTheme(R.style.DefaultDarkTheme);
-                break;
-            case THEME_DEFAULT_LIGHT:
-                setTheme(R.style.DefaultLightTheme);
-                break;
-            case THEME_CUSTOM_DARK:
-                setTheme(R.style.CustomDarkTheme);
-                break;
-            case THEME_CUSTOM_LIGHT:
-                setTheme(R.style.CustomLightTheme);
-                break;
-        }
     }
 }

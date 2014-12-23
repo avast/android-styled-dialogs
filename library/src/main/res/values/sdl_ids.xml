@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="id" name="sdl_positive_button" />
+    <item type="id" name="sdl_neutral_button" />
+    <item type="id" name="sdl_negative_button" />
+</resources>

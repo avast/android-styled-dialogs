@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-	<style name="Button" parent="android:Widget.Button">
+	<style name="Button">
 		<item name="android:layout_width">wrap_content</item>
 		<item name="android:layout_height">wrap_content</item>
-		<item name="android:layout_margin">@dimen/grid_2</item>
+		<item name="android:layout_marginTop">@dimen/grid_2</item>
+        <item name="android:layout_marginBottom">@dimen/grid_2</item>
+        <item name="android:layout_marginLeft">@dimen/grid_1</item>
+        <item name="android:layout_marginRight">@dimen/grid_1</item>
 	</style>
 
 	<style name="Button.Top">

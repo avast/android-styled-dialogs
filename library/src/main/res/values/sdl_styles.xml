@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
 	<style name="SDL"/>
 
@@ -14,15 +14,10 @@
 		<item name="android:windowCloseOnTouchOutside">true</item>
 		<item name="android:backgroundDimAmount">0.6</item>
 		<item name="android:colorBackgroundCacheHint">@null</item>
-
-        <item name="sdlTitleTextStyle">@style/SDL.TextView.Title</item>
-        <item name="sdlMessageTextStyle">@style/SDL.TextView.Message</item>
-
 		<item name="sdlDialogStyle">@style/DialogStyleDark</item>
 	</style>
 
 	<style name="DialogStyleDark">
-		<item name="dialogBackground">@drawable/sdl_background_dark</item>
 		<item name="titleTextColor">@color/sdl_title_text_dark</item>
 		<item name="titleSeparatorColor">@color/sdl_title_separator_dark</item>
 		<item name="messageTextColor">@color/sdl_message_text_dark</item>
@@ -38,7 +33,7 @@
 	</style>
 
 	<style name="DialogStyleLight">
-		<item name="dialogBackground">@drawable/sdl_background_light</item>
+		<item name="sdlBackground">@drawable/sdl_background_light</item>
 		<item name="titleTextColor">@color/sdl_title_text_light</item>
 		<item name="titleSeparatorColor">@color/sdl_title_separator_light</item>
 		<item name="messageTextColor">@color/sdl_message_text_light</item>
@@ -53,31 +48,104 @@
         <item name="listItemSeparatorColor">@color/sdl_list_item_separator_light</item>
 	</style>
 
-	<style name="SDL.Group">
+    <!-- New: -->
+
+	<style name="SDL.Layout">
 		<item name="android:layout_width">match_parent</item>
 		<item name="android:layout_height">match_parent</item>
 		<item name="android:orientation">vertical</item>
 	</style>
 
-	<style name="SDL.Group.ButtonPanel">
-		<item name="android:layout_height">wrap_content</item>
+    <style name="SDL.Layout.Main">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingLeft">@dimen/grid_6</item>
+        <item name="android:paddingRight">@dimen/grid_6</item>
+        <item name="android:paddingTop">@dimen/grid_6</item>
+        <item name="android:paddingBottom">@dimen/grid_4</item>
+
+    </style>
+
+    <style name="SDL.Layout.Custom">
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+	<style name="SDL.Layout.Buttons">
+        <item name="android:orientation">horizontal</item>
+		<item name="android:layout_height">@dimen/grid_12</item>
+        <item name="android:layout_marginBottom">@dimen/grid_2</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">@dimen/grid_3</item>
+        <item name="android:paddingRight">@dimen/grid_3</item>
 	</style>
 
-	<style name="SDL.Group.Content">
+    <style name="SDL.ScrollView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+
+    <style name="SDL.TextView" parent="@android:style/Widget.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="SDL.TextView.Title">
+        <item name="android:textSize">20sp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:paddingBottom">@dimen/grid_4</item>
+        <item name="android:textColor">@color/sdl_text_primary</item>
+    </style>
+
+    <style name="SDL.TextView.Message">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/sdl_text_secondary</item>
+    </style>
+
+    <style name="SDL.Button">
+        <item name="android:background">@drawable/sdl_button</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:minWidth">@dimen/grid_16</item>
+        <item name="android:layout_height">@dimen/grid_9</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingRight">@dimen/grid_2</item>
+        <item name="android:paddingLeft">@dimen/grid_2</item>
+        <item name="android:layout_marginRight">@dimen/grid_1</item>
+        <item name="android:layout_marginLeft">@dimen/grid_1</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textAllCaps" tools:ignore="NewApi">true</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">?colorAccent</item>
+    </style>
+
+    <style name="SDL.Expander">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+
+    <!-- Old: -->
+
+    <style name="SDL.ButtonPanel">
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+	<style name="SDL.Layout.Content">
 		<item name="android:layout_height">0dp</item>
 		<item name="android:layout_weight">1</item>
 		<item name="android:gravity">center</item>
 	</style>
 
-	<style name="SDL.Group.Horizontal">
+	<style name="SDL.Layout.Horizontal">
 		<item name="android:orientation">horizontal</item>
 	</style>
 
-	<style name="SDL.Group.Horizontal.ButtonPanel">
+	<style name="SDL.Layout.Horizontal.ButtonPanel">
 		<item name="android:layout_height">wrap_content</item>
 	</style>
 
-	<style name="SDL.Group.Wrap">
+	<style name="SDL.Layout.Wrap">
 		<item name="android:layout_height">wrap_content</item>
 		<item name="android:layout_weight">1</item>
 	</style>
@@ -97,21 +165,6 @@
 		<item name="android:layout_height">2dp</item>
 	</style>
 
-	<style name="SDL.Button" parent="@android:style/Widget.Button">
-		<item name="android:layout_height">wrap_content</item>
-		<item name="android:paddingTop">@dimen/grid_3</item>
-		<item name="android:paddingBottom">@dimen/grid_3</item>
-		<item name="android:minHeight">48dip</item>
-		<item name="android:minWidth">64dip</item>
-		<item name="android:paddingLeft">4dip</item>
-		<item name="android:paddingRight">4dip</item>
-		<item name="android:layout_width">0dp</item>
-		<item name="android:layout_weight">1</item>
-		<item name="android:textSize">15sp</item>
-		<item name="android:textStyle">normal</item>
-		<item name="android:layout_gravity">center_vertical</item>
-	</style>
-
 	<style name="SDL.DatePicker">
 		<item name="android:layout_width">match_parent</item>
 		<item name="android:layout_height">wrap_content</item>
@@ -126,28 +179,6 @@
 		<item name="android:layout_weight">1</item>
 		<item name="android:cacheColorHint">@null</item>
 		<item name="android:background">@android:color/transparent</item>
-	</style>
-
-	<style name="SDL.TextView" parent="@android:style/Widget.TextView">
-		<item name="android:layout_width">wrap_content</item>
-		<item name="android:layout_height">wrap_content</item>
-	</style>
-
-	<style name="SDL.TextView.Message">
-		<item name="android:textSize">16sp</item>
-		<item name="android:paddingTop">@dimen/grid_3</item>
-		<item name="android:paddingBottom">@dimen/grid_3</item>
-		<item name="android:paddingLeft">@dimen/grid_4</item>
-		<item name="android:paddingRight">@dimen/grid_4</item>
-	</style>
-
-	<style name="SDL.TextView.Title">
-		<item name="android:textSize">22sp</item>
-		<item name="android:layout_width">match_parent</item>
-		<item name="android:paddingLeft">@dimen/grid_4</item>
-		<item name="android:paddingRight">@dimen/grid_4</item>
-		<item name="android:paddingTop">@dimen/grid_4</item>
-		<item name="android:paddingBottom">@dimen/grid_4</item>
 	</style>
 
 	<style name="SDL.Progress" parent="@android:style/Widget.ProgressBar">

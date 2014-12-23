@@ -2,7 +2,7 @@
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
              android:id="@+id/sdl__customPanel"
-             style="@style/SDL.Group.Content">
+             style="@style/SDL.Layout.Content">
     <FrameLayout android:id="@+id/sdl__custom"
-                 style="@style/SDL.Group"/>
+                 style="@style/SDL.Layout"/>
 </FrameLayout>

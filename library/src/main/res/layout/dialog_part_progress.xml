@@ -2,7 +2,7 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@+id/sdl__progressPanel"
-	style="@style/SDL.Group"
+	style="@style/SDL.Layout"
 	android:gravity="center_vertical"
 	android:orientation="horizontal">
 

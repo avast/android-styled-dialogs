@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	package="eu.inmite.demo.dialogs"
-	android:versionCode="1"
-	android:versionName="1.0">
+	package="eu.inmite.demo.dialogs">
 
-	<uses-sdk
-		android:minSdkVersion="8"
-		android:targetSdkVersion="17" />
 	<application
 		android:label="@string/app_name"
 		android:icon="@drawable/ic_launcher"
-		android:theme="@style/CustomDarkTheme">
+		android:theme="@style/AppTheme"
+        android:allowBackup="true">
 		<activity
-			android:name=".MyActivity"
-			android:label="@string/app_name">
+			android:name=".MyActivity">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />

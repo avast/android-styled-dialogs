@@ -2,13 +2,14 @@
 <resources>
 
 	<declare-styleable name="StyledDialogs">
+        <!-- todo: old -->
 		<attr name="sdlDialogStyle" format="reference" />
-        <attr name="sdlTitleTextStyle" format="reference" />
-        <attr name="sdlMessageTextStyle" format="reference" />
 	</declare-styleable>
 
 	<declare-styleable name="DialogStyle">
-		<attr name="dialogBackground" format="reference" />
+        <!-- new: -->
+		<attr name="sdlBackground" format="reference" />
+        <!-- todo: old -->
 		<attr name="titleTextColor" format="color|reference" />
 		<attr name="titleSeparatorColor" format="color|reference" />
 		<attr name="messageTextColor" format="color|reference" />
