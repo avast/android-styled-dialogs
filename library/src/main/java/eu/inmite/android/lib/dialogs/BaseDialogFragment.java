@@ -18,6 +18,7 @@ package eu.inmite.android.lib.dialogs;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.drawable.ColorDrawable;
@@ -28,6 +29,7 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +40,7 @@ import android.widget.*;
  *
  * @author David Vávra (david@inmite.eu)
  */
-public abstract class BaseDialogFragment extends DialogFragment {
+public abstract class BaseDialogFragment extends DialogFragment implements DialogInterface.OnShowListener {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -57,6 +59,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
             dialog.setCanceledOnTouchOutside(
                 args.getBoolean(BaseDialogBuilder.ARG_CANCELABLE_ON_TOUCH_OUTSIDE));
         }
+        dialog.setOnShowListener(this);
         return dialog;
     }
 
@@ -89,7 +92,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
      */
     protected Button getPositiveButton() {
         if (getView() != null) {
-            return (Button)getView().findViewById(R.id.sdl_positive_button);
+            return (Button)getView().findViewById(R.id.sdl_button_positive);
         } else {
             return null;
         }
@@ -100,7 +103,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
      */
     protected Button getNegativeButton() {
         if (getView() != null) {
-            return (Button)getView().findViewById(R.id.sdl_negative_button);
+            return (Button)getView().findViewById(R.id.sdl_button_negative);
         } else {
             return null;
         }
@@ -111,10 +114,38 @@ public abstract class BaseDialogFragment extends DialogFragment {
      */
     protected Button getNeutralButton() {
         if (getView() != null) {
-            return (Button)getView().findViewById(R.id.sdl_neutral_button);
+            return (Button)getView().findViewById(R.id.sdl_button_neutral);
         } else {
             return null;
         }
+    }
+
+    @Override
+    public void onShow(DialogInterface dialog) {
+        ScrollView vScrollView = (ScrollView)getView().findViewById(R.id.sdl_scrollview);
+        boolean scrollable = isScrollable(vScrollView);
+        modifyButtonsBasedOnScrollableContent(scrollable);
+    }
+
+    private void modifyButtonsBasedOnScrollableContent(boolean scrollable) {
+        View vButtonDivider = getView().findViewById(R.id.sdl_button_divider);
+        View vButtonsBottomSpace = getView().findViewById(R.id.sdl_buttons_bottom_space);
+        if (scrollable) {
+            vButtonDivider.setVisibility(View.VISIBLE);
+            vButtonsBottomSpace.setVisibility(View.GONE);
+        } else {
+            vButtonDivider.setVisibility(View.GONE);
+            vButtonsBottomSpace.setVisibility(View.VISIBLE);
+        }
+    }
+
+    boolean isScrollable(ScrollView scrollView) {
+        ScrollView sv = (ScrollView) scrollView;
+        if (sv.getChildCount() == 0) {
+            return false;
+        }
+        final int childHeight = sv.getChildAt(0).getMeasuredHeight();
+        return sv.getMeasuredHeight() < childHeight;
     }
 
     /**
@@ -146,7 +177,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
 
         private CharSequence mMessage;
 
-        private View mView;
+        private View mCustomView;
 
         private boolean mViewSpacingSpecified;
 
@@ -281,14 +312,14 @@ public abstract class BaseDialogFragment extends DialogFragment {
         }
 
         public Builder setView(View view) {
-            mView = view;
+            mCustomView = view;
             mViewSpacingSpecified = false;
             return this;
         }
 
         public Builder setView(View view, int viewSpacingLeft, int viewSpacingTop,
                                int viewSpacingRight, int viewSpacingBottom) {
-            mView = view;
+            mCustomView = view;
             mViewSpacingSpecified = true;
             mViewSpacingLeft = viewSpacingLeft;
             mViewSpacingTop = viewSpacingTop;
@@ -372,22 +403,44 @@ public abstract class BaseDialogFragment extends DialogFragment {
 
             TextView vTitle = (TextView)content.findViewById(R.id.sdl_title);
             TextView vMessage = (TextView)content.findViewById(R.id.sdl_message);
+            FrameLayout vCustomView = (FrameLayout)content.findViewById(R.id.sdl_custom);
             Button vPositiveButton = (Button)content.findViewById(R.id.sdl_button_positive);
             Button vNegativeButton = (Button)content.findViewById(R.id.sdl_button_negative);
             Button vNeutralButton = (Button)content.findViewById(R.id.sdl_button_neutral);
+            Button vPositiveButtonStacked = (Button)content.findViewById(R.id.sdl_button_positive_stacked);
+            Button vNegativeButtonStacked = (Button)content.findViewById(R.id.sdl_button_negative_stacked);
+            Button vNeutralButtonStacked = (Button)content.findViewById(R.id.sdl_button_neutral_stacked);
+            View vButtonsDefault = content.findViewById(R.id.sdl_buttons_default);
+            View vButtonsStacked = content.findViewById(R.id.sdl_buttons_stacked);
 
             set(vTitle, mTitle);
             set(vMessage, mMessage);
-            set(vPositiveButton, mPositiveButtonText, mPositiveButtonListener);
-            set(vNegativeButton, mNegativeButtonText, mNegativeButtonListener);
-            set(vNeutralButton, mNeutralButtonText, mNeutralButtonListener);
+            setPaddingOfTitleAndMessage(vTitle, vMessage);
+
+            if (mCustomView!=null) {
+                vCustomView.addView(mCustomView);
+            }
+
+            if (shouldStackButtons()) {
+                set(vPositiveButtonStacked, mPositiveButtonText, mPositiveButtonListener);
+                set(vNegativeButtonStacked, mNegativeButtonText, mNegativeButtonListener);
+                set(vNeutralButtonStacked, mNeutralButtonText, mNeutralButtonListener);
+                vButtonsDefault.setVisibility(View.GONE);
+                vButtonsStacked.setVisibility(View.VISIBLE);
+            } else {
+                set(vPositiveButton, mPositiveButtonText, mPositiveButtonListener);
+                set(vNegativeButton, mNegativeButtonText, mNegativeButtonListener);
+                set(vNeutralButton, mNeutralButtonText, mNeutralButtonListener);
+                vButtonsDefault.setVisibility(View.VISIBLE);
+                vButtonsStacked.setVisibility(View.GONE);
+            }
 
             /*
-            if (mView != null) {
+            if (mCustomView != null) {
                 FrameLayout customPanel = (FrameLayout)mInflater
                     .inflate(R.layout.dialog_part_custom, content, false);
                 FrameLayout custom = (FrameLayout)customPanel.findViewById(R.id.sdl__custom);
-                custom.addView(mView,
+                custom.addView(mCustomView,
                     new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.MATCH_PARENT)
                 );
@@ -415,6 +468,29 @@ public abstract class BaseDialogFragment extends DialogFragment {
             addButtons(content);*/
 
             return content;
+        }
+
+        private void setPaddingOfTitleAndMessage(TextView vTitle, TextView vMessage) {
+            int grid6 = mContext.getResources().getDimensionPixelSize(R.dimen.grid_6);
+            int grid4 = mContext.getResources().getDimensionPixelSize(R.dimen.grid_4);
+            if (!TextUtils.isEmpty(mTitle) && !TextUtils.isEmpty(mMessage)) {
+                vTitle.setPadding(grid6, grid6, grid6, grid4);
+                vMessage.setPadding(grid6, 0, grid6, grid4);
+            } else if (TextUtils.isEmpty(mTitle)) {
+                vMessage.setPadding(grid6, grid6, grid6, grid4);
+            } else if (TextUtils.isEmpty(mMessage)) {
+                vTitle.setPadding(grid6, grid6, grid6, grid4);
+            }
+        }
+
+        private boolean shouldStackButtons() {
+            return shouldStackButton(mPositiveButtonText) || shouldStackButton(mNegativeButtonText)
+                || shouldStackButton(mNeutralButtonText);
+        }
+
+        private boolean shouldStackButton(CharSequence text) {
+            final int MAX_BUTTON_CHARS = 12;
+            return text != null && text.length() > MAX_BUTTON_CHARS;
         }
 
         private void set(Button button, CharSequence text, View.OnClickListener listener) {

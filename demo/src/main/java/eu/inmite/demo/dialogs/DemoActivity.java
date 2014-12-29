@@ -27,7 +27,7 @@ import android.widget.Toast;
 
 import eu.inmite.android.lib.dialogs.*;
 
-public class MyActivity extends ActionBarActivity implements
+public class DemoActivity extends ActionBarActivity implements
     ISimpleDialogListener,
     IDateDialogListener,
     ISimpleDialogCancelListener,
@@ -37,7 +37,7 @@ public class MyActivity extends ActionBarActivity implements
 
     private static final int REQUEST_PROGRESS = 1;
 
-    MyActivity c = this;
+    DemoActivity c = this;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,14 +47,24 @@ public class MyActivity extends ActionBarActivity implements
             @Override
             public void onClick(View v) {
                 SimpleDialogFragment.createBuilder(c, getSupportFragmentManager())
-                    .setMessage(R.string.message_1).show();
+                    .setMessage("Love. Can know all the math in the \'verse but take a boat in the air that you don\'t " +
+                        "love? She\'ll shake you off just as sure as a turn in the worlds. Love keeps her in the air when " +
+                        "she oughtta fall down...tell you she\'s hurtin\' \'fore she keens...makes her a home.").show();
             }
         });
         findViewById(R.id.message_title_dialog).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SimpleDialogFragment.createBuilder(c, getSupportFragmentManager())
-                    .setTitle(R.string.title).setMessage(R.string.message_2).show();
+                    .setTitle("More Firefly quotes:").setMessage
+                    ("Wash: \"Psychic, though? That sounds like something out of science fiction.\"\n\nZoe: \"We live" +
+                        " " +
+                        "in a space ship, dear.\"\nWash: \"Here lies my beloved Zoe, " +
+                        ("my autumn flower ... somewhat less attractive now that she's all corpsified and gross" +
+                            ".\"\n\nRiver Tam: \"Also? I can kill you with my brain.\"\n\nKayle: \"Going on a year now, nothins twixed my neathers not run on batteries.\" \n" +
+                            "Mal: \"I can't know that.\" \n" +
+                            "Jayne: \"I can stand to hear a little more.\"\n\nWash: \"I've been under fire before. Well ... I've been in a fire. Actually, I was fired. I can handle myself.\""))
+                    .show();
             }
         });
         findViewById(R.id.message_title_buttons_dialog)
@@ -62,21 +72,27 @@ public class MyActivity extends ActionBarActivity implements
                 @Override
                 public void onClick(View v) {
                     SimpleDialogFragment.createBuilder(c, getSupportFragmentManager())
-                        .setTitle(R.string.title)
-                        .setMessage(R.string.message_3)
-                        .setPositiveButtonText(R.string.positive_button)
-                        .setNegativeButtonText(R.string.negative_button).setNeutralButtonText("WTF?").setRequestCode(42)
-                        .setTag("custom-tag")
+                        .setTitle("Do you like this quote?")
+                        .setMessage("Jayne: \"Shiny. Let's be bad guys.\"")
+                        .setPositiveButtonText("Love")
+                        .setNegativeButtonText("Hate").setNeutralButtonText("WTF?").setRequestCode(42)
                         .show();
                 }
             });
+        findViewById(R.id.long_buttons).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SimpleDialogFragment.createBuilder(c, getSupportFragmentManager()).setMessage("How will you decide?")
+                    .setPositiveButtonText("Time for some thrillin' heroics!").setNegativeButtonText("Misbehave")
+                    .setNeutralButtonText("Keep flying").show();
+            }
+        });
         findViewById(R.id.progress_dialog).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ProgressDialogFragment.createBuilder(c, getSupportFragmentManager())
-                    .setMessage(R.string.message_4)
+                    .setMessage("Mal: I\\'m just waiting to see if I pass out. Long story.")
                     .setRequestCode(REQUEST_PROGRESS)
-                    .setTitle(R.string.app_name)
                     .show();
             }
         });
@@ -102,7 +118,7 @@ public class MyActivity extends ActionBarActivity implements
             @Override
             public void onClick(View v) {
                 TimePickerDialogFragment
-                    .createBuilder(MyActivity.this, getSupportFragmentManager())
+                    .createBuilder(DemoActivity.this, getSupportFragmentManager())
                     .setDate(new Date())
                     .set24hour(true)
                     .setPositiveButtonText(android.R.string.ok)
@@ -115,7 +131,7 @@ public class MyActivity extends ActionBarActivity implements
             @Override
             public void onClick(View v) {
                 DatePickerDialogFragment
-                    .createBuilder(MyActivity.this, getSupportFragmentManager())
+                    .createBuilder(DemoActivity.this, getSupportFragmentManager())
                     .setDate(new Date())
                     .set24hour(true)
                     .setPositiveButtonText(android.R.string.ok)
@@ -201,7 +217,7 @@ public class MyActivity extends ActionBarActivity implements
     }
 
     private void setCurrentTheme(int theme) {
-        Intent i = new Intent(c, MyActivity.class);
+        Intent i = new Intent(c, DemoActivity.class);
         i.putExtra(EXTRA_THEME, theme);
         startActivity(i);
         finish();

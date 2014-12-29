@@ -56,15 +56,6 @@
 		<item name="android:orientation">vertical</item>
 	</style>
 
-    <style name="SDL.Layout.Main">
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:paddingLeft">@dimen/grid_6</item>
-        <item name="android:paddingRight">@dimen/grid_6</item>
-        <item name="android:paddingTop">@dimen/grid_6</item>
-        <item name="android:paddingBottom">@dimen/grid_4</item>
-
-    </style>
-
     <style name="SDL.Layout.Custom">
         <item name="android:layout_height">wrap_content</item>
     </style>
@@ -72,11 +63,15 @@
 	<style name="SDL.Layout.Buttons">
         <item name="android:orientation">horizontal</item>
 		<item name="android:layout_height">@dimen/grid_12</item>
-        <item name="android:layout_marginBottom">@dimen/grid_2</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:paddingLeft">@dimen/grid_3</item>
         <item name="android:paddingRight">@dimen/grid_3</item>
 	</style>
+
+    <style name="SDL.Layout.Buttons.Stacked">
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
 
     <style name="SDL.ScrollView">
         <item name="android:layout_width">match_parent</item>
@@ -93,13 +88,15 @@
     <style name="SDL.TextView.Title">
         <item name="android:textSize">20sp</item>
         <item name="android:layout_width">match_parent</item>
-        <item name="android:paddingBottom">@dimen/grid_4</item>
         <item name="android:textColor">@color/sdl_text_primary</item>
+        <!-- paddings set in code -->
     </style>
 
     <style name="SDL.TextView.Message">
+        <item name="android:layout_width">match_parent</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/sdl_text_secondary</item>
+        <!-- paddings set in code -->
     </style>
 
     <style name="SDL.Button">
@@ -122,6 +119,25 @@
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">0dp</item>
         <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="SDL.Divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/sdl_divider</item>
+    </style>
+
+    <style name="SDL.Button.Stacked">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:gravity">center_vertical|end</item>
+    </style>
+
+    <style name="SDL.Space">
+        <item name="android:layout_width">match_parent</item>
+    </style>
+
+    <style name="SDL.Space.ButtonsBottom">
+        <item name="android:layout_height">@dimen/grid_2</item>
     </style>
 
 
@@ -214,6 +230,4 @@
 
         <item name="android:textSize">18dp</item>
     </style>
-
-
 </resources>

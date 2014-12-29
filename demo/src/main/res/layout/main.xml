@@ -15,24 +15,29 @@
 			android:id="@+id/message_dialog" />
 
 		<Button
-			android:text="SimpleDialog: message and title"
+			android:text="SimpleDialog: long message and title"
 			android:id="@+id/message_title_dialog"
 			style="@style/Button" />
 
-		<Button
-			style="@style/Button"
-			android:text="SimpleDialog with callbacks"
-			android:id="@+id/message_title_buttons_dialog" />
+        <Button
+            style="@style/Button"
+            android:text="SimpleDialog: buttons &amp; callbacks"
+            android:id="@+id/message_title_buttons_dialog" />
+
+        <Button
+            style="@style/Button"
+            android:text="SimpleDialog: stacked buttons"
+            android:id="@+id/long_buttons" />
+
+        <Button
+            style="@style/Button"
+            android:text="Dialog with custom view"
+            android:id="@+id/custom_dialog" />
 
 		<Button
 			style="@style/Button"
 			android:text="Dialog with list"
 			android:id="@+id/list_dialog" />
-
-		<Button
-			style="@style/Button"
-			android:text="Dialog with custom view"
-			android:id="@+id/custom_dialog" />
 
 		<Button
 			style="@style/Button"

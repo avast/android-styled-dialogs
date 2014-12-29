@@ -8,7 +8,7 @@
 		android:theme="@style/AppTheme"
         android:allowBackup="true">
 		<activity
-			android:name=".MyActivity">
+			android:name=".DemoActivity">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />
