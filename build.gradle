@@ -1,6 +1,6 @@
 buildscript {
     repositories {
-        mavenCentral()
+        jcenter()
     }
 
     dependencies {
@@ -9,12 +9,14 @@ buildscript {
 }
 
 allprojects {
-    version = VERSION_NAME
-    group = GROUP
-
     repositories {
-        mavenCentral()
+        jcenter()
     }
+}
+
+ext {
+    VERSION_NAME = "2.0.0"
+    VERSION_CODE = 5
 }
 
 apply plugin: 'android-reporting'

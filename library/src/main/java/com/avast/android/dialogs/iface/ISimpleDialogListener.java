@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package eu.inmite.android.lib.dialogs;
+package com.avast.android.dialogs.iface;
 
 /**
  * Implement this interface in Activity or Fragment to react to positive and negative buttons.

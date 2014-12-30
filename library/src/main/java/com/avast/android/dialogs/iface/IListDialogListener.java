@@ -1,4 +1,4 @@
-package eu.inmite.android.lib.dialogs;
+package com.avast.android.dialogs.iface;
 
 /**
  * Interface for ListDialogFragment

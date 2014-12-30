@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package eu.inmite.demo.dialogs;
+package com.avast.dialogs;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -24,15 +24,17 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Toast;
 
-import eu.inmite.android.lib.dialogs.*;
+import com.avast.android.dialogs.fragment.*;
+import com.avast.android.dialogs.iface.IDateDialogListener;
+import com.avast.android.dialogs.iface.IListDialogListener;
+import com.avast.android.dialogs.iface.ISimpleDialogCancelListener;
+import com.avast.android.dialogs.iface.ISimpleDialogListener;
 
 public class DemoActivity extends ActionBarActivity implements
     ISimpleDialogListener,
     IDateDialogListener,
     ISimpleDialogCancelListener,
     IListDialogListener {
-
-    public static final String EXTRA_THEME = "theme";
 
     private static final int REQUEST_PROGRESS = 1;
 

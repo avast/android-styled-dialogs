@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package eu.inmite.android.lib.dialogs;
+package com.avast.android.dialogs.core;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -29,6 +29,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+
+import com.avast.android.dialogs.R;
 
 /**
  * Base dialog fragment for all your dialogs, stylable and same design on Android 2.2+.

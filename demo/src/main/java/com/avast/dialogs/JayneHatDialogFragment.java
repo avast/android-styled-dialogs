@@ -13,18 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package eu.inmite.demo.dialogs;
+package com.avast.dialogs;
 
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import eu.inmite.android.lib.dialogs.BaseDialogFragment;
-import eu.inmite.android.lib.dialogs.ISimpleDialogListener;
-import eu.inmite.android.lib.dialogs.SimpleDialogFragment;
+import com.avast.android.dialogs.core.BaseDialogFragment;
+import com.avast.android.dialogs.fragment.SimpleDialogFragment;
+import com.avast.android.dialogs.iface.ISimpleDialogListener;
 
 /**
- * Sample implementation of eu.inmite.android.lib.dialogs.BaseDialogFragment - custom view by extending {@link SimpleDialogFragment}.
+ * Sample implementation of custom dialog by extending {@link SimpleDialogFragment}.
  *
  * @author David Vávra (david@inmite.eu)
  */

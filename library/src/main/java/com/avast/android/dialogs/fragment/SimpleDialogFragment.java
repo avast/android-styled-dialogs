@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package eu.inmite.android.lib.dialogs;
+package com.avast.android.dialogs.fragment;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -26,9 +26,14 @@ import android.text.SpannedString;
 import android.text.TextUtils;
 import android.view.View;
 
+import com.avast.android.dialogs.core.BaseDialogBuilder;
+import com.avast.android.dialogs.core.BaseDialogFragment;
+import com.avast.android.dialogs.iface.ISimpleDialogCancelListener;
+import com.avast.android.dialogs.iface.ISimpleDialogListener;
+
 /**
  * Dialog for displaying simple message, message with title or message with title and two buttons. Implement {@link
- * ISimpleDialogListener} in your Fragment or Activity to rect on positive and negative button clicks. This class can
+ * com.avast.android.dialogs.iface.ISimpleDialogListener} in your Fragment or Activity to rect on positive and negative button clicks. This class can
  * be extended and more parameters can be added in overridden build() method.
  *
  * @author David Vávra (david@inmite.eu)

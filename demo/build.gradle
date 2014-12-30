@@ -8,10 +8,10 @@ android {
         minSdkVersion 8
         targetSdkVersion 21
         versionName project.VERSION_NAME
-        versionCode Integer.parseInt(project.VERSION_CODE)
+        versionCode project.VERSION_CODE
     }
 }
 
 dependencies {
-    compile project(':library')
+    compile "com.avast:android-styled-dialogs:2.0.0"
 }

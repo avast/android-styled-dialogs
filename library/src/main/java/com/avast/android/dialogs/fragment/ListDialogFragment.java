@@ -1,4 +1,4 @@
-package eu.inmite.android.lib.dialogs;
+package com.avast.android.dialogs.fragment;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -12,8 +12,13 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 
+import com.avast.android.dialogs.R;
+import com.avast.android.dialogs.core.BaseDialogBuilder;
+import com.avast.android.dialogs.core.BaseDialogFragment;
+import com.avast.android.dialogs.iface.IListDialogListener;
+
 /**
- * Dialog with a list of options. Implement {@link eu.inmite.android.lib.dialogs.IListDialogListener} to handle selection.
+ * Dialog with a list of options. Implement {@link com.avast.android.dialogs.iface.IListDialogListener} to handle selection.
  */
 public class ListDialogFragment extends BaseDialogFragment {
 

@@ -14,11 +14,13 @@
  * limitations under the License.
  */
 
-package eu.inmite.android.lib.dialogs;
+package com.avast.android.dialogs.iface;
+
+import java.util.Date;
 
 /**
  * @author Tomáš Kypta
  */
-public interface ISimpleDialogCancelListener {
-	public void onCancelled(int requestCode);
+public interface IDateDialogCancelListener {
+	public void onCancelled(int requestCode, Date date);
 }

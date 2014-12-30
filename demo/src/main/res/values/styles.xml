@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
 	<style name="Button">
 		<item name="android:layout_width">match_parent</item>
@@ -8,6 +8,5 @@
         <item name="android:layout_marginBottom">@dimen/grid_1</item>
         <item name="android:layout_marginLeft">@dimen/grid_2</item>
         <item name="android:layout_marginRight">@dimen/grid_2</item>
-        <item name="android:textAllCaps" tools:ignore="NewApi">true</item>
 	</style>
 </resources>
