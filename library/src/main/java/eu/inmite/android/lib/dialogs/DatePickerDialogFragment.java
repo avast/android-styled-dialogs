@@ -1,5 +1,9 @@
 package eu.inmite.android.lib.dialogs;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,10 +12,6 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.DatePicker;
-
-import java.util.Calendar;
-import java.util.Date;
-import java.util.TimeZone;
 
 /**
  * Dialog with a date picker. Implement {@link eu.inmite.android.lib.dialogs.IDateDialogListener} or {@link eu.inmite.android.lib.dialogs.IDateDialogCancelListener} to handle events.
@@ -113,7 +113,7 @@ public class DatePickerDialogFragment extends BaseDialogFragment {
                 }
             });
         }
-        mDatePicker = (DatePicker) LayoutInflater.from(getActivity()).inflate(R.layout.dialog_part_datepicker, null);
+        mDatePicker = (DatePicker) LayoutInflater.from(getActivity()).inflate(R.layout.sdl_datepicker, null);
         builder.setView(mDatePicker);
 
         TimeZone zone = TimeZone.getTimeZone(getArguments().getString(ARG_ZONE));
@@ -205,22 +205,8 @@ public class DatePickerDialogFragment extends BaseDialogFragment {
             return this;
         }
 
-        /**
-         * When there is neither positive nor negative button, default "close" button is created if it was enabled.<br/>
-         * Default is true.
-         */
-        public SimpleDialogBuilder hideDefaultButton(boolean hide) {
-            mShowDefaultButton = !hide;
-            return this;
-        }
-
-
         @Override
         protected Bundle prepareArguments() {
-            if (mShowDefaultButton && mPositiveButtonText == null && mNegativeButtonText == null) {
-                mPositiveButtonText = mContext.getString(R.string.dialog_close);
-            }
-
             Bundle args = new Bundle();
             args.putString(SimpleDialogFragment.ARG_TITLE, mTitle);
             args.putString(SimpleDialogFragment.ARG_POSITIVE_BUTTON, mPositiveButtonText);

@@ -9,46 +9,13 @@
 		<item name="android:windowNoTitle">true</item>
 		<item name="android:windowContentOverlay">@null</item>
 		<item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
-		<item name="android:windowActionBar">false</item>
-		<item name="android:windowActionModeOverlay">true</item>
-		<item name="android:windowCloseOnTouchOutside">true</item>
+		<item name="android:windowActionBar" tools:ignore="NewApi">false</item>
+		<item name="android:windowActionModeOverlay" tools:ignore="NewApi">true</item>
+		<item name="android:windowCloseOnTouchOutside" tools:ignore="NewApi">true</item>
 		<item name="android:backgroundDimAmount">0.6</item>
 		<item name="android:colorBackgroundCacheHint">@null</item>
-		<item name="sdlDialogStyle">@style/DialogStyleDark</item>
+        <item name="android:windowBackground">@drawable/sdl_background</item>
 	</style>
-
-	<style name="DialogStyleDark">
-		<item name="titleTextColor">@color/sdl_title_text_dark</item>
-		<item name="titleSeparatorColor">@color/sdl_title_separator_dark</item>
-		<item name="messageTextColor">@color/sdl_message_text_dark</item>
-		<item name="buttonTextColor">@color/sdl_button_text_dark</item>
-		<item name="buttonSeparatorColor">@color/sdl_button_separator_dark</item>
-		<item name="buttonBackgroundColorNormal">@color/sdl_button_normal_dark</item>
-		<item name="buttonBackgroundColorPressed">@color/sdl_button_pressed_dark</item>
-		<item name="buttonBackgroundColorFocused">@color/sdl_button_focused_dark</item>
-        <item name="listItemColorNormal">@color/sdl_button_normal_dark</item>
-        <item name="listItemColorFocused">@color/sdl_button_focused_dark</item>
-        <item name="listItemColorPressed">@color/sdl_button_pressed_dark</item>
-        <item name="listItemSeparatorColor">@color/sdl_list_item_separator_dark</item>
-	</style>
-
-	<style name="DialogStyleLight">
-		<item name="sdlBackground">@drawable/sdl_background_light</item>
-		<item name="titleTextColor">@color/sdl_title_text_light</item>
-		<item name="titleSeparatorColor">@color/sdl_title_separator_light</item>
-		<item name="messageTextColor">@color/sdl_message_text_light</item>
-		<item name="buttonTextColor">@color/sdl_button_text_light</item>
-		<item name="buttonSeparatorColor">@color/sdl_button_separator_light</item>
-		<item name="buttonBackgroundColorNormal">@color/sdl_button_normal_light</item>
-		<item name="buttonBackgroundColorPressed">@color/sdl_button_pressed_light</item>
-		<item name="buttonBackgroundColorFocused">@color/sdl_button_focused_light</item>
-        <item name="listItemColorNormal">@color/sdl_button_normal_light</item>
-        <item name="listItemColorFocused">@color/sdl_button_focused_light</item>
-        <item name="listItemColorPressed">@color/sdl_button_pressed_light</item>
-        <item name="listItemSeparatorColor">@color/sdl_list_item_separator_light</item>
-	</style>
-
-    <!-- New: -->
 
 	<style name="SDL.Layout">
 		<item name="android:layout_width">match_parent</item>
@@ -71,6 +38,11 @@
     <style name="SDL.Layout.Buttons.Stacked">
         <item name="android:orientation">vertical</item>
         <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="SDL.Layout.Progress">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
     </style>
 
     <style name="SDL.ScrollView">
@@ -97,6 +69,21 @@
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/sdl_text_secondary</item>
         <!-- paddings set in code -->
+    </style>
+
+    <style name="SDL.TextView.Message.Progress">
+        <item name="android:paddingRight">@dimen/grid_4</item>
+    </style>
+
+    <style name="SDL.TextView.ListItem">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">@dimen/grid_13</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/sdl_text_primary</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">@dimen/grid_6</item>
+        <item name="android:paddingRight">@dimen/grid_6</item>
     </style>
 
     <style name="SDL.Button">
@@ -140,94 +127,29 @@
         <item name="android:layout_height">@dimen/grid_2</item>
     </style>
 
-
-    <!-- Old: -->
-
-    <style name="SDL.ButtonPanel">
-        <item name="android:layout_height">wrap_content</item>
-    </style>
-
-	<style name="SDL.Layout.Content">
-		<item name="android:layout_height">0dp</item>
-		<item name="android:layout_weight">1</item>
-		<item name="android:gravity">center</item>
-	</style>
-
-	<style name="SDL.Layout.Horizontal">
-		<item name="android:orientation">horizontal</item>
-	</style>
-
-	<style name="SDL.Layout.Horizontal.ButtonPanel">
-		<item name="android:layout_height">wrap_content</item>
-	</style>
-
-	<style name="SDL.Layout.Wrap">
-		<item name="android:layout_height">wrap_content</item>
-		<item name="android:layout_weight">1</item>
-	</style>
-
-	<style name="SDL.HorizontalSeparator">
-		<item name="android:layout_width">match_parent</item>
-		<item name="android:layout_height">1dp</item>
-	</style>
-
-	<style name="SDL.ButtonSeparator">
-		<item name="android:layout_width">1dp</item>
-		<item name="android:layout_height">match_parent</item>
-	</style>
-
-	<style name="SDL.TitleSeparator">
-		<item name="android:layout_width">match_parent</item>
-		<item name="android:layout_height">2dp</item>
-	</style>
-
-	<style name="SDL.DatePicker">
-		<item name="android:layout_width">match_parent</item>
-		<item name="android:layout_height">wrap_content</item>
-		<item name="android:layout_gravity">center</item>
-		<item name="android:spinnersShown">true</item>
-		<item name="android:calendarViewShown">false</item>
-	</style>
-
-	<style name="SDL.ListView" parent="@android:style/Widget.ListView">
-		<item name="android:layout_width">match_parent</item>
-		<item name="android:layout_height">match_parent</item>
-		<item name="android:layout_weight">1</item>
-		<item name="android:cacheColorHint">@null</item>
-		<item name="android:background">@android:color/transparent</item>
-	</style>
-
-	<style name="SDL.Progress" parent="@android:style/Widget.ProgressBar">
-		<item name="android:layout_width">wrap_content</item>
-		<item name="android:layout_height">wrap_content</item>
-		<item name="android:layout_marginRight">0dp</item>
-		<item name="android:layout_marginLeft">@dimen/grid_4</item>
-		<item name="android:layout_marginTop">@dimen/grid_4</item>
-		<item name="android:layout_marginBottom">@dimen/grid_4</item>
-	</style>
-
-    <style name="SDL.ListItem">
-
-        <item name="android:layout_width">match_parent</item>
-
-        <item name="android:layout_height">?android:listPreferredItemHeight</item>
-
-        <item name="android:gravity">center_vertical|left</item>
-
-        <item name="android:orientation">horizontal</item>
-
-    </style>
-
-    <style
-        name="ListItemText"
-        parent="@android:style/Widget.TextView">
-
+    <style name="SDL.Progress" parent="Widget.AppCompat.ProgressBar">
         <item name="android:layout_width">wrap_content</item>
-
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginRight">@dimen/grid_1</item>
+        <item name="android:layout_marginLeft">@dimen/grid_4</item>
+        <item name="android:layout_marginTop">@dimen/grid_4</item>
+        <item name="android:layout_marginBottom">@dimen/grid_4</item>
+    </style>
 
-        <item name="android:padding">@dimen/grid_4</item>
+    <style name="SDL.DatePicker">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:spinnersShown" tools:ignore="NewApi">true</item>
+        <item name="android:calendarViewShown" tools:ignore="NewApi">false</item>
+    </style>
 
-        <item name="android:textSize">18dp</item>
+    <style name="SDL.ListView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:scrollbarStyle">outsideOverlay</item>
+        <item name="android:divider">@null</item>
+        <item name="android:dividerHeight">0dp</item>
+        <item name="android:listSelector">@drawable/sdl_list</item>
     </style>
 </resources>

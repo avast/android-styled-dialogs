@@ -3,4 +3,5 @@
 	android:layout_width="wrap_content"
 	android:layout_height="wrap_content"
 	android:src="@drawable/jayne_hat"
+    android:contentDescription="Jayne has the best hat ever"
 	android:padding="@dimen/grid_2"/>

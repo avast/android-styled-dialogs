@@ -39,7 +39,7 @@ public class JayneHatDialogFragment extends SimpleDialogFragment {
 	@Override
 	public BaseDialogFragment.Builder build(BaseDialogFragment.Builder builder) {
 		builder.setTitle("Jayne's hat");
-		builder.setView(LayoutInflater.from(getActivity()).inflate(R.layout.item_jayne_hat, null));
+		builder.setView(LayoutInflater.from(getActivity()).inflate(R.layout.view_jayne_hat, null));
 		builder.setPositiveButton("I want one", new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

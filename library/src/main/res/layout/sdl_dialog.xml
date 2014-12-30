@@ -9,7 +9,6 @@
         android:id="@+id/sdl_title"
         tools:text="Title" />
 
-
     <ScrollView style="@style/SDL.ScrollView" android:id="@+id/sdl_scrollview">
 
         <LinearLayout style="@style/SDL.Layout">
@@ -24,6 +23,10 @@
                 android:id="@+id/sdl_custom" />
         </LinearLayout>
     </ScrollView>
+
+    <ListView
+        android:id="@+id/sdl_list"
+        style="@style/SDL.ListView" />
 
     <View
         android:id="@+id/sdl_button_divider"

@@ -186,8 +186,6 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 		private String mNegativeButtonText;
 		private String mNeutralButtonText;
 
-		private boolean mShowDefaultButton = true;
-
 		protected SimpleDialogBuilder(Context context, FragmentManager fragmentManager, Class<? extends SimpleDialogFragment> clazz) {
 			super(context, fragmentManager, clazz);
 		}
@@ -257,21 +255,8 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 			return this;
 		}
 
-		/**
-		 * When there is neither positive nor negative button, default "close" button is created if it was enabled.<br/>
-		 * Default is true.
-		 */
-		public SimpleDialogBuilder hideDefaultButton(boolean hide) {
-			mShowDefaultButton = !hide;
-			return this;
-		}
-
 		@Override
 		protected Bundle prepareArguments() {
-			if (mShowDefaultButton && mPositiveButtonText == null && mNegativeButtonText == null) {
-				mPositiveButtonText = mContext.getString(R.string.dialog_close);
-			}
-
 			Bundle args = new Bundle();
 			args.putCharSequence(SimpleDialogFragment.ARG_MESSAGE, mMessage);
 			args.putString(SimpleDialogFragment.ARG_TITLE, mTitle);

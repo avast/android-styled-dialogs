@@ -19,7 +19,6 @@ package eu.inmite.demo.dialogs;
 import java.text.DateFormat;
 import java.util.Date;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
@@ -63,7 +62,9 @@ public class DemoActivity extends ActionBarActivity implements
                         ("my autumn flower ... somewhat less attractive now that she's all corpsified and gross" +
                             ".\"\n\nRiver Tam: \"Also? I can kill you with my brain.\"\n\nKayle: \"Going on a year now, nothins twixed my neathers not run on batteries.\" \n" +
                             "Mal: \"I can't know that.\" \n" +
-                            "Jayne: \"I can stand to hear a little more.\"\n\nWash: \"I've been under fire before. Well ... I've been in a fire. Actually, I was fired. I can handle myself.\""))
+                            "Jayne: \"I can stand to hear a little more.\"\n\nWash: \"I've been under fire before. " +
+                            "Well ... I've been in a fire. Actually, I was fired. I can handle myself.\""))
+                    .setNegativeButtonText("Close")
                     .show();
             }
         });
@@ -91,7 +92,7 @@ public class DemoActivity extends ActionBarActivity implements
             @Override
             public void onClick(View v) {
                 ProgressDialogFragment.createBuilder(c, getSupportFragmentManager())
-                    .setMessage("Mal: I\\'m just waiting to see if I pass out. Long story.")
+                    .setMessage("Mal: I\'m just waiting to see if I pass out. Long story.")
                     .setRequestCode(REQUEST_PROGRESS)
                     .show();
             }
@@ -214,13 +215,5 @@ public class DemoActivity extends ActionBarActivity implements
 
         DateFormat dateFormat = DateFormat.getDateTimeInstance();
         Toast.makeText(this, text + "Success! " + dateFormat.format(date), Toast.LENGTH_SHORT).show();
-    }
-
-    private void setCurrentTheme(int theme) {
-        Intent i = new Intent(c, DemoActivity.class);
-        i.putExtra(EXTRA_THEME, theme);
-        startActivity(i);
-        finish();
-        overridePendingTransition(0, 0);
     }
 }

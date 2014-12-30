@@ -1,7 +1,7 @@
 package eu.inmite.android.lib.dialogs;
 
 /**
- *
+ * Interface for ListDialogFragment
  */
 public interface IListDialogListener {
 

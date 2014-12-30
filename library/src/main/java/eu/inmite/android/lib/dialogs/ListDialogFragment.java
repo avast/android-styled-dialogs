@@ -41,8 +41,6 @@ public class ListDialogFragment extends BaseDialogFragment {
 
         private String cancelButtonText;
 
-        private boolean mShowDefaultButton = true;
-
         public SimpleListDialogBuilder(Context context, FragmentManager fragmentManager) {
             super(context, fragmentManager, ListDialogFragment.class);
         }
@@ -91,22 +89,8 @@ public class ListDialogFragment extends BaseDialogFragment {
             return (ListDialogFragment) super.show();
         }
 
-        /**
-         * When there is neither positive nor negative button, default "close" button is created if
-         * it was enabled.<br/>
-         * Default is true.
-         */
-        public SimpleListDialogBuilder hideDefaultButton(boolean hide) {
-            mShowDefaultButton = !hide;
-            return this;
-        }
-
         @Override
         protected Bundle prepareArguments() {
-            if (mShowDefaultButton && cancelButtonText == null) {
-                cancelButtonText = mContext.getString(R.string.dialog_close);
-            }
-
             Bundle args = new Bundle();
             args.putString(SimpleDialogFragment.ARG_TITLE, title);
             args.putString(SimpleDialogFragment.ARG_POSITIVE_BUTTON, cancelButtonText);
@@ -147,9 +131,9 @@ public class ListDialogFragment extends BaseDialogFragment {
 
         final String[] items = getItems();
         if (items != null && items.length > 0) {
-            ListAdapter adapter = new ArrayAdapter<String>(getActivity(),
-                    R.layout.dialog_list_item,
-                    R.id.list_item_text,
+            ListAdapter adapter = new ArrayAdapter<>(getActivity(),
+                    R.layout.sdl_list_item,
+                    R.id.sdl_text,
                     items);
 
             builder.setItems(adapter, 0, new AdapterView.OnItemClickListener() {
