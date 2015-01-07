@@ -35,14 +35,11 @@ It uses standard Material colors, for example like this:
 
 Easy:
 
-### Dialog with a simple message and Close button:
+### Dialog with a simple message only:
 ```java
 SimpleDialogFragment.createBuilder(this, getSupportFragmentManager()).setMessage(R.string.message).show();
 ```
-### Dialog with a title, message and Close button:
-```java
-SimpleDialogFragment.createBuilder(this, getSupportFragmentManager()).setTitle(R.string.title).setMessage(R.string.message).show();
-```
+
 ### Dialog with a title, message and two buttons:	
 ```java
 SimpleDialogFragment.createBuilder(this, getSupportFragmentManager()).setTitle(R.string.title).setMessage(R.string.message).setPositiveButtonText(R.string.positive_button).setNegativeButtonText(R.string.negative_button).show();
