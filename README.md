@@ -1,64 +1,35 @@
 # StyledDialogs for Android
 
-This library makes styling and using dialogs _a piece of cake_.
+This library backports dialog from Material Design to Android 2.2+
 
  ![Screenshot of the dialogs](graphics/screenshot-small.png)
 
 Features:
 
- - Compatible with Holo style and **Android Design Guidelines**
- - Change style for all dialogs only by changing a **few color resources**
+ - Compatible with **Material Design Guidelines**
  - Same look for **Android 2.2+**
  - **Same API** as native Android DialogFragments
  - `SimpleDialogFragment` class, which makes displaying simple dialogs a **one line of code**
- - `ListDialogFragment`, `DatePickerDialogFragment` and `TimePickerDialogFragment`
+ - `ListDialogFragment`, `DatePickerDialogFragment`, `TimePickerDialogFragment` and more
 
 ## How to include it in your project:
 
-With Gradle:
 ```groovy
-compile 'eu.inmite.android.lib:android-styled-dialogs:1.2.0'
+dependencies {
+	compile 'com.avast:android-styled-dialogs:2.0.0'
+}
 ```    
-
-With Maven:
-```xml
-<dependency>
-	<groupId>eu.inmite.android.lib</groupId>
-	<artifactId>android-styled-dialogs</artifactId>
-	<version>1.2.0</version>
-	<type>aar</type>
-</dependency>
-```
-
-Manually:
-
- - clone the project
- - add it as library project in your IDE
- - include latest support library
+(from [jcenter](https://bintray.com/avast/android/styled-dialogs/))
 
 ## How to style all dialogs:
 
-Add following into your application theme:
+It uses standard Material colors, for example like this:
+
 ```xml
-<item name="sdlDialogStyle">@style/DialogStyleLight.Custom</item>
-```
-or
-```xml
-<item name="sdlDialogStyle">@style/DialogStyleDark.Custom</item>
-```
-Define your dialog style, example for light theme:
-```xml
-<style name="DialogStyleLight.Custom">
-	<!-- anything can be left out: -->
-	<item name="titleTextColor">@color/dialog_title_text</item>
-	<item name="titleSeparatorColor">@color/dialog_title_separator</item>
-	<item name="messageTextColor">@color/dialog_message_text</item>
-	<item name="buttonTextColor">@color/dialog_button_text</item>
-	<item name="buttonSeparatorColor">@color/dialog_button_separator</item>
-	<item name="buttonBackgroundColorNormal">@color/dialog_button_normal</item>
-	<item name="buttonBackgroundColorPressed">@color/dialog_button_pressed</item>
-	<item name="buttonBackgroundColorFocused">@color/dialog_button_focused</item>
-	<item name="dialogBackground">@drawable/dialog_background</item>
+<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/indigo</item>
+        <item name="colorPrimaryDark">@color/indigo_dark</item>
+        <item name="colorAccent">@color/pink</item>
 </style>
 ```
 
