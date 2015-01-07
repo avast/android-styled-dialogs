@@ -8,9 +8,9 @@ Features:
 
  - Compatible with **Material Design Guidelines**
  - Same look for **Android 2.2+**
- - **Same API** as native Android DialogFragments
- - `SimpleDialogFragment` class, which makes displaying simple dialogs a **one line of code**
- - `ListDialogFragment`, `DatePickerDialogFragment`, `TimePickerDialogFragment` and more
+ - Built on top of standard **DialogFragment**
+ - Supports stacked buttons, neutral button, callbacks even after rotation
+ - Contains even more specialized dialogs: List, Progress, Time&Date Picker, Custom, ...
 
 ## How to include it in your project:
 
