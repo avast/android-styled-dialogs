@@ -1,7 +1,5 @@
 # StyledDialogs for Android
 
-This library backports dialog from Material Design to Android 2.2+
-
  ![Screenshot of the dialogs](graphics/screenshot-small.png)
 
 Features:
