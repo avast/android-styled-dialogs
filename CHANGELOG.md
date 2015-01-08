@@ -2,6 +2,8 @@
 
 ## 2.0.1
 
+January 8, 2015
+
 - complete rewrite for Material design
 
 ## 1.1.2
