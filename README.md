@@ -14,10 +14,12 @@ Features:
 
 ```groovy
 dependencies {
-	compile 'com.avast:android-styled-dialogs:2.0.0'
+	compile 'com.avast:android-styled-dialogs:2.0.1'
 }
 ```    
 (from [jcenter](https://bintray.com/avast/android/styled-dialogs/))
+
+[Looking for Holo dialogs?](https://github.com/inmite/android-styled-dialogs/tree/holo)
 
 ## How to style all dialogs:
 
