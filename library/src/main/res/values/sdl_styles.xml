@@ -38,6 +38,8 @@
     <style name="SDL.Layout.Buttons.Stacked">
         <item name="android:orientation">vertical</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingLeft">0dp</item>
+        <item name="android:paddingRight">0dp</item>
     </style>
 
     <style name="SDL.Layout.Progress">
@@ -102,6 +104,16 @@
         <item name="android:textColor">?colorAccent</item>
     </style>
 
+    <style name="SDL.Button.Stacked">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/grid_12</item>
+        <item name="android:gravity">center_vertical|end</item>
+        <item name="android:paddingRight">@dimen/grid_8</item>
+        <item name="android:paddingLeft">@dimen/grid_8</item>
+        <item name="android:layout_marginRight">0dp</item>
+        <item name="android:layout_marginLeft">0dp</item>
+    </style>
+
     <style name="SDL.Expander">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">0dp</item>
@@ -112,11 +124,6 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
         <item name="android:background">@color/sdl_divider</item>
-    </style>
-
-    <style name="SDL.Button.Stacked">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:gravity">center_vertical|end</item>
     </style>
 
     <style name="SDL.Space">

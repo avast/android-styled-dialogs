@@ -13,5 +13,5 @@ android {
 }
 
 dependencies {
-    compile "com.avast:android-styled-dialogs:2.0.0"
+    compile project(":library")
 }

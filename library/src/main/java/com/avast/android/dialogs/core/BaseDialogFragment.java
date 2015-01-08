@@ -19,6 +19,7 @@ package com.avast.android.dialogs.core;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -31,6 +32,7 @@ import android.view.ViewGroup;
 import android.widget.*;
 
 import com.avast.android.dialogs.R;
+import com.avast.android.dialogs.util.TypefaceHelper;
 
 /**
  * Base dialog fragment for all your dialogs, stylable and same design on Android 2.2+.
@@ -152,6 +154,8 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
 
         private AdapterView.OnItemClickListener mOnItemClickListener;
 
+
+
         public Builder(Context context, LayoutInflater inflater, ViewGroup container) {
             this.mContext = context;
             this.mContainer = container;
@@ -253,8 +257,11 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
             View vButtonsStacked = content.findViewById(R.id.sdl_buttons_stacked);
             ListView vList = (ListView)content.findViewById(R.id.sdl_list);
 
-            set(vTitle, mTitle);
-            set(vMessage, mMessage);
+            Typeface regularFont = TypefaceHelper.get(mContext, "Roboto-Regular");
+            Typeface mediumFont = TypefaceHelper.get(mContext, "Roboto-Medium");
+
+            set(vTitle, mTitle, mediumFont);
+            set(vMessage, mMessage, regularFont);
             setPaddingOfTitleAndMessage(vTitle, vMessage);
 
             if (mCustomView != null) {
@@ -269,15 +276,15 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
             }
 
             if (shouldStackButtons()) {
-                set(vPositiveButtonStacked, mPositiveButtonText, mPositiveButtonListener);
-                set(vNegativeButtonStacked, mNegativeButtonText, mNegativeButtonListener);
-                set(vNeutralButtonStacked, mNeutralButtonText, mNeutralButtonListener);
+                set(vPositiveButtonStacked, mPositiveButtonText, mediumFont, mPositiveButtonListener);
+                set(vNegativeButtonStacked, mNegativeButtonText, mediumFont, mNegativeButtonListener);
+                set(vNeutralButtonStacked, mNeutralButtonText, mediumFont, mNeutralButtonListener);
                 vButtonsDefault.setVisibility(View.GONE);
                 vButtonsStacked.setVisibility(View.VISIBLE);
             } else {
-                set(vPositiveButton, mPositiveButtonText, mPositiveButtonListener);
-                set(vNegativeButton, mNegativeButtonText, mNegativeButtonListener);
-                set(vNeutralButton, mNeutralButtonText, mNeutralButtonListener);
+                set(vPositiveButton, mPositiveButtonText, mediumFont, mPositiveButtonListener);
+                set(vNegativeButton, mNegativeButtonText, mediumFont, mNegativeButtonListener);
+                set(vNeutralButton, mNeutralButtonText, mediumFont, mNeutralButtonListener);
                 vButtonsDefault.setVisibility(View.VISIBLE);
                 vButtonsStacked.setVisibility(View.GONE);
             }
@@ -315,16 +322,17 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
             return text != null && text.length() > MAX_BUTTON_CHARS;
         }
 
-        private void set(Button button, CharSequence text, View.OnClickListener listener) {
-            set(button, text);
+        private void set(Button button, CharSequence text, Typeface font, View.OnClickListener listener) {
+            set(button, text, font);
             if (listener != null) {
                 button.setOnClickListener(listener);
             }
         }
 
-        private void set(TextView textView, CharSequence text) {
+        private void set(TextView textView, CharSequence text, Typeface font) {
             if (text != null) {
                 textView.setText(text);
+                textView.setTypeface(font);
             } else {
                 textView.setVisibility(View.GONE);
             }

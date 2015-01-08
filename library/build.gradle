@@ -3,7 +3,7 @@ apply plugin: 'com.android.library'
 ext {
     PUBLISH_GROUP_ID = 'com.avast'
     PUBLISH_ARTIFACT_ID = 'android-styled-dialogs'
-    PUBLISH_VERSION = '2.0.0'
+    PUBLISH_VERSION = project.VERSION_NAME
 }
 
 android {

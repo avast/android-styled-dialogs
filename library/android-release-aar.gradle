@@ -29,6 +29,14 @@ uploadArchives {
         pom.version = version
         // Add other pom properties here if you want (developer details / licenses)
         repository(url: "file://${localReleaseDest}")
+        // workaround for: https://code.google.com/p/android/issues/detail?id=72807
+        pom.whenConfigured { pom ->
+            pom.dependencies.findAll { dependency ->
+                if (dependency.artifactId == 'appcompat-v7') {
+                    dependency.type = 'aar'
+                }
+            }
+        }
     }
 }
 
