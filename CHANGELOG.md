@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.1
+
+- complete rewrite for Material design
+
 ## 1.1.2
 
 January 2, 2014
