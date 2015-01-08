@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+	<style name="SDL"/>
+
+	<style name="SDL.Dialog" parent="android:Theme">
+		<item name="android:windowFrame">@null</item>
+		<item name="android:windowIsFloating">true</item>
+		<item name="android:windowNoTitle">true</item>
+		<item name="android:windowContentOverlay">@null</item>
+		<item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+		<item name="android:windowActionBar" tools:ignore="NewApi">false</item>
+		<item name="android:windowActionModeOverlay" tools:ignore="NewApi">true</item>
+		<item name="android:windowCloseOnTouchOutside" tools:ignore="NewApi">true</item>
+		<item name="android:backgroundDimAmount">0.6</item>
+		<item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowBackground">@drawable/sdl_background</item>
+	</style>
+
+	<style name="SDL.Layout">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">match_parent</item>
+		<item name="android:orientation">vertical</item>
+	</style>
+
+    <style name="SDL.Layout.Custom">
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+	<style name="SDL.Layout.Buttons">
+        <item name="android:orientation">horizontal</item>
+		<item name="android:layout_height">@dimen/grid_12</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">@dimen/grid_3</item>
+        <item name="android:paddingRight">@dimen/grid_3</item>
+	</style>
+
+    <style name="SDL.Layout.Buttons.Stacked">
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingLeft">0dp</item>
+        <item name="android:paddingRight">0dp</item>
+    </style>
+
+    <style name="SDL.Layout.Progress">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="SDL.ScrollView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+
+    <style name="SDL.TextView" parent="@android:style/Widget.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="SDL.TextView.Title">
+        <item name="android:textSize">20sp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textColor">@color/sdl_text_primary</item>
+        <!-- paddings set in code -->
+    </style>
+
+    <style name="SDL.TextView.Message">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/sdl_text_secondary</item>
+        <!-- paddings set in code -->
+    </style>
+
+    <style name="SDL.TextView.Message.Progress">
+        <item name="android:paddingRight">@dimen/grid_4</item>
+    </style>
+
+    <style name="SDL.TextView.ListItem">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">@dimen/grid_13</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/sdl_text_primary</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">@dimen/grid_6</item>
+        <item name="android:paddingRight">@dimen/grid_6</item>
+    </style>
+
+    <style name="SDL.Button">
+        <item name="android:background">@drawable/sdl_button</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:minWidth">@dimen/grid_16</item>
+        <item name="android:layout_height">@dimen/grid_9</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingRight">@dimen/grid_2</item>
+        <item name="android:paddingLeft">@dimen/grid_2</item>
+        <item name="android:layout_marginRight">@dimen/grid_1</item>
+        <item name="android:layout_marginLeft">@dimen/grid_1</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textAllCaps" tools:ignore="NewApi">true</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">?colorAccent</item>
+    </style>
+
+    <style name="SDL.Button.Stacked">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/grid_12</item>
+        <item name="android:gravity">center_vertical|end</item>
+        <item name="android:paddingRight">@dimen/grid_8</item>
+        <item name="android:paddingLeft">@dimen/grid_8</item>
+        <item name="android:layout_marginRight">0dp</item>
+        <item name="android:layout_marginLeft">0dp</item>
+    </style>
+
+    <style name="SDL.Expander">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="SDL.Divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/sdl_divider</item>
+    </style>
+
+    <style name="SDL.Space">
+        <item name="android:layout_width">match_parent</item>
+    </style>
+
+    <style name="SDL.Space.ButtonsBottom">
+        <item name="android:layout_height">@dimen/grid_2</item>
+    </style>
+
+    <style name="SDL.Progress" parent="Widget.AppCompat.ProgressBar">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginRight">@dimen/grid_1</item>
+        <item name="android:layout_marginLeft">@dimen/grid_4</item>
+        <item name="android:layout_marginTop">@dimen/grid_4</item>
+        <item name="android:layout_marginBottom">@dimen/grid_4</item>
+    </style>
+
+    <style name="SDL.DatePicker">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:spinnersShown" tools:ignore="NewApi">true</item>
+        <item name="android:calendarViewShown" tools:ignore="NewApi">false</item>
+    </style>
+
+    <style name="SDL.ListView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:scrollbarStyle">outsideOverlay</item>
+        <item name="android:divider">@null</item>
+        <item name="android:dividerHeight">0dp</item>
+        <item name="android:listSelector">@drawable/sdl_list</item>
+    </style>
+</resources>

@@ -1,54 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-	<style name="DefaultDarkTheme" parent="android:Theme">
-		<item name="sdlDialogStyle">@style/DialogStyleDark</item>
-	</style>
-
-	<style name="DefaultLightTheme" parent="android:Theme.Light">
-		<item name="sdlDialogStyle">@style/DialogStyleLight</item>
-	</style>
-
-	<style name="CustomDarkTheme" parent="android:Theme">
-		<item name="sdlDialogStyle">@style/DialogStyleDark.Custom</item>
-		<item name="android:windowBackground">@color/background_dark</item>
-	</style>
-
-	<style name="CustomLightTheme" parent="android:Theme.Light">
-		<item name="sdlDialogStyle">@style/DialogStyleLight.Custom</item>
-		<item name="android:windowBackground">@color/background</item>
-	</style>
-
-	<style name="DialogStyleLight.Custom">
-		<!-- anything can be left out: -->
-		<item name="titleTextColor">@color/dialog_title_text</item>
-		<item name="titleSeparatorColor">@color/dialog_title_separator</item>
-		<item name="messageTextColor">@color/dialog_message_text</item>
-		<item name="buttonTextColor">@color/dialog_button_text</item>
-		<item name="buttonSeparatorColor">@color/dialog_button_separator</item>
-		<item name="buttonBackgroundColorNormal">@color/dialog_button_normal</item>
-		<item name="buttonBackgroundColorPressed">@color/dialog_button_pressed</item>
-		<item name="buttonBackgroundColorFocused">@color/dialog_button_focused</item>
-		<item name="listItemSeparatorColor">@color/dialog_button_separator</item>
-		<item name="listItemColorNormal">@color/dialog_button_normal</item>
-		<item name="listItemColorPressed">@color/dialog_button_pressed</item>
-		<item name="listItemColorFocused">@color/dialog_button_focused</item>
-	</style>
-
-	<style name="DialogStyleDark.Custom">
-		<!-- anything can be left out: -->
-		<item name="titleTextColor">@color/dialog_title_text_dark</item>
-		<item name="titleSeparatorColor">@color/dialog_title_separator_dark</item>
-		<item name="messageTextColor">@color/dialog_message_text_dark</item>
-		<item name="buttonTextColor">@color/dialog_button_text_dark</item>
-		<item name="buttonSeparatorColor">@color/dialog_button_separator_dark</item>
-		<item name="buttonBackgroundColorNormal">@color/dialog_button_normal_dark</item>
-		<item name="buttonBackgroundColorPressed">@color/dialog_button_pressed_dark</item>
-		<item name="buttonBackgroundColorFocused">@color/dialog_button_focused_dark</item>
-        <item name="listItemSeparatorColor">@color/dialog_button_separator_dark</item>
-        <item name="listItemColorNormal">@color/dialog_button_normal</item>
-        <item name="listItemColorPressed">@color/dialog_button_pressed</item>
-        <item name="listItemColorFocused">@color/dialog_button_focused</item>
+	<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/indigo</item>
+        <item name="colorPrimaryDark">@color/indigo_dark</item>
+        <item name="colorAccent">@color/pink</item>
 	</style>
 
 </resources>

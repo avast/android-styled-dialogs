@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Material colors -->
+    <color name="sdl_text_primary">#DE000000</color> <!-- 87% -->
+    <color name="sdl_text_secondary">#8A000000</color> <!-- 54% -->
+    <color name="sdl_divider">#1F000000</color> <!-- 12% -->
+    <color name="sdl_pressed">#D5D5D5</color>
+</resources>

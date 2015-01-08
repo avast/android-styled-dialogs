@@ -1,7 +1,9 @@
 apply plugin: 'com.android.library'
 
-repositories {
-    mavenCentral()
+ext {
+    PUBLISH_GROUP_ID = 'com.avast'
+    PUBLISH_ARTIFACT_ID = 'android-styled-dialogs'
+    PUBLISH_VERSION = project.VERSION_NAME
 }
 
 android {
@@ -9,16 +11,15 @@ android {
     buildToolsVersion "20"
 
     defaultConfig {
-        minSdkVersion 7
+        minSdkVersion 8
         targetSdkVersion 21
         versionName project.VERSION_NAME
-        versionCode Integer.parseInt(project.VERSION_CODE)
+        versionCode project.VERSION_CODE
     }
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:21.0.3'
+    compile 'com.android.support:appcompat-v7:21.0.3'
 }
 
-// Used to push in maven
-apply from: '../maven_push.gradle'
+apply from: 'android-release-aar.gradle'

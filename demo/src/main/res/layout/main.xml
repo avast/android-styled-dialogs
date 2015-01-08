@@ -9,59 +9,31 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content">
 
-		<LinearLayout
-			android:orientation="horizontal"
-			android:gravity="center"
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginBottom="@dimen/grid_8"
-			android:layout_marginTop="@dimen/grid_4">
-
-			<Button
-				style="@style/Button.Top"
-				android:text="Default dark theme"
-				android:id="@+id/default_dark_theme" />
-
-			<Button
-				style="@style/Button.Top"
-				android:text="Default light theme"
-				android:id="@+id/default_light_theme" />
-
-			<Button
-				style="@style/Button.Top"
-				android:text="Custom dark theme"
-				android:id="@+id/custom_dark_theme" />
-
-			<Button
-				style="@style/Button.Top"
-				android:text="Custom light theme"
-				android:id="@+id/custom_light_theme" />
-		</LinearLayout>
-
 		<Button
 			style="@style/Button"
-			android:text="SimpleDialog: message"
+			android:text="Simple dialog: only message"
+            android:layout_marginTop="@dimen/grid_3"
 			android:id="@+id/message_dialog" />
 
 		<Button
-			android:text="SimpleDialog: message and title"
+			android:text="Simple dialog: long message and title"
 			android:id="@+id/message_title_dialog"
 			style="@style/Button" />
 
-		<Button
-			style="@style/Button"
-			android:text="SimpleDialog with callbacks"
-			android:id="@+id/message_title_buttons_dialog" />
+        <Button
+            style="@style/Button"
+            android:text="Simple dialog: 3 buttons &amp; callbacks"
+            android:id="@+id/message_title_buttons_dialog" />
+
+        <Button
+            style="@style/Button"
+            android:text="Simple dialog: stacked buttons"
+            android:id="@+id/long_buttons" />
 
 		<Button
 			style="@style/Button"
-			android:text="Dialog with list"
+			android:text="List dialog"
 			android:id="@+id/list_dialog" />
-
-		<Button
-			style="@style/Button"
-			android:text="Dialog with custom view"
-			android:id="@+id/custom_dialog" />
 
 		<Button
 			style="@style/Button"
@@ -71,11 +43,17 @@
 		<Button
 			style="@style/Button"
 			android:id="@+id/time_picker"
-			android:text="Time Picker" />
+			android:text="Time picker dialog" />
 
 		<Button
 			style="@style/Button"
 			android:id="@+id/date_picker"
-			android:text="Date Picker"/>
+			android:text="Date picker dialog"/>
+
+        <Button
+            style="@style/Button"
+            android:text="Custom dialog"
+            android:layout_marginBottom="@dimen/grid_3"
+            android:id="@+id/custom_dialog" />
 	</LinearLayout>
 </ScrollView>

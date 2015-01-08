@@ -5,13 +5,13 @@ android {
     buildToolsVersion "20"
 
     defaultConfig {
-        minSdkVersion 7
+        minSdkVersion 8
         targetSdkVersion 21
         versionName project.VERSION_NAME
-        versionCode Integer.parseInt(project.VERSION_CODE)
+        versionCode project.VERSION_CODE
     }
 }
 
 dependencies {
-    compile project(':library')
+    compile project(":library")
 }
