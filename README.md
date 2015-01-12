@@ -1,4 +1,4 @@
-# StyledDialogs for Android
+# StyledDialogs for Android [![Build Status](https://travis-ci.org/avast/android-styled-dialogs.svg?branch=master)](https://travis-ci.org/avast/android-styled-dialogs) [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-StyledDialogs-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/143)
 
  ![Screenshot of the dialogs](graphics/screenshot-small.png)
 
@@ -17,7 +17,7 @@ dependencies {
 	compile 'com.avast:android-styled-dialogs:2.0.1'
 }
 ```    
-(from [jcenter](https://bintray.com/avast/android/styled-dialogs/))
+Hosted in [jcenter](https://bintray.com/avast/android/styled-dialogs/): [ ![Download](https://api.bintray.com/packages/avast/android/styled-dialogs/images/download.svg) ](https://bintray.com/avast/android/styled-dialogs/_latestVersion)
 
 [Looking for Holo dialogs?](https://github.com/inmite/android-styled-dialogs/tree/holo)
 
