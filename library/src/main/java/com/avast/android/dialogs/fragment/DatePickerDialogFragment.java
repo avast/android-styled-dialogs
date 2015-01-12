@@ -1,8 +1,6 @@
 package com.avast.android.dialogs.fragment;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.TimeZone;
+import java.util.*;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -55,32 +53,40 @@ public class DatePickerDialogFragment extends BaseDialogFragment {
         }
     }
 
-    protected IDateDialogListener getDialogListener() {
+    /** Get dialog date listeners.
+     *  There might be more than one date listener.
+     *
+     * @return Dialog date listeners
+     * @since 2.1.0
+     */
+    protected IDateDialogListener[] getDialogListeners() {
         final Fragment targetFragment = getTargetFragment();
-        if (targetFragment != null) {
-            if (targetFragment instanceof IDateDialogListener) {
-                return (IDateDialogListener) targetFragment;
-            }
-        } else {
-            if (getActivity() instanceof IDateDialogListener) {
-                return (IDateDialogListener) getActivity();
-            }
+        List<IDateDialogListener> listeners = new ArrayList<IDateDialogListener>();
+        if (targetFragment != null && targetFragment instanceof IDateDialogListener) {
+            listeners.add((IDateDialogListener) targetFragment);
         }
-        return null;
+        if (getActivity() instanceof IDateDialogListener) {
+            listeners.add((IDateDialogListener) getActivity());
+        }
+        return listeners.toArray(new IDateDialogListener[listeners.size()]);
     }
 
-    protected IDateDialogCancelListener getCancelListener() {
+    /** Get dialog cancel listeners.
+     *  There might be more than one cancel listener.
+     *
+     * @return Dialog cancel listeners
+     * @since 2.1.0
+     */
+    protected IDateDialogCancelListener[] getCancelListeners() {
         final Fragment targetFragment = getTargetFragment();
-        if (targetFragment != null) {
-            if (targetFragment instanceof IDateDialogCancelListener) {
-                return (IDateDialogCancelListener) targetFragment;
-            }
-        } else {
-            if (getActivity() instanceof IDateDialogCancelListener) {
-                return (IDateDialogCancelListener) getActivity();
-            }
+        List<IDateDialogCancelListener> listeners = new ArrayList<IDateDialogCancelListener>();
+        if (targetFragment != null && targetFragment instanceof IDateDialogCancelListener) {
+            listeners.add((IDateDialogCancelListener) targetFragment);
         }
-        return null;
+        if (getActivity() instanceof IDateDialogCancelListener) {
+            listeners.add((IDateDialogCancelListener)getActivity());
+        }
+        return listeners.toArray(new IDateDialogCancelListener[listeners.size()]);
     }
 
     @Override
@@ -96,8 +102,7 @@ public class DatePickerDialogFragment extends BaseDialogFragment {
 
                 @Override
                 public void onClick(View view) {
-                    IDateDialogListener listener = getDialogListener();
-                    if (listener != null) {
+                    for (IDateDialogListener listener : getDialogListeners()) {
                         listener.onPositiveButtonClicked(mRequestCode, getDate());
                     }
                     dismiss();
@@ -111,8 +116,7 @@ public class DatePickerDialogFragment extends BaseDialogFragment {
 
                 @Override
                 public void onClick(View view) {
-                    IDateDialogListener listener = getDialogListener();
-                    if (listener != null) {
+                    for (IDateDialogListener listener : getDialogListeners()) {
                         listener.onNegativeButtonClicked(mRequestCode, getDate());
                     }
                     dismiss();

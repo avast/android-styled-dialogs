@@ -16,6 +16,9 @@
 
 package com.avast.android.dialogs.fragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -86,10 +89,9 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 			builder.setPositiveButton(positiveButtonText, new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					ISimpleDialogListener listener = getDialogListener();
-					if (listener != null) {
-						listener.onPositiveButtonClicked(mRequestCode);
-					}
+					for (ISimpleDialogListener listener : getDialogListeners()) {
+                        listener.onPositiveButtonClicked(mRequestCode);
+                    }
 					dismiss();
 				}
 			});
@@ -100,10 +102,9 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 			builder.setNegativeButton(negativeButtonText, new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					ISimpleDialogListener listener = getDialogListener();
-					if (listener != null) {
-						listener.onNegativeButtonClicked(mRequestCode);
-					}
+                    for (ISimpleDialogListener listener : getDialogListeners()) {
+                        listener.onNegativeButtonClicked(mRequestCode);
+                    }
 					dismiss();
 				}
 			});
@@ -114,10 +115,9 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 			builder.setNeutralButton(neutralButtonText, new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					ISimpleDialogListener listener = getDialogListener();
-					if (listener != null) {
-						listener.onNeutralButtonClicked(mRequestCode);
-					}
+					for (ISimpleDialogListener listener : getDialogListeners()) {
+                        listener.onNeutralButtonClicked(mRequestCode);
+                    }
 					dismiss();
 				}
 			});
@@ -149,38 +149,45 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 	@Override
 	public void onCancel(DialogInterface dialog) {
 		super.onCancel(dialog);
-		ISimpleDialogCancelListener listener = getCancelListener();
-		if (listener != null) {
-			listener.onCancelled(mRequestCode);
+		for (ISimpleDialogCancelListener listener : getCancelListeners()) {
+		    listener.onCancelled(mRequestCode);
 		}
 	}
 
-	protected ISimpleDialogListener getDialogListener() {
+    /** Get dialog listeners.
+     *  There might be more than one listener.
+     *
+     * @return Dialog listeners
+     * @since 2.1.0
+     */
+	protected ISimpleDialogListener[] getDialogListeners() {
 		final Fragment targetFragment = getTargetFragment();
-		if (targetFragment != null) {
-			if (targetFragment instanceof ISimpleDialogListener) {
-				return (ISimpleDialogListener) targetFragment;
-			}
-		} else {
-			if (getActivity() instanceof ISimpleDialogListener) {
-				return (ISimpleDialogListener) getActivity();
-			}
-		}
-		return null;
+        List<ISimpleDialogListener> listeners = new ArrayList<ISimpleDialogListener>();
+		if (targetFragment != null && targetFragment instanceof ISimpleDialogListener) {
+            listeners.add((ISimpleDialogListener) targetFragment);
+        }
+        if (getActivity() instanceof ISimpleDialogListener) {
+            listeners.add((ISimpleDialogListener)getActivity());
+        }
+		return listeners.toArray(new ISimpleDialogListener[listeners.size()]);
 	}
 
-	protected ISimpleDialogCancelListener getCancelListener() {
+    /** Get dialog cancel listeners.
+     *  There might be more than one cancel listener.
+     *
+     * @return Dialog cancel listeners
+     * @since 2.1.0
+     */
+	protected ISimpleDialogCancelListener[] getCancelListeners() {
 		final Fragment targetFragment = getTargetFragment();
-		if (targetFragment != null) {
-			if (targetFragment instanceof ISimpleDialogCancelListener) {
-				return (ISimpleDialogCancelListener) targetFragment;
-			}
-		} else {
-			if (getActivity() instanceof ISimpleDialogCancelListener) {
-				return (ISimpleDialogCancelListener) getActivity();
-			}
-		}
-		return null;
+        List<ISimpleDialogCancelListener> listeners = new ArrayList<ISimpleDialogCancelListener>();
+		if (targetFragment != null && targetFragment instanceof ISimpleDialogCancelListener) {
+            listeners.add((ISimpleDialogCancelListener) targetFragment);
+        }
+        if (getActivity() instanceof ISimpleDialogCancelListener) {
+            listeners.add((ISimpleDialogCancelListener) getActivity());
+        }
+		return listeners.toArray(new ISimpleDialogCancelListener[listeners.size()]);
 	}
 
 	public static class SimpleDialogBuilder extends BaseDialogBuilder<SimpleDialogBuilder> {

@@ -43,10 +43,9 @@ public class JayneHatDialogFragment extends SimpleDialogFragment {
 		builder.setPositiveButton("I want one", new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ISimpleDialogListener listener = getDialogListener();
-				if (listener != null) {
-					listener.onPositiveButtonClicked(0);
-				}
+				for (ISimpleDialogListener listener : getDialogListeners()) {
+                    listener.onPositiveButtonClicked(0);
+                }
 				dismiss();
 			}
 		});

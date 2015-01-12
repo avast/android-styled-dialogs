@@ -1,5 +1,8 @@
 package com.avast.android.dialogs.fragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -64,24 +67,27 @@ public class ProgressDialogFragment extends BaseDialogFragment {
 	@Override
 	public void onCancel(DialogInterface dialog) {
 		super.onCancel(dialog);
-		ISimpleDialogCancelListener listener = getCancelListener();
-		if (listener != null) {
-			listener.onCancelled(mRequestCode);
-		}
+		for (ISimpleDialogCancelListener listener : getCancelListeners()) {
+            listener.onCancelled(mRequestCode);
+        }
 	}
 
-	protected ISimpleDialogCancelListener getCancelListener() {
+    /** Get dialog cancel listeners.
+     *  There might be more than one cancel listener.
+     *
+     * @return Dialog cancel listeners
+     * @since 2.1.0
+     */
+	protected ISimpleDialogCancelListener[] getCancelListeners() {
 		final Fragment targetFragment = getTargetFragment();
-		if (targetFragment != null) {
-			if (targetFragment instanceof ISimpleDialogCancelListener) {
-				return (ISimpleDialogCancelListener) targetFragment;
-			}
-		} else {
-			if (getActivity() instanceof ISimpleDialogCancelListener) {
-				return (ISimpleDialogCancelListener) getActivity();
-			}
+        List<ISimpleDialogCancelListener> listeners = new ArrayList<ISimpleDialogCancelListener>();
+		if (targetFragment != null && targetFragment instanceof ISimpleDialogCancelListener) {
+            listeners.add((ISimpleDialogCancelListener) targetFragment);
 		}
-		return null;
+        if (getActivity() instanceof ISimpleDialogCancelListener) {
+            listeners.add((ISimpleDialogCancelListener) getActivity());
+		}
+		return listeners.toArray(new ISimpleDialogCancelListener[listeners.size()]);
 	}
 
 	public static class ProgressDialogBuilder extends BaseDialogBuilder<ProgressDialogBuilder> {

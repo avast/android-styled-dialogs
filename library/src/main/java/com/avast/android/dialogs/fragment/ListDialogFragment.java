@@ -1,5 +1,8 @@
 package com.avast.android.dialogs.fragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
@@ -108,9 +111,8 @@ public class ListDialogFragment extends BaseDialogFragment {
     @Override
     public void onCancel(DialogInterface dialog) {
         super.onCancel(dialog);
-        IListDialogListener onListItemSelectedListener = getDialogListener();
-        if (onListItemSelectedListener != null) {
-            onListItemSelectedListener.onCancelled();
+        for (IListDialogListener listener : getDialogListeners()) {
+            listener.onCancelled();
         }
     }
 
@@ -125,9 +127,8 @@ public class ListDialogFragment extends BaseDialogFragment {
             builder.setPositiveButton(getPositiveButtonText(), new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    IListDialogListener onListItemSelectedListener = getDialogListener();
-                    if (onListItemSelectedListener != null) {
-                        onListItemSelectedListener.onCancelled();
+                    for (IListDialogListener listener : getDialogListeners()) {
+                        listener.onCancelled();
                     }
                     dismiss();
                 }
@@ -144,12 +145,10 @@ public class ListDialogFragment extends BaseDialogFragment {
             builder.setItems(adapter, 0, new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    IListDialogListener onListItemSelectedListener = getDialogListener();
-                    if (onListItemSelectedListener != null) {
-                        onListItemSelectedListener
-                                .onListItemSelected(getItems()[position], position);
-                        dismiss();
+                    for (IListDialogListener listener : getDialogListeners()) {
+                        listener.onListItemSelected(getItems()[position], position);
                     }
+                    dismiss();
                 }
             });
         }
@@ -157,18 +156,22 @@ public class ListDialogFragment extends BaseDialogFragment {
         return builder;
     }
 
-    private IListDialogListener getDialogListener() {
+    /** Get dialog listeners.
+     *  There might be more than one listener.
+     *
+     * @return Dialog listeners
+     * @since 2.1.0
+     */
+    private IListDialogListener[] getDialogListeners() {
         final Fragment targetFragment = getTargetFragment();
-        if (targetFragment != null) {
-            if (targetFragment instanceof IListDialogListener) {
-                return (IListDialogListener) targetFragment;
-            }
-        } else {
-            if (getActivity() instanceof IListDialogListener) {
-                return (IListDialogListener) getActivity();
-            }
+        List<IListDialogListener> listeners = new ArrayList<IListDialogListener>();
+        if (targetFragment != null && targetFragment instanceof IListDialogListener) {
+            listeners.add((IListDialogListener) targetFragment);
         }
-        return null;
+        if (getActivity() instanceof IListDialogListener) {
+            listeners.add((IListDialogListener) getActivity());
+        }
+        return listeners.toArray(new IListDialogListener[listeners.size()]);
     }
 
     private String getTitle() {
