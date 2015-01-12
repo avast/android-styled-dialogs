@@ -1,4 +1,5 @@
-# StyledDialogs for Android [![Build Status](https://travis-ci.org/avast/android-styled-dialogs.svg?branch=master)](https://travis-ci.org/avast/android-styled-dialogs) [![Android Arsenal](https://img.shields.io/badge/AndroidArsenal-StyledDialogs-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/143)
+# StyledDialogs for Android 
+[![Build Status](https://travis-ci.org/avast/android-styled-dialogs.svg?branch=master)](https://travis-ci.org/avast/android-styled-dialogs) [![License](https://img.shields.io/badge/license-Apache%202-green.svg?style=flat)](https://github.com/avast/android-styled-dialogs/blob/master/LICENSE.txt) [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-StyledDialogs-green.svg?style=flat)](https://android-arsenal.com/details/1/143) 
 
  ![Screenshot of the dialogs](graphics/screenshot-small.png)
 
