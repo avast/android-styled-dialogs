@@ -3,6 +3,5 @@ android:
   components:
     - build-tools-20.0.0
     - android-21
-    - extra-google-m2repository
     - extra-android-support
     - extra-android-m2repository
