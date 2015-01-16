@@ -107,6 +107,7 @@ public class DemoActivity extends ActionBarActivity implements
                     .setTitle("Your favorite character:")
                     .setItems(new String[]{"Jayne", "Malcolm", "Kaylee",
                         "Wash", "Zoe", "River"})
+                    .setRequestCode(11)
                     .show();
 
             }
@@ -148,13 +149,10 @@ public class DemoActivity extends ActionBarActivity implements
     // IListDialogListener
 
     @Override
-    public void onListItemSelected(String value, int number) {
-        Toast.makeText(c, "Selected: " + value, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onCancelled() {
-        Toast.makeText(c, "Nothing selected", Toast.LENGTH_SHORT).show();
+    public void onListItemSelected(String value, int number, int requestCode) {
+        if (requestCode == 11) {
+            Toast.makeText(c, "Selected: " + value, Toast.LENGTH_SHORT).show();
+        }
     }
 
     // ISimpleDialogCancelListener
@@ -165,6 +163,8 @@ public class DemoActivity extends ActionBarActivity implements
             Toast.makeText(c, "Dialog cancelled", Toast.LENGTH_SHORT).show();
         } else if (requestCode == REQUEST_PROGRESS) {
             Toast.makeText(c, "Progress dialog cancelled", Toast.LENGTH_SHORT).show();
+        } else if (requestCode == 11) {
+            Toast.makeText(c, "Nothing selected", Toast.LENGTH_SHORT).show();
         }
     }
 

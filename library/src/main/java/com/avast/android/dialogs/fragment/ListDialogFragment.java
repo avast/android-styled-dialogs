@@ -23,6 +23,7 @@ import com.avast.android.dialogs.iface.IListDialogListener;
 public class ListDialogFragment extends BaseDialogFragment {
 
     private static String ARG_ITEMS = "items";
+    protected int mRequestCode;
 
     public static SimpleListDialogBuilder createBuilder(Context context,
                                                         FragmentManager fragmentManager) {
@@ -35,6 +36,15 @@ public class ListDialogFragment extends BaseDialogFragment {
         if (getArguments() == null) {
             throw new IllegalArgumentException(
                     "use SimpleListDialogBuilder to construct this dialog");
+        }
+        final Fragment targetFragment = getTargetFragment();
+        if (targetFragment != null) {
+          mRequestCode = getTargetRequestCode();
+        } else {
+          Bundle args = getArguments();
+          if (args != null) {
+            mRequestCode = args.getInt(BaseDialogBuilder.ARG_REQUEST_CODE, 0);
+          }
         }
     }
 
@@ -110,7 +120,7 @@ public class ListDialogFragment extends BaseDialogFragment {
         super.onCancel(dialog);
         IListDialogListener onListItemSelectedListener = getDialogListener();
         if (onListItemSelectedListener != null) {
-            onListItemSelectedListener.onCancelled();
+            onListItemSelectedListener.onCancelled(mRequestCode);
         }
     }
 
@@ -127,7 +137,7 @@ public class ListDialogFragment extends BaseDialogFragment {
                 public void onClick(View view) {
                     IListDialogListener onListItemSelectedListener = getDialogListener();
                     if (onListItemSelectedListener != null) {
-                        onListItemSelectedListener.onCancelled();
+                        onListItemSelectedListener.onCancelled(mRequestCode);
                     }
                     dismiss();
                 }
@@ -147,7 +157,7 @@ public class ListDialogFragment extends BaseDialogFragment {
                     IListDialogListener onListItemSelectedListener = getDialogListener();
                     if (onListItemSelectedListener != null) {
                         onListItemSelectedListener
-                                .onListItemSelected(getItems()[position], position);
+                                .onListItemSelected(getItems()[position], position, mRequestCode);
                         dismiss();
                     }
                 }
