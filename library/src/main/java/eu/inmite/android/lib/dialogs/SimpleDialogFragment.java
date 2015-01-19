@@ -25,6 +25,7 @@ import android.text.Html;
 import android.text.SpannedString;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 
 /**
  * Dialog for displaying simple message, message with title or message with title and two buttons. Implement {@link
@@ -34,14 +35,6 @@ import android.view.View;
  * @author David Vávra (david@inmite.eu)
  */
 public class SimpleDialogFragment extends BaseDialogFragment {
-
-	protected final static String ARG_MESSAGE = "message";
-	protected final static String ARG_TITLE = "title";
-	protected final static String ARG_POSITIVE_BUTTON = "positive_button";
-	protected final static String ARG_NEGATIVE_BUTTON = "negative_button";
-	protected final static String ARG_NEUTRAL_BUTTON = "neutral_button";
-
-	protected int mRequestCode;
 
 	public static SimpleDialogBuilder createBuilder(Context context, FragmentManager fragmentManager) {
 		return new SimpleDialogBuilder(context, fragmentManager, SimpleDialogFragment.class);
@@ -56,7 +49,7 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 		} else {
 			Bundle args = getArguments();
 			if (args != null) {
-				mRequestCode = args.getInt(BaseDialogBuilder.ARG_REQUEST_CODE, 0);
+				mRequestCode = args.getInt(BaseDialogFragment.ARG_REQUEST_CODE, 0);
 			}
 		}
 	}
@@ -121,26 +114,6 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 		return builder;
 	}
 
-	protected CharSequence getMessage() {
-		return getArguments().getCharSequence(ARG_MESSAGE);
-	}
-
-	protected String getTitle() {
-		return getArguments().getString(ARG_TITLE);
-	}
-
-	protected String getPositiveButtonText() {
-		return getArguments().getString(ARG_POSITIVE_BUTTON);
-	}
-
-	protected String getNegativeButtonText() {
-		return getArguments().getString(ARG_NEGATIVE_BUTTON);
-	}
-
-	protected String getNeutralButtonText() {
-		return getArguments().getString(ARG_NEUTRAL_BUTTON);
-	}
-
 	@Override
 	public void onCancel(DialogInterface dialog) {
 		super.onCancel(dialog);
@@ -154,11 +127,11 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 		final Fragment targetFragment = getTargetFragment();
 		if (targetFragment != null) {
 			if (targetFragment instanceof ISimpleDialogListener) {
-				return (ISimpleDialogListener) targetFragment;
+				return (ISimpleDialogListener)targetFragment;
 			}
 		} else {
 			if (getActivity() instanceof ISimpleDialogListener) {
-				return (ISimpleDialogListener) getActivity();
+				return (ISimpleDialogListener)getActivity();
 			}
 		}
 		return null;
@@ -168,11 +141,11 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 		final Fragment targetFragment = getTargetFragment();
 		if (targetFragment != null) {
 			if (targetFragment instanceof ISimpleDialogCancelListener) {
-				return (ISimpleDialogCancelListener) targetFragment;
+				return (ISimpleDialogCancelListener)targetFragment;
 			}
 		} else {
 			if (getActivity() instanceof ISimpleDialogCancelListener) {
-				return (ISimpleDialogCancelListener) getActivity();
+				return (ISimpleDialogCancelListener)getActivity();
 			}
 		}
 		return null;
@@ -180,15 +153,8 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 
 	public static class SimpleDialogBuilder extends BaseDialogBuilder<SimpleDialogBuilder> {
 
-		private String mTitle;
-		private CharSequence mMessage;
-		private String mPositiveButtonText;
-		private String mNegativeButtonText;
-		private String mNeutralButtonText;
-
-		private boolean mShowDefaultButton = true;
-
-		protected SimpleDialogBuilder(Context context, FragmentManager fragmentManager, Class<? extends SimpleDialogFragment> clazz) {
+		protected SimpleDialogBuilder(Context context, FragmentManager fragmentManager,
+		                              Class<? extends SimpleDialogFragment> clazz) {
 			super(context, fragmentManager, clazz);
 		}
 
@@ -197,88 +163,32 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 			return this;
 		}
 
-		public SimpleDialogBuilder setTitle(int titleResourceId) {
-			mTitle = mContext.getString(titleResourceId);
-			return this;
-		}
-
-
-		public SimpleDialogBuilder setTitle(String title) {
-			mTitle = title;
-			return this;
-		}
-
-		public SimpleDialogBuilder setMessage(int messageResourceId) {
-			mMessage = mContext.getText(messageResourceId);
-			return this;
-		}
-
-		/**
-		 * Allow to set resource string with HTML formatting and bind %s,%i.
-		 * This is workaround for https://code.google.com/p/android/issues/detail?id=2923
-		 */
-		public SimpleDialogBuilder setMessage(int resourceId, Object... formatArgs){
-			mMessage = Html.fromHtml(String.format(Html.toHtml(new SpannedString(mContext.getText(resourceId))), formatArgs));
-			return this;
-		}
-
-		public SimpleDialogBuilder setMessage(CharSequence message) {
-			mMessage = message;
-			return this;
-		}
-
-		public SimpleDialogBuilder setPositiveButtonText(int textResourceId) {
-			mPositiveButtonText = mContext.getString(textResourceId);
-			return this;
-		}
-
-		public SimpleDialogBuilder setPositiveButtonText(String text) {
-			mPositiveButtonText = text;
-			return this;
-		}
-
-		public SimpleDialogBuilder setNegativeButtonText(int textResourceId) {
-			mNegativeButtonText = mContext.getString(textResourceId);
-			return this;
-		}
-
-		public SimpleDialogBuilder setNegativeButtonText(String text) {
-			mNegativeButtonText = text;
-			return this;
-		}
-
-		public SimpleDialogBuilder setNeutralButtonText(int textResourceId) {
-			mNeutralButtonText = mContext.getString(textResourceId);
-			return this;
-		}
-
-		public SimpleDialogBuilder setNeutralButtonText(String text) {
-			mNeutralButtonText = text;
-			return this;
-		}
-
-		/**
-		 * When there is neither positive nor negative button, default "close" button is created if it was enabled.<br/>
-		 * Default is true.
-		 */
-		public SimpleDialogBuilder hideDefaultButton(boolean hide) {
-			mShowDefaultButton = !hide;
-			return this;
-		}
-
 		@Override
 		protected Bundle prepareArguments() {
-			if (mShowDefaultButton && mPositiveButtonText == null && mNegativeButtonText == null) {
-				mPositiveButtonText = mContext.getString(R.string.dialog_close);
+			if (mDialogParams.showDefaultButton && mDialogParams.positiveButtonText == null &&
+				mDialogParams.negativeButtonText == null) {
+				mDialogParams.positiveButtonText = mDialogParams.context.getString(R.string.dialog_close);
 			}
 
 			Bundle args = new Bundle();
-			args.putCharSequence(SimpleDialogFragment.ARG_MESSAGE, mMessage);
-			args.putString(SimpleDialogFragment.ARG_TITLE, mTitle);
-			args.putString(SimpleDialogFragment.ARG_POSITIVE_BUTTON, mPositiveButtonText);
-			args.putString(SimpleDialogFragment.ARG_NEGATIVE_BUTTON, mNegativeButtonText);
-			args.putString(SimpleDialogFragment.ARG_NEUTRAL_BUTTON, mNeutralButtonText);
-
+			args.putCharSequence(BaseDialogFragment.ARG_MESSAGE, mDialogParams.message);
+			if (!TextUtils.isEmpty(mDialogParams.title)) {
+				args.putString(BaseDialogFragment.ARG_TITLE, mDialogParams.title.toString());
+			}
+			if (mDialogParams.positiveButtonText != null) {
+				args.putString(BaseDialogFragment.ARG_POSITIVE_BUTTON, mDialogParams.positiveButtonText
+					.toString());
+			}
+			if (mDialogParams.negativeButtonText != null) {
+				args.putString(BaseDialogFragment.ARG_NEGATIVE_BUTTON,
+					mDialogParams.negativeButtonText.toString());
+			}
+			if (mDialogParams.neutralButtonText != null) {
+				args.putString(BaseDialogFragment.ARG_NEUTRAL_BUTTON,
+					mDialogParams.neutralButtonText.toString());
+			}
+			args.putBoolean(BaseDialogFragment.ARG_CANCELABLE_ON_TOUCH_OUTSIDE,
+				mDialogParams.cancelableOnTouchOutside);
 			return args;
 		}
 	}

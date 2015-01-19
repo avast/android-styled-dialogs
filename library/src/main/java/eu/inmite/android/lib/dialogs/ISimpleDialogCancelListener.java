@@ -17,9 +17,15 @@
 package eu.inmite.android.lib.dialogs;
 
 /**
- * @author Tomáš Kypta
- * @since 13/05/2013
+ * Implement this interface in Activity or Fragment to react to cancel event.
+ *
+ * @author Tomáš Kypta (inmite.eu)
  */
 public interface ISimpleDialogCancelListener {
+	/**
+	 * Callback to react on cancel event.
+	 *
+	 * @param requestCode identifies dialogue
+	 */
 	public void onCancelled(int requestCode);
 }
