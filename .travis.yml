@@ -4,7 +4,9 @@ android:
     - build-tools-20.0.0
     - android-21
     - extra-android-m2repository
-    
+env:
+  matrix:
+    - ANDROID_TARGET=android-19  ANDROID_ABI=armeabi-v7a    
 before_script:
   # Create and start emulator
   - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
