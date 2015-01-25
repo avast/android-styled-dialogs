@@ -33,7 +33,9 @@ public class DemoActivity extends ActionBarActivity implements
         IDateDialogListener,
         ISimpleDialogCancelListener,
         IListDialogListener,
-        IListDialogMultipleListener {
+        IListDialogMultipleListener,
+        IEditTextDialogListener,
+        IEditTextDialogCancelListener {
 
     private static final int REQUEST_PROGRESS = 1;
 
@@ -140,7 +142,7 @@ public class DemoActivity extends ActionBarActivity implements
                                 "Wash", "Zoe", "River"})
                         .setRequestCode(112)
                         .setChoiceMode(AbsListView.CHOICE_MODE_SINGLE)
-                        .setSelectedItem(1)
+//                        .setSelectedItem(1)
                         .show();
 
             }
@@ -177,6 +179,23 @@ public class DemoActivity extends ActionBarActivity implements
                         .show();
             }
         });
+
+
+        findViewById(R.id.edittext_dialog).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditTextDialogFragment
+                        .createBuilder(DemoActivity.this, getSupportFragmentManager())
+                        .setTitle("Your favorite character")
+                        .setMessage("Enter your favorite character:")
+                        .setHint("This is a hint for you")
+                        .setPositiveButtonText(android.R.string.ok)
+                        .setNegativeButtonText("I don't know")
+                        .setRequestCode(64)
+                        .setSingleLine(true)
+                        .show();
+            }
+        });
     }
 
     // IListDialogListener
@@ -200,8 +219,11 @@ public class DemoActivity extends ActionBarActivity implements
             Toast.makeText(c, "Dialog cancelled", Toast.LENGTH_SHORT).show();
         } else if (requestCode == REQUEST_PROGRESS) {
             Toast.makeText(c, "Progress dialog cancelled", Toast.LENGTH_SHORT).show();
-        } else if (requestCode == 11) {
+        } else if (requestCode == 11 || requestCode == 112) {
             Toast.makeText(c, "Nothing selected", Toast.LENGTH_SHORT).show();
+        } else if (requestCode == 64) {
+            Toast.makeText(c, "Dialog Cancelled", Toast.LENGTH_SHORT).show();
+
         }
     }
 
@@ -269,5 +291,24 @@ public class DemoActivity extends ActionBarActivity implements
             }
             Toast.makeText(c, "Selected: " + sb.toString(), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void onPositiveButtonClicked(int requestCode, String result) {
+        if (requestCode == 64) {
+            Toast.makeText(this, "Your favorite character is " + result, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onNegativeButtonClicked(int requestCode, String result) {
+        if (requestCode == 64) {
+            Toast.makeText(this, "I don't know either", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onNeutralButtonClicked(int requestCode, String result) {
+
     }
 }
