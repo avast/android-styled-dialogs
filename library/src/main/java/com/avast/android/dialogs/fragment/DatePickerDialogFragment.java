@@ -3,6 +3,7 @@ package com.avast.android.dialogs.fragment;
 import java.util.*;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,11 +15,13 @@ import android.widget.DatePicker;
 import com.avast.android.dialogs.R;
 import com.avast.android.dialogs.core.BaseDialogBuilder;
 import com.avast.android.dialogs.core.BaseDialogFragment;
-import com.avast.android.dialogs.iface.IDateDialogCancelListener;
 import com.avast.android.dialogs.iface.IDateDialogListener;
+import com.avast.android.dialogs.iface.ISimpleDialogCancelListener;
 
-/**
- * Dialog with a date picker. Implement {@link com.avast.android.dialogs.iface.IDateDialogListener} or {@link com.avast.android.dialogs.iface.IDateDialogCancelListener} to handle events.
+/** Dialog with a date picker.
+ *
+ *  Implement {@link com.avast.android.dialogs.iface.IDateDialogListener}
+ *  and/or {@link com.avast.android.dialogs.iface.ISimpleDialogCancelListener} to handle events.
  */
 public class DatePickerDialogFragment extends BaseDialogFragment {
 
@@ -77,16 +80,24 @@ public class DatePickerDialogFragment extends BaseDialogFragment {
      * @return Dialog cancel listeners
      * @since 2.1.0
      */
-    protected IDateDialogCancelListener[] getCancelListeners() {
+    protected ISimpleDialogCancelListener[] getCancelListeners() {
         final Fragment targetFragment = getTargetFragment();
-        List<IDateDialogCancelListener> listeners = new ArrayList<IDateDialogCancelListener>();
-        if (targetFragment != null && targetFragment instanceof IDateDialogCancelListener) {
-            listeners.add((IDateDialogCancelListener) targetFragment);
+        List<ISimpleDialogCancelListener> listeners = new ArrayList<ISimpleDialogCancelListener>();
+        if (targetFragment != null && targetFragment instanceof ISimpleDialogCancelListener) {
+            listeners.add((ISimpleDialogCancelListener) targetFragment);
         }
-        if (getActivity() instanceof IDateDialogCancelListener) {
-            listeners.add((IDateDialogCancelListener)getActivity());
+        if (getActivity() instanceof ISimpleDialogCancelListener) {
+            listeners.add((ISimpleDialogCancelListener)getActivity());
         }
-        return listeners.toArray(new IDateDialogCancelListener[listeners.size()]);
+        return listeners.toArray(new ISimpleDialogCancelListener[listeners.size()]);
+    }
+
+    @Override
+    public void onCancel(DialogInterface dialog) {
+        super.onCancel(dialog);
+        for (ISimpleDialogCancelListener listener : getCancelListeners()) {
+            listener.onCancelled(mRequestCode);
+        }
     }
 
     @Override

@@ -171,6 +171,10 @@ public class DemoActivity extends ActionBarActivity implements
             Toast.makeText(c, "Progress dialog cancelled", Toast.LENGTH_SHORT).show();
         } else if (requestCode == REQUEST_LIST) {
             Toast.makeText(c, "Nothing selected", Toast.LENGTH_SHORT).show();
+        } else if (requestCode == REQUEST_DATE_PICKER) {
+            Toast.makeText(c, "Date picker cancelled", Toast.LENGTH_SHORT).show();
+        } else if (requestCode == REQUEST_TIME_PICKER) {
+            Toast.makeText(c, "Time picker cancelled", Toast.LENGTH_SHORT).show();
         }
     }
 
