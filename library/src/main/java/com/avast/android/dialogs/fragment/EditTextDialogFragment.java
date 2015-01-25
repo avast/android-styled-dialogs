@@ -9,6 +9,7 @@ import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.text.Html;
+import android.text.InputType;
 import android.text.SpannedString;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -33,6 +34,7 @@ public class EditTextDialogFragment extends BaseDialogFragment {
     protected final static String ARG_MESSAGE = "message";
     protected final static String ARG_SINGLE_LINE = "singleLine";
     protected final static String ARG_SELECT_ALL = "selectAll";
+    protected final static String ARG_INPUT_TYPE = "inputType";
 
 
     protected final static String ARG_TITLE = "title";
@@ -90,6 +92,9 @@ public class EditTextDialogFragment extends BaseDialogFragment {
                 imeAction = getString(android.R.string.ok);
             }
             mEditText.setImeActionLabel(imeAction, EditorInfo.IME_ACTION_DONE);
+            if (getInputType() != null) {
+                mEditText.setInputType(getInputType());
+            }
             mEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
                 @Override
                 public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -226,6 +231,14 @@ public class EditTextDialogFragment extends BaseDialogFragment {
         return getArguments().getString(ARG_INIT_TEXT);
     }
 
+    protected Integer getInputType() {
+        if (getArguments().containsKey(ARG_INPUT_TYPE)) {
+            return getArguments().getInt(ARG_INPUT_TYPE);
+        } else {
+            return null;
+        }
+    }
+
 
     protected IEditTextDialogListener getDialogListener() {
         final Fragment targetFragment = getTargetFragment();
@@ -265,6 +278,7 @@ public class EditTextDialogFragment extends BaseDialogFragment {
         private String mNeutralButtonText;
         private boolean mSingleLine;
         private boolean mSelectAll;
+        private Integer mInputType;
 
         private String mNegativeButtonText;
 
@@ -278,8 +292,9 @@ public class EditTextDialogFragment extends BaseDialogFragment {
         }
 
         /**
-         * @param initText text to prefill in the edittext
-         * @param selected whether the text should be preselected when dialog shows up
+         * Works like {@link #setInitText(String, boolean) setInitText(String, boolean}
+         * except it uses resource Id for text instead of String
+         *
          * @return
          */
         public EditTextDialogBuilder setInitText(@StringRes int initTextResourceId, boolean selected) {
@@ -297,6 +312,14 @@ public class EditTextDialogFragment extends BaseDialogFragment {
         public EditTextDialogBuilder setInitText(String initText, boolean selected) {
             mInitText = initText;
             mSelectAll = selected;
+            return this;
+        }
+
+        /**
+         * See {@link android.widget.TextView#setInputType(int) TextView.setInputType}
+         */
+        public EditTextDialogBuilder setInputType(int inputType) {
+            mInputType = inputType;
             return this;
         }
 
@@ -391,6 +414,9 @@ public class EditTextDialogFragment extends BaseDialogFragment {
             args.putString(ARG_NEUTRAL_BUTTON, mNeutralButtonText);
             args.putBoolean(ARG_SINGLE_LINE, mSingleLine);
             args.putBoolean(ARG_SELECT_ALL, mSelectAll);
+            if (mInputType != null) {
+                args.putInt(ARG_INPUT_TYPE, mInputType);
+            }
 
 
             return args;

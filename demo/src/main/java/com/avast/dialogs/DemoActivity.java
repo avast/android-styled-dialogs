@@ -21,6 +21,7 @@ import java.util.Date;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.text.InputType;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.Toast;
@@ -193,6 +194,7 @@ public class DemoActivity extends ActionBarActivity implements
                         .setNegativeButtonText("I don't know")
                         .setRequestCode(64)
                         .setSingleLine(true)
+//                        .setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS)
                         .show();
             }
         });
