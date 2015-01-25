@@ -37,6 +37,10 @@ public class DemoActivity extends ActionBarActivity implements
     IListDialogListener {
 
     private static final int REQUEST_PROGRESS = 1;
+    private static final int REQUEST_LIST = 11;
+    private static final int REQUEST_DATE_PICKER = 12;
+    private static final int REQUEST_TIME_PICKER = 13;
+    private static final int REQUEST_SIMPLE_DIALOG = 42;
 
     DemoActivity c = this;
 
@@ -78,7 +82,9 @@ public class DemoActivity extends ActionBarActivity implements
                         .setTitle("Do you like this quote?")
                         .setMessage("Jayne: \"Shiny. Let's be bad guys.\"")
                         .setPositiveButtonText("Love")
-                        .setNegativeButtonText("Hate").setNeutralButtonText("WTF?").setRequestCode(42)
+                        .setNegativeButtonText("Hate")
+                        .setNeutralButtonText("WTF?")
+                        .setRequestCode(REQUEST_SIMPLE_DIALOG)
                         .show();
                 }
             });
@@ -107,7 +113,7 @@ public class DemoActivity extends ActionBarActivity implements
                     .setTitle("Your favorite character:")
                     .setItems(new String[]{"Jayne", "Malcolm", "Kaylee",
                         "Wash", "Zoe", "River"})
-                    .setRequestCode(11)
+                    .setRequestCode(REQUEST_LIST)
                     .show();
 
             }
@@ -127,7 +133,7 @@ public class DemoActivity extends ActionBarActivity implements
                     .set24hour(true)
                     .setPositiveButtonText(android.R.string.ok)
                     .setNegativeButtonText(android.R.string.cancel)
-                    .setRequestCode(13)
+                    .setRequestCode(REQUEST_TIME_PICKER)
                     .show();
             }
         });
@@ -140,7 +146,7 @@ public class DemoActivity extends ActionBarActivity implements
                     .set24hour(true)
                     .setPositiveButtonText(android.R.string.ok)
                     .setNegativeButtonText(android.R.string.cancel)
-                    .setRequestCode(12)
+                    .setRequestCode(REQUEST_DATE_PICKER)
                     .show();
             }
         });
@@ -150,7 +156,7 @@ public class DemoActivity extends ActionBarActivity implements
 
     @Override
     public void onListItemSelected(String value, int number, int requestCode) {
-        if (requestCode == 11) {
+        if (requestCode == REQUEST_LIST) {
             Toast.makeText(c, "Selected: " + value, Toast.LENGTH_SHORT).show();
         }
     }
@@ -159,11 +165,11 @@ public class DemoActivity extends ActionBarActivity implements
 
     @Override
     public void onCancelled(int requestCode) {
-        if (requestCode == 42) {
+        if (requestCode == REQUEST_SIMPLE_DIALOG) {
             Toast.makeText(c, "Dialog cancelled", Toast.LENGTH_SHORT).show();
         } else if (requestCode == REQUEST_PROGRESS) {
             Toast.makeText(c, "Progress dialog cancelled", Toast.LENGTH_SHORT).show();
-        } else if (requestCode == 11) {
+        } else if (requestCode == REQUEST_LIST) {
             Toast.makeText(c, "Nothing selected", Toast.LENGTH_SHORT).show();
         }
     }
@@ -172,21 +178,21 @@ public class DemoActivity extends ActionBarActivity implements
 
     @Override
     public void onPositiveButtonClicked(int requestCode) {
-        if (requestCode == 42) {
+        if (requestCode == REQUEST_SIMPLE_DIALOG) {
             Toast.makeText(c, "Positive button clicked", Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
     public void onNegativeButtonClicked(int requestCode) {
-        if (requestCode == 42) {
+        if (requestCode == REQUEST_SIMPLE_DIALOG) {
             Toast.makeText(c, "Negative button clicked", Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
     public void onNeutralButtonClicked(int requestCode) {
-        if (requestCode == 42) {
+        if (requestCode == REQUEST_SIMPLE_DIALOG) {
             Toast.makeText(c, "Neutral button clicked", Toast.LENGTH_SHORT).show();
         }
     }
@@ -196,9 +202,9 @@ public class DemoActivity extends ActionBarActivity implements
     @Override
     public void onNegativeButtonClicked(int resultCode, Date date) {
         String text = "";
-        if (resultCode == 12) {
+        if (resultCode == REQUEST_DATE_PICKER) {
             text = "Date ";
-        } else if (resultCode == 13) {
+        } else if (resultCode == REQUEST_TIME_PICKER) {
             text = "Time ";
         }
 
@@ -209,9 +215,9 @@ public class DemoActivity extends ActionBarActivity implements
     @Override
     public void onPositiveButtonClicked(int resultCode, Date date) {
         String text = "";
-        if (resultCode == 12) {
+        if (resultCode == REQUEST_DATE_PICKER) {
             text = "Date ";
-        } else if (resultCode == 13) {
+        } else if (resultCode == REQUEST_TIME_PICKER) {
             text = "Time ";
         }
 
