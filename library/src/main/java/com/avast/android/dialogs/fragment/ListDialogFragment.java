@@ -197,8 +197,8 @@ public class ListDialogFragment extends BaseDialogFragment {
     private void buildMultiChoice(Builder builder) {
         final String[] items = getItems();
         ListAdapter adapter = new ArrayAdapter<>(getActivity(),
-                android.R.layout.select_dialog_multichoice,
-                android.R.id.text1,
+                R.layout.sdl_list_item_multichoice,
+                R.id.sdl_text,
                 items);
         builder.setItems(adapter, asIntArray(getCheckedItems()), AbsListView.CHOICE_MODE_MULTIPLE, new AdapterView.OnItemClickListener() {
             @Override
@@ -213,8 +213,8 @@ public class ListDialogFragment extends BaseDialogFragment {
     private void buildSingleChoice(Builder builder) {
         final String[] items = getItems();
         ListAdapter adapter = new ArrayAdapter<>(getActivity(),
-                android.R.layout.select_dialog_singlechoice,
-                android.R.id.text1,
+                R.layout.sdl_list_item_singlechoice,
+                R.id.sdl_text,
                 items);
         builder.setItems(adapter, asIntArray(getCheckedItems()), AbsListView.CHOICE_MODE_SINGLE, new AdapterView.OnItemClickListener() {
             @Override
@@ -243,6 +243,37 @@ public class ListDialogFragment extends BaseDialogFragment {
                 dismiss();
             }
         });
+    }
+
+    private void onMultiChoiceResult() {
+        int[] checkedPositions = asIntArray(getCheckedItems());
+        String[] items = getItems();
+        String[] checkedValues = new String[checkedPositions.length];
+        int i = 0;
+        for (int checkedPosition : checkedPositions) {
+            if (checkedPosition >= 0 && checkedPosition < items.length) {
+                checkedValues[i++] = items[checkedPosition];
+            }
+        }
+        ((IListDialogMultipleListener) getDialogListener()).onListItemsSelected(checkedValues, checkedPositions, mRequestCode);
+
+    }
+
+    private void onSingleChoiceResult() {
+        int[] checkedPositions = asIntArray(getCheckedItems());
+        String[] items = getItems();
+        boolean success = false;
+        for (int i : checkedPositions) {
+            if (i >= 0 && i < items.length) {
+                //1st valid value
+                ((IListDialogListener) getDialogListener()).onListItemSelected(items[i], i, mRequestCode);
+                success = true;
+                break;
+            }
+        }
+        if (!success) {//no item selected
+            getDialogListener().onCancelled(mRequestCode);
+        }
     }
 
     @Override
@@ -277,31 +308,11 @@ public class ListDialogFragment extends BaseDialogFragment {
             builder.setPositiveButton(positiveButton, new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    int[] checkedPositions = asIntArray(getCheckedItems());
-                    String[] items = getItems();
                     ISimpleDialogCancelListener listener = getDialogListener();
                     if (getMode() == AbsListView.CHOICE_MODE_MULTIPLE && listener != null && listener instanceof IListDialogMultipleListener) {
-                        String[] checkedValues = new String[checkedPositions.length];
-                        int i = 0;
-                        for (int checkedPosition : checkedPositions) {
-                            if (checkedPosition >= 0 && checkedPosition < items.length) {
-                                checkedValues[i++] = items[checkedPosition];
-                            }
-                        }
-                        ((IListDialogMultipleListener) listener).onListItemsSelected(checkedValues, checkedPositions, mRequestCode);
+                        onMultiChoiceResult();
                     } else if (getMode() == AbsListView.CHOICE_MODE_SINGLE && listener != null && listener instanceof IListDialogListener) {
-                        boolean success = false;
-                        for (int i : checkedPositions) {
-                            if (i >= 0 && i < items.length) {
-                                //1st valid value
-                                ((IListDialogListener) listener).onListItemSelected(items[i], i, mRequestCode);
-                                success = true;
-                                break;
-                            }
-                        }
-                        if (!success) {//no item selected
-                            listener.onCancelled(mRequestCode);
-                        }
+                        onSingleChoiceResult();
                     }
                     dismiss();
                 }
