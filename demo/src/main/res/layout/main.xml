@@ -35,6 +35,16 @@
 			android:text="List dialog"
 			android:id="@+id/list_dialog" />
 
+        <Button
+                style="@style/Button"
+                android:text="Single choice list dialog"
+                android:id="@+id/list_dialog_single" />
+
+        <Button
+                style="@style/Button"
+                android:text="Multiple choice list dialog"
+                android:id="@+id/list_dialog_multiple" />
+
 		<Button
 			style="@style/Button"
 			android:text="Progress dialog"

@@ -22,19 +22,18 @@ import java.util.Date;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.Toast;
 
 import com.avast.android.dialogs.fragment.*;
-import com.avast.android.dialogs.iface.IDateDialogListener;
-import com.avast.android.dialogs.iface.IListDialogListener;
-import com.avast.android.dialogs.iface.ISimpleDialogCancelListener;
-import com.avast.android.dialogs.iface.ISimpleDialogListener;
+import com.avast.android.dialogs.iface.*;
 
 public class DemoActivity extends ActionBarActivity implements
-    ISimpleDialogListener,
-    IDateDialogListener,
-    ISimpleDialogCancelListener,
-    IListDialogListener {
+        ISimpleDialogListener,
+        IDateDialogListener,
+        ISimpleDialogCancelListener,
+        IListDialogListener,
+        IListDialogMultipleListener {
 
     private static final int REQUEST_PROGRESS = 1;
 
@@ -48,67 +47,101 @@ public class DemoActivity extends ActionBarActivity implements
             @Override
             public void onClick(View v) {
                 SimpleDialogFragment.createBuilder(c, getSupportFragmentManager())
-                    .setMessage("Love. Can know all the math in the \'verse but take a boat in the air that you don\'t " +
-                        "love? She\'ll shake you off just as sure as a turn in the worlds. Love keeps her in the air when " +
-                        "she oughtta fall down...tell you she\'s hurtin\' \'fore she keens...makes her a home.").show();
+                        .setMessage("Love. Can know all the math in the \'verse but take a boat in the air that you don\'t " +
+                                "love? She\'ll shake you off just as sure as a turn in the worlds. Love keeps her in the air when " +
+                                "she oughtta fall down...tell you she\'s hurtin\' \'fore she keens...makes her a home.").show();
             }
         });
         findViewById(R.id.message_title_dialog).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SimpleDialogFragment.createBuilder(c, getSupportFragmentManager())
-                    .setTitle("More Firefly quotes:").setMessage
-                    ("Wash: \"Psychic, though? That sounds like something out of science fiction.\"\n\nZoe: \"We live" +
-                        " " +
-                        "in a space ship, dear.\"\nWash: \"Here lies my beloved Zoe, " +
-                        ("my autumn flower ... somewhat less attractive now that she's all corpsified and gross" +
-                            ".\"\n\nRiver Tam: \"Also? I can kill you with my brain.\"\n\nKayle: \"Going on a year now, nothins twixed my neathers not run on batteries.\" \n" +
-                            "Mal: \"I can't know that.\" \n" +
-                            "Jayne: \"I can stand to hear a little more.\"\n\nWash: \"I've been under fire before. " +
-                            "Well ... I've been in a fire. Actually, I was fired. I can handle myself.\""))
-                    .setNegativeButtonText("Close")
-                    .show();
+                        .setTitle("More Firefly quotes:").setMessage
+                        ("Wash: \"Psychic, though? That sounds like something out of science fiction.\"\n\nZoe: \"We live" +
+                                " " +
+                                "in a space ship, dear.\"\nWash: \"Here lies my beloved Zoe, " +
+                                ("my autumn flower ... somewhat less attractive now that she's all corpsified and gross" +
+                                        ".\"\n\nRiver Tam: \"Also? I can kill you with my brain.\"\n\nKayle: \"Going on a year now, nothins twixed my neathers not run on batteries.\" \n" +
+                                        "Mal: \"I can't know that.\" \n" +
+                                        "Jayne: \"I can stand to hear a little more.\"\n\nWash: \"I've been under fire before. " +
+                                        "Well ... I've been in a fire. Actually, I was fired. I can handle myself.\""))
+                        .setNegativeButtonText("Close")
+                        .show();
             }
         });
         findViewById(R.id.message_title_buttons_dialog)
-            .setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    SimpleDialogFragment.createBuilder(c, getSupportFragmentManager())
-                        .setTitle("Do you like this quote?")
-                        .setMessage("Jayne: \"Shiny. Let's be bad guys.\"")
-                        .setPositiveButtonText("Love")
-                        .setNegativeButtonText("Hate").setNeutralButtonText("WTF?").setRequestCode(42)
-                        .show();
-                }
-            });
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        SimpleDialogFragment.createBuilder(c, getSupportFragmentManager())
+                                .setTitle("Do you like this quote?")
+                                .setMessage("Jayne: \"Shiny. Let's be bad guys.\"")
+                                .setPositiveButtonText("Love")
+                                .setNegativeButtonText("Hate").setNeutralButtonText("WTF?").setRequestCode(42)
+                                .show();
+                    }
+                });
         findViewById(R.id.long_buttons).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SimpleDialogFragment.createBuilder(c, getSupportFragmentManager()).setMessage("How will you decide?")
-                    .setPositiveButtonText("Time for some thrillin' heroics!").setNegativeButtonText("Misbehave")
-                    .setNeutralButtonText("Keep flying").show();
+                        .setPositiveButtonText("Time for some thrillin' heroics!").setNegativeButtonText("Misbehave")
+                        .setNeutralButtonText("Keep flying").show();
             }
         });
         findViewById(R.id.progress_dialog).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ProgressDialogFragment.createBuilder(c, getSupportFragmentManager())
-                    .setMessage("Mal: I\'m just waiting to see if I pass out. Long story.")
-                    .setRequestCode(REQUEST_PROGRESS)
-                    .show();
+                        .setMessage("Mal: I\'m just waiting to see if I pass out. Long story.")
+                        .setRequestCode(REQUEST_PROGRESS)
+                        .show();
             }
         });
         findViewById(R.id.list_dialog).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ListDialogFragment
-                    .createBuilder(c, getSupportFragmentManager())
-                    .setTitle("Your favorite character:")
-                    .setItems(new String[]{"Jayne", "Malcolm", "Kaylee",
-                        "Wash", "Zoe", "River"})
-                    .setRequestCode(11)
-                    .show();
+                        .createBuilder(c, getSupportFragmentManager())
+                        .setTitle("Your favorite character:")
+                        .setItems(new String[]{"Jayne", "Malcolm", "Kaylee",
+                                "Wash", "Zoe", "River"})
+                        .setRequestCode(11)
+                        .show();
+
+            }
+        });
+
+
+        findViewById(R.id.list_dialog_multiple).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ListDialogFragment
+                        .createBuilder(c, getSupportFragmentManager())
+                        .setTitle("Your favorite character:")
+                        .setItems(new String[]{"Jayne", "Malcolm", "Kaylee",
+                                "Wash", "Zoe", "River"})
+                        .setRequestCode(111)
+                        .setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE)
+                        .setCheckedItems(new int[]{1, 3})
+                        .show();
+
+            }
+        });
+
+
+        findViewById(R.id.list_dialog_single).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ListDialogFragment
+                        .createBuilder(c, getSupportFragmentManager())
+                        .setTitle("Your favorite character:")
+                        .setItems(new String[]{"Jayne", "Malcolm", "Kaylee",
+                                "Wash", "Zoe", "River"})
+                        .setRequestCode(112)
+                        .setChoiceMode(AbsListView.CHOICE_MODE_SINGLE)
+                        .setSelectedItem(1)
+                        .show();
 
             }
         });
@@ -122,26 +155,26 @@ public class DemoActivity extends ActionBarActivity implements
             @Override
             public void onClick(View v) {
                 TimePickerDialogFragment
-                    .createBuilder(DemoActivity.this, getSupportFragmentManager())
-                    .setDate(new Date())
-                    .set24hour(true)
-                    .setPositiveButtonText(android.R.string.ok)
-                    .setNegativeButtonText(android.R.string.cancel)
-                    .setRequestCode(13)
-                    .show();
+                        .createBuilder(DemoActivity.this, getSupportFragmentManager())
+                        .setDate(new Date())
+                        .set24hour(true)
+                        .setPositiveButtonText(android.R.string.ok)
+                        .setNegativeButtonText(android.R.string.cancel)
+                        .setRequestCode(13)
+                        .show();
             }
         });
         findViewById(R.id.date_picker).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DatePickerDialogFragment
-                    .createBuilder(DemoActivity.this, getSupportFragmentManager())
-                    .setDate(new Date())
-                    .set24hour(true)
-                    .setPositiveButtonText(android.R.string.ok)
-                    .setNegativeButtonText(android.R.string.cancel)
-                    .setRequestCode(12)
-                    .show();
+                        .createBuilder(DemoActivity.this, getSupportFragmentManager())
+                        .setDate(new Date())
+                        .set24hour(true)
+                        .setPositiveButtonText(android.R.string.ok)
+                        .setNegativeButtonText(android.R.string.cancel)
+                        .setRequestCode(12)
+                        .show();
             }
         });
     }
@@ -151,6 +184,10 @@ public class DemoActivity extends ActionBarActivity implements
     @Override
     public void onListItemSelected(String value, int number, int requestCode) {
         if (requestCode == 11) {
+            Toast.makeText(c, "Selected: " + value, Toast.LENGTH_SHORT).show();
+        }
+
+        if (requestCode == 112) {
             Toast.makeText(c, "Selected: " + value, Toast.LENGTH_SHORT).show();
         }
     }
@@ -217,5 +254,20 @@ public class DemoActivity extends ActionBarActivity implements
 
         DateFormat dateFormat = DateFormat.getDateTimeInstance();
         Toast.makeText(this, text + "Success! " + dateFormat.format(date), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onListItemsSelected(String[] values, int[] selectedPositions, int requestCode) {
+        if (requestCode == 111) {
+            StringBuilder sb = new StringBuilder();
+            for (String value : values) {
+                if (sb.length() > 0) {
+                    sb.append(", ");
+                }
+                sb.append(value);
+
+            }
+            Toast.makeText(c, "Selected: " + sb.toString(), Toast.LENGTH_SHORT).show();
+        }
     }
 }
