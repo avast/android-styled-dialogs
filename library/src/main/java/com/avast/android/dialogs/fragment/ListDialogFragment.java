@@ -1,12 +1,10 @@
 package com.avast.android.dialogs.fragment;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
 import android.view.View;
@@ -156,16 +154,8 @@ public class ListDialogFragment extends BaseDialogFragment {
      * @return Dialog listeners
      * @since 2.1.0
      */
-    private IListDialogListener[] getDialogListeners() {
-        final Fragment targetFragment = getTargetFragment();
-        List<IListDialogListener> listeners = new ArrayList<IListDialogListener>();
-        if (targetFragment != null && targetFragment instanceof IListDialogListener) {
-            listeners.add((IListDialogListener) targetFragment);
-        }
-        if (getActivity() instanceof IListDialogListener) {
-            listeners.add((IListDialogListener) getActivity());
-        }
-        return listeners.toArray(new IListDialogListener[listeners.size()]);
+    private List<IListDialogListener> getDialogListeners() {
+        return getDialogListeners(IListDialogListener.class);
     }
 
     private String getTitle() {

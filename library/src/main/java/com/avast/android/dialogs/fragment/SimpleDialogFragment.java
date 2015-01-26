@@ -16,13 +16,10 @@
 
 package com.avast.android.dialogs.fragment;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.text.Html;
 import android.text.SpannedString;
@@ -31,7 +28,9 @@ import android.view.View;
 
 import com.avast.android.dialogs.core.BaseDialogBuilder;
 import com.avast.android.dialogs.core.BaseDialogFragment;
-import com.avast.android.dialogs.iface.*;
+import com.avast.android.dialogs.iface.INegativeButtonDialogListener;
+import com.avast.android.dialogs.iface.INeutralButtonDialogListener;
+import com.avast.android.dialogs.iface.IPositiveButtonDialogListener;
 
 /**
  * Dialog for displaying simple message, message with title or message with title and two buttons. Implement {@link
@@ -136,58 +135,34 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 		return getArguments().getString(ARG_NEUTRAL_BUTTON);
 	}
 
-    /** Get dialog listeners.
+    /** Get positive button dialog listeners.
      *  There might be more than one listener.
      *
      * @return Dialog listeners
      * @since 2.1.0
      */
-	protected IPositiveButtonDialogListener[] getPositiveButtonDialogListeners() {
-		final Fragment targetFragment = getTargetFragment();
-        List<IPositiveButtonDialogListener> listeners = new ArrayList<IPositiveButtonDialogListener>();
-		if (targetFragment != null && targetFragment instanceof IPositiveButtonDialogListener) {
-            listeners.add((IPositiveButtonDialogListener) targetFragment);
-        }
-        if (getActivity() instanceof IPositiveButtonDialogListener) {
-            listeners.add((IPositiveButtonDialogListener)getActivity());
-        }
-		return listeners.toArray(new IPositiveButtonDialogListener[listeners.size()]);
+	protected List<IPositiveButtonDialogListener> getPositiveButtonDialogListeners() {
+        return getDialogListeners(IPositiveButtonDialogListener.class);
 	}
 
-    /** Get dialog listeners.
+    /** Get negative button dialog listeners.
      *  There might be more than one listener.
      *
      * @return Dialog listeners
      * @since 2.1.0
      */
-	protected INegativeButtonDialogListener[] getNegativeButtonDialogListeners() {
-		final Fragment targetFragment = getTargetFragment();
-        List<INegativeButtonDialogListener> listeners = new ArrayList<INegativeButtonDialogListener>();
-		if (targetFragment != null && targetFragment instanceof INegativeButtonDialogListener) {
-            listeners.add((INegativeButtonDialogListener) targetFragment);
-        }
-        if (getActivity() instanceof INegativeButtonDialogListener) {
-            listeners.add((INegativeButtonDialogListener)getActivity());
-        }
-		return listeners.toArray(new INegativeButtonDialogListener[listeners.size()]);
+	protected List<INegativeButtonDialogListener> getNegativeButtonDialogListeners() {
+        return getDialogListeners(INegativeButtonDialogListener.class);
 	}
 
-    /** Get dialog listeners.
+    /** Get neutral button dialog listeners.
      *  There might be more than one listener.
      *
      * @return Dialog listeners
      * @since 2.1.0
      */
-	protected INeutralButtonDialogListener[] getNeutralButtonDialogListeners() {
-		final Fragment targetFragment = getTargetFragment();
-        List<INeutralButtonDialogListener> listeners = new ArrayList<INeutralButtonDialogListener>();
-		if (targetFragment != null && targetFragment instanceof INeutralButtonDialogListener) {
-            listeners.add((INeutralButtonDialogListener) targetFragment);
-        }
-        if (getActivity() instanceof INeutralButtonDialogListener) {
-            listeners.add((INeutralButtonDialogListener)getActivity());
-        }
-		return listeners.toArray(new INeutralButtonDialogListener[listeners.size()]);
+	protected List<INeutralButtonDialogListener> getNeutralButtonDialogListeners() {
+        return getDialogListeners(INeutralButtonDialogListener.class);
 	}
 
 

@@ -1,11 +1,12 @@
 package com.avast.android.dialogs.fragment;
 
-import java.util.*;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.TimeZone;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -16,7 +17,6 @@ import com.avast.android.dialogs.R;
 import com.avast.android.dialogs.core.BaseDialogBuilder;
 import com.avast.android.dialogs.core.BaseDialogFragment;
 import com.avast.android.dialogs.iface.IDateDialogListener;
-import com.avast.android.dialogs.iface.ISimpleDialogCancelListener;
 
 /** Dialog with a date picker.
  *
@@ -46,16 +46,8 @@ public class DatePickerDialogFragment extends BaseDialogFragment {
      * @return Dialog date listeners
      * @since 2.1.0
      */
-    protected IDateDialogListener[] getDialogListeners() {
-        final Fragment targetFragment = getTargetFragment();
-        List<IDateDialogListener> listeners = new ArrayList<IDateDialogListener>();
-        if (targetFragment != null && targetFragment instanceof IDateDialogListener) {
-            listeners.add((IDateDialogListener) targetFragment);
-        }
-        if (getActivity() instanceof IDateDialogListener) {
-            listeners.add((IDateDialogListener) getActivity());
-        }
-        return listeners.toArray(new IDateDialogListener[listeners.size()]);
+    protected List<IDateDialogListener> getDialogListeners() {
+        return getDialogListeners(IDateDialogListener.class);
     }
 
     @Override

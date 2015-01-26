@@ -122,16 +122,22 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
      * @return Dialog cancel listeners
      * @since 2.1.0
      */
-    protected ISimpleDialogCancelListener[] getCancelListeners() {
+    protected List<ISimpleDialogCancelListener> getCancelListeners() {
+        return getDialogListeners(ISimpleDialogCancelListener.class);
+    }
+
+
+    @SuppressWarnings("unchecked")
+    protected <T> List<T> getDialogListeners(Class<T> listenerInterface) {
         final Fragment targetFragment = getTargetFragment();
-        List<ISimpleDialogCancelListener> listeners = new ArrayList<ISimpleDialogCancelListener>();
-        if (targetFragment != null && targetFragment instanceof ISimpleDialogCancelListener) {
-            listeners.add((ISimpleDialogCancelListener) targetFragment);
+        List<T> listeners = new ArrayList<T>();
+        if (targetFragment != null && listenerInterface.isAssignableFrom(targetFragment.getClass())) {
+            listeners.add((T) targetFragment);
         }
-        if (getActivity() instanceof ISimpleDialogCancelListener) {
-            listeners.add((ISimpleDialogCancelListener) getActivity());
+        if (getActivity() != null && listenerInterface.isAssignableFrom(getActivity().getClass())) {
+            listeners.add((T) getActivity());
         }
-        return listeners.toArray(new ISimpleDialogCancelListener[listeners.size()]);
+        return listeners;
     }
 
     /**
