@@ -33,7 +33,6 @@ public class ProgressDialogFragment extends BaseDialogFragment {
 	protected final static String ARG_MESSAGE = "message";
 	protected final static String ARG_TITLE = "title";
 
-	protected int mRequestCode;
 
 	public static ProgressDialogBuilder createBuilder(Context context, FragmentManager fragmentManager) {
 		return new ProgressDialogBuilder(context, fragmentManager);
@@ -59,36 +58,9 @@ public class ProgressDialogFragment extends BaseDialogFragment {
 		if (getArguments() == null) {
 			throw new IllegalArgumentException("use ProgressDialogBuilder to construct this dialog");
 		}
-		final Fragment targetFragment = getTargetFragment();
-		mRequestCode = targetFragment != null ?
-				getTargetRequestCode() : getArguments().getInt(BaseDialogBuilder.ARG_REQUEST_CODE, 0);
 	}
 
-	@Override
-	public void onCancel(DialogInterface dialog) {
-		super.onCancel(dialog);
-		for (ISimpleDialogCancelListener listener : getCancelListeners()) {
-            listener.onCancelled(mRequestCode);
-        }
-	}
 
-    /** Get dialog cancel listeners.
-     *  There might be more than one cancel listener.
-     *
-     * @return Dialog cancel listeners
-     * @since 2.1.0
-     */
-	protected ISimpleDialogCancelListener[] getCancelListeners() {
-		final Fragment targetFragment = getTargetFragment();
-        List<ISimpleDialogCancelListener> listeners = new ArrayList<ISimpleDialogCancelListener>();
-		if (targetFragment != null && targetFragment instanceof ISimpleDialogCancelListener) {
-            listeners.add((ISimpleDialogCancelListener) targetFragment);
-		}
-        if (getActivity() instanceof ISimpleDialogCancelListener) {
-            listeners.add((ISimpleDialogCancelListener) getActivity());
-		}
-		return listeners.toArray(new ISimpleDialogCancelListener[listeners.size()]);
-	}
 
 	public static class ProgressDialogBuilder extends BaseDialogBuilder<ProgressDialogBuilder> {
 

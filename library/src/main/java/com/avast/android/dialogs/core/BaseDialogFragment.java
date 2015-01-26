@@ -16,6 +16,9 @@
 
 package com.avast.android.dialogs.core;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -23,6 +26,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
@@ -32,6 +36,7 @@ import android.view.ViewGroup;
 import android.widget.*;
 
 import com.avast.android.dialogs.R;
+import com.avast.android.dialogs.iface.ISimpleDialogCancelListener;
 import com.avast.android.dialogs.util.TypefaceHelper;
 
 /**
@@ -40,6 +45,8 @@ import com.avast.android.dialogs.util.TypefaceHelper;
  * @author David Vávra (david@inmite.eu)
  */
 public abstract class BaseDialogFragment extends DialogFragment implements DialogInterface.OnShowListener {
+
+    protected int mRequestCode;
 
     @NonNull
     @Override
@@ -59,6 +66,20 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
                              Bundle savedInstanceState) {
         Builder builder = new Builder(getActivity(), inflater, container);
         return build(builder).create();
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        final Fragment targetFragment = getTargetFragment();
+        if (targetFragment != null) {
+            mRequestCode = getTargetRequestCode();
+        } else {
+            Bundle args = getArguments();
+            if (args != null) {
+                mRequestCode = args.getInt(BaseDialogBuilder.ARG_REQUEST_CODE, 0);
+            }
+        }
     }
 
     protected abstract Builder build(Builder initialBuilder);
@@ -85,6 +106,32 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
             boolean scrollable = isScrollable(vScrollView);
             modifyButtonsBasedOnScrollableContent(scrollable);
         }
+    }
+
+    @Override
+    public void onCancel(DialogInterface dialog) {
+        super.onCancel(dialog);
+        for (ISimpleDialogCancelListener listener : getCancelListeners()) {
+            listener.onCancelled(mRequestCode);
+        }
+    }
+
+    /** Get dialog cancel listeners.
+     *  There might be more than one cancel listener.
+     *
+     * @return Dialog cancel listeners
+     * @since 2.1.0
+     */
+    protected ISimpleDialogCancelListener[] getCancelListeners() {
+        final Fragment targetFragment = getTargetFragment();
+        List<ISimpleDialogCancelListener> listeners = new ArrayList<ISimpleDialogCancelListener>();
+        if (targetFragment != null && targetFragment instanceof ISimpleDialogCancelListener) {
+            listeners.add((ISimpleDialogCancelListener) targetFragment);
+        }
+        if (getActivity() instanceof ISimpleDialogCancelListener) {
+            listeners.add((ISimpleDialogCancelListener) getActivity());
+        }
+        return listeners.toArray(new ISimpleDialogCancelListener[listeners.size()]);
     }
 
     /**

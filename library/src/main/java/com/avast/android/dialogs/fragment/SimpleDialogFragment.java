@@ -49,7 +49,6 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 	protected final static String ARG_NEGATIVE_BUTTON = "negative_button";
 	protected final static String ARG_NEUTRAL_BUTTON = "neutral_button";
 
-	protected int mRequestCode;
 
 	public static SimpleDialogBuilder createBuilder(Context context, FragmentManager fragmentManager) {
 		return new SimpleDialogBuilder(context, fragmentManager, SimpleDialogFragment.class);
@@ -58,15 +57,7 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		final Fragment targetFragment = getTargetFragment();
-		if (targetFragment != null) {
-			mRequestCode = getTargetRequestCode();
-		} else {
-			Bundle args = getArguments();
-			if (args != null) {
-				mRequestCode = args.getInt(BaseDialogBuilder.ARG_REQUEST_CODE, 0);
-			}
-		}
+
 	}
 
 	/**
@@ -146,14 +137,6 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 		return getArguments().getString(ARG_NEUTRAL_BUTTON);
 	}
 
-	@Override
-	public void onCancel(DialogInterface dialog) {
-		super.onCancel(dialog);
-		for (ISimpleDialogCancelListener listener : getCancelListeners()) {
-		    listener.onCancelled(mRequestCode);
-		}
-	}
-
     /** Get dialog listeners.
      *  There might be more than one listener.
      *
@@ -170,24 +153,6 @@ public class SimpleDialogFragment extends BaseDialogFragment {
             listeners.add((ISimpleDialogListener)getActivity());
         }
 		return listeners.toArray(new ISimpleDialogListener[listeners.size()]);
-	}
-
-    /** Get dialog cancel listeners.
-     *  There might be more than one cancel listener.
-     *
-     * @return Dialog cancel listeners
-     * @since 2.1.0
-     */
-	protected ISimpleDialogCancelListener[] getCancelListeners() {
-		final Fragment targetFragment = getTargetFragment();
-        List<ISimpleDialogCancelListener> listeners = new ArrayList<ISimpleDialogCancelListener>();
-		if (targetFragment != null && targetFragment instanceof ISimpleDialogCancelListener) {
-            listeners.add((ISimpleDialogCancelListener) targetFragment);
-        }
-        if (getActivity() instanceof ISimpleDialogCancelListener) {
-            listeners.add((ISimpleDialogCancelListener) getActivity());
-        }
-		return listeners.toArray(new ISimpleDialogCancelListener[listeners.size()]);
 	}
 
 	public static class SimpleDialogBuilder extends BaseDialogBuilder<SimpleDialogBuilder> {

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -19,14 +18,16 @@ import com.avast.android.dialogs.R;
 import com.avast.android.dialogs.core.BaseDialogBuilder;
 import com.avast.android.dialogs.core.BaseDialogFragment;
 import com.avast.android.dialogs.iface.IListDialogListener;
+import com.avast.android.dialogs.iface.ISimpleDialogCancelListener;
 
 /**
  * Dialog with a list of options. Implement {@link com.avast.android.dialogs.iface.IListDialogListener} to handle selection.
  */
 public class ListDialogFragment extends BaseDialogFragment {
 
-    private static String ARG_ITEMS = "items";
-    protected int mRequestCode;
+    protected final static String ARG_ITEMS = "items";
+    protected final static String ARG_TITLE = "title";
+    protected final static String ARG_CANCEL_BUTTON = "cancel_button";
 
     public static SimpleListDialogBuilder createBuilder(Context context,
                                                         FragmentManager fragmentManager) {
@@ -39,15 +40,6 @@ public class ListDialogFragment extends BaseDialogFragment {
         if (getArguments() == null) {
             throw new IllegalArgumentException(
                     "use SimpleListDialogBuilder to construct this dialog");
-        }
-        final Fragment targetFragment = getTargetFragment();
-        if (targetFragment != null) {
-          mRequestCode = getTargetRequestCode();
-        } else {
-          Bundle args = getArguments();
-          if (args != null) {
-            mRequestCode = args.getInt(BaseDialogBuilder.ARG_REQUEST_CODE, 0);
-          }
         }
     }
 
@@ -110,19 +102,11 @@ public class ListDialogFragment extends BaseDialogFragment {
         @Override
         protected Bundle prepareArguments() {
             Bundle args = new Bundle();
-            args.putString(SimpleDialogFragment.ARG_TITLE, title);
-            args.putString(SimpleDialogFragment.ARG_POSITIVE_BUTTON, cancelButtonText);
+            args.putString(ARG_TITLE, title);
+            args.putString(ARG_CANCEL_BUTTON, cancelButtonText);
             args.putStringArray(ARG_ITEMS, items);
 
             return args;
-        }
-    }
-
-    @Override
-    public void onCancel(DialogInterface dialog) {
-        super.onCancel(dialog);
-        for (IListDialogListener listener : getDialogListeners()) {
-            listener.onCancelled(mRequestCode);
         }
     }
 
@@ -133,11 +117,11 @@ public class ListDialogFragment extends BaseDialogFragment {
             builder.setTitle(title);
         }
 
-        if (!TextUtils.isEmpty(getPositiveButtonText())) {
-            builder.setPositiveButton(getPositiveButtonText(), new View.OnClickListener() {
+        if (!TextUtils.isEmpty(getCancelButtonText())) {
+            builder.setPositiveButton(getCancelButtonText(), new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    for (IListDialogListener listener : getDialogListeners()) {
+                    for (ISimpleDialogCancelListener listener : getCancelListeners()) {
                         listener.onCancelled(mRequestCode);
                     }
                     dismiss();
@@ -185,15 +169,15 @@ public class ListDialogFragment extends BaseDialogFragment {
     }
 
     private String getTitle() {
-        return getArguments().getString(SimpleDialogFragment.ARG_TITLE);
+        return getArguments().getString(ARG_TITLE);
     }
 
     private String[] getItems() {
         return getArguments().getStringArray(ARG_ITEMS);
     }
 
-    private String getPositiveButtonText() {
-        return getArguments().getString(SimpleDialogFragment.ARG_POSITIVE_BUTTON);
+    private String getCancelButtonText() {
+        return getArguments().getString(ARG_CANCEL_BUTTON);
     }
 
 }

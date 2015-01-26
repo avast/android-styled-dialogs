@@ -35,25 +35,9 @@ public class DatePickerDialogFragment extends BaseDialogFragment {
     DatePicker mDatePicker;
     Calendar mCalendar;
 
-    private int mRequestCode;
-
 
     public static SimpleDialogBuilder createBuilder(Context context, FragmentManager fragmentManager) {
         return new SimpleDialogBuilder(context, fragmentManager, DatePickerDialogFragment.class);
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        final Fragment targetFragment = getTargetFragment();
-        if (targetFragment != null) {
-            mRequestCode = getTargetRequestCode();
-        } else {
-            Bundle args = getArguments();
-            if (args != null) {
-                mRequestCode = args.getInt(BaseDialogBuilder.ARG_REQUEST_CODE, 0);
-            }
-        }
     }
 
     /** Get dialog date listeners.
@@ -72,32 +56,6 @@ public class DatePickerDialogFragment extends BaseDialogFragment {
             listeners.add((IDateDialogListener) getActivity());
         }
         return listeners.toArray(new IDateDialogListener[listeners.size()]);
-    }
-
-    /** Get dialog cancel listeners.
-     *  There might be more than one cancel listener.
-     *
-     * @return Dialog cancel listeners
-     * @since 2.1.0
-     */
-    protected ISimpleDialogCancelListener[] getCancelListeners() {
-        final Fragment targetFragment = getTargetFragment();
-        List<ISimpleDialogCancelListener> listeners = new ArrayList<ISimpleDialogCancelListener>();
-        if (targetFragment != null && targetFragment instanceof ISimpleDialogCancelListener) {
-            listeners.add((ISimpleDialogCancelListener) targetFragment);
-        }
-        if (getActivity() instanceof ISimpleDialogCancelListener) {
-            listeners.add((ISimpleDialogCancelListener)getActivity());
-        }
-        return listeners.toArray(new ISimpleDialogCancelListener[listeners.size()]);
-    }
-
-    @Override
-    public void onCancel(DialogInterface dialog) {
-        super.onCancel(dialog);
-        for (ISimpleDialogCancelListener listener : getCancelListeners()) {
-            listener.onCancelled(mRequestCode);
-        }
     }
 
     @Override
