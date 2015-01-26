@@ -17,6 +17,7 @@
 package com.avast.android.dialogs.core;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import android.app.Dialog;
@@ -130,14 +131,14 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
     @SuppressWarnings("unchecked")
     protected <T> List<T> getDialogListeners(Class<T> listenerInterface) {
         final Fragment targetFragment = getTargetFragment();
-        List<T> listeners = new ArrayList<T>();
+        List<T> listeners = new ArrayList<T>(2);
         if (targetFragment != null && listenerInterface.isAssignableFrom(targetFragment.getClass())) {
             listeners.add((T) targetFragment);
         }
         if (getActivity() != null && listenerInterface.isAssignableFrom(getActivity().getClass())) {
             listeners.add((T) getActivity());
         }
-        return listeners;
+        return Collections.unmodifiableList(listeners);
     }
 
     /**
