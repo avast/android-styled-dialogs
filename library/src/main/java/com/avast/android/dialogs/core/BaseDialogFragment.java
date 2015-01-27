@@ -83,6 +83,12 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
         }
     }
 
+    /** Key method for using {@link com.avast.android.dialogs.core.BaseDialogFragment}.
+     *  Customized dialogs need to be set up via provided builder.
+     *
+     * @param initialBuilder Provided builder for setting up customized dialog
+     * @return Updated builder
+     */
     protected abstract Builder build(Builder initialBuilder);
 
     @Override
@@ -127,7 +133,12 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
         return getDialogListeners(ISimpleDialogCancelListener.class);
     }
 
-
+    /** Utility method for acquiring all listeners of some type for current instance of DialogFragment
+     *
+     * @param listenerInterface Interface of the desired listeners
+     * @return Unmodifiable list of listeners
+     * @since 2.1.0
+     */
     @SuppressWarnings("unchecked")
     protected <T> List<T> getDialogListeners(Class<T> listenerInterface) {
         final Fragment targetFragment = getTargetFragment();

@@ -58,8 +58,8 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 
 	}
 
-	/**
-	 * Children can extend this to add more things to base builder.
+	/** Key method for extending {@link com.avast.android.dialogs.fragment.SimpleDialogFragment}.
+	 *  Children can extend this to add more things to base builder.
 	 */
 	@Override
 	protected BaseDialogFragment.Builder build(BaseDialogFragment.Builder builder) {
