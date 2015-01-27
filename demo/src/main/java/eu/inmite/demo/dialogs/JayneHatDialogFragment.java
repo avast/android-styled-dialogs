@@ -30,26 +30,26 @@ import eu.inmite.android.lib.dialogs.SimpleDialogFragment;
  */
 public class JayneHatDialogFragment extends SimpleDialogFragment {
 
-	public static String TAG = "jayne";
+    public static String TAG = "jayne";
 
-	public static void show(FragmentActivity activity) {
-		new JayneHatDialogFragment().show(activity.getSupportFragmentManager(), TAG);
-	}
+    public static void show(FragmentActivity activity) {
+        new JayneHatDialogFragment().show(activity.getSupportFragmentManager(), TAG);
+    }
 
-	@Override
-	public BaseDialogFragment.Builder build(BaseDialogFragment.Builder builder) {
-		builder.setTitle("Jayne's hat");
-		builder.setView(LayoutInflater.from(getActivity()).inflate(R.layout.item_jayne_hat, null));
-		builder.setPositiveButton("I want one", new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				ISimpleDialogListener listener = getDialogListener();
-				if (listener != null) {
-					listener.onPositiveButtonClicked(0);
-				}
-				dismiss();
-			}
-		});
-		return builder;
-	}
+    @Override
+    public BaseDialogFragment.Builder build(BaseDialogFragment.Builder builder) {
+        builder.setTitle("Jayne's hat");
+        builder.setView(LayoutInflater.from(getActivity()).inflate(R.layout.item_jayne_hat, null));
+        builder.setPositiveButton("I want one", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ISimpleDialogListener listener = getDialogListener();
+                if (listener != null) {
+                    listener.onPositiveButtonClicked(0);
+                }
+                dismiss();
+            }
+        });
+        return builder;
+    }
 }

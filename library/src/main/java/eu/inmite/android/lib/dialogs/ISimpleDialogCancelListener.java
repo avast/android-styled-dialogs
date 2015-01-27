@@ -22,10 +22,10 @@ package eu.inmite.android.lib.dialogs;
  * @author Tomáš Kypta (inmite.eu)
  */
 public interface ISimpleDialogCancelListener {
-	/**
-	 * Callback to react on cancel event.
-	 *
-	 * @param requestCode identifies dialogue
-	 */
-	public void onCancelled(int requestCode);
+    /**
+     * Callback to react on cancel event.
+     *
+     * @param requestCode identifies dialogue
+     */
+    public void onCancelled(int requestCode);
 }

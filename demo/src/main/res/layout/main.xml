@@ -1,81 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-	<LinearLayout
-		android:orientation="vertical"
-		android:gravity="center"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-		<LinearLayout
-			android:orientation="horizontal"
-			android:gravity="center"
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginBottom="@dimen/grid_8"
-			android:layout_marginTop="@dimen/grid_4">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/grid_8"
+            android:layout_marginTop="@dimen/grid_4">
 
-			<Button
-				style="@style/Button.Top"
-				android:text="Default dark theme"
-				android:id="@+id/default_dark_theme" />
+            <Button
+                style="@style/Button.Top"
+                android:text="Default dark theme"
+                android:id="@+id/default_dark_theme" />
 
-			<Button
-				style="@style/Button.Top"
-				android:text="Default light theme"
-				android:id="@+id/default_light_theme" />
+            <Button
+                style="@style/Button.Top"
+                android:text="Default light theme"
+                android:id="@+id/default_light_theme" />
 
-			<Button
-				style="@style/Button.Top"
-				android:text="Custom dark theme"
-				android:id="@+id/custom_dark_theme" />
+            <Button
+                style="@style/Button.Top"
+                android:text="Custom dark theme"
+                android:id="@+id/custom_dark_theme" />
 
-			<Button
-				style="@style/Button.Top"
-				android:text="Custom light theme"
-				android:id="@+id/custom_light_theme" />
-		</LinearLayout>
+            <Button
+                style="@style/Button.Top"
+                android:text="Custom light theme"
+                android:id="@+id/custom_light_theme" />
+        </LinearLayout>
 
-		<Button
-			style="@style/Button"
-			android:text="SimpleDialog: message"
-			android:id="@+id/message_dialog" />
+        <Button
+            style="@style/Button"
+            android:text="SimpleDialog: message"
+            android:id="@+id/message_dialog" />
 
-		<Button
-			android:text="SimpleDialog: message and title"
-			android:id="@+id/message_title_dialog"
-			style="@style/Button" />
+        <Button
+            android:text="SimpleDialog: message and title"
+            android:id="@+id/message_title_dialog"
+            style="@style/Button" />
 
-		<Button
-			style="@style/Button"
-			android:text="SimpleDialog with callbacks"
-			android:id="@+id/message_title_buttons_dialog" />
+        <Button
+            style="@style/Button"
+            android:text="SimpleDialog with callbacks"
+            android:id="@+id/message_title_buttons_dialog" />
 
-		<Button
-			style="@style/Button"
-			android:text="Dialog with list"
-			android:id="@+id/list_dialog" />
+        <Button
+            style="@style/Button"
+            android:text="Dialog with list"
+            android:id="@+id/list_dialog" />
 
-		<Button
-			style="@style/Button"
-			android:text="Dialog with custom view"
-			android:id="@+id/custom_dialog" />
+        <Button
+            style="@style/Button"
+            android:text="Dialog with custom view"
+            android:id="@+id/custom_dialog" />
 
-		<Button
-			style="@style/Button"
-			android:text="Progress dialog"
-			android:id="@+id/progress_dialog" />
-		
-		<Button
-			style="@style/Button"
-			android:id="@+id/time_picker"
-			android:text="Time Picker" />
+        <Button
+            style="@style/Button"
+            android:text="Progress dialog"
+            android:id="@+id/progress_dialog" />
 
-		<Button
-			style="@style/Button"
-			android:id="@+id/date_picker"
-			android:text="Date Picker"/>
-	</LinearLayout>
+        <Button
+            style="@style/Button"
+            android:id="@+id/time_picker"
+            android:text="Time Picker" />
+
+        <Button
+            style="@style/Button"
+            android:id="@+id/date_picker"
+            android:text="Date Picker" />
+    </LinearLayout>
 </ScrollView>

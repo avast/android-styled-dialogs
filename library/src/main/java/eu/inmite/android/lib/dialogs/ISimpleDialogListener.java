@@ -23,24 +23,24 @@ package eu.inmite.android.lib.dialogs;
  * @author David Vávra (david@inmite.eu)
  */
 public interface ISimpleDialogListener {
-	/**
-	 * Callback for click on positive button.
-	 *
-	 * @param requestCode enables to identify dialog
-	 */
-	public void onPositiveButtonClicked(int requestCode);
+    /**
+     * Callback for click on positive button.
+     *
+     * @param requestCode enables to identify dialog
+     */
+    public void onPositiveButtonClicked(int requestCode);
 
-	/**
-	 * Callback for click on negative button.
-	 *
-	 * @param requestCode enables to identify dialog
-	 */
-	public void onNegativeButtonClicked(int requestCode);
+    /**
+     * Callback for click on negative button.
+     *
+     * @param requestCode enables to identify dialog
+     */
+    public void onNegativeButtonClicked(int requestCode);
 
-	/**
-	 * Callback for click on neutral button.
-	 *
-	 * @param requestCode enables to identify dialog
-	 */
-	public void onNeutralButtonClicked(int requestCode);
+    /**
+     * Callback for click on neutral button.
+     *
+     * @param requestCode enables to identify dialog
+     */
+    public void onNeutralButtonClicked(int requestCode);
 }

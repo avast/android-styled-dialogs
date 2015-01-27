@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="app_name">StyledDialogs Demo</string>
-	<string name="title">Favourite Firefly quote</string>
+    <string name="app_name">StyledDialogs Demo</string>
+    <string name="title">Favourite Firefly quote</string>
 	<string name="message_1">Love. Can know all the math in the \'verse but take a boat in the air that you
 		don\'t
 		love? She\'ll shake you off just as sure as a turn in the worlds. Love keeps her in the air when she oughtta
@@ -14,6 +14,6 @@
 	</string>
 	<string name="message_4">Mal: I\'m just waiting to see if I pass out. Long story."
 	</string>
-	<string name="positive_button">Love</string>
-	<string name="negative_button">Hate</string>
+    <string name="positive_button">Love</string>
+    <string name="negative_button">Hate</string>
 </resources>
