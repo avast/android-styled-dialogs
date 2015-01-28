@@ -3,4 +3,8 @@
     <item type="id" name="sdl__positive_button" />
     <item type="id" name="sdl__neutral_button" />
     <item type="id" name="sdl__negative_button" />
+
+    <!-- Just adding these so I wont have to remove a lot of code from NumberPicker.java. -->
+    <item name="sdl__np__increment" type="id" />
+    <item name="sdl__np__decrement" type="id" />
 </resources>

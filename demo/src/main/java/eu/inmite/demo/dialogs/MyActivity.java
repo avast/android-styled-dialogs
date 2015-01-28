@@ -157,6 +157,22 @@ public class MyActivity extends FragmentActivity implements
                     .show();
             }
         });
+
+        findViewById(R.id.number_picker).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NumberPickerDialogFragment
+                        .createBuilder(MyActivity.this, getSupportFragmentManager())
+                        .setTitle("Pick a number:")
+                        .setNumber(5)
+                        .setMaxValue(20)
+                        .setMinValue(0)
+                        .setPositiveButtonText(android.R.string.ok)
+                        .setNegativeButtonText(android.R.string.cancel)
+                        .setRequestCode(14)
+                        .show();
+            }
+        });
     }
 
     // IListDialogListener

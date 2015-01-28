@@ -27,4 +27,5 @@
     <color name="sdl_bright_foreground_disabled_holo_dark">#ff4c4c4c</color>
     <color name="sdl_bright_foreground_disabled_holo_light">#ffb2b2b2</color>
 
+    <color name="sdl_transparent">#00000000</color>
 </resources>
