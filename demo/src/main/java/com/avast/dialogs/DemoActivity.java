@@ -22,22 +22,23 @@ import java.util.Date;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.Toast;
 
 import com.avast.android.dialogs.fragment.*;
-import com.avast.android.dialogs.iface.IDateDialogListener;
-import com.avast.android.dialogs.iface.IListDialogListener;
-import com.avast.android.dialogs.iface.ISimpleDialogCancelListener;
-import com.avast.android.dialogs.iface.ISimpleDialogListener;
+import com.avast.android.dialogs.iface.*;
 
 public class DemoActivity extends ActionBarActivity implements
     ISimpleDialogListener,
     IDateDialogListener,
     ISimpleDialogCancelListener,
-    IListDialogListener {
+    IListDialogListener,
+    IListDialogMultipleListener {
 
     private static final int REQUEST_PROGRESS = 1;
-    private static final int REQUEST_LIST = 11;
+    private static final int REQUEST_LIST_SIMPLE = 9;
+    private static final int REQUEST_LIST_MULTIPLE = 10;
+    private static final int REQUEST_LIST_SINGLE = 11;
     private static final int REQUEST_DATE_PICKER = 12;
     private static final int REQUEST_TIME_PICKER = 13;
     private static final int REQUEST_SIMPLE_DIALOG = 42;
@@ -105,7 +106,7 @@ public class DemoActivity extends ActionBarActivity implements
                     .show();
             }
         });
-        findViewById(R.id.list_dialog).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.list_dialog_simple).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ListDialogFragment
@@ -113,7 +114,36 @@ public class DemoActivity extends ActionBarActivity implements
                     .setTitle("Your favorite character:")
                     .setItems(new String[]{"Jayne", "Malcolm", "Kaylee",
                         "Wash", "Zoe", "River"})
-                    .setRequestCode(REQUEST_LIST)
+                    .setRequestCode(REQUEST_LIST_SIMPLE)
+                    .show();
+
+            }
+        });
+        findViewById(R.id.list_dialog_single).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ListDialogFragment
+                    .createBuilder(c, getSupportFragmentManager())
+                    .setTitle("Your favorite character:")
+                    .setItems(new String[]{"Jayne", "Malcolm", "Kaylee",
+                        "Wash", "Zoe", "River"})
+                    .setRequestCode(REQUEST_LIST_SINGLE)
+                    .setChoiceMode(AbsListView.CHOICE_MODE_SINGLE)
+                    .show();
+
+            }
+        });
+        findViewById(R.id.list_dialog_multiple).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ListDialogFragment
+                    .createBuilder(c, getSupportFragmentManager())
+                    .setTitle("Your favorite character:")
+                    .setItems(new String[]{"Jayne", "Malcolm", "Kaylee",
+                        "Wash", "Zoe", "River"})
+                    .setRequestCode(REQUEST_LIST_MULTIPLE)
+                    .setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE)
+                    .setCheckedItems(new int[]{1, 3})
                     .show();
 
             }
@@ -156,8 +186,23 @@ public class DemoActivity extends ActionBarActivity implements
 
     @Override
     public void onListItemSelected(String value, int number, int requestCode) {
-        if (requestCode == REQUEST_LIST) {
+        if (requestCode == REQUEST_LIST_SIMPLE || requestCode == REQUEST_LIST_SINGLE) {
             Toast.makeText(c, "Selected: " + value, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onListItemsSelected(String[] values, int[] selectedPositions, int requestCode) {
+        if (requestCode == REQUEST_LIST_MULTIPLE) {
+            StringBuilder sb = new StringBuilder();
+            for (String value : values) {
+                if (sb.length() > 0) {
+                    sb.append(", ");
+                }
+                sb.append(value);
+
+            }
+            Toast.makeText(c, "Selected: " + sb.toString(), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -169,7 +214,8 @@ public class DemoActivity extends ActionBarActivity implements
             Toast.makeText(c, "Dialog cancelled", Toast.LENGTH_SHORT).show();
         } else if (requestCode == REQUEST_PROGRESS) {
             Toast.makeText(c, "Progress dialog cancelled", Toast.LENGTH_SHORT).show();
-        } else if (requestCode == REQUEST_LIST) {
+        } else if (requestCode == REQUEST_LIST_SIMPLE || requestCode == REQUEST_LIST_SINGLE || requestCode ==
+            REQUEST_LIST_MULTIPLE) {
             Toast.makeText(c, "Nothing selected", Toast.LENGTH_SHORT).show();
         }
     }
@@ -224,4 +270,5 @@ public class DemoActivity extends ActionBarActivity implements
         DateFormat dateFormat = DateFormat.getDateTimeInstance();
         Toast.makeText(this, text + "Success! " + dateFormat.format(date), Toast.LENGTH_SHORT).show();
     }
+
 }
