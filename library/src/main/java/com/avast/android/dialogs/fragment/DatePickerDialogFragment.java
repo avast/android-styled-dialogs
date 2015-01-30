@@ -18,6 +18,7 @@ import com.avast.android.dialogs.core.BaseDialogBuilder;
 import com.avast.android.dialogs.core.BaseDialogFragment;
 import com.avast.android.dialogs.iface.IDateDialogCancelListener;
 import com.avast.android.dialogs.iface.IDateDialogListener;
+import com.avast.android.dialogs.iface.IListDialogListener;
 
 /**
  * Dialog with a date picker. Implement {@link com.avast.android.dialogs.iface.IDateDialogListener} or {@link com.avast.android.dialogs.iface.IDateDialogCancelListener} to handle events.
@@ -56,6 +57,10 @@ public class DatePickerDialogFragment extends BaseDialogFragment {
     }
 
     protected IDateDialogListener getDialogListener() {
+        IDateDialogListener listener = getGeneralListener(IDateDialogListener.class);
+        if (listener != null) {
+            return listener;
+        }
         final Fragment targetFragment = getTargetFragment();
         if (targetFragment != null) {
             if (targetFragment instanceof IDateDialogListener) {
@@ -69,7 +74,12 @@ public class DatePickerDialogFragment extends BaseDialogFragment {
         return null;
     }
 
+    @SuppressWarnings({"unused"})
     protected IDateDialogCancelListener getCancelListener() {
+        IDateDialogCancelListener listener = getGeneralListener(IListDialogListener.class);
+        if (listener != null) {
+            return listener;
+        }
         final Fragment targetFragment = getTargetFragment();
         if (targetFragment != null) {
             if (targetFragment instanceof IDateDialogCancelListener) {

@@ -114,6 +114,19 @@ public class DemoActivity extends ActionBarActivity implements
                     .setItems(new String[]{"Jayne", "Malcolm", "Kaylee",
                         "Wash", "Zoe", "River"})
                     .setRequestCode(REQUEST_LIST)
+                    .setGeneralListener(new IListDialogListener() {
+                        @Override
+                        public void onListItemSelected(String value, int number, int requestCode) {
+                            if (requestCode == REQUEST_LIST) {
+                                Toast.makeText(c, "List item is selected: " + value, Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(int requestCode) {
+                            Toast.makeText(c, "Nothing selected in list", Toast.LENGTH_SHORT).show();
+                        }
+                    })
                     .show();
 
             }

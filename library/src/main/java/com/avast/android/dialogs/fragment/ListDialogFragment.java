@@ -39,12 +39,12 @@ public class ListDialogFragment extends BaseDialogFragment {
         }
         final Fragment targetFragment = getTargetFragment();
         if (targetFragment != null) {
-          mRequestCode = getTargetRequestCode();
+            mRequestCode = getTargetRequestCode();
         } else {
-          Bundle args = getArguments();
-          if (args != null) {
-            mRequestCode = args.getInt(BaseDialogBuilder.ARG_REQUEST_CODE, 0);
-          }
+            Bundle args = getArguments();
+            if (args != null) {
+                mRequestCode = args.getInt(BaseDialogBuilder.ARG_REQUEST_CODE, 0);
+            }
         }
     }
 
@@ -168,6 +168,10 @@ public class ListDialogFragment extends BaseDialogFragment {
     }
 
     private IListDialogListener getDialogListener() {
+        IListDialogListener listener = getGeneralListener(IListDialogListener.class);
+        if (listener != null) {
+            return listener;
+        }
         final Fragment targetFragment = getTargetFragment();
         if (targetFragment != null) {
             if (targetFragment instanceof IListDialogListener) {

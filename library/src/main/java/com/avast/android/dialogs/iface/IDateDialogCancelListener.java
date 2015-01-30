@@ -22,5 +22,5 @@ import java.util.Date;
  * @author Tomáš Kypta
  */
 public interface IDateDialogCancelListener {
-	public void onCancelled(int requestCode, Date date);
+    public void onCancelled(int requestCode, Date date);
 }
