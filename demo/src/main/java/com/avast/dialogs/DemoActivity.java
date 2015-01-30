@@ -210,17 +210,24 @@ public class DemoActivity extends ActionBarActivity implements
 
     @Override
     public void onCancelled(int requestCode) {
-        if (requestCode == REQUEST_SIMPLE_DIALOG) {
-            Toast.makeText(c, "Dialog cancelled", Toast.LENGTH_SHORT).show();
-        } else if (requestCode == REQUEST_PROGRESS) {
-            Toast.makeText(c, "Progress dialog cancelled", Toast.LENGTH_SHORT).show();
-        } else if (requestCode == REQUEST_LIST_SIMPLE || requestCode == REQUEST_LIST_SINGLE || requestCode ==
-            REQUEST_LIST_MULTIPLE) {
-            Toast.makeText(c, "Nothing selected", Toast.LENGTH_SHORT).show();
-        } else if (requestCode == REQUEST_DATE_PICKER) {
-            Toast.makeText(c, "Date picker cancelled", Toast.LENGTH_SHORT).show();
-        } else if (requestCode == REQUEST_TIME_PICKER) {
-            Toast.makeText(c, "Time picker cancelled", Toast.LENGTH_SHORT).show();
+        switch (requestCode) {
+            case REQUEST_SIMPLE_DIALOG:
+                Toast.makeText(c, "Dialog cancelled", Toast.LENGTH_SHORT).show();
+                break;
+            case REQUEST_PROGRESS:
+                Toast.makeText(c, "Progress dialog cancelled", Toast.LENGTH_SHORT).show();
+                break;
+            case REQUEST_LIST_SIMPLE:
+            case REQUEST_LIST_SINGLE:
+            case REQUEST_LIST_MULTIPLE:
+                Toast.makeText(c, "Nothing selected", Toast.LENGTH_SHORT).show();
+                break;
+            case REQUEST_DATE_PICKER:
+                Toast.makeText(c, "Date picker cancelled", Toast.LENGTH_SHORT).show();
+                break;
+            case REQUEST_TIME_PICKER:
+                Toast.makeText(c, "Time picker cancelled", Toast.LENGTH_SHORT).show();
+                break;
         } 
     }
 
