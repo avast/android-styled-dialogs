@@ -88,6 +88,36 @@
         <item name="android:paddingRight">@dimen/grid_6</item>
     </style>
 
+    <style name="SDL.TextView.MultiChoice">
+        <item name="android:minHeight">@dimen/grid_13</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/sdl_text_primary</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingRight">@dimen/grid_6</item>
+    </style>
+
+    <style name="SDL.ListItemControl">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:focusable">false</item>
+        <item name="android:focusableInTouchMode">false</item>
+        <item name="android:clickable">false</item>
+        <item name="android:minHeight">@dimen/grid_13</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">@dimen/grid_6</item>
+        <item name="android:paddingRight">0dp</item>
+    </style>
+
+    <style name="SDL.ListItem">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:gravity">center_vertical|start</item>
+        <item name="android:descendantFocusability">blocksDescendants</item>
+        <item name="android:paddingLeft">@dimen/grid_6</item>
+        <item name="android:paddingRight">@dimen/grid_6</item>
+    </style>
+
     <style name="SDL.Button">
         <item name="android:background">@drawable/sdl_button</item>
         <item name="android:layout_width">wrap_content</item>
