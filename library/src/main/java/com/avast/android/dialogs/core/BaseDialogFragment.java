@@ -48,7 +48,7 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
         Bundle args = getArguments();
         if (args != null) {
             dialog.setCanceledOnTouchOutside(
-                    args.getBoolean(BaseDialogBuilder.ARG_CANCELABLE_ON_TOUCH_OUTSIDE));
+                args.getBoolean(BaseDialogBuilder.ARG_CANCELABLE_ON_TOUCH_OUTSIDE));
         }
         dialog.setOnShowListener(this);
         return dialog;
@@ -81,7 +81,7 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
     @Override
     public void onShow(DialogInterface dialog) {
         if (getView() != null) {
-            ScrollView vScrollView = (ScrollView) getView().findViewById(R.id.sdl_scrollview);
+            ScrollView vScrollView = (ScrollView)getView().findViewById(R.id.sdl_scrollview);
             boolean scrollable = isScrollable(vScrollView);
             modifyButtonsBasedOnScrollableContent(scrollable);
         }
@@ -231,7 +231,7 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
             mListCheckedItemMultipleIds = checkedItemIds;
             mOnItemClickListener = listener;
             mChoiceMode = choiceMode;
-            mListCheckedItemIdx=-1;
+            mListCheckedItemIdx = -1;
             return this;
         }
 
@@ -256,20 +256,20 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
 
         public View create() {
 
-            LinearLayout content = (LinearLayout) mInflater.inflate(R.layout.sdl_dialog, mContainer, false);
+            LinearLayout content = (LinearLayout)mInflater.inflate(R.layout.sdl_dialog, mContainer, false);
 
-            TextView vTitle = (TextView) content.findViewById(R.id.sdl_title);
-            TextView vMessage = (TextView) content.findViewById(R.id.sdl_message);
-            FrameLayout vCustomView = (FrameLayout) content.findViewById(R.id.sdl_custom);
-            Button vPositiveButton = (Button) content.findViewById(R.id.sdl_button_positive);
-            Button vNegativeButton = (Button) content.findViewById(R.id.sdl_button_negative);
-            Button vNeutralButton = (Button) content.findViewById(R.id.sdl_button_neutral);
-            Button vPositiveButtonStacked = (Button) content.findViewById(R.id.sdl_button_positive_stacked);
-            Button vNegativeButtonStacked = (Button) content.findViewById(R.id.sdl_button_negative_stacked);
-            Button vNeutralButtonStacked = (Button) content.findViewById(R.id.sdl_button_neutral_stacked);
+            TextView vTitle = (TextView)content.findViewById(R.id.sdl_title);
+            TextView vMessage = (TextView)content.findViewById(R.id.sdl_message);
+            FrameLayout vCustomView = (FrameLayout)content.findViewById(R.id.sdl_custom);
+            Button vPositiveButton = (Button)content.findViewById(R.id.sdl_button_positive);
+            Button vNegativeButton = (Button)content.findViewById(R.id.sdl_button_negative);
+            Button vNeutralButton = (Button)content.findViewById(R.id.sdl_button_neutral);
+            Button vPositiveButtonStacked = (Button)content.findViewById(R.id.sdl_button_positive_stacked);
+            Button vNegativeButtonStacked = (Button)content.findViewById(R.id.sdl_button_negative_stacked);
+            Button vNeutralButtonStacked = (Button)content.findViewById(R.id.sdl_button_neutral_stacked);
             View vButtonsDefault = content.findViewById(R.id.sdl_buttons_default);
             View vButtonsStacked = content.findViewById(R.id.sdl_buttons_stacked);
-            ListView vList = (ListView) content.findViewById(R.id.sdl_list);
+            ListView vList = (ListView)content.findViewById(R.id.sdl_list);
 
             Typeface regularFont = TypefaceHelper.get(mContext, "Roboto-Regular");
             Typeface mediumFont = TypefaceHelper.get(mContext, "Roboto-Medium");
@@ -309,7 +309,7 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
                 vButtonsStacked.setVisibility(View.GONE);
             }
             if (TextUtils.isEmpty(mPositiveButtonText) && TextUtils.isEmpty(mNegativeButtonText) && TextUtils.isEmpty
-                    (mNeutralButtonText)) {
+                (mNeutralButtonText)) {
                 vButtonsDefault.setVisibility(View.GONE);
             }
 
@@ -334,7 +334,7 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
 
         private boolean shouldStackButtons() {
             return shouldStackButton(mPositiveButtonText) || shouldStackButton(mNegativeButtonText)
-                    || shouldStackButton(mNeutralButtonText);
+                || shouldStackButton(mNeutralButtonText);
         }
 
         private boolean shouldStackButton(CharSequence text) {

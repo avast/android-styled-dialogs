@@ -12,6 +12,7 @@ import android.text.TextUtils;
 import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.*;
+
 import com.avast.android.dialogs.R;
 import com.avast.android.dialogs.core.BaseDialogBuilder;
 import com.avast.android.dialogs.core.BaseDialogFragment;
@@ -48,7 +49,7 @@ public class ListDialogFragment extends BaseDialogFragment {
         super.onActivityCreated(savedInstanceState);
         if (getArguments() == null) {
             throw new IllegalArgumentException(
-                    "use SimpleListDialogBuilder to construct this dialog");
+                "use SimpleListDialogBuilder to construct this dialog");
         }
         final Fragment targetFragment = getTargetFragment();
         if (targetFragment != null) {
@@ -160,7 +161,7 @@ public class ListDialogFragment extends BaseDialogFragment {
 
         @Override
         public ListDialogFragment show() {
-            return (ListDialogFragment) super.show();
+            return (ListDialogFragment)super.show();
         }
 
         @Override
@@ -197,13 +198,13 @@ public class ListDialogFragment extends BaseDialogFragment {
     private void buildMultiChoice(Builder builder) {
         final String[] items = getItems();
         ListAdapter adapter = new ArrayAdapter<>(getActivity(),
-                R.layout.sdl_list_item_multichoice,
-                R.id.sdl_text,
-                items);
+            R.layout.sdl_list_item_multichoice,
+            R.id.sdl_text,
+            items);
         builder.setItems(adapter, asIntArray(getCheckedItems()), AbsListView.CHOICE_MODE_MULTIPLE, new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                SparseBooleanArray checkedPositions = ((ListView) parent).getCheckedItemPositions();
+                SparseBooleanArray checkedPositions = ((ListView)parent).getCheckedItemPositions();
                 setCheckedItems(new SparseBooleanArrayParcelable(checkedPositions));
             }
         });
@@ -213,13 +214,13 @@ public class ListDialogFragment extends BaseDialogFragment {
     private void buildSingleChoice(Builder builder) {
         final String[] items = getItems();
         ListAdapter adapter = new ArrayAdapter<>(getActivity(),
-                R.layout.sdl_list_item_singlechoice,
-                R.id.sdl_text,
-                items);
+            R.layout.sdl_list_item_singlechoice,
+            R.id.sdl_text,
+            items);
         builder.setItems(adapter, asIntArray(getCheckedItems()), AbsListView.CHOICE_MODE_SINGLE, new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                SparseBooleanArray checkedPositions = ((ListView) parent).getCheckedItemPositions();
+                SparseBooleanArray checkedPositions = ((ListView)parent).getCheckedItemPositions();
                 setCheckedItems(new SparseBooleanArrayParcelable(checkedPositions));
             }
         });
@@ -229,16 +230,16 @@ public class ListDialogFragment extends BaseDialogFragment {
     private void buildNormalChoice(Builder builder) {
         final String[] items = getItems();
         ListAdapter adapter = new ArrayAdapter<>(getActivity(),
-                R.layout.sdl_list_item,
-                R.id.sdl_text,
-                items);
+            R.layout.sdl_list_item,
+            R.id.sdl_text,
+            items);
 
         builder.setItems(adapter, -1, new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ISimpleDialogCancelListener listener = getDialogListener();
                 if (listener != null && listener instanceof IListDialogListener) {
-                    ((IListDialogListener) listener).onListItemSelected(getItems()[position], position, mRequestCode);
+                    ((IListDialogListener)listener).onListItemSelected(getItems()[position], position, mRequestCode);
                 }
                 dismiss();
             }
@@ -255,7 +256,7 @@ public class ListDialogFragment extends BaseDialogFragment {
                 checkedValues[i++] = items[checkedPosition];
             }
         }
-        ((IListDialogMultipleListener) getDialogListener()).onListItemsSelected(checkedValues, checkedPositions, mRequestCode);
+        ((IListDialogMultipleListener)getDialogListener()).onListItemsSelected(checkedValues, checkedPositions, mRequestCode);
 
     }
 
@@ -266,7 +267,7 @@ public class ListDialogFragment extends BaseDialogFragment {
         for (int i : checkedPositions) {
             if (i >= 0 && i < items.length) {
                 //1st valid value
-                ((IListDialogListener) getDialogListener()).onListItemSelected(items[i], i, mRequestCode);
+                ((IListDialogListener)getDialogListener()).onListItemSelected(items[i], i, mRequestCode);
                 success = true;
                 break;
             }
@@ -344,11 +345,11 @@ public class ListDialogFragment extends BaseDialogFragment {
         final Fragment targetFragment = getTargetFragment();
         if (targetFragment != null) {
             if (targetFragment instanceof IListDialogListener || targetFragment instanceof IListDialogMultipleListener) {
-                return (ISimpleDialogCancelListener) targetFragment;
+                return (ISimpleDialogCancelListener)targetFragment;
             }
         } else {
             if (getActivity() instanceof IListDialogListener || getActivity() instanceof IListDialogMultipleListener) {
-                return (ISimpleDialogCancelListener) getActivity();
+                return (ISimpleDialogCancelListener)getActivity();
             }
         }
         return null;
