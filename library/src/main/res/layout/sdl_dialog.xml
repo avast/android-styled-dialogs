@@ -9,7 +9,9 @@
         android:id="@+id/sdl_title"
         tools:text="Title" />
 
-    <ScrollView style="@style/SDL.ScrollView" android:id="@+id/sdl_scrollview">
+    <ScrollView
+        style="@style/SDL.ScrollView"
+        android:id="@+id/sdl_scrollview">
 
         <LinearLayout style="@style/SDL.Layout">
 

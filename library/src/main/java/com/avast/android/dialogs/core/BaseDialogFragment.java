@@ -82,7 +82,8 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
     public void onShow(DialogInterface dialog) {
         if (getView() != null) {
             ScrollView vScrollView = (ScrollView)getView().findViewById(R.id.sdl_scrollview);
-            boolean scrollable = isScrollable(vScrollView);
+            ListView vListView = (ListView)getView().findViewById(R.id.sdl_list);
+            boolean scrollable = isScrollable(vScrollView) || isScrollable(vListView);
             modifyButtonsBasedOnScrollableContent(scrollable);
         }
     }
@@ -117,6 +118,14 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
         }
         final int childHeight = scrollView.getChildAt(0).getMeasuredHeight();
         return scrollView.getMeasuredHeight() < childHeight;
+    }
+
+    boolean isScrollable(ListView listView) {
+        int totalHeight = 0;
+        for (int i = 0; i < listView.getChildCount(); i++) {
+            totalHeight += listView.getChildAt(i).getMeasuredHeight();
+        }
+        return listView.getMeasuredHeight() < totalHeight;
     }
 
     /**
@@ -270,6 +279,7 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
             View vButtonsDefault = content.findViewById(R.id.sdl_buttons_default);
             View vButtonsStacked = content.findViewById(R.id.sdl_buttons_stacked);
             ListView vList = (ListView)content.findViewById(R.id.sdl_list);
+            ScrollView vScrollView = (ScrollView)content.findViewById(R.id.sdl_scrollview);
 
             Typeface regularFont = TypefaceHelper.get(mContext, "Roboto-Regular");
             Typeface mediumFont = TypefaceHelper.get(mContext, "Roboto-Medium");
@@ -293,6 +303,7 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
                         vList.setItemChecked(i, true);
                     }
                 }
+                vScrollView.setVisibility(View.GONE); // only one scrollable content in the dialog allowed
             }
 
             if (shouldStackButtons()) {
