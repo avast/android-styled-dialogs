@@ -152,8 +152,11 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
 
         private int mListCheckedItemIdx;
 
-        private AdapterView.OnItemClickListener mOnItemClickListener;
+        private int mChoiceMode;
 
+        private int[] mListCheckedItemMultipleIds;
+
+        private AdapterView.OnItemClickListener mOnItemClickListener;
 
 
         public Builder(Context context, LayoutInflater inflater, ViewGroup container) {
@@ -222,6 +225,16 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
             return this;
         }
 
+
+        public Builder setItems(ListAdapter listAdapter, int[] checkedItemIds, int choiceMode, final AdapterView.OnItemClickListener listener) {
+            mListAdapter = listAdapter;
+            mListCheckedItemMultipleIds = checkedItemIds;
+            mOnItemClickListener = listener;
+            mChoiceMode = choiceMode;
+            mListCheckedItemIdx = -1;
+            return this;
+        }
+
         /**
          * Set list
          *
@@ -232,6 +245,7 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
             mListAdapter = listAdapter;
             mOnItemClickListener = listener;
             mListCheckedItemIdx = checkedItemIdx;
+            mChoiceMode = AbsListView.CHOICE_MODE_NONE;
             return this;
         }
 
@@ -272,6 +286,12 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
                 vList.setOnItemClickListener(mOnItemClickListener);
                 if (mListCheckedItemIdx != -1) {
                     vList.setSelection(mListCheckedItemIdx);
+                }
+                if (mListCheckedItemMultipleIds != null) {
+                    vList.setChoiceMode(mChoiceMode);
+                    for (int i : mListCheckedItemMultipleIds) {
+                        vList.setItemChecked(i, true);
+                    }
                 }
             }
 
