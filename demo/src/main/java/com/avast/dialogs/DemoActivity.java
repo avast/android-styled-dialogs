@@ -33,7 +33,7 @@ public class DemoActivity extends ActionBarActivity implements
     IDateDialogListener,
     ISimpleDialogCancelListener,
     IListDialogListener,
-    IListDialogMultipleListener {
+    IMultiChoiceListDialogListener {
 
     private static final int REQUEST_PROGRESS = 1;
     private static final int REQUEST_LIST_SIMPLE = 9;
