@@ -1,6 +1,7 @@
 package com.avast.android.dialogs.fragment;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -395,20 +396,24 @@ public class ListDialogFragment extends BaseDialogFragment {
 
 
     private static int[] asIntArray(SparseBooleanArray checkedItems) {
-        ArrayList<Integer> list = new ArrayList<>();
-        //add indexes that are checked to a list
+        int checked = 0;
+        // compute number of items
         for (int i = 0; i < checkedItems.size(); i++) {
             int key = checkedItems.keyAt(i);
             if (checkedItems.get(key)) {
-                list.add(key);
+                ++checked;
             }
         }
-        Collections.sort(list);
-        //convert to int array
-        int[] array = new int[list.size()];
-        for (int i = 0; i < list.size(); i++) {
-            array[i] = list.get(i);
+
+        int[] array = new int[checked];
+        //add indexes that are checked
+        for (int i = 0, j = 0; i < checkedItems.size(); i++) {
+            int key = checkedItems.keyAt(i);
+            if (checkedItems.get(key)) {
+                array[j++] = key;
+            }
         }
+        Arrays.sort(array);
         return array;
     }
 
