@@ -9,6 +9,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.DatePicker;
@@ -18,10 +19,11 @@ import com.avast.android.dialogs.core.BaseDialogBuilder;
 import com.avast.android.dialogs.core.BaseDialogFragment;
 import com.avast.android.dialogs.iface.IDateDialogListener;
 
-/** Dialog with a date picker.
- *
- *  Implement {@link com.avast.android.dialogs.iface.IDateDialogListener}
- *  and/or {@link com.avast.android.dialogs.iface.ISimpleDialogCancelListener} to handle events.
+/**
+ * Dialog with a date picker.
+ * <p/>
+ * Implement {@link com.avast.android.dialogs.iface.IDateDialogListener}
+ * and/or {@link com.avast.android.dialogs.iface.ISimpleDialogCancelListener} to handle events.
  */
 public class DatePickerDialogFragment extends BaseDialogFragment {
 
@@ -40,8 +42,9 @@ public class DatePickerDialogFragment extends BaseDialogFragment {
         return new SimpleDialogBuilder(context, fragmentManager, DatePickerDialogFragment.class);
     }
 
-    /** Get dialog date listeners.
-     *  There might be more than one date listener.
+    /**
+     * Get dialog date listeners.
+     * There might be more than one date listener.
      *
      * @return Dialog date listeners
      * @since 2.1.0
@@ -84,15 +87,15 @@ public class DatePickerDialogFragment extends BaseDialogFragment {
                 }
             });
         }
-        mDatePicker = (DatePicker) LayoutInflater.from(getActivity()).inflate(R.layout.sdl_datepicker, null);
+        mDatePicker = (DatePicker)LayoutInflater.from(getActivity()).inflate(R.layout.sdl_datepicker, null);
         builder.setView(mDatePicker);
 
         TimeZone zone = TimeZone.getTimeZone(getArguments().getString(ARG_ZONE));
         mCalendar = Calendar.getInstance(zone);
         mCalendar.setTimeInMillis(getArguments().getLong(ARG_DATE, System.currentTimeMillis()));
         mDatePicker.updateDate(mCalendar.get(Calendar.YEAR)
-                , mCalendar.get(Calendar.MONTH)
-                , mCalendar.get(Calendar.DAY_OF_MONTH));
+            , mCalendar.get(Calendar.MONTH)
+            , mCalendar.get(Calendar.DAY_OF_MONTH));
         return builder;
     }
 
@@ -128,6 +131,7 @@ public class DatePickerDialogFragment extends BaseDialogFragment {
 
         protected SimpleDialogBuilder(Context context, FragmentManager fragmentManager, Class<? extends DatePickerDialogFragment> clazz) {
             super(context, fragmentManager, clazz);
+            m24h = DateFormat.is24HourFormat(context);
         }
 
         public SimpleDialogBuilder setTitle(int titleResourceId) {
@@ -188,7 +192,7 @@ public class DatePickerDialogFragment extends BaseDialogFragment {
             if (mTimeZone != null) {
                 args.putString(ARG_ZONE, mTimeZone);
             } else {
-                args.putString(ARG_ZONE, "GMT");
+                args.putString(ARG_ZONE, TimeZone.getDefault().getID());
             }
             return args;
         }

@@ -160,7 +160,6 @@ public class DemoActivity extends ActionBarActivity implements
                 TimePickerDialogFragment
                     .createBuilder(DemoActivity.this, getSupportFragmentManager())
                     .setDate(new Date())
-                    .set24hour(true)
                     .setPositiveButtonText(android.R.string.ok)
                     .setNegativeButtonText(android.R.string.cancel)
                     .setRequestCode(REQUEST_TIME_PICKER)
@@ -173,7 +172,6 @@ public class DemoActivity extends ActionBarActivity implements
                 DatePickerDialogFragment
                     .createBuilder(DemoActivity.this, getSupportFragmentManager())
                     .setDate(new Date())
-                    .set24hour(true)
                     .setPositiveButtonText(android.R.string.ok)
                     .setNegativeButtonText(android.R.string.cancel)
                     .setRequestCode(REQUEST_DATE_PICKER)
