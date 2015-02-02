@@ -41,7 +41,7 @@ import com.avast.android.dialogs.iface.ISimpleDialogCancelListener;
 import com.avast.android.dialogs.util.TypefaceHelper;
 
 /**
- * Base dialog fragment for all your dialogs, stylable and same design on Android 2.2+.
+ * Base dialog fragment for all your dialogs, styleable and same design on Android 2.2+.
  *
  * @author David Vávra (david@inmite.eu)
  */

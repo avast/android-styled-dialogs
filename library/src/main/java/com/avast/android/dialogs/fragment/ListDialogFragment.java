@@ -38,9 +38,10 @@ public class ListDialogFragment extends BaseDialogFragment {
     public @interface ChoiceMode {
     }
 
-    private static final String ARG_ITEMS = "items";
-    private static final String ARG_CHECKED_ITEMS = "checkedItems";
-    private static final String ARG_MODE = "choiceMode";
+    protected static final String ARG_ITEMS = "items";
+    protected static final String ARG_CHECKED_ITEMS = "checkedItems";
+    protected static final String ARG_MODE = "choiceMode";
+
     protected final static String ARG_TITLE = "title";
     protected final static String ARG_POSITIVE_BUTTON = "positive_button";
     protected final static String ARG_NEGATIVE_BUTTON = "negative_button";
@@ -338,8 +339,9 @@ public class ListDialogFragment extends BaseDialogFragment {
         return builder;
     }
 
-    /** Get dialog listeners.
-     *  There might be more than one listener.
+    /**
+     * Get dialog listeners.
+     * There might be more than one listener.
      *
      * @return Dialog listeners
      * @since 2.1.0
@@ -348,8 +350,9 @@ public class ListDialogFragment extends BaseDialogFragment {
         return getDialogListeners(IListDialogListener.class);
     }
 
-    /** Get dialog listeners.
-     *  There might be more than one listener.
+    /**
+     * Get dialog listeners.
+     * There might be more than one listener.
      *
      * @return Dialog listeners
      * @since 2.1.0
@@ -387,11 +390,11 @@ public class ListDialogFragment extends BaseDialogFragment {
     }
 
     private String getPositiveButtonText() {
-        return getArguments().getString(SimpleDialogFragment.ARG_POSITIVE_BUTTON);
+        return getArguments().getString(ARG_POSITIVE_BUTTON);
     }
 
     private String getNegativeButtonText() {
-        return getArguments().getString(SimpleDialogFragment.ARG_NEGATIVE_BUTTON);
+        return getArguments().getString(ARG_NEGATIVE_BUTTON);
     }
 
 
