@@ -1,12 +1,15 @@
 package com.avast.android.dialogs.fragment;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
 import android.util.SparseBooleanArray;
@@ -17,15 +20,16 @@ import com.avast.android.dialogs.R;
 import com.avast.android.dialogs.core.BaseDialogBuilder;
 import com.avast.android.dialogs.core.BaseDialogFragment;
 import com.avast.android.dialogs.iface.IListDialogListener;
-import com.avast.android.dialogs.iface.IListDialogMultipleListener;
+import com.avast.android.dialogs.iface.IMultiChoiceListDialogListener;
 import com.avast.android.dialogs.iface.ISimpleDialogCancelListener;
 import com.avast.android.dialogs.util.SparseBooleanArrayParcelable;
 
-import java.util.ArrayList;
-import java.util.Collections;
-
 /**
- * Dialog with a list of options. Implement {@link com.avast.android.dialogs.iface.IListDialogListener} to handle selection.
+ * Dialog with a list of options.
+ *
+ * Implement {@link com.avast.android.dialogs.iface.IListDialogListener} to handle selection of single and no choice
+ * modes. Implement {@link com.avast.android.dialogs.iface.IMultiChoiceListDialogListener} to handle selection of
+ * multi choice.
  */
 public class ListDialogFragment extends BaseDialogFragment {
 
@@ -37,8 +41,10 @@ public class ListDialogFragment extends BaseDialogFragment {
     private static final String ARG_ITEMS = "items";
     private static final String ARG_CHECKED_ITEMS = "checkedItems";
     private static final String ARG_MODE = "choiceMode";
+    protected final static String ARG_TITLE = "title";
+    protected final static String ARG_POSITIVE_BUTTON = "positive_button";
+    protected final static String ARG_NEGATIVE_BUTTON = "negative_button";
 
-    protected int mRequestCode;
 
     public static SimpleListDialogBuilder createBuilder(Context context, FragmentManager fragmentManager) {
         return new SimpleListDialogBuilder(context, fragmentManager);
@@ -50,15 +56,6 @@ public class ListDialogFragment extends BaseDialogFragment {
         if (getArguments() == null) {
             throw new IllegalArgumentException(
                 "use SimpleListDialogBuilder to construct this dialog");
-        }
-        final Fragment targetFragment = getTargetFragment();
-        if (targetFragment != null) {
-            mRequestCode = getTargetRequestCode();
-        } else {
-            Bundle args = getArguments();
-            if (args != null) {
-                mRequestCode = args.getInt(BaseDialogBuilder.ARG_REQUEST_CODE, 0);
-            }
         }
     }
 
@@ -167,9 +164,9 @@ public class ListDialogFragment extends BaseDialogFragment {
         @Override
         protected Bundle prepareArguments() {
             Bundle args = new Bundle();
-            args.putString(SimpleDialogFragment.ARG_TITLE, title);
-            args.putString(SimpleDialogFragment.ARG_POSITIVE_BUTTON, confirmButtonText);
-            args.putString(SimpleDialogFragment.ARG_NEGATIVE_BUTTON, cancelButtonText);
+            args.putString(ARG_TITLE, title);
+            args.putString(ARG_POSITIVE_BUTTON, confirmButtonText);
+            args.putString(ARG_NEGATIVE_BUTTON, cancelButtonText);
 
             args.putStringArray(ARG_ITEMS, items);
 
@@ -185,96 +182,54 @@ public class ListDialogFragment extends BaseDialogFragment {
         }
     }
 
-    @Override
-    public void onCancel(DialogInterface dialog) {
-        super.onCancel(dialog);
-        ISimpleDialogCancelListener onListItemSelectedListener = getDialogListener();
-        if (onListItemSelectedListener != null) {
-            onListItemSelectedListener.onCancelled(mRequestCode);
-        }
+    private ListAdapter prepareAdapter(int itemLayoutId) {
+        return new ArrayAdapter<>(getActivity(),
+            itemLayoutId,
+            R.id.sdl_text,
+            getItems());
     }
 
-
     private void buildMultiChoice(Builder builder) {
-        final String[] items = getItems();
-        ListAdapter adapter = new ArrayAdapter<>(getActivity(),
-            R.layout.sdl_list_item_multichoice,
-            R.id.sdl_text,
-            items);
-        builder.setItems(adapter, asIntArray(getCheckedItems()), AbsListView.CHOICE_MODE_MULTIPLE, new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                SparseBooleanArray checkedPositions = ((ListView)parent).getCheckedItemPositions();
-                setCheckedItems(new SparseBooleanArrayParcelable(checkedPositions));
-            }
-        });
+        builder.setItems(
+            prepareAdapter(R.layout.sdl_list_item_multichoice),
+            asIntArray(getCheckedItems()), AbsListView.CHOICE_MODE_MULTIPLE,
+            new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    SparseBooleanArray checkedPositions = ((ListView)parent).getCheckedItemPositions();
+                    setCheckedItems(new SparseBooleanArrayParcelable(checkedPositions));
+                }
+            });
     }
 
 
     private void buildSingleChoice(Builder builder) {
-        final String[] items = getItems();
-        ListAdapter adapter = new ArrayAdapter<>(getActivity(),
-            R.layout.sdl_list_item_singlechoice,
-            R.id.sdl_text,
-            items);
-        builder.setItems(adapter, asIntArray(getCheckedItems()), AbsListView.CHOICE_MODE_SINGLE, new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                SparseBooleanArray checkedPositions = ((ListView)parent).getCheckedItemPositions();
-                setCheckedItems(new SparseBooleanArrayParcelable(checkedPositions));
-            }
-        });
+        builder.setItems(
+            prepareAdapter(R.layout.sdl_list_item_singlechoice),
+            asIntArray(getCheckedItems()),
+            AbsListView.CHOICE_MODE_SINGLE, new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    SparseBooleanArray checkedPositions = ((ListView)parent).getCheckedItemPositions();
+                    setCheckedItems(new SparseBooleanArrayParcelable(checkedPositions));
+                }
+            });
     }
 
 
     private void buildNormalChoice(Builder builder) {
-        final String[] items = getItems();
-        ListAdapter adapter = new ArrayAdapter<>(getActivity(),
-            R.layout.sdl_list_item,
-            R.id.sdl_text,
-            items);
-
-        builder.setItems(adapter, -1, new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ISimpleDialogCancelListener listener = getDialogListener();
-                if (listener != null && listener instanceof IListDialogListener) {
-                    ((IListDialogListener)listener).onListItemSelected(getItems()[position], position, mRequestCode);
+        builder.setItems(
+            prepareAdapter(R.layout.sdl_list_item),
+            -1,
+            new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    for (IListDialogListener listener : getSingleDialogListeners()) {
+                        listener.onListItemSelected(getItems()[position], position, mRequestCode);
+                    }
+                    dismiss();
                 }
-                dismiss();
-            }
-        });
-    }
-
-    private void onMultiChoiceResult() {
-        int[] checkedPositions = asIntArray(getCheckedItems());
-        String[] items = getItems();
-        String[] checkedValues = new String[checkedPositions.length];
-        int i = 0;
-        for (int checkedPosition : checkedPositions) {
-            if (checkedPosition >= 0 && checkedPosition < items.length) {
-                checkedValues[i++] = items[checkedPosition];
-            }
-        }
-        ((IListDialogMultipleListener)getDialogListener()).onListItemsSelected(checkedValues, checkedPositions, mRequestCode);
-
-    }
-
-    private void onSingleChoiceResult() {
-        int[] checkedPositions = asIntArray(getCheckedItems());
-        String[] items = getItems();
-        boolean success = false;
-        for (int i : checkedPositions) {
-            if (i >= 0 && i < items.length) {
-                //1st valid value
-                ((IListDialogListener)getDialogListener()).onListItemSelected(items[i], i, mRequestCode);
-                success = true;
-                break;
-            }
-        }
-        if (!success) {//no item selected
-            getDialogListener().onCancelled(mRequestCode);
-        }
+            });
     }
 
     @Override
@@ -284,13 +239,11 @@ public class ListDialogFragment extends BaseDialogFragment {
             builder.setTitle(title);
         }
 
-
         if (!TextUtils.isEmpty(getNegativeButtonText())) {
             builder.setNegativeButton(getNegativeButtonText(), new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ISimpleDialogCancelListener listener = getDialogListener();
-                    if (listener != null) {
+                    for (ISimpleDialogCancelListener listener : getCancelListeners()) {
                         listener.onCancelled(mRequestCode);
                     }
                     dismiss();
@@ -298,29 +251,73 @@ public class ListDialogFragment extends BaseDialogFragment {
             });
         }
 
-
         //confirm button makes no sense when CHOICE_MODE_NONE
         if (getMode() != AbsListView.CHOICE_MODE_NONE) {
+            View.OnClickListener positiveButtonClickListener = null;
+            switch (getMode()) {
+                case AbsListView.CHOICE_MODE_MULTIPLE:
+                    positiveButtonClickListener = new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            // prepare multiple results
+                            final int[] checkedPositions = asIntArray(getCheckedItems());
+                            final String[] items = getItems();
+                            final String[] checkedValues = new String[checkedPositions.length];
+                            int i = 0;
+                            for (int checkedPosition : checkedPositions) {
+                                if (checkedPosition >= 0 && checkedPosition < items.length) {
+                                    checkedValues[i++] = items[checkedPosition];
+                                }
+                            }
+
+                            for (IMultiChoiceListDialogListener listener : getMutlipleDialogListeners()) {
+                                listener.onListItemsSelected(checkedValues, checkedPositions, mRequestCode);
+                            }
+                            dismiss();
+                        }
+                    };
+                    break;
+                case AbsListView.CHOICE_MODE_SINGLE:
+                    positiveButtonClickListener = new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            // prepare single result
+                            int selectedPosition = -1;
+                            final int[] checkedPositions = asIntArray(getCheckedItems());
+                            final String[] items = getItems();
+                            for (int i : checkedPositions) {
+                                if (i >= 0 && i < items.length) {
+                                    //1st valid value
+                                    selectedPosition = i;
+                                    break;
+                                }
+                            }
+
+                            // either item is selected or dialog is cancelled
+                            if (selectedPosition != -1) {
+                                for (IListDialogListener listener : getSingleDialogListeners()) {
+                                    listener.onListItemSelected(items[selectedPosition], selectedPosition, mRequestCode);
+                                }
+                            } else {
+                                for (ISimpleDialogCancelListener listener : getCancelListeners()) {
+                                    listener.onCancelled(mRequestCode);
+                                }
+                            }
+                            dismiss();
+                        }
+                    };
+                    break;
+            }
+
             String positiveButton = getPositiveButtonText();
             if (TextUtils.isEmpty(getPositiveButtonText())) {
                 //we always need confirm button when CHOICE_MODE_SINGLE or CHOICE_MODE_MULTIPLE
                 positiveButton = getString(android.R.string.ok);
             }
-            builder.setPositiveButton(positiveButton, new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    ISimpleDialogCancelListener listener = getDialogListener();
-                    if (getMode() == AbsListView.CHOICE_MODE_MULTIPLE && listener != null && listener instanceof IListDialogMultipleListener) {
-                        onMultiChoiceResult();
-                    } else if (getMode() == AbsListView.CHOICE_MODE_SINGLE && listener != null && listener instanceof IListDialogListener) {
-                        onSingleChoiceResult();
-                    }
-                    dismiss();
-                }
-            });
+            builder.setPositiveButton(positiveButton, positiveButtonClickListener);
         }
 
-
+        // prepare list and its item click listener
         final String[] items = getItems();
         if (items != null && items.length > 0) {
             @ChoiceMode
@@ -341,22 +338,28 @@ public class ListDialogFragment extends BaseDialogFragment {
         return builder;
     }
 
-    private ISimpleDialogCancelListener getDialogListener() {
-        final Fragment targetFragment = getTargetFragment();
-        if (targetFragment != null) {
-            if (targetFragment instanceof IListDialogListener || targetFragment instanceof IListDialogMultipleListener) {
-                return (ISimpleDialogCancelListener)targetFragment;
-            }
-        } else {
-            if (getActivity() instanceof IListDialogListener || getActivity() instanceof IListDialogMultipleListener) {
-                return (ISimpleDialogCancelListener)getActivity();
-            }
-        }
-        return null;
+    /** Get dialog listeners.
+     *  There might be more than one listener.
+     *
+     * @return Dialog listeners
+     * @since 2.1.0
+     */
+    private List<IListDialogListener> getSingleDialogListeners() {
+        return getDialogListeners(IListDialogListener.class);
+    }
+
+    /** Get dialog listeners.
+     *  There might be more than one listener.
+     *
+     * @return Dialog listeners
+     * @since 2.1.0
+     */
+    private List<IMultiChoiceListDialogListener> getMutlipleDialogListeners() {
+        return getDialogListeners(IMultiChoiceListDialogListener.class);
     }
 
     private String getTitle() {
-        return getArguments().getString(SimpleDialogFragment.ARG_TITLE);
+        return getArguments().getString(ARG_TITLE);
     }
 
 
@@ -393,20 +396,24 @@ public class ListDialogFragment extends BaseDialogFragment {
 
 
     private static int[] asIntArray(SparseBooleanArray checkedItems) {
-        ArrayList<Integer> list = new ArrayList<>();
-        //add indexes that are checked to a list
+        int checked = 0;
+        // compute number of items
         for (int i = 0; i < checkedItems.size(); i++) {
             int key = checkedItems.keyAt(i);
             if (checkedItems.get(key)) {
-                list.add(key);
+                ++checked;
             }
         }
-        Collections.sort(list);
-        //convert to int array
-        int[] array = new int[list.size()];
-        for (int i = 0; i < list.size(); i++) {
-            array[i] = list.get(i);
+
+        int[] array = new int[checked];
+        //add indexes that are checked
+        for (int i = 0, j = 0; i < checkedItems.size(); i++) {
+            int key = checkedItems.keyAt(i);
+            if (checkedItems.get(key)) {
+                array[j++] = key;
+            }
         }
+        Arrays.sort(array);
         return array;
     }
 

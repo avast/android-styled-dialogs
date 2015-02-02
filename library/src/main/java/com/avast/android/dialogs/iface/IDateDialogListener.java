@@ -24,6 +24,7 @@ import java.util.Date;
  * @author David Vávra (david@inmite.eu)
  */
 public interface IDateDialogListener {
+
 	public void onPositiveButtonClicked(int requestCode, Date date);
 
 	public void onNegativeButtonClicked(int requestCode, Date date);

@@ -16,15 +16,10 @@
 
 package com.avast.android.dialogs.iface;
 
-/**
- * Implement this interface in Activity or Fragment to react to positive and negative buttons.
+/** Implement this interface in Activity or Fragment to react to positive, negative and neutral dialog buttons.
  *
  * @author David Vávra (david@inmite.eu)
  */
-public interface ISimpleDialogListener {
-	public void onPositiveButtonClicked(int requestCode);
+public interface ISimpleDialogListener extends IPositiveButtonDialogListener, INegativeButtonDialogListener, INeutralButtonDialogListener {
 
-	public void onNegativeButtonClicked(int requestCode);
-
-	public void onNeutralButtonClicked(int requestCode);
 }

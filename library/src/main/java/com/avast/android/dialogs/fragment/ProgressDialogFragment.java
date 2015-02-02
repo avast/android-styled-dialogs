@@ -1,5 +1,8 @@
 package com.avast.android.dialogs.fragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -30,7 +33,6 @@ public class ProgressDialogFragment extends BaseDialogFragment {
 	protected final static String ARG_MESSAGE = "message";
 	protected final static String ARG_TITLE = "title";
 
-	protected int mRequestCode;
 
 	public static ProgressDialogBuilder createBuilder(Context context, FragmentManager fragmentManager) {
 		return new ProgressDialogBuilder(context, fragmentManager);
@@ -56,33 +58,9 @@ public class ProgressDialogFragment extends BaseDialogFragment {
 		if (getArguments() == null) {
 			throw new IllegalArgumentException("use ProgressDialogBuilder to construct this dialog");
 		}
-		final Fragment targetFragment = getTargetFragment();
-		mRequestCode = targetFragment != null ?
-				getTargetRequestCode() : getArguments().getInt(BaseDialogBuilder.ARG_REQUEST_CODE, 0);
 	}
 
-	@Override
-	public void onCancel(DialogInterface dialog) {
-		super.onCancel(dialog);
-		ISimpleDialogCancelListener listener = getCancelListener();
-		if (listener != null) {
-			listener.onCancelled(mRequestCode);
-		}
-	}
 
-	protected ISimpleDialogCancelListener getCancelListener() {
-		final Fragment targetFragment = getTargetFragment();
-		if (targetFragment != null) {
-			if (targetFragment instanceof ISimpleDialogCancelListener) {
-				return (ISimpleDialogCancelListener) targetFragment;
-			}
-		} else {
-			if (getActivity() instanceof ISimpleDialogCancelListener) {
-				return (ISimpleDialogCancelListener) getActivity();
-			}
-		}
-		return null;
-	}
 
 	public static class ProgressDialogBuilder extends BaseDialogBuilder<ProgressDialogBuilder> {
 

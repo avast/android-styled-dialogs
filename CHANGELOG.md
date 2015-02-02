@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.1.0
+
+ - refactored dialog listeners
+ - listeners called for both activity and fragment
+ - cancel listener made more general
+ - broke ISimpleDialogListener into separated button listeners
+
 ## 2.0.1
 
 January 8, 2015

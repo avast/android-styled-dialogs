@@ -12,8 +12,10 @@ import android.widget.TimePicker;
 import com.avast.android.dialogs.R;
 import com.avast.android.dialogs.core.BaseDialogFragment;
 
-/**
- * Dialog with a time picker. Implement {@link com.avast.android.dialogs.iface.IDateDialogListener} or {@link com.avast.android.dialogs.iface.IDateDialogCancelListener} to handle events.
+/** Dialog with a time picker.
+ *
+ *  Implement {@link com.avast.android.dialogs.iface.IDateDialogListener}
+ *  and/or {@link com.avast.android.dialogs.iface.ISimpleDialogCancelListener} to handle events.
  */
 public class TimePickerDialogFragment extends DatePickerDialogFragment {
 

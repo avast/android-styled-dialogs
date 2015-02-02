@@ -16,10 +16,10 @@
 
 package com.avast.android.dialogs.fragment;
 
+import java.util.List;
+
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.text.Html;
 import android.text.SpannedString;
@@ -28,8 +28,9 @@ import android.view.View;
 
 import com.avast.android.dialogs.core.BaseDialogBuilder;
 import com.avast.android.dialogs.core.BaseDialogFragment;
-import com.avast.android.dialogs.iface.ISimpleDialogCancelListener;
-import com.avast.android.dialogs.iface.ISimpleDialogListener;
+import com.avast.android.dialogs.iface.INegativeButtonDialogListener;
+import com.avast.android.dialogs.iface.INeutralButtonDialogListener;
+import com.avast.android.dialogs.iface.IPositiveButtonDialogListener;
 
 /**
  * Dialog for displaying simple message, message with title or message with title and two buttons. Implement {@link
@@ -46,7 +47,6 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 	protected final static String ARG_NEGATIVE_BUTTON = "negative_button";
 	protected final static String ARG_NEUTRAL_BUTTON = "neutral_button";
 
-	protected int mRequestCode;
 
 	public static SimpleDialogBuilder createBuilder(Context context, FragmentManager fragmentManager) {
 		return new SimpleDialogBuilder(context, fragmentManager, SimpleDialogFragment.class);
@@ -55,19 +55,11 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		final Fragment targetFragment = getTargetFragment();
-		if (targetFragment != null) {
-			mRequestCode = getTargetRequestCode();
-		} else {
-			Bundle args = getArguments();
-			if (args != null) {
-				mRequestCode = args.getInt(BaseDialogBuilder.ARG_REQUEST_CODE, 0);
-			}
-		}
+
 	}
 
-	/**
-	 * Children can extend this to add more things to base builder.
+	/** Key method for extending {@link com.avast.android.dialogs.fragment.SimpleDialogFragment}.
+	 *  Children can extend this to add more things to base builder.
 	 */
 	@Override
 	protected BaseDialogFragment.Builder build(BaseDialogFragment.Builder builder) {
@@ -86,10 +78,9 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 			builder.setPositiveButton(positiveButtonText, new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					ISimpleDialogListener listener = getDialogListener();
-					if (listener != null) {
-						listener.onPositiveButtonClicked(mRequestCode);
-					}
+					for (IPositiveButtonDialogListener listener : getPositiveButtonDialogListeners()) {
+                        listener.onPositiveButtonClicked(mRequestCode);
+                    }
 					dismiss();
 				}
 			});
@@ -100,10 +91,9 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 			builder.setNegativeButton(negativeButtonText, new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					ISimpleDialogListener listener = getDialogListener();
-					if (listener != null) {
-						listener.onNegativeButtonClicked(mRequestCode);
-					}
+                    for (INegativeButtonDialogListener listener : getNegativeButtonDialogListeners()) {
+                        listener.onNegativeButtonClicked(mRequestCode);
+                    }
 					dismiss();
 				}
 			});
@@ -114,10 +104,9 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 			builder.setNeutralButton(neutralButtonText, new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					ISimpleDialogListener listener = getDialogListener();
-					if (listener != null) {
-						listener.onNeutralButtonClicked(mRequestCode);
-					}
+					for (INeutralButtonDialogListener listener : getNeutralButtonDialogListeners()) {
+                        listener.onNeutralButtonClicked(mRequestCode);
+                    }
 					dismiss();
 				}
 			});
@@ -146,42 +135,36 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 		return getArguments().getString(ARG_NEUTRAL_BUTTON);
 	}
 
-	@Override
-	public void onCancel(DialogInterface dialog) {
-		super.onCancel(dialog);
-		ISimpleDialogCancelListener listener = getCancelListener();
-		if (listener != null) {
-			listener.onCancelled(mRequestCode);
-		}
+    /** Get positive button dialog listeners.
+     *  There might be more than one listener.
+     *
+     * @return Dialog listeners
+     * @since 2.1.0
+     */
+	protected List<IPositiveButtonDialogListener> getPositiveButtonDialogListeners() {
+        return getDialogListeners(IPositiveButtonDialogListener.class);
 	}
 
-	protected ISimpleDialogListener getDialogListener() {
-		final Fragment targetFragment = getTargetFragment();
-		if (targetFragment != null) {
-			if (targetFragment instanceof ISimpleDialogListener) {
-				return (ISimpleDialogListener) targetFragment;
-			}
-		} else {
-			if (getActivity() instanceof ISimpleDialogListener) {
-				return (ISimpleDialogListener) getActivity();
-			}
-		}
-		return null;
+    /** Get negative button dialog listeners.
+     *  There might be more than one listener.
+     *
+     * @return Dialog listeners
+     * @since 2.1.0
+     */
+	protected List<INegativeButtonDialogListener> getNegativeButtonDialogListeners() {
+        return getDialogListeners(INegativeButtonDialogListener.class);
 	}
 
-	protected ISimpleDialogCancelListener getCancelListener() {
-		final Fragment targetFragment = getTargetFragment();
-		if (targetFragment != null) {
-			if (targetFragment instanceof ISimpleDialogCancelListener) {
-				return (ISimpleDialogCancelListener) targetFragment;
-			}
-		} else {
-			if (getActivity() instanceof ISimpleDialogCancelListener) {
-				return (ISimpleDialogCancelListener) getActivity();
-			}
-		}
-		return null;
+    /** Get neutral button dialog listeners.
+     *  There might be more than one listener.
+     *
+     * @return Dialog listeners
+     * @since 2.1.0
+     */
+	protected List<INeutralButtonDialogListener> getNeutralButtonDialogListeners() {
+        return getDialogListeners(INeutralButtonDialogListener.class);
 	}
+
 
 	public static class SimpleDialogBuilder extends BaseDialogBuilder<SimpleDialogBuilder> {
 

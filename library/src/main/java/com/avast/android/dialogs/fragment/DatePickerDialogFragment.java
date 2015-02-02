@@ -2,11 +2,11 @@ package com.avast.android.dialogs.fragment;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.TimeZone;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -16,11 +16,12 @@ import android.widget.DatePicker;
 import com.avast.android.dialogs.R;
 import com.avast.android.dialogs.core.BaseDialogBuilder;
 import com.avast.android.dialogs.core.BaseDialogFragment;
-import com.avast.android.dialogs.iface.IDateDialogCancelListener;
 import com.avast.android.dialogs.iface.IDateDialogListener;
 
-/**
- * Dialog with a date picker. Implement {@link com.avast.android.dialogs.iface.IDateDialogListener} or {@link com.avast.android.dialogs.iface.IDateDialogCancelListener} to handle events.
+/** Dialog with a date picker.
+ *
+ *  Implement {@link com.avast.android.dialogs.iface.IDateDialogListener}
+ *  and/or {@link com.avast.android.dialogs.iface.ISimpleDialogCancelListener} to handle events.
  */
 public class DatePickerDialogFragment extends BaseDialogFragment {
 
@@ -34,53 +35,19 @@ public class DatePickerDialogFragment extends BaseDialogFragment {
     DatePicker mDatePicker;
     Calendar mCalendar;
 
-    private int mRequestCode;
-
 
     public static SimpleDialogBuilder createBuilder(Context context, FragmentManager fragmentManager) {
         return new SimpleDialogBuilder(context, fragmentManager, DatePickerDialogFragment.class);
     }
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        final Fragment targetFragment = getTargetFragment();
-        if (targetFragment != null) {
-            mRequestCode = getTargetRequestCode();
-        } else {
-            Bundle args = getArguments();
-            if (args != null) {
-                mRequestCode = args.getInt(BaseDialogBuilder.ARG_REQUEST_CODE, 0);
-            }
-        }
-    }
-
-    protected IDateDialogListener getDialogListener() {
-        final Fragment targetFragment = getTargetFragment();
-        if (targetFragment != null) {
-            if (targetFragment instanceof IDateDialogListener) {
-                return (IDateDialogListener) targetFragment;
-            }
-        } else {
-            if (getActivity() instanceof IDateDialogListener) {
-                return (IDateDialogListener) getActivity();
-            }
-        }
-        return null;
-    }
-
-    protected IDateDialogCancelListener getCancelListener() {
-        final Fragment targetFragment = getTargetFragment();
-        if (targetFragment != null) {
-            if (targetFragment instanceof IDateDialogCancelListener) {
-                return (IDateDialogCancelListener) targetFragment;
-            }
-        } else {
-            if (getActivity() instanceof IDateDialogCancelListener) {
-                return (IDateDialogCancelListener) getActivity();
-            }
-        }
-        return null;
+    /** Get dialog date listeners.
+     *  There might be more than one date listener.
+     *
+     * @return Dialog date listeners
+     * @since 2.1.0
+     */
+    protected List<IDateDialogListener> getDialogListeners() {
+        return getDialogListeners(IDateDialogListener.class);
     }
 
     @Override
@@ -96,8 +63,7 @@ public class DatePickerDialogFragment extends BaseDialogFragment {
 
                 @Override
                 public void onClick(View view) {
-                    IDateDialogListener listener = getDialogListener();
-                    if (listener != null) {
+                    for (IDateDialogListener listener : getDialogListeners()) {
                         listener.onPositiveButtonClicked(mRequestCode, getDate());
                     }
                     dismiss();
@@ -111,8 +77,7 @@ public class DatePickerDialogFragment extends BaseDialogFragment {
 
                 @Override
                 public void onClick(View view) {
-                    IDateDialogListener listener = getDialogListener();
-                    if (listener != null) {
+                    for (IDateDialogListener listener : getDialogListeners()) {
                         listener.onNegativeButtonClicked(mRequestCode, getDate());
                     }
                     dismiss();
