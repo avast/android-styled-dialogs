@@ -9,6 +9,7 @@ February 2, 2015
  - cancel listener made more general
  - broke ISimpleDialogListener into separated button listeners
  - TimePickerDialog fragment has correct default timezone and 24-hour view
+ - Custom view is no longer wrapped in ScrollView
 
 ## 2.0.1
 
