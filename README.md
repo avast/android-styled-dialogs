@@ -15,7 +15,7 @@ Features:
 
 ```groovy
 dependencies {
-	compile 'com.avast:android-styled-dialogs:2.0.1'
+	compile 'com.avast:android-styled-dialogs:2.1.0'
 }
 ```    
 Hosted in [jcenter](https://bintray.com/avast/android/styled-dialogs/): [ ![Download](https://api.bintray.com/packages/avast/android/styled-dialogs/images/download.svg) ](https://bintray.com/avast/android/styled-dialogs/_latestVersion)
