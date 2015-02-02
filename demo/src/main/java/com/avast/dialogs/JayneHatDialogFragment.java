@@ -22,7 +22,6 @@ import android.view.View;
 import com.avast.android.dialogs.core.BaseDialogFragment;
 import com.avast.android.dialogs.fragment.SimpleDialogFragment;
 import com.avast.android.dialogs.iface.IPositiveButtonDialogListener;
-import com.avast.android.dialogs.iface.ISimpleDialogListener;
 
 /**
  * Sample implementation of custom dialog by extending {@link SimpleDialogFragment}.

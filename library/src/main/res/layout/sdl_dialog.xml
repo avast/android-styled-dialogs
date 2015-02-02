@@ -9,26 +9,27 @@
         android:id="@+id/sdl_title"
         tools:text="Title" />
 
-    <ScrollView
-        style="@style/SDL.ScrollView"
-        android:id="@+id/sdl_scrollview">
+    <LinearLayout style="@style/SDL.Layout.Content">
 
-        <LinearLayout style="@style/SDL.Layout">
+        <ScrollView
+            style="@style/SDL.ScrollView"
+            android:id="@+id/sdl_message_scrollview">
 
             <TextView
                 style="@style/SDL.TextView.Message"
                 android:id="@+id/sdl_message"
                 tools:text="Lorem ipsum doler samet Jane is awesome guy and Kaylee is so hot." />
+        </ScrollView>
 
-            <FrameLayout
-                style="@style/SDL.Layout.Custom"
-                android:id="@+id/sdl_custom" />
-        </LinearLayout>
-    </ScrollView>
+        <FrameLayout
+            style="@style/SDL.Layout.Custom"
+            android:id="@+id/sdl_custom" />
 
-    <ListView
-        android:id="@+id/sdl_list"
-        style="@style/SDL.ListView" />
+        <ListView
+            android:id="@+id/sdl_list"
+            style="@style/SDL.ListView" />
+
+    </LinearLayout>
 
     <View
         android:id="@+id/sdl_button_divider"

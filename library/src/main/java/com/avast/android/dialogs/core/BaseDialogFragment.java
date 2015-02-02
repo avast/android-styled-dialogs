@@ -83,8 +83,9 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
         }
     }
 
-    /** Key method for using {@link com.avast.android.dialogs.core.BaseDialogFragment}.
-     *  Customized dialogs need to be set up via provided builder.
+    /**
+     * Key method for using {@link com.avast.android.dialogs.core.BaseDialogFragment}.
+     * Customized dialogs need to be set up via provided builder.
      *
      * @param initialBuilder Provided builder for setting up customized dialog
      * @return Updated builder
@@ -109,9 +110,19 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
     @Override
     public void onShow(DialogInterface dialog) {
         if (getView() != null) {
-            ScrollView vScrollView = (ScrollView)getView().findViewById(R.id.sdl_scrollview);
+            ScrollView vMessageScrollView = (ScrollView)getView().findViewById(R.id.sdl_message_scrollview);
             ListView vListView = (ListView)getView().findViewById(R.id.sdl_list);
-            boolean scrollable = isScrollable(vScrollView) || isScrollable(vListView);
+            FrameLayout vCustomViewNoScrollView = (FrameLayout)getView().findViewById(R.id.sdl_custom);
+            boolean customViewNoScrollViewScrollable = false;
+            if (vCustomViewNoScrollView.getChildCount() > 0) {
+                View firstChild = vCustomViewNoScrollView.getChildAt(0);
+                if (firstChild instanceof ViewGroup) {
+                    customViewNoScrollViewScrollable = isScrollable((ViewGroup)firstChild);
+                }
+            }
+            boolean listViewScrollable = isScrollable(vListView);
+            boolean messageScrollable = isScrollable(vMessageScrollView);
+            boolean scrollable = listViewScrollable || messageScrollable || customViewNoScrollViewScrollable;
             modifyButtonsBasedOnScrollableContent(scrollable);
         }
     }
@@ -124,8 +135,9 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
         }
     }
 
-    /** Get dialog cancel listeners.
-     *  There might be more than one cancel listener.
+    /**
+     * Get dialog cancel listeners.
+     * There might be more than one cancel listener.
      *
      * @return Dialog cancel listeners
      * @since 2.1.0
@@ -134,7 +146,8 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
         return getDialogListeners(ISimpleDialogCancelListener.class);
     }
 
-    /** Utility method for acquiring all listeners of some type for current instance of DialogFragment
+    /**
+     * Utility method for acquiring all listeners of some type for current instance of DialogFragment
      *
      * @param listenerInterface Interface of the desired listeners
      * @return Unmodifiable list of listeners
@@ -145,10 +158,10 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
         final Fragment targetFragment = getTargetFragment();
         List<T> listeners = new ArrayList<T>(2);
         if (targetFragment != null && listenerInterface.isAssignableFrom(targetFragment.getClass())) {
-            listeners.add((T) targetFragment);
+            listeners.add((T)targetFragment);
         }
         if (getActivity() != null && listenerInterface.isAssignableFrom(getActivity().getClass())) {
-            listeners.add((T) getActivity());
+            listeners.add((T)getActivity());
         }
         return Collections.unmodifiableList(listeners);
     }
@@ -177,15 +190,7 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
         }
     }
 
-    boolean isScrollable(ScrollView scrollView) {
-        if (scrollView.getChildCount() == 0) {
-            return false;
-        }
-        final int childHeight = scrollView.getChildAt(0).getMeasuredHeight();
-        return scrollView.getMeasuredHeight() < childHeight;
-    }
-
-    boolean isScrollable(ListView listView) {
+    private boolean isScrollable(ViewGroup listView) {
         int totalHeight = 0;
         for (int i = 0; i < listView.getChildCount(); i++) {
             totalHeight += listView.getChildAt(i).getMeasuredHeight();
@@ -344,7 +349,6 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
             View vButtonsDefault = content.findViewById(R.id.sdl_buttons_default);
             View vButtonsStacked = content.findViewById(R.id.sdl_buttons_stacked);
             ListView vList = (ListView)content.findViewById(R.id.sdl_list);
-            ScrollView vScrollView = (ScrollView)content.findViewById(R.id.sdl_scrollview);
 
             Typeface regularFont = TypefaceHelper.get(mContext, "Roboto-Regular");
             Typeface mediumFont = TypefaceHelper.get(mContext, "Roboto-Medium");
@@ -368,7 +372,6 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
                         vList.setItemChecked(i, true);
                     }
                 }
-                vScrollView.setVisibility(View.GONE); // only one scrollable content in the dialog allowed
             }
 
             if (shouldStackButtons()) {
