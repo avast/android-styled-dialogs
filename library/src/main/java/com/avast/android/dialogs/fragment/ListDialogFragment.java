@@ -19,6 +19,7 @@ import android.widget.*;
 import com.avast.android.dialogs.R;
 import com.avast.android.dialogs.core.BaseDialogBuilder;
 import com.avast.android.dialogs.core.BaseDialogFragment;
+import com.avast.android.dialogs.core.StyleType;
 import com.avast.android.dialogs.iface.IListDialogListener;
 import com.avast.android.dialogs.iface.IMultiChoiceListDialogListener;
 import com.avast.android.dialogs.iface.ISimpleDialogCancelListener;
@@ -192,13 +193,14 @@ public class ListDialogFragment extends BaseDialogFragment {
 
     private void buildMultiChoice(Builder builder) {
         builder.setItems(
-            prepareAdapter(R.layout.sdl_list_item_multichoice),
-            asIntArray(getCheckedItems()), AbsListView.CHOICE_MODE_MULTIPLE,
-            new AdapterView.OnItemClickListener() {
+            prepareAdapter( StyleType.isDarkThemeEnabled() ?
+                    R.layout.sdl_list_item_multichoice_dark :R.layout.sdl_list_item_multichoice),
+                    asIntArray(getCheckedItems()), AbsListView.CHOICE_MODE_MULTIPLE,
+                    new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    SparseBooleanArray checkedPositions = ((ListView)parent).getCheckedItemPositions();
-                    setCheckedItems(new SparseBooleanArrayParcelable(checkedPositions));
+                        SparseBooleanArray checkedPositions = ((ListView)parent).getCheckedItemPositions();
+                        setCheckedItems(new SparseBooleanArrayParcelable(checkedPositions));
                 }
             });
     }
@@ -206,13 +208,14 @@ public class ListDialogFragment extends BaseDialogFragment {
 
     private void buildSingleChoice(Builder builder) {
         builder.setItems(
-            prepareAdapter(R.layout.sdl_list_item_singlechoice),
-            asIntArray(getCheckedItems()),
-            AbsListView.CHOICE_MODE_SINGLE, new AdapterView.OnItemClickListener() {
+            prepareAdapter( StyleType.isDarkThemeEnabled() ?
+                    R.layout.sdl_list_item_singlechoice_dark:R.layout.sdl_list_item_singlechoice),
+                    asIntArray(getCheckedItems()),
+                    AbsListView.CHOICE_MODE_SINGLE, new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    SparseBooleanArray checkedPositions = ((ListView)parent).getCheckedItemPositions();
-                    setCheckedItems(new SparseBooleanArrayParcelable(checkedPositions));
+                        SparseBooleanArray checkedPositions = ((ListView)parent).getCheckedItemPositions();
+                        setCheckedItems(new SparseBooleanArrayParcelable(checkedPositions));
                 }
             });
     }
@@ -220,14 +223,14 @@ public class ListDialogFragment extends BaseDialogFragment {
 
     private void buildNormalChoice(Builder builder) {
         builder.setItems(
-            prepareAdapter(R.layout.sdl_list_item),
-            -1,
-            new AdapterView.OnItemClickListener() {
+            prepareAdapter( StyleType.isDarkThemeEnabled() ?
+                    R.layout.sdl_list_item_dark : R.layout.sdl_list_item),-1,
+                    new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    for (IListDialogListener listener : getSingleDialogListeners()) {
-                        listener.onListItemSelected(getItems()[position], position, mRequestCode);
-                    }
+                        for (IListDialogListener listener : getSingleDialogListeners()) {
+                            listener.onListItemSelected(getItems()[position], position, mRequestCode);
+                        }
                     dismiss();
                 }
             });

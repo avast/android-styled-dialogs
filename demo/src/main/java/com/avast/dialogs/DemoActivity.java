@@ -21,10 +21,14 @@ import java.util.Date;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.Toast;
 
+import com.avast.android.dialogs.core.StyleType;
 import com.avast.android.dialogs.fragment.*;
 import com.avast.android.dialogs.iface.*;
 
@@ -49,6 +53,7 @@ public class DemoActivity extends ActionBarActivity implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+
         findViewById(R.id.message_dialog).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -179,6 +184,38 @@ public class DemoActivity extends ActionBarActivity implements
             }
         });
     }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.theme_change:
+                if(StyleType.isDarkThemeEnabled())//dark theme is disabled....
+                    StyleType.disableDarkTheme();
+                else//dark theme is enabled...
+                    StyleType.enableDarkTheme();
+        }
+        invalidateOptionsMenu();
+        return super.onOptionsItemSelected(item);
+    }
+
+   /*
+    * inflating menu to switch between dark and light theme of dialog....
+    */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        super.onCreateOptionsMenu(menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu , menu);
+        if(StyleType.isDarkThemeEnabled())
+            menu.findItem(R.id.theme_change).setTitle("Use Light Theme");
+        else
+            menu.findItem(R.id.theme_change).setTitle("Use Dark Theme");
+        return true;
+    }
+
+
+
 
     // IListDialogListener
 

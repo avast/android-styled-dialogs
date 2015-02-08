@@ -32,6 +32,7 @@ import com.avast.android.dialogs.iface.INegativeButtonDialogListener;
 import com.avast.android.dialogs.iface.INeutralButtonDialogListener;
 import com.avast.android.dialogs.iface.IPositiveButtonDialogListener;
 
+
 /**
  * Dialog for displaying simple message, message with title or message with title and two buttons. Implement {@link
  * com.avast.android.dialogs.iface.ISimpleDialogListener} in your Fragment or Activity to rect on positive and negative button clicks. This class can

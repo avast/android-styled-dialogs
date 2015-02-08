@@ -3,6 +3,7 @@
 
 	<style name="SDL"/>
 
+    <!-- Light Theme-->
 	<style name="SDL.Dialog" parent="android:Theme">
 		<item name="android:windowFrame">@null</item>
 		<item name="android:windowIsFloating">true</item>
@@ -193,4 +194,33 @@
         <item name="android:dividerHeight">0dp</item>
         <item name="android:listSelector">@drawable/sdl_list</item>
     </style>
+
+
+    <!--Dark Theme-->
+    <style name="SDL.Dialog.Dark" parent="SDL.Dialog">
+        <item name="android:windowBackground">@drawable/sdl_background_dark</item>
+    </style>
+
+    <style name="SDL.TextView.Title.Dark" parent="SDL.TextView.Title">
+        <item name="android:textColor">@color/sdl_textColor_primary_dark</item>
+        <!-- paddings set in code -->
+    </style>
+
+    <style name="SDL.TextView.Message.Dark" parent="SDL.TextView.Message">
+        <item name="android:textColor">@color/sdl_textColor_primary_dark</item>
+        <!-- paddings set in code -->
+    </style>
+
+    <style name="SDL.TextView.ListItem.Dark" parent="SDL.TextView.ListItem">
+        <item name="android:textColor">@color/sdl_textColor_primary_dark</item>
+    </style>
+
+    <style name="SDL.TextView.MultiChoice.Dark" parent="SDL.TextView.MultiChoice">
+        <item name="android:textColor">@color/sdl_textColor_primary_dark</item>
+    </style>
+
+    <style name="SDL.TextView.Message.Progress.Dark" parent="SDL.TextView.Message.Progress">
+        <item name="android:textColor">@color/sdl_textColor_primary_dark</item>
+    </style>
+
 </resources>

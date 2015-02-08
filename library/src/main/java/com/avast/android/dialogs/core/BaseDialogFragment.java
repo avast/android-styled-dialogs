@@ -53,6 +53,12 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Dialog dialog = new Dialog(getActivity(), R.style.SDL_Dialog);
+
+        //if dark theme is enabled then using it,,,,
+        if(StyleType.isDarkThemeEnabled())
+            dialog = new Dialog(getActivity() , R.style.SDL_Dialog_Dark);
+
+
         Bundle args = getArguments();
         if (args != null) {
             dialog.setCanceledOnTouchOutside(
@@ -335,7 +341,14 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
 
         public View create() {
 
-            LinearLayout content = (LinearLayout)mInflater.inflate(R.layout.sdl_dialog, mContainer, false);
+            LinearLayout content;
+
+            //dark theme is enabled....
+            if(StyleType.isDarkThemeEnabled())
+                content = (LinearLayout)mInflater.inflate(R.layout.sdl_dialog_dark, mContainer, false);
+            else
+                content = (LinearLayout)mInflater.inflate(R.layout.sdl_dialog, mContainer, false);
+
 
             TextView vTitle = (TextView)content.findViewById(R.id.sdl_title);
             TextView vMessage = (TextView)content.findViewById(R.id.sdl_message);

@@ -6,6 +6,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
+
 /**
  * Internal base builder that holds common values for all dialog fragment builders.
  *
