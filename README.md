@@ -60,7 +60,13 @@ Implement interface `ISimpleDialogCancelListener` in your Activity/Fragment.
 
 Extend `BaseDialogFragment`. 
 
-Demo app contains a `JayneHatDialogFragment` which shows how to add custom view to a dialog.
+Have a look at [JayneHatDialogFragment](https://github.com/avast/android-styled-dialogs/blob/master/demo/src/main/java/com/avast/dialogs/JayneHatDialogFragment.java) for a practical example.
+
+## Contributing
+
+Pull requests are welcomed!
+
+Please set your Android Studio formatting to [our code style](https://github.com/avast/android-styled-dialogs/blob/master/code-formatting-config.xml).
 
 ## Why 'Dialogs'?
 
