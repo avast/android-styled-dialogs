@@ -7,4 +7,10 @@
         <item name="colorAccent">@color/pink</item>
 	</style>
 
+    <style name="AppThemeDark" parent="Theme.AppCompat">
+        <item name="colorPrimary">@color/indigo</item>
+        <item name="colorPrimaryDark">@color/indigo_dark</item>
+        <item name="colorAccent">@color/pink</item>
+    </style>
+
 </resources>

@@ -19,8 +19,10 @@ package com.avast.dialogs;
 import java.text.DateFormat;
 import java.util.Date;
 
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -28,7 +30,6 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.Toast;
 
-import com.avast.android.dialogs.core.StyleType;
 import com.avast.android.dialogs.fragment.*;
 import com.avast.android.dialogs.iface.*;
 
@@ -185,38 +186,6 @@ public class DemoActivity extends ActionBarActivity implements
         });
     }
 
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()){
-            case R.id.theme_change:
-                if(StyleType.isDarkThemeEnabled())//dark theme is disabled....
-                    StyleType.disableDarkTheme();
-                else//dark theme is enabled...
-                    StyleType.enableDarkTheme();
-        }
-        invalidateOptionsMenu();
-        return super.onOptionsItemSelected(item);
-    }
-
-   /*
-    * inflating menu to switch between dark and light theme of dialog....
-    */
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        super.onCreateOptionsMenu(menu);
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu , menu);
-        if(StyleType.isDarkThemeEnabled())
-            menu.findItem(R.id.theme_change).setTitle("Use Light Theme");
-        else
-            menu.findItem(R.id.theme_change).setTitle("Use Dark Theme");
-        return true;
-    }
-
-
-
-
     // IListDialogListener
 
     @Override
@@ -316,4 +285,64 @@ public class DemoActivity extends ActionBarActivity implements
         DateFormat dateFormat = DateFormat.getDateTimeInstance();
         Toast.makeText(this, text + "Success! " + dateFormat.format(date), Toast.LENGTH_SHORT).show();
     }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.theme_change:
+                //If true then it means using dark theme
+                if(getCurrentTheme()){
+                    setTheme(R.style.AppTheme);
+                    Toast.makeText(DemoActivity.this , "Light theme set" , Toast.LENGTH_SHORT).show();
+                }else{
+                    setTheme(R.style.AppThemeDark);
+                    Toast.makeText(DemoActivity.this , "Dark theme set" , Toast.LENGTH_SHORT).show();
+                }
+        }
+        invalidateOptionsMenu();
+        return super.onOptionsItemSelected(item);
+    }
+
+    /*
+     * inflating menu to switch between dark and light theme of dialog....
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        super.onCreateOptionsMenu(menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu , menu);
+
+        //If true then it means using dark theme
+        if(getCurrentTheme())
+            menu.findItem(R.id.theme_change).setTitle("Use Light Theme");
+        else
+            menu.findItem(R.id.theme_change).setTitle("Use Dark Theme");
+        return true;
+    }
+
+    /**
+     *
+     * @return True is using dark theme
+     */
+    private boolean getCurrentTheme(){
+        boolean darkTheme = false;
+        //Try-catch block is used to overcome resource not found exception
+        try{
+            TypedValue val = new TypedValue();
+
+            //Reading attr value from current theme
+            getTheme().resolveAttribute(com.avast.android.dialogs.R.attr.isLightTheme , val , true);
+
+            //Passing the resource ID to TypedArray to get the attribute value
+            TypedArray arr = obtainStyledAttributes(val.data , new int[]{com.avast.android.dialogs.R.attr.isLightTheme});
+            darkTheme = !arr.getBoolean(0 , false);
+            arr.recycle();
+        }catch(RuntimeException e){
+            //Resource not found , so sticking to light theme
+            darkTheme = false;
+        }
+        return darkTheme;
+    }
+
 }

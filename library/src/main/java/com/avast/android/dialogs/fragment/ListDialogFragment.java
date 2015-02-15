@@ -14,12 +14,12 @@ import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
 import android.util.SparseBooleanArray;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.*;
 
 import com.avast.android.dialogs.R;
 import com.avast.android.dialogs.core.BaseDialogBuilder;
 import com.avast.android.dialogs.core.BaseDialogFragment;
-import com.avast.android.dialogs.core.StyleType;
 import com.avast.android.dialogs.iface.IListDialogListener;
 import com.avast.android.dialogs.iface.IMultiChoiceListDialogListener;
 import com.avast.android.dialogs.iface.ISimpleDialogCancelListener;
@@ -184,17 +184,37 @@ public class ListDialogFragment extends BaseDialogFragment {
         }
     }
 
-    private ListAdapter prepareAdapter(int itemLayoutId) {
-        return new ArrayAdapter<>(getActivity(),
+    private ListAdapter prepareAdapter(int itemLayoutId ,final int style) {
+        return new ArrayAdapter<Object>(getActivity(),
             itemLayoutId,
             R.id.sdl_text,
-            getItems());
+            getItems()){
+            /**
+             * This function of list adapter class is overriden to set the dark style attrributes
+             * to the list view dynamically
+             *
+             * @param position
+             * @param convertView
+             * @param parent
+             * @return
+             */
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                //Dark theme is enabled
+                if(isDarkTheme()){
+                    View v =  super.getView(position, convertView, parent);
+                    TextView t = (TextView) v.findViewById(R.id.sdl_text);
+                    t.setTextAppearance(getActivity() , style);
+                    return v;
+                }
+                return super.getView(position , convertView , parent);
+            }
+        };
     }
 
     private void buildMultiChoice(Builder builder) {
         builder.setItems(
-            prepareAdapter( StyleType.isDarkThemeEnabled() ?
-                    R.layout.sdl_list_item_multichoice_dark :R.layout.sdl_list_item_multichoice),
+            prepareAdapter(R.layout.sdl_list_item_multichoice , R.style.SDL_TextView_MultiChoice_Dark),
                     asIntArray(getCheckedItems()), AbsListView.CHOICE_MODE_MULTIPLE,
                     new AdapterView.OnItemClickListener() {
                 @Override
@@ -208,8 +228,7 @@ public class ListDialogFragment extends BaseDialogFragment {
 
     private void buildSingleChoice(Builder builder) {
         builder.setItems(
-            prepareAdapter( StyleType.isDarkThemeEnabled() ?
-                    R.layout.sdl_list_item_singlechoice_dark:R.layout.sdl_list_item_singlechoice),
+            prepareAdapter(R.layout.sdl_list_item_singlechoice , R.style.SDL_TextView_MultiChoice_Dark),
                     asIntArray(getCheckedItems()),
                     AbsListView.CHOICE_MODE_SINGLE, new AdapterView.OnItemClickListener() {
                 @Override
@@ -223,8 +242,7 @@ public class ListDialogFragment extends BaseDialogFragment {
 
     private void buildNormalChoice(Builder builder) {
         builder.setItems(
-            prepareAdapter( StyleType.isDarkThemeEnabled() ?
-                    R.layout.sdl_list_item_dark : R.layout.sdl_list_item),-1,
+            prepareAdapter(R.layout.sdl_list_item , R.style.SDL_TextView_ListItem_Dark),-1,
                     new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

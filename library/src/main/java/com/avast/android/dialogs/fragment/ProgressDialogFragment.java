@@ -15,7 +15,6 @@ import android.widget.TextView;
 import com.avast.android.dialogs.R;
 import com.avast.android.dialogs.core.BaseDialogBuilder;
 import com.avast.android.dialogs.core.BaseDialogFragment;
-import com.avast.android.dialogs.core.StyleType;
 import com.avast.android.dialogs.iface.ISimpleDialogCancelListener;
 
 /**
@@ -42,14 +41,14 @@ public class ProgressDialogFragment extends BaseDialogFragment {
 	@Override
 	protected Builder build(Builder builder) {
 		final LayoutInflater inflater = builder.getLayoutInflater();
-		final View view;
-
-        //if dark theme is enabled....
-        if(StyleType.isDarkThemeEnabled())
-            view = inflater.inflate(R.layout.sdl_progress_dark, null, false);
-        else
-            view = inflater.inflate(R.layout.sdl_progress, null, false);
+		final View view = inflater.inflate(R.layout.sdl_progress, null, false);
 		final TextView tvMessage = (TextView) view.findViewById(R.id.sdl_message);
+
+        //Changing the textview style to dark dynamically if dark theme is in use
+        if(isDarkTheme()){
+            tvMessage.setTextAppearance(getActivity() , R.style.SDL_TextView_Message_Progress_Dark);
+        }
+
 		tvMessage.setText(getArguments().getString(ARG_MESSAGE));
 
 		builder.setView(view);

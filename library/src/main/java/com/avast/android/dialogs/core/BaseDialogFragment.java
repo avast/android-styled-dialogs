@@ -23,6 +23,7 @@ import java.util.List;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -31,6 +32,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,15 +51,30 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
 
     protected int mRequestCode;
 
+    //True then use dark theme , else by default make use of light theme
+    private static boolean darkTheme;
+
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        Dialog dialog = new Dialog(getActivity(), R.style.SDL_Dialog);
 
-        //if dark theme is enabled then using it,,,,
-        if(StyleType.isDarkThemeEnabled())
-            dialog = new Dialog(getActivity() , R.style.SDL_Dialog_Dark);
+        //Try-catch block is used to overcome resource not found exception
+        try{
+            TypedValue val = new TypedValue();
 
+            //Reading attr value from current theme
+            getActivity().getTheme().resolveAttribute(R.attr.isLightTheme , val , true);
+
+            //Passing the resource ID to TypedArray to get the attribute value
+            TypedArray arr = getActivity().obtainStyledAttributes(val.data , new int[]{R.attr.isLightTheme});
+            darkTheme = !arr.getBoolean(0 , false);
+            arr.recycle();
+        }catch(RuntimeException e){
+            //Resource not found , so sticking to light theme
+            darkTheme = false;
+        }
+
+        Dialog dialog = new Dialog(getActivity(), darkTheme ? R.style.SDL_Dialog_Dark : R.style.SDL_Dialog);
 
         Bundle args = getArguments();
         if (args != null) {
@@ -341,15 +358,7 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
 
         public View create() {
 
-            LinearLayout content;
-
-            //dark theme is enabled....
-            if(StyleType.isDarkThemeEnabled())
-                content = (LinearLayout)mInflater.inflate(R.layout.sdl_dialog_dark, mContainer, false);
-            else
-                content = (LinearLayout)mInflater.inflate(R.layout.sdl_dialog, mContainer, false);
-
-
+            LinearLayout content = (LinearLayout)mInflater.inflate(R.layout.sdl_dialog, mContainer, false);
             TextView vTitle = (TextView)content.findViewById(R.id.sdl_title);
             TextView vMessage = (TextView)content.findViewById(R.id.sdl_message);
             FrameLayout vCustomView = (FrameLayout)content.findViewById(R.id.sdl_custom);
@@ -362,6 +371,12 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
             View vButtonsDefault = content.findViewById(R.id.sdl_buttons_default);
             View vButtonsStacked = content.findViewById(R.id.sdl_buttons_stacked);
             ListView vList = (ListView)content.findViewById(R.id.sdl_list);
+
+            //Dark theme is enabled
+            if(isDarkTheme()){
+                vTitle.setTextAppearance(mContext , R.style.SDL_TextView_Title_Dark);
+                vMessage.setTextAppearance(mContext , R.style.SDL_TextView_Message_Dark);
+            }
 
             Typeface regularFont = TypefaceHelper.get(mContext, "Roboto-Regular");
             Typeface mediumFont = TypefaceHelper.get(mContext, "Roboto-Medium");
@@ -449,5 +464,13 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
                 textView.setVisibility(View.GONE);
             }
         }
+    }
+
+    /**
+     *
+     * @return True if dark theme is to be used
+     */
+    public static boolean isDarkTheme(){
+        return darkTheme;
     }
 }
