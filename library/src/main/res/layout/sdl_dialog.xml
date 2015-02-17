@@ -1,29 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    style="@style/SDL.Layout"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/SDL.Layout">
 
     <TextView
-        style="@style/SDL.TextView.Title"
         android:id="@+id/sdl_title"
+        style="@style/SDL.TextView.Title"
         tools:text="Title" />
 
     <LinearLayout style="@style/SDL.Layout.Content">
 
         <ScrollView
-            style="@style/SDL.ScrollView"
-            android:id="@+id/sdl_message_scrollview">
+            android:id="@+id/sdl_message_scrollview"
+            style="@style/SDL.ScrollView">
 
             <TextView
-                style="@style/SDL.TextView.Message"
                 android:id="@+id/sdl_message"
+                style="@style/SDL.TextView.Message"
                 tools:text="Lorem ipsum doler samet Jane is awesome guy and Kaylee is so hot." />
         </ScrollView>
 
         <FrameLayout
-            style="@style/SDL.Layout.Custom"
-            android:id="@+id/sdl_custom" />
+            android:id="@+id/sdl_custom"
+            style="@style/SDL.Layout.Custom" />
 
         <ListView
             android:id="@+id/sdl_list"
@@ -36,48 +35,48 @@
         style="@style/SDL.Divider" />
 
     <LinearLayout
-        style="@style/SDL.Layout.Buttons"
-        android:id="@+id/sdl_buttons_default">
+        android:id="@+id/sdl_buttons_default"
+        style="@style/SDL.Layout.Buttons">
 
         <Button
+            android:id="@+id/sdl_button_neutral"
             style="@style/SDL.Button"
-            tools:text="Neutral"
-            android:id="@+id/sdl_button_neutral" />
+            tools:text="Neutral" />
 
         <View style="@style/SDL.Expander" />
 
         <Button
+            android:id="@+id/sdl_button_negative"
             style="@style/SDL.Button"
-            tools:text="Negative"
-            android:id="@+id/sdl_button_negative" />
+            tools:text="Negative" />
 
         <Button
+            android:id="@+id/sdl_button_positive"
             style="@style/SDL.Button"
-            tools:text="Positive"
-            android:id="@+id/sdl_button_positive" />
+            tools:text="Positive" />
     </LinearLayout>
 
     <LinearLayout
-        style="@style/SDL.Layout.Buttons.Stacked"
-        android:id="@+id/sdl_buttons_stacked">
+        android:id="@+id/sdl_buttons_stacked"
+        style="@style/SDL.Layout.Buttons.Stacked">
 
         <Button
+            android:id="@+id/sdl_button_positive_stacked"
             style="@style/SDL.Button.Stacked"
-            tools:text="Positive"
-            android:id="@+id/sdl_button_positive_stacked" />
+            tools:text="Positive" />
 
         <Button
+            android:id="@+id/sdl_button_negative_stacked"
             style="@style/SDL.Button.Stacked"
-            tools:text="Negative"
-            android:id="@+id/sdl_button_negative_stacked" />
+            tools:text="Negative" />
 
         <Button
+            android:id="@+id/sdl_button_neutral_stacked"
             style="@style/SDL.Button.Stacked"
-            tools:text="Neutral"
-            android:id="@+id/sdl_button_neutral_stacked" />
+            tools:text="Neutral" />
     </LinearLayout>
 
     <View
-        style="@style/SDL.Space.ButtonsBottom"
-        android:id="@+id/sdl_buttons_bottom_space" />
+        android:id="@+id/sdl_buttons_bottom_space"
+        style="@style/SDL.Space.ButtonsBottom" />
 </LinearLayout>

@@ -1,9 +1,5 @@
 package com.avast.android.dialogs.fragment;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.TimeZone;
-
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
@@ -12,10 +8,15 @@ import android.widget.TimePicker;
 import com.avast.android.dialogs.R;
 import com.avast.android.dialogs.core.BaseDialogFragment;
 
-/** Dialog with a time picker.
- *
- *  Implement {@link com.avast.android.dialogs.iface.IDateDialogListener}
- *  and/or {@link com.avast.android.dialogs.iface.ISimpleDialogCancelListener} to handle events.
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
+
+/**
+ * Dialog with a time picker.
+ * <p/>
+ * Implement {@link com.avast.android.dialogs.iface.IDateDialogListener}
+ * and/or {@link com.avast.android.dialogs.iface.ISimpleDialogCancelListener} to handle events.
  */
 public class TimePickerDialogFragment extends DatePickerDialogFragment {
 

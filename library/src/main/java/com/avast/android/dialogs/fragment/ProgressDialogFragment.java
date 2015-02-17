@@ -1,12 +1,7 @@
 package com.avast.android.dialogs.fragment;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +10,6 @@ import android.widget.TextView;
 import com.avast.android.dialogs.R;
 import com.avast.android.dialogs.core.BaseDialogBuilder;
 import com.avast.android.dialogs.core.BaseDialogFragment;
-import com.avast.android.dialogs.iface.ISimpleDialogCancelListener;
 
 /**
  * Simple progress dialog that shows indeterminate progress bar together with message and dialog title (optional).<br/>
@@ -30,86 +24,85 @@ import com.avast.android.dialogs.iface.ISimpleDialogCancelListener;
  */
 public class ProgressDialogFragment extends BaseDialogFragment {
 
-	protected final static String ARG_MESSAGE = "message";
-	protected final static String ARG_TITLE = "title";
+    protected final static String ARG_MESSAGE = "message";
+    protected final static String ARG_TITLE = "title";
 
 
-	public static ProgressDialogBuilder createBuilder(Context context, FragmentManager fragmentManager) {
-		return new ProgressDialogBuilder(context, fragmentManager);
-	}
+    public static ProgressDialogBuilder createBuilder(Context context, FragmentManager fragmentManager) {
+        return new ProgressDialogBuilder(context, fragmentManager);
+    }
 
-	@Override
-	protected Builder build(Builder builder) {
-		final LayoutInflater inflater = builder.getLayoutInflater();
-		final View view = inflater.inflate(R.layout.sdl_progress, null, false);
-		final TextView tvMessage = (TextView) view.findViewById(R.id.sdl_message);
+    @Override
+    protected Builder build(Builder builder) {
+        final LayoutInflater inflater = builder.getLayoutInflater();
+        final View view = inflater.inflate(R.layout.sdl_progress, null, false);
+        final TextView tvMessage = (TextView) view.findViewById(R.id.sdl_message);
 
         //Changing the textview style to dark dynamically if dark theme is in use
-        if(isDarkTheme()){
-            tvMessage.setTextAppearance(getActivity() , R.style.SDL_TextView_Message_Progress_Dark);
+        if (isDarkTheme()) {
+            tvMessage.setTextAppearance(getActivity(), R.style.SDL_TextView_Message_Progress_Dark);
         }
 
-		tvMessage.setText(getArguments().getString(ARG_MESSAGE));
+        tvMessage.setText(getArguments().getString(ARG_MESSAGE));
 
-		builder.setView(view);
+        builder.setView(view);
 
-		builder.setTitle(getArguments().getString(ARG_TITLE));
+        builder.setTitle(getArguments().getString(ARG_TITLE));
 
-		return builder;
-	}
+        return builder;
+    }
 
-	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
-		if (getArguments() == null) {
-			throw new IllegalArgumentException("use ProgressDialogBuilder to construct this dialog");
-		}
-	}
-
-
-
-	public static class ProgressDialogBuilder extends BaseDialogBuilder<ProgressDialogBuilder> {
-
-		private String mTitle;
-		private String mMessage;
-
-		protected ProgressDialogBuilder(Context context, FragmentManager fragmentManager) {
-			super(context, fragmentManager, ProgressDialogFragment.class);
-		}
-
-		@Override
-		protected ProgressDialogBuilder self() {
-			return this;
-		}
-
-		public ProgressDialogBuilder setTitle(int titleResourceId) {
-			mTitle = mContext.getString(titleResourceId);
-			return this;
-		}
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (getArguments() == null) {
+            throw new IllegalArgumentException("use ProgressDialogBuilder to construct this dialog");
+        }
+    }
 
 
-		public ProgressDialogBuilder setTitle(String title) {
-			mTitle = title;
-			return this;
-		}
+    public static class ProgressDialogBuilder extends BaseDialogBuilder<ProgressDialogBuilder> {
 
-		public ProgressDialogBuilder setMessage(int messageResourceId) {
-			mMessage = mContext.getString(messageResourceId);
-			return this;
-		}
+        private String mTitle;
+        private String mMessage;
 
-		public ProgressDialogBuilder setMessage(String message) {
-			mMessage = message;
-			return this;
-		}
+        protected ProgressDialogBuilder(Context context, FragmentManager fragmentManager) {
+            super(context, fragmentManager, ProgressDialogFragment.class);
+        }
 
-		@Override
-		protected Bundle prepareArguments() {
-			Bundle args = new Bundle();
-			args.putString(SimpleDialogFragment.ARG_MESSAGE, mMessage);
-			args.putString(SimpleDialogFragment.ARG_TITLE, mTitle);
+        @Override
+        protected ProgressDialogBuilder self() {
+            return this;
+        }
 
-			return args;
-		}
-	}
+        public ProgressDialogBuilder setTitle(int titleResourceId) {
+            mTitle = mContext.getString(titleResourceId);
+            return this;
+        }
+
+
+        public ProgressDialogBuilder setTitle(String title) {
+            mTitle = title;
+            return this;
+        }
+
+        public ProgressDialogBuilder setMessage(int messageResourceId) {
+            mMessage = mContext.getString(messageResourceId);
+            return this;
+        }
+
+        public ProgressDialogBuilder setMessage(String message) {
+            mMessage = message;
+            return this;
+        }
+
+        @Override
+        protected Bundle prepareArguments() {
+            Bundle args = new Bundle();
+            args.putString(SimpleDialogFragment.ARG_MESSAGE, mMessage);
+            args.putString(SimpleDialogFragment.ARG_TITLE, mTitle);
+
+            return args;
+        }
+    }
 }

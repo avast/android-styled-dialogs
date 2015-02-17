@@ -4,66 +4,66 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:orientation="vertical"
-        android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
 
         <Button
+            android:id="@+id/message_dialog"
             style="@style/Button"
-            android:text="Simple dialog: only message"
             android:layout_marginTop="@dimen/grid_3"
-            android:id="@+id/message_dialog" />
+            android:text="Simple dialog: only message" />
 
         <Button
-            android:text="Simple dialog: long message and title"
             android:id="@+id/message_title_dialog"
-            style="@style/Button" />
+            style="@style/Button"
+            android:text="Simple dialog: long message and title" />
 
         <Button
+            android:id="@+id/message_title_buttons_dialog"
             style="@style/Button"
-            android:text="Simple dialog: 3 buttons &amp; callbacks"
-            android:id="@+id/message_title_buttons_dialog" />
+            android:text="Simple dialog: 3 buttons &amp; callbacks" />
 
         <Button
+            android:id="@+id/long_buttons"
             style="@style/Button"
-            android:text="Simple dialog: stacked buttons"
-            android:id="@+id/long_buttons" />
+            android:text="Simple dialog: stacked buttons" />
 
         <Button
+            android:id="@+id/list_dialog_simple"
             style="@style/Button"
-            android:text="List dialog"
-            android:id="@+id/list_dialog_simple" />
+            android:text="List dialog" />
 
         <Button
+            android:id="@+id/list_dialog_single"
             style="@style/Button"
-            android:text="Single choice list dialog"
-            android:id="@+id/list_dialog_single" />
+            android:text="Single choice list dialog" />
 
         <Button
+            android:id="@+id/list_dialog_multiple"
             style="@style/Button"
-            android:text="Multiple choice list dialog"
-            android:id="@+id/list_dialog_multiple" />
+            android:text="Multiple choice list dialog" />
 
         <Button
+            android:id="@+id/progress_dialog"
             style="@style/Button"
-            android:text="Progress dialog"
-            android:id="@+id/progress_dialog" />
+            android:text="Progress dialog" />
 
         <Button
-            style="@style/Button"
             android:id="@+id/time_picker"
+            style="@style/Button"
             android:text="Time picker dialog" />
 
         <Button
-            style="@style/Button"
             android:id="@+id/date_picker"
+            style="@style/Button"
             android:text="Date picker dialog" />
 
         <Button
+            android:id="@+id/custom_dialog"
             style="@style/Button"
-            android:text="Custom dialog"
             android:layout_marginBottom="@dimen/grid_3"
-            android:id="@+id/custom_dialog" />
+            android:text="Custom dialog" />
     </LinearLayout>
 </ScrollView>
