@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-	<style name="SDL"/>
+    <style name="SDL" />
 
     <!-- Light Theme-->
-	<style name="SDL.Dialog" parent="android:Theme">
-		<item name="android:windowFrame">@null</item>
-		<item name="android:windowIsFloating">true</item>
-		<item name="android:windowNoTitle">true</item>
-		<item name="android:windowContentOverlay">@null</item>
-		<item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
-		<item name="android:windowActionBar" tools:ignore="NewApi">false</item>
-		<item name="android:windowActionModeOverlay" tools:ignore="NewApi">true</item>
-		<item name="android:windowCloseOnTouchOutside" tools:ignore="NewApi">true</item>
-		<item name="android:backgroundDimAmount">0.6</item>
-		<item name="android:colorBackgroundCacheHint">@null</item>
+    <style name="SDL.Dialog" parent="android:Theme">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+        <item name="android:windowActionBar" tools:ignore="NewApi">false</item>
+        <item name="android:windowActionModeOverlay" tools:ignore="NewApi">true</item>
+        <item name="android:windowCloseOnTouchOutside" tools:ignore="NewApi">true</item>
+        <item name="android:backgroundDimAmount">0.6</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
         <item name="android:windowBackground">@drawable/sdl_background</item>
-	</style>
+    </style>
 
-	<style name="SDL.Layout">
-		<item name="android:layout_width">match_parent</item>
-		<item name="android:layout_height">match_parent</item>
-		<item name="android:orientation">vertical</item>
-	</style>
+    <style name="SDL.Layout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:orientation">vertical</item>
+    </style>
 
     <style name="SDL.Layout.Content">
         <item name="android:layout_height">0dp</item>
@@ -33,13 +33,13 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-	<style name="SDL.Layout.Buttons">
+    <style name="SDL.Layout.Buttons">
         <item name="android:orientation">horizontal</item>
-		<item name="android:layout_height">@dimen/grid_12</item>
+        <item name="android:layout_height">@dimen/grid_12</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:paddingLeft">@dimen/grid_3</item>
         <item name="android:paddingRight">@dimen/grid_3</item>
-	</style>
+    </style>
 
     <style name="SDL.Layout.Buttons.Stacked">
         <item name="android:orientation">vertical</item>

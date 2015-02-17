@@ -1,10 +1,5 @@
 package com.avast.android.dialogs.fragment;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -15,7 +10,12 @@ import android.text.TextUtils;
 import android.util.SparseBooleanArray;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.*;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.avast.android.dialogs.R;
 import com.avast.android.dialogs.core.BaseDialogBuilder;
@@ -25,9 +25,12 @@ import com.avast.android.dialogs.iface.IMultiChoiceListDialogListener;
 import com.avast.android.dialogs.iface.ISimpleDialogCancelListener;
 import com.avast.android.dialogs.util.SparseBooleanArrayParcelable;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Dialog with a list of options.
- *
+ * <p/>
  * Implement {@link com.avast.android.dialogs.iface.IListDialogListener} to handle selection of single and no choice
  * modes. Implement {@link com.avast.android.dialogs.iface.IMultiChoiceListDialogListener} to handle selection of
  * multi choice.
@@ -35,21 +38,37 @@ import com.avast.android.dialogs.util.SparseBooleanArrayParcelable;
 public class ListDialogFragment extends BaseDialogFragment {
 
 
-    @IntDef({AbsListView.CHOICE_MODE_MULTIPLE, AbsListView.CHOICE_MODE_SINGLE, AbsListView.CHOICE_MODE_NONE})
-    public @interface ChoiceMode {
-    }
-
     protected static final String ARG_ITEMS = "items";
     protected static final String ARG_CHECKED_ITEMS = "checkedItems";
     protected static final String ARG_MODE = "choiceMode";
-
     protected final static String ARG_TITLE = "title";
     protected final static String ARG_POSITIVE_BUTTON = "positive_button";
     protected final static String ARG_NEGATIVE_BUTTON = "negative_button";
 
-
     public static SimpleListDialogBuilder createBuilder(Context context, FragmentManager fragmentManager) {
         return new SimpleListDialogBuilder(context, fragmentManager);
+    }
+
+    private static int[] asIntArray(SparseBooleanArray checkedItems) {
+        int checked = 0;
+        // compute number of items
+        for (int i = 0; i < checkedItems.size(); i++) {
+            int key = checkedItems.keyAt(i);
+            if (checkedItems.get(key)) {
+                ++checked;
+            }
+        }
+
+        int[] array = new int[checked];
+        //add indexes that are checked
+        for (int i = 0, j = 0; i < checkedItems.size(); i++) {
+            int key = checkedItems.keyAt(i);
+            if (checkedItems.get(key)) {
+                array[j++] = key;
+            }
+        }
+        Arrays.sort(array);
+        return array;
     }
 
     @Override
@@ -57,138 +76,16 @@ public class ListDialogFragment extends BaseDialogFragment {
         super.onActivityCreated(savedInstanceState);
         if (getArguments() == null) {
             throw new IllegalArgumentException(
-                "use SimpleListDialogBuilder to construct this dialog");
+                    "use SimpleListDialogBuilder to construct this dialog");
         }
     }
 
-    public static class SimpleListDialogBuilder extends BaseDialogBuilder<SimpleListDialogBuilder> {
-
-        private String title;
-
-        private String[] items;
-
-        @ChoiceMode
-        private int mode;
-        private int[] checkedItems;
-
-        private String cancelButtonText;
-        private String confirmButtonText;
-
-
-        public SimpleListDialogBuilder(Context context, FragmentManager fragmentManager) {
-            super(context, fragmentManager, ListDialogFragment.class);
-        }
-
-        @Override
-        protected SimpleListDialogBuilder self() {
-            return this;
-        }
-
-        private Resources getResources() {
-            return mContext.getResources();
-        }
-
-        public SimpleListDialogBuilder setTitle(String title) {
-            this.title = title;
-            return this;
-        }
-
-        public SimpleListDialogBuilder setTitle(int titleResID) {
-            this.title = getResources().getString(titleResID);
-            return this;
-        }
-
-
-        /**
-         * Positions of item that should be pre-selected
-         * Valid for setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE)
-         *
-         * @param positions list of item positions to mark as checked
-         * @return builder
-         */
-        public SimpleListDialogBuilder setCheckedItems(int[] positions) {
-            this.checkedItems = positions;
-            return this;
-        }
-
-        /**
-         * Position of item that should be pre-selected
-         * Valid for setChoiceMode(AbsListView.CHOICE_MODE_SINGLE)
-         *
-         * @param position item position to mark as selected
-         * @return builder
-         */
-        public SimpleListDialogBuilder setSelectedItem(int position) {
-            this.checkedItems = new int[]{position};
-            return this;
-        }
-
-        public SimpleListDialogBuilder setChoiceMode(@ChoiceMode int choiceMode) {
-            this.mode = choiceMode;
-            return this;
-        }
-
-        public SimpleListDialogBuilder setItems(String[] items) {
-            this.items = items;
-            return this;
-        }
-
-        public SimpleListDialogBuilder setItems(int itemsArrayResID) {
-            this.items = getResources().getStringArray(itemsArrayResID);
-            return this;
-        }
-
-        public SimpleListDialogBuilder setConfirmButtonText(String text) {
-            this.confirmButtonText = text;
-            return this;
-        }
-
-        public SimpleListDialogBuilder setConfirmButtonText(int confirmBttTextResID) {
-            this.confirmButtonText = getResources().getString(confirmBttTextResID);
-            return this;
-        }
-
-        public SimpleListDialogBuilder setCancelButtonText(String text) {
-            this.cancelButtonText = text;
-            return this;
-        }
-
-        public SimpleListDialogBuilder setCancelButtonText(int cancelBttTextResID) {
-            this.cancelButtonText = getResources().getString(cancelBttTextResID);
-            return this;
-        }
-
-        @Override
-        public ListDialogFragment show() {
-            return (ListDialogFragment)super.show();
-        }
-
-        @Override
-        protected Bundle prepareArguments() {
-            Bundle args = new Bundle();
-            args.putString(ARG_TITLE, title);
-            args.putString(ARG_POSITIVE_BUTTON, confirmButtonText);
-            args.putString(ARG_NEGATIVE_BUTTON, cancelButtonText);
-
-            args.putStringArray(ARG_ITEMS, items);
-
-            SparseBooleanArrayParcelable sparseArray = new SparseBooleanArrayParcelable();
-            for (int index = 0; checkedItems != null && index < checkedItems.length; index++) {
-                sparseArray.put(checkedItems[index], true);
-            }
-            args.putParcelable(ARG_CHECKED_ITEMS, sparseArray);
-            args.putInt(ARG_MODE, mode);
-
-
-            return args;
-        }
-    }
-
-    private ListAdapter prepareAdapter(int itemLayoutId ,final int style) {
+    private ListAdapter prepareAdapter(int itemLayoutId) {
         return new ArrayAdapter<Object>(getActivity(),
-            itemLayoutId,
-            R.id.sdl_text,
-            getItems()){
+                itemLayoutId,
+                R.id.sdl_text,
+                getItems()) {
+
             /**
              * This function of list adapter class is overriden to set the dark style attrributes
              * to the list view dynamically
@@ -201,57 +98,55 @@ public class ListDialogFragment extends BaseDialogFragment {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 //Dark theme is enabled
-                if(isDarkTheme()){
-                    View v =  super.getView(position, convertView, parent);
+                if (isDarkTheme()) {
+                    View v = super.getView(position, convertView, parent);
                     TextView t = (TextView) v.findViewById(R.id.sdl_text);
-                    t.setTextAppearance(getActivity() , style);
+                    t.setTextColor(getResources().getColor(R.color.sdl_textColor_primary_dark));
                     return v;
                 }
-                return super.getView(position , convertView , parent);
+                return super.getView(position, convertView, parent);
             }
         };
     }
 
     private void buildMultiChoice(Builder builder) {
         builder.setItems(
-            prepareAdapter(R.layout.sdl_list_item_multichoice , R.style.SDL_TextView_MultiChoice_Dark),
-                    asIntArray(getCheckedItems()), AbsListView.CHOICE_MODE_MULTIPLE,
-                    new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        SparseBooleanArray checkedPositions = ((ListView)parent).getCheckedItemPositions();
+                prepareAdapter(R.layout.sdl_list_item_multichoice),
+                asIntArray(getCheckedItems()), AbsListView.CHOICE_MODE_MULTIPLE,
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        SparseBooleanArray checkedPositions = ((ListView) parent).getCheckedItemPositions();
                         setCheckedItems(new SparseBooleanArrayParcelable(checkedPositions));
-                }
-            });
+                    }
+                });
     }
-
 
     private void buildSingleChoice(Builder builder) {
         builder.setItems(
-            prepareAdapter(R.layout.sdl_list_item_singlechoice , R.style.SDL_TextView_MultiChoice_Dark),
-                    asIntArray(getCheckedItems()),
-                    AbsListView.CHOICE_MODE_SINGLE, new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        SparseBooleanArray checkedPositions = ((ListView)parent).getCheckedItemPositions();
+                prepareAdapter(R.layout.sdl_list_item_singlechoice),
+                asIntArray(getCheckedItems()),
+                AbsListView.CHOICE_MODE_SINGLE, new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        SparseBooleanArray checkedPositions = ((ListView) parent).getCheckedItemPositions();
                         setCheckedItems(new SparseBooleanArrayParcelable(checkedPositions));
-                }
-            });
+                    }
+                });
     }
-
 
     private void buildNormalChoice(Builder builder) {
         builder.setItems(
-            prepareAdapter(R.layout.sdl_list_item , R.style.SDL_TextView_ListItem_Dark),-1,
-                    new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                prepareAdapter(R.layout.sdl_list_item), -1,
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         for (IListDialogListener listener : getSingleDialogListeners()) {
                             listener.onListItemSelected(getItems()[position], position, mRequestCode);
                         }
-                    dismiss();
-                }
-            });
+                        dismiss();
+                    }
+                });
     }
 
     @Override
@@ -386,7 +281,6 @@ public class ListDialogFragment extends BaseDialogFragment {
         return getArguments().getString(ARG_TITLE);
     }
 
-
     @SuppressWarnings("ResourceType")
     @ChoiceMode
     private int getMode() {
@@ -395,10 +289,6 @@ public class ListDialogFragment extends BaseDialogFragment {
 
     private String[] getItems() {
         return getArguments().getStringArray(ARG_ITEMS);
-    }
-
-    private void setCheckedItems(SparseBooleanArrayParcelable checkedItems) {
-        getArguments().putParcelable(ARG_CHECKED_ITEMS, checkedItems);
     }
 
     @NonNull
@@ -410,6 +300,10 @@ public class ListDialogFragment extends BaseDialogFragment {
         return items;
     }
 
+    private void setCheckedItems(SparseBooleanArrayParcelable checkedItems) {
+        getArguments().putParcelable(ARG_CHECKED_ITEMS, checkedItems);
+    }
+
     private String getPositiveButtonText() {
         return getArguments().getString(ARG_POSITIVE_BUTTON);
     }
@@ -418,27 +312,131 @@ public class ListDialogFragment extends BaseDialogFragment {
         return getArguments().getString(ARG_NEGATIVE_BUTTON);
     }
 
+    @IntDef({AbsListView.CHOICE_MODE_MULTIPLE, AbsListView.CHOICE_MODE_SINGLE, AbsListView.CHOICE_MODE_NONE})
+    public @interface ChoiceMode {
+    }
 
-    private static int[] asIntArray(SparseBooleanArray checkedItems) {
-        int checked = 0;
-        // compute number of items
-        for (int i = 0; i < checkedItems.size(); i++) {
-            int key = checkedItems.keyAt(i);
-            if (checkedItems.get(key)) {
-                ++checked;
-            }
+    public static class SimpleListDialogBuilder extends BaseDialogBuilder<SimpleListDialogBuilder> {
+
+        private String title;
+
+        private String[] items;
+
+        @ChoiceMode
+        private int mode;
+        private int[] checkedItems;
+
+        private String cancelButtonText;
+        private String confirmButtonText;
+
+
+        public SimpleListDialogBuilder(Context context, FragmentManager fragmentManager) {
+            super(context, fragmentManager, ListDialogFragment.class);
         }
 
-        int[] array = new int[checked];
-        //add indexes that are checked
-        for (int i = 0, j = 0; i < checkedItems.size(); i++) {
-            int key = checkedItems.keyAt(i);
-            if (checkedItems.get(key)) {
-                array[j++] = key;
-            }
+        @Override
+        protected SimpleListDialogBuilder self() {
+            return this;
         }
-        Arrays.sort(array);
-        return array;
+
+        private Resources getResources() {
+            return mContext.getResources();
+        }
+
+        public SimpleListDialogBuilder setTitle(String title) {
+            this.title = title;
+            return this;
+        }
+
+        public SimpleListDialogBuilder setTitle(int titleResID) {
+            this.title = getResources().getString(titleResID);
+            return this;
+        }
+
+
+        /**
+         * Positions of item that should be pre-selected
+         * Valid for setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE)
+         *
+         * @param positions list of item positions to mark as checked
+         * @return builder
+         */
+        public SimpleListDialogBuilder setCheckedItems(int[] positions) {
+            this.checkedItems = positions;
+            return this;
+        }
+
+        /**
+         * Position of item that should be pre-selected
+         * Valid for setChoiceMode(AbsListView.CHOICE_MODE_SINGLE)
+         *
+         * @param position item position to mark as selected
+         * @return builder
+         */
+        public SimpleListDialogBuilder setSelectedItem(int position) {
+            this.checkedItems = new int[]{position};
+            return this;
+        }
+
+        public SimpleListDialogBuilder setChoiceMode(@ChoiceMode int choiceMode) {
+            this.mode = choiceMode;
+            return this;
+        }
+
+        public SimpleListDialogBuilder setItems(String[] items) {
+            this.items = items;
+            return this;
+        }
+
+        public SimpleListDialogBuilder setItems(int itemsArrayResID) {
+            this.items = getResources().getStringArray(itemsArrayResID);
+            return this;
+        }
+
+        public SimpleListDialogBuilder setConfirmButtonText(String text) {
+            this.confirmButtonText = text;
+            return this;
+        }
+
+        public SimpleListDialogBuilder setConfirmButtonText(int confirmBttTextResID) {
+            this.confirmButtonText = getResources().getString(confirmBttTextResID);
+            return this;
+        }
+
+        public SimpleListDialogBuilder setCancelButtonText(String text) {
+            this.cancelButtonText = text;
+            return this;
+        }
+
+        public SimpleListDialogBuilder setCancelButtonText(int cancelBttTextResID) {
+            this.cancelButtonText = getResources().getString(cancelBttTextResID);
+            return this;
+        }
+
+        @Override
+        public ListDialogFragment show() {
+            return (ListDialogFragment) super.show();
+        }
+
+        @Override
+        protected Bundle prepareArguments() {
+            Bundle args = new Bundle();
+            args.putString(ARG_TITLE, title);
+            args.putString(ARG_POSITIVE_BUTTON, confirmButtonText);
+            args.putString(ARG_NEGATIVE_BUTTON, cancelButtonText);
+
+            args.putStringArray(ARG_ITEMS, items);
+
+            SparseBooleanArrayParcelable sparseArray = new SparseBooleanArrayParcelable();
+            for (int index = 0; checkedItems != null && index < checkedItems.length; index++) {
+                sparseArray.put(checkedItems[index], true);
+            }
+            args.putParcelable(ARG_CHECKED_ITEMS, sparseArray);
+            args.putInt(ARG_MODE, mode);
+
+
+            return args;
+        }
     }
 
 }
