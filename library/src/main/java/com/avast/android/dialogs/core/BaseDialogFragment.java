@@ -16,13 +16,10 @@
 
 package com.avast.android.dialogs.core;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -31,14 +28,27 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.*;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.avast.android.dialogs.R;
 import com.avast.android.dialogs.iface.ISimpleDialogCancelListener;
 import com.avast.android.dialogs.util.TypefaceHelper;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Base dialog fragment for all your dialogs, styleable and same design on Android 2.2+.
@@ -47,16 +57,44 @@ import com.avast.android.dialogs.util.TypefaceHelper;
  */
 public abstract class BaseDialogFragment extends DialogFragment implements DialogInterface.OnShowListener {
 
+    //True then use dark theme , else by default make use of light theme
+    private static boolean darkTheme;
     protected int mRequestCode;
+
+    /**
+     * @return True if dark theme is to be used
+     */
+    public static boolean isDarkTheme() {
+        return darkTheme;
+    }
 
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        Dialog dialog = new Dialog(getActivity(), R.style.SDL_Dialog);
+
         Bundle args = getArguments();
+
+        if (args != null) {
+
+            if (args.getBoolean(BaseDialogBuilder.ARG_USE_DARK_THEME)) {
+                //Developer is explicitly using the dark theme
+                darkTheme = true;
+            } else {
+                //Dynamically detecting the theme declared in manifest
+                resolveTheme();
+            }
+
+        } else {
+
+            //Dynamically detecting the theme declared in manifest
+            resolveTheme();
+        }
+
+        Dialog dialog = new Dialog(getActivity(), darkTheme ? R.style.SDL_Dialog_Dark : R.style.SDL_Dialog);
+
         if (args != null) {
             dialog.setCanceledOnTouchOutside(
-                args.getBoolean(BaseDialogBuilder.ARG_CANCELABLE_ON_TOUCH_OUTSIDE));
+                    args.getBoolean(BaseDialogBuilder.ARG_CANCELABLE_ON_TOUCH_OUTSIDE));
         }
         dialog.setOnShowListener(this);
         return dialog;
@@ -110,14 +148,14 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
     @Override
     public void onShow(DialogInterface dialog) {
         if (getView() != null) {
-            ScrollView vMessageScrollView = (ScrollView)getView().findViewById(R.id.sdl_message_scrollview);
-            ListView vListView = (ListView)getView().findViewById(R.id.sdl_list);
-            FrameLayout vCustomViewNoScrollView = (FrameLayout)getView().findViewById(R.id.sdl_custom);
+            ScrollView vMessageScrollView = (ScrollView) getView().findViewById(R.id.sdl_message_scrollview);
+            ListView vListView = (ListView) getView().findViewById(R.id.sdl_list);
+            FrameLayout vCustomViewNoScrollView = (FrameLayout) getView().findViewById(R.id.sdl_custom);
             boolean customViewNoScrollViewScrollable = false;
             if (vCustomViewNoScrollView.getChildCount() > 0) {
                 View firstChild = vCustomViewNoScrollView.getChildAt(0);
                 if (firstChild instanceof ViewGroup) {
-                    customViewNoScrollViewScrollable = isScrollable((ViewGroup)firstChild);
+                    customViewNoScrollViewScrollable = isScrollable((ViewGroup) firstChild);
                 }
             }
             boolean listViewScrollable = isScrollable(vListView);
@@ -158,10 +196,10 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
         final Fragment targetFragment = getTargetFragment();
         List<T> listeners = new ArrayList<T>(2);
         if (targetFragment != null && listenerInterface.isAssignableFrom(targetFragment.getClass())) {
-            listeners.add((T)targetFragment);
+            listeners.add((T) targetFragment);
         }
         if (getActivity() != null && listenerInterface.isAssignableFrom(getActivity().getClass())) {
-            listeners.add((T)getActivity());
+            listeners.add((T) getActivity());
         }
         return Collections.unmodifiableList(listeners);
     }
@@ -196,6 +234,27 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
             totalHeight += listView.getChildAt(i).getMeasuredHeight();
         }
         return listView.getMeasuredHeight() < totalHeight;
+    }
+
+    /**
+     * This method resolves the current theme declared in the manifest
+     */
+    private void resolveTheme() {
+        //Try-catch block is used to overcome resource not found exception
+        try {
+            TypedValue val = new TypedValue();
+
+            //Reading attr value from current theme
+            getActivity().getTheme().resolveAttribute(R.attr.isLightTheme, val, true);
+
+            //Passing the resource ID to TypedArray to get the attribute value
+            TypedArray arr = getActivity().obtainStyledAttributes(val.data, new int[]{R.attr.isLightTheme});
+            darkTheme = !arr.getBoolean(0, false);
+            arr.recycle();
+        } catch (RuntimeException e) {
+            //Resource not found , so sticking to light theme
+            darkTheme = false;
+        }
     }
 
     /**
@@ -236,7 +295,6 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
         private int[] mListCheckedItemMultipleIds;
 
         private AdapterView.OnItemClickListener mOnItemClickListener;
-
 
         public Builder(Context context, LayoutInflater inflater, ViewGroup container) {
             this.mContext = context;
@@ -304,7 +362,6 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
             return this;
         }
 
-
         public Builder setItems(ListAdapter listAdapter, int[] checkedItemIds, int choiceMode, final AdapterView.OnItemClickListener listener) {
             mListAdapter = listAdapter;
             mListCheckedItemMultipleIds = checkedItemIds;
@@ -335,20 +392,26 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
 
         public View create() {
 
-            LinearLayout content = (LinearLayout)mInflater.inflate(R.layout.sdl_dialog, mContainer, false);
-
-            TextView vTitle = (TextView)content.findViewById(R.id.sdl_title);
-            TextView vMessage = (TextView)content.findViewById(R.id.sdl_message);
-            FrameLayout vCustomView = (FrameLayout)content.findViewById(R.id.sdl_custom);
-            Button vPositiveButton = (Button)content.findViewById(R.id.sdl_button_positive);
-            Button vNegativeButton = (Button)content.findViewById(R.id.sdl_button_negative);
-            Button vNeutralButton = (Button)content.findViewById(R.id.sdl_button_neutral);
-            Button vPositiveButtonStacked = (Button)content.findViewById(R.id.sdl_button_positive_stacked);
-            Button vNegativeButtonStacked = (Button)content.findViewById(R.id.sdl_button_negative_stacked);
-            Button vNeutralButtonStacked = (Button)content.findViewById(R.id.sdl_button_neutral_stacked);
+            LinearLayout content = (LinearLayout) mInflater.inflate(R.layout.sdl_dialog, mContainer, false);
+            TextView vTitle = (TextView) content.findViewById(R.id.sdl_title);
+            TextView vMessage = (TextView) content.findViewById(R.id.sdl_message);
+            FrameLayout vCustomView = (FrameLayout) content.findViewById(R.id.sdl_custom);
+            Button vPositiveButton = (Button) content.findViewById(R.id.sdl_button_positive);
+            Button vNegativeButton = (Button) content.findViewById(R.id.sdl_button_negative);
+            Button vNeutralButton = (Button) content.findViewById(R.id.sdl_button_neutral);
+            Button vPositiveButtonStacked = (Button) content.findViewById(R.id.sdl_button_positive_stacked);
+            Button vNegativeButtonStacked = (Button) content.findViewById(R.id.sdl_button_negative_stacked);
+            Button vNeutralButtonStacked = (Button) content.findViewById(R.id.sdl_button_neutral_stacked);
             View vButtonsDefault = content.findViewById(R.id.sdl_buttons_default);
             View vButtonsStacked = content.findViewById(R.id.sdl_buttons_stacked);
-            ListView vList = (ListView)content.findViewById(R.id.sdl_list);
+            ListView vList = (ListView) content.findViewById(R.id.sdl_list);
+
+
+            //Dark theme is enabled
+            if (isDarkTheme()) {
+                vTitle.setTextAppearance(mContext, R.style.SDL_TextView_Title_Dark);
+                vMessage.setTextAppearance(mContext, R.style.SDL_TextView_Message_Dark);
+            }
 
             Typeface regularFont = TypefaceHelper.get(mContext, "Roboto-Regular");
             Typeface mediumFont = TypefaceHelper.get(mContext, "Roboto-Medium");
@@ -388,7 +451,7 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
                 vButtonsStacked.setVisibility(View.GONE);
             }
             if (TextUtils.isEmpty(mPositiveButtonText) && TextUtils.isEmpty(mNegativeButtonText) && TextUtils.isEmpty
-                (mNeutralButtonText)) {
+                    (mNeutralButtonText)) {
                 vButtonsDefault.setVisibility(View.GONE);
             }
 
@@ -413,7 +476,7 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
 
         private boolean shouldStackButtons() {
             return shouldStackButton(mPositiveButtonText) || shouldStackButton(mNegativeButtonText)
-                || shouldStackButton(mNeutralButtonText);
+                    || shouldStackButton(mNeutralButtonText);
         }
 
         private boolean shouldStackButton(CharSequence text) {

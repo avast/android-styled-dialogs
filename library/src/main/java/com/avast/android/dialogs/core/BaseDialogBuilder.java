@@ -6,6 +6,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
+
 /**
  * Internal base builder that holds common values for all dialog fragment builders.
  *
@@ -16,18 +17,17 @@ public abstract class BaseDialogBuilder<T extends BaseDialogBuilder<T>> {
     public final static String ARG_REQUEST_CODE = "request_code";
     public final static String ARG_CANCELABLE_ON_TOUCH_OUTSIDE = "cancelable_oto";
     public final static String DEFAULT_TAG = "simple_dialog";
+    private String mTag = DEFAULT_TAG;
     public final static int DEFAULT_REQUEST_CODE = -42;
-
+    private int mRequestCode = DEFAULT_REQUEST_CODE;
+    public static String ARG_USE_DARK_THEME = "usedarktheme";
     protected final Context mContext;
     protected final FragmentManager mFragmentManager;
     protected final Class<? extends BaseDialogFragment> mClass;
-
     private Fragment mTargetFragment;
     private boolean mCancelable = true;
     private boolean mCancelableOnTouchOutside = true;
-
-    private String mTag = DEFAULT_TAG;
-    private int mRequestCode = DEFAULT_REQUEST_CODE;
+    private boolean mUseDarkTheme = false;
 
     public BaseDialogBuilder(Context context, FragmentManager fragmentManager, Class<? extends BaseDialogFragment> clazz) {
         mFragmentManager = fragmentManager;
@@ -68,12 +68,19 @@ public abstract class BaseDialogBuilder<T extends BaseDialogBuilder<T>> {
         return self();
     }
 
+    public T useDarkTheme() {
+        mUseDarkTheme = true;
+        return self();
+    }
+
     private BaseDialogFragment create() {
         final Bundle args = prepareArguments();
 
-        final BaseDialogFragment fragment = (BaseDialogFragment)Fragment.instantiate(mContext, mClass.getName(), args);
+        final BaseDialogFragment fragment = (BaseDialogFragment) Fragment.instantiate(mContext, mClass.getName(), args);
 
         args.putBoolean(ARG_CANCELABLE_ON_TOUCH_OUTSIDE, mCancelableOnTouchOutside);
+
+        args.putBoolean(ARG_USE_DARK_THEME, mUseDarkTheme);
 
         if (mTargetFragment != null) {
             fragment.setTargetFragment(mTargetFragment, mRequestCode);

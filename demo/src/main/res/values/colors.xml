@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<!-- custom light theme: -->
+    <!-- custom light theme: -->
     <color name="indigo">#3F51B5</color>
     <color name="indigo_dark">#303F9F</color>
     <color name="pink">#FF4081</color>

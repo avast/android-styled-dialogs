@@ -30,25 +30,25 @@ import com.avast.android.dialogs.iface.IPositiveButtonDialogListener;
  */
 public class JayneHatDialogFragment extends SimpleDialogFragment {
 
-	public static String TAG = "jayne";
+    public static String TAG = "jayne";
 
-	public static void show(FragmentActivity activity) {
-		new JayneHatDialogFragment().show(activity.getSupportFragmentManager(), TAG);
-	}
+    public static void show(FragmentActivity activity) {
+        new JayneHatDialogFragment().show(activity.getSupportFragmentManager(), TAG);
+    }
 
-	@Override
-	public BaseDialogFragment.Builder build(BaseDialogFragment.Builder builder) {
-		builder.setTitle("Jayne's hat");
-		builder.setView(LayoutInflater.from(getActivity()).inflate(R.layout.view_jayne_hat, null));
-		builder.setPositiveButton("I want one", new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				for (IPositiveButtonDialogListener listener : getPositiveButtonDialogListeners()) {
+    @Override
+    public BaseDialogFragment.Builder build(BaseDialogFragment.Builder builder) {
+        builder.setTitle("Jayne's hat");
+        builder.setView(LayoutInflater.from(getActivity()).inflate(R.layout.view_jayne_hat, null));
+        builder.setPositiveButton("I want one", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (IPositiveButtonDialogListener listener : getPositiveButtonDialogListeners()) {
                     listener.onPositiveButtonClicked(mRequestCode);
                 }
-				dismiss();
-			}
-		});
-		return builder;
-	}
+                dismiss();
+            }
+        });
+        return builder;
+    }
 }
