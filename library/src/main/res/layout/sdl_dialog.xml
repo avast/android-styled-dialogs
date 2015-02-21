@@ -28,6 +28,10 @@
             android:id="@+id/sdl_list"
             style="@style/SDL.ListView" />
 
+        <EditText
+            android:id="@+id/sdl_editText"
+            style="@style/SDL.EditText" />
+
     </LinearLayout>
 
     <View

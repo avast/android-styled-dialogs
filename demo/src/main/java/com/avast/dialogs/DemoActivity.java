@@ -25,14 +25,17 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.avast.android.dialogs.fragment.DatePickerDialogFragment;
+import com.avast.android.dialogs.fragment.EditTextDialogFragment;
 import com.avast.android.dialogs.fragment.ListDialogFragment;
 import com.avast.android.dialogs.fragment.ProgressDialogFragment;
 import com.avast.android.dialogs.fragment.SimpleDialogFragment;
 import com.avast.android.dialogs.fragment.TimePickerDialogFragment;
 import com.avast.android.dialogs.iface.IDateDialogListener;
+import com.avast.android.dialogs.iface.IEditTextGetTextListener;
 import com.avast.android.dialogs.iface.IListDialogListener;
 import com.avast.android.dialogs.iface.IMultiChoiceListDialogListener;
 import com.avast.android.dialogs.iface.ISimpleDialogCancelListener;
@@ -46,7 +49,8 @@ public class DemoActivity extends ActionBarActivity implements
         IDateDialogListener,
         ISimpleDialogCancelListener,
         IListDialogListener,
-        IMultiChoiceListDialogListener {
+        IMultiChoiceListDialogListener,
+        IEditTextGetTextListener {
 
     private static final int REQUEST_PROGRESS = 1;
     private static final int REQUEST_LIST_SIMPLE = 9;
@@ -55,6 +59,7 @@ public class DemoActivity extends ActionBarActivity implements
     private static final int REQUEST_DATE_PICKER = 12;
     private static final int REQUEST_TIME_PICKER = 13;
     private static final int REQUEST_SIMPLE_DIALOG = 42;
+    private static final int REQUEST_EDIT_TEXT = 100;
 
     DemoActivity c = this;
 
@@ -121,6 +126,20 @@ public class DemoActivity extends ActionBarActivity implements
                         .show();
             }
         });
+
+        findViewById(R.id.editText_dialog_simple).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditTextDialogFragment.createBuilder(c, getSupportFragmentManager())
+                        .setTitle("Edit Text Dialog")
+                        .setHint("Enter message")
+                        .setMessage("Hi enter your message")
+                        .setPositiveButtonText("Get Msg")
+                        .setRequestCode(REQUEST_EDIT_TEXT)
+                        .show();
+            }
+        });
+
         findViewById(R.id.list_dialog_simple).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -250,6 +269,14 @@ public class DemoActivity extends ActionBarActivity implements
     public void onPositiveButtonClicked(int requestCode) {
         if (requestCode == REQUEST_SIMPLE_DIALOG) {
             Toast.makeText(c, "Positive button clicked", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    @Override
+    public void onGetTextListener(EditText editText, int requestCode) {
+        if (requestCode == REQUEST_EDIT_TEXT) {
+            Toast.makeText(c, editText.getText(), Toast.LENGTH_SHORT).show();
         }
     }
 

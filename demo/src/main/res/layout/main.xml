@@ -30,6 +30,13 @@
             style="@style/Button"
             android:text="Simple dialog: stacked buttons" />
 
+
+        <Button
+            android:id="@+id/editText_dialog_simple"
+            style="@style/Button"
+            android:text="EditText dialog" />
+
+
         <Button
             android:id="@+id/list_dialog_simple"
             style="@style/Button"
