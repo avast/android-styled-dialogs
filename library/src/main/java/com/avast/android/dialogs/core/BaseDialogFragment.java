@@ -35,6 +35,7 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
@@ -284,6 +285,9 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
 
         private CharSequence mMessage;
 
+        //Hint to be shown in the EditTextDialogFragment
+        private CharSequence mHint;
+
         private View mCustomView;
 
         private ListAdapter mListAdapter;
@@ -295,6 +299,9 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
         private int[] mListCheckedItemMultipleIds;
 
         private AdapterView.OnItemClickListener mOnItemClickListener;
+
+        //Edit text for EditTextDialogFragment
+        private EditText editText;
 
         public Builder(Context context, LayoutInflater inflater, ViewGroup container) {
             this.mContext = context;
@@ -362,6 +369,18 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
             return this;
         }
 
+        //Setting hint for edit text
+        public Builder setHint(CharSequence hint) {
+            mHint = hint;
+            return this;
+        }
+
+        //Setting hint for edit text
+        public Builder setHint(int hintId) {
+            mHint = mContext.getText(hintId);
+            return this;
+        }
+
         public Builder setItems(ListAdapter listAdapter, int[] checkedItemIds, int choiceMode, final AdapterView.OnItemClickListener listener) {
             mListAdapter = listAdapter;
             mListCheckedItemMultipleIds = checkedItemIds;
@@ -405,7 +424,7 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
             View vButtonsDefault = content.findViewById(R.id.sdl_buttons_default);
             View vButtonsStacked = content.findViewById(R.id.sdl_buttons_stacked);
             ListView vList = (ListView) content.findViewById(R.id.sdl_list);
-
+            editText = (EditText) content.findViewById(R.id.sdl_editText);
 
             //Dark theme is enabled
             if (isDarkTheme()) {
@@ -455,7 +474,21 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
                 vButtonsDefault.setVisibility(View.GONE);
             }
 
+            //If hint is not null then using the edittext
+            if (TextUtils.isEmpty(mHint)) {
+                editText.setVisibility(View.GONE);
+            } else {
+                editText.setHint(mHint);
+            }
+
             return content;
+        }
+
+        /**
+         * @return The the widget edit text which is used for the getTextListener
+         */
+        public EditText getEditText() {
+            return editText;
         }
 
         /**
