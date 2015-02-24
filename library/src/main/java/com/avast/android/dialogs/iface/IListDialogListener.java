@@ -6,5 +6,5 @@ package com.avast.android.dialogs.iface;
  */
 public interface IListDialogListener {
 
-    public void onListItemSelected(String value, int number, int requestCode);
+    public void onListItemSelected(CharSequence value, int number, int requestCode);
 }

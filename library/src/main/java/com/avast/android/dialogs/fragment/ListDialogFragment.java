@@ -151,7 +151,7 @@ public class ListDialogFragment extends BaseDialogFragment {
 
     @Override
     protected Builder build(Builder builder) {
-        final String title = getTitle();
+        final CharSequence title = getTitle();
         if (!TextUtils.isEmpty(title)) {
             builder.setTitle(title);
         }
@@ -178,8 +178,8 @@ public class ListDialogFragment extends BaseDialogFragment {
                         public void onClick(View view) {
                             // prepare multiple results
                             final int[] checkedPositions = asIntArray(getCheckedItems());
-                            final String[] items = getItems();
-                            final String[] checkedValues = new String[checkedPositions.length];
+                            final CharSequence[] items = getItems();
+                            final CharSequence[] checkedValues = new CharSequence[checkedPositions.length];
                             int i = 0;
                             for (int checkedPosition : checkedPositions) {
                                 if (checkedPosition >= 0 && checkedPosition < items.length) {
@@ -201,7 +201,7 @@ public class ListDialogFragment extends BaseDialogFragment {
                             // prepare single result
                             int selectedPosition = -1;
                             final int[] checkedPositions = asIntArray(getCheckedItems());
-                            final String[] items = getItems();
+                            final CharSequence[] items = getItems();
                             for (int i : checkedPositions) {
                                 if (i >= 0 && i < items.length) {
                                     //1st valid value
@@ -226,7 +226,7 @@ public class ListDialogFragment extends BaseDialogFragment {
                     break;
             }
 
-            String positiveButton = getPositiveButtonText();
+            CharSequence positiveButton = getPositiveButtonText();
             if (TextUtils.isEmpty(getPositiveButtonText())) {
                 //we always need confirm button when CHOICE_MODE_SINGLE or CHOICE_MODE_MULTIPLE
                 positiveButton = getString(android.R.string.ok);
@@ -235,7 +235,7 @@ public class ListDialogFragment extends BaseDialogFragment {
         }
 
         // prepare list and its item click listener
-        final String[] items = getItems();
+        final CharSequence[] items = getItems();
         if (items != null && items.length > 0) {
             @ChoiceMode
             final int mode = getMode();
@@ -277,8 +277,8 @@ public class ListDialogFragment extends BaseDialogFragment {
         return getDialogListeners(IMultiChoiceListDialogListener.class);
     }
 
-    private String getTitle() {
-        return getArguments().getString(ARG_TITLE);
+    private CharSequence getTitle() {
+        return getArguments().getCharSequence(ARG_TITLE);
     }
 
     @SuppressWarnings("ResourceType")
@@ -287,8 +287,8 @@ public class ListDialogFragment extends BaseDialogFragment {
         return getArguments().getInt(ARG_MODE);
     }
 
-    private String[] getItems() {
-        return getArguments().getStringArray(ARG_ITEMS);
+    private CharSequence[] getItems() {
+        return getArguments().getCharSequenceArray(ARG_ITEMS);
     }
 
     @NonNull
@@ -304,12 +304,12 @@ public class ListDialogFragment extends BaseDialogFragment {
         getArguments().putParcelable(ARG_CHECKED_ITEMS, checkedItems);
     }
 
-    private String getPositiveButtonText() {
-        return getArguments().getString(ARG_POSITIVE_BUTTON);
+    private CharSequence getPositiveButtonText() {
+        return getArguments().getCharSequence(ARG_POSITIVE_BUTTON);
     }
 
-    private String getNegativeButtonText() {
-        return getArguments().getString(ARG_NEGATIVE_BUTTON);
+    private CharSequence getNegativeButtonText() {
+        return getArguments().getCharSequence(ARG_NEGATIVE_BUTTON);
     }
 
     @IntDef({AbsListView.CHOICE_MODE_MULTIPLE, AbsListView.CHOICE_MODE_SINGLE, AbsListView.CHOICE_MODE_NONE})
@@ -318,16 +318,16 @@ public class ListDialogFragment extends BaseDialogFragment {
 
     public static class SimpleListDialogBuilder extends BaseDialogBuilder<SimpleListDialogBuilder> {
 
-        private String title;
+        private CharSequence title;
 
-        private String[] items;
+        private CharSequence[] items;
 
         @ChoiceMode
         private int mode;
         private int[] checkedItems;
 
-        private String cancelButtonText;
-        private String confirmButtonText;
+        private CharSequence cancelButtonText;
+        private CharSequence confirmButtonText;
 
 
         public SimpleListDialogBuilder(Context context, FragmentManager fragmentManager) {
@@ -343,7 +343,7 @@ public class ListDialogFragment extends BaseDialogFragment {
             return mContext.getResources();
         }
 
-        public SimpleListDialogBuilder setTitle(String title) {
+        public SimpleListDialogBuilder setTitle(CharSequence title) {
             this.title = title;
             return this;
         }
@@ -383,7 +383,7 @@ public class ListDialogFragment extends BaseDialogFragment {
             return this;
         }
 
-        public SimpleListDialogBuilder setItems(String[] items) {
+        public SimpleListDialogBuilder setItems(CharSequence[] items) {
             this.items = items;
             return this;
         }
@@ -393,7 +393,7 @@ public class ListDialogFragment extends BaseDialogFragment {
             return this;
         }
 
-        public SimpleListDialogBuilder setConfirmButtonText(String text) {
+        public SimpleListDialogBuilder setConfirmButtonText(CharSequence text) {
             this.confirmButtonText = text;
             return this;
         }
@@ -403,7 +403,7 @@ public class ListDialogFragment extends BaseDialogFragment {
             return this;
         }
 
-        public SimpleListDialogBuilder setCancelButtonText(String text) {
+        public SimpleListDialogBuilder setCancelButtonText(CharSequence text) {
             this.cancelButtonText = text;
             return this;
         }
@@ -421,11 +421,11 @@ public class ListDialogFragment extends BaseDialogFragment {
         @Override
         protected Bundle prepareArguments() {
             Bundle args = new Bundle();
-            args.putString(ARG_TITLE, title);
-            args.putString(ARG_POSITIVE_BUTTON, confirmButtonText);
-            args.putString(ARG_NEGATIVE_BUTTON, cancelButtonText);
+            args.putCharSequence(ARG_TITLE, title);
+            args.putCharSequence(ARG_POSITIVE_BUTTON, confirmButtonText);
+            args.putCharSequence(ARG_NEGATIVE_BUTTON, cancelButtonText);
 
-            args.putStringArray(ARG_ITEMS, items);
+            args.putCharSequenceArray(ARG_ITEMS, items);
 
             SparseBooleanArrayParcelable sparseArray = new SparseBooleanArrayParcelable();
             for (int index = 0; checkedItems != null && index < checkedItems.length; index++) {

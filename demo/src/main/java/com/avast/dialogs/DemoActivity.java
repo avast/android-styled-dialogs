@@ -198,17 +198,17 @@ public class DemoActivity extends ActionBarActivity implements
     // IListDialogListener
 
     @Override
-    public void onListItemSelected(String value, int number, int requestCode) {
+    public void onListItemSelected(CharSequence value, int number, int requestCode) {
         if (requestCode == REQUEST_LIST_SIMPLE || requestCode == REQUEST_LIST_SINGLE) {
             Toast.makeText(c, "Selected: " + value, Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
-    public void onListItemsSelected(String[] values, int[] selectedPositions, int requestCode) {
+    public void onListItemsSelected(CharSequence[] values, int[] selectedPositions, int requestCode) {
         if (requestCode == REQUEST_LIST_MULTIPLE) {
             StringBuilder sb = new StringBuilder();
-            for (String value : values) {
+            for (CharSequence value : values) {
                 if (sb.length() > 0) {
                     sb.append(", ");
                 }

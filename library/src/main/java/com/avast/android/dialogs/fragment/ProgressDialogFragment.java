@@ -43,11 +43,11 @@ public class ProgressDialogFragment extends BaseDialogFragment {
             tvMessage.setTextAppearance(getActivity(), R.style.SDL_TextView_Message_Progress_Dark);
         }
 
-        tvMessage.setText(getArguments().getString(ARG_MESSAGE));
+        tvMessage.setText(getArguments().getCharSequence(ARG_MESSAGE));
 
         builder.setView(view);
 
-        builder.setTitle(getArguments().getString(ARG_TITLE));
+        builder.setTitle(getArguments().getCharSequence(ARG_TITLE));
 
         return builder;
     }
@@ -63,8 +63,8 @@ public class ProgressDialogFragment extends BaseDialogFragment {
 
     public static class ProgressDialogBuilder extends BaseDialogBuilder<ProgressDialogBuilder> {
 
-        private String mTitle;
-        private String mMessage;
+        private CharSequence mTitle;
+        private CharSequence mMessage;
 
         protected ProgressDialogBuilder(Context context, FragmentManager fragmentManager) {
             super(context, fragmentManager, ProgressDialogFragment.class);
@@ -81,7 +81,7 @@ public class ProgressDialogFragment extends BaseDialogFragment {
         }
 
 
-        public ProgressDialogBuilder setTitle(String title) {
+        public ProgressDialogBuilder setTitle(CharSequence title) {
             mTitle = title;
             return this;
         }
@@ -91,7 +91,7 @@ public class ProgressDialogFragment extends BaseDialogFragment {
             return this;
         }
 
-        public ProgressDialogBuilder setMessage(String message) {
+        public ProgressDialogBuilder setMessage(CharSequence message) {
             mMessage = message;
             return this;
         }
@@ -99,8 +99,8 @@ public class ProgressDialogFragment extends BaseDialogFragment {
         @Override
         protected Bundle prepareArguments() {
             Bundle args = new Bundle();
-            args.putString(SimpleDialogFragment.ARG_MESSAGE, mMessage);
-            args.putString(SimpleDialogFragment.ARG_TITLE, mTitle);
+            args.putCharSequence(SimpleDialogFragment.ARG_MESSAGE, mMessage);
+            args.putCharSequence(SimpleDialogFragment.ARG_TITLE, mTitle);
 
             return args;
         }
