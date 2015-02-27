@@ -10,6 +10,22 @@ android {
         versionName project.VERSION_NAME
         versionCode project.VERSION_CODE
     }
+
+    signingConfigs {
+        release {
+            storeFile file(AVAST_LABS_KEYSTORE_FILE)
+            storePassword AVAST_LABS_KEYSTORE_PASSWORD
+            keyAlias AVAST_LABS_KEY_ALIAS
+            keyPassword AVAST_LABS_KEY_PASSWORD
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.release
+        }
+    }
 }
 
 dependencies {

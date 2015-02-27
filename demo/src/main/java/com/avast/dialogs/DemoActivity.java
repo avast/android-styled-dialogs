@@ -19,8 +19,12 @@ package com.avast.dialogs;
 import java.text.DateFormat;
 import java.util.Date;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.Toast;
@@ -49,6 +53,9 @@ public class DemoActivity extends ActionBarActivity implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.drawable.img_avast_logo_small);
+
         findViewById(R.id.message_dialog).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -278,5 +285,24 @@ public class DemoActivity extends ActionBarActivity implements
 
         DateFormat dateFormat = DateFormat.getDateTimeInstance();
         Toast.makeText(this, text + "Success! " + dateFormat.format(date), Toast.LENGTH_SHORT).show();
+    }
+
+    // menu
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.about) {
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse("https://github.com/avast/android-styled-dialogs"));
+            startActivity(i);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

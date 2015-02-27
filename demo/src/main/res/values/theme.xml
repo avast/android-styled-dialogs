@@ -2,9 +2,15 @@
 <resources>
 
 	<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/indigo</item>
-        <item name="colorPrimaryDark">@color/indigo_dark</item>
-        <item name="colorAccent">@color/pink</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
+
+        <item name="actionOverflowButtonStyle">@style/OverFlow</item>
 	</style>
+
+    <style name="OverFlow" parent="Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:src">@drawable/ic_menu</item>
+    </style>
 
 </resources>

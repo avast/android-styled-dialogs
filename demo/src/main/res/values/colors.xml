@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<!-- custom light theme: -->
-    <color name="indigo">#3F51B5</color>
-    <color name="indigo_dark">#303F9F</color>
-    <color name="pink">#FF4081</color>
+    <color name="primary">#3C4655</color>
+    <color name="primary_dark">#0E0E0E</color>
+    <color name="accent">#F4982E</color>
 </resources>
