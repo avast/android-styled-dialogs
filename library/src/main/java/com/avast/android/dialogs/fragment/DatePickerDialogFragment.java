@@ -1,10 +1,5 @@
 package com.avast.android.dialogs.fragment;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.TimeZone;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -18,6 +13,11 @@ import com.avast.android.dialogs.R;
 import com.avast.android.dialogs.core.BaseDialogBuilder;
 import com.avast.android.dialogs.core.BaseDialogFragment;
 import com.avast.android.dialogs.iface.IDateDialogListener;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.TimeZone;
 
 /**
  * Dialog with a date picker.
@@ -87,15 +87,15 @@ public class DatePickerDialogFragment extends BaseDialogFragment {
                 }
             });
         }
-        mDatePicker = (DatePicker)LayoutInflater.from(getActivity()).inflate(R.layout.sdl_datepicker, null);
+        mDatePicker = (DatePicker) LayoutInflater.from(getActivity()).inflate(R.layout.sdl_datepicker, null);
         builder.setView(mDatePicker);
 
         TimeZone zone = TimeZone.getTimeZone(getArguments().getString(ARG_ZONE));
         mCalendar = Calendar.getInstance(zone);
         mCalendar.setTimeInMillis(getArguments().getLong(ARG_DATE, System.currentTimeMillis()));
         mDatePicker.updateDate(mCalendar.get(Calendar.YEAR)
-            , mCalendar.get(Calendar.MONTH)
-            , mCalendar.get(Calendar.DAY_OF_MONTH));
+                , mCalendar.get(Calendar.MONTH)
+                , mCalendar.get(Calendar.DAY_OF_MONTH));
         return builder;
     }
 

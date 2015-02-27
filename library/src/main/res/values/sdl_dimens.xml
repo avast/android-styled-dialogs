@@ -1,34 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<!-- grid size -->
-	<dimen name="grid_1">4dp</dimen>   <!-- one square in grid -->
-	<dimen name="grid_2">8dp</dimen>
-	<dimen name="grid_3">12dp</dimen>
-	<dimen name="grid_4">16dp</dimen>
-	<dimen name="grid_5">20dp</dimen>
-	<dimen name="grid_6">24dp</dimen>
-	<dimen name="grid_7">28dp</dimen>
-	<dimen name="grid_8">32dp</dimen>
-	<dimen name="grid_9">36dp</dimen>
-	<dimen name="grid_10">40dp</dimen>
-	<dimen name="grid_11">44dp</dimen>
-	<dimen name="grid_12">48dp</dimen>
-	<dimen name="grid_13">52dp</dimen>
-	<dimen name="grid_14">56dp</dimen>
-	<dimen name="grid_15">60dp</dimen>
-	<dimen name="grid_16">64dp</dimen>
-	<dimen name="grid_17">68dp</dimen>
-	<dimen name="grid_18">72dp</dimen>
-	<dimen name="grid_20">80dp</dimen>
-	<dimen name="grid_26">104dp</dimen>
-	<dimen name="grid_27">108dp</dimen>
-	<dimen name="grid_28">112dp</dimen>
-	<dimen name="grid_43">172dp</dimen>
-	<dimen name="grid_44">176dp</dimen>
-	<dimen name="grid_45">180dp</dimen>
-	<dimen name="grid_46">184dp</dimen>
-	<dimen name="grid_55">220dp</dimen>
-	<dimen name="grid_57">228dp</dimen>
-	<dimen name="grid_58">232dp</dimen>
-	<dimen name="grid_90">360dp</dimen>
+    <!-- grid size -->
+    <dimen name="grid_1">4dp</dimen>
+    <!-- one square in grid -->
+    <dimen name="grid_2">8dp</dimen>
+    <dimen name="grid_3">12dp</dimen>
+    <dimen name="grid_4">16dp</dimen>
+    <dimen name="grid_5">20dp</dimen>
+    <dimen name="grid_6">24dp</dimen>
+    <dimen name="grid_7">28dp</dimen>
+    <dimen name="grid_8">32dp</dimen>
+    <dimen name="grid_9">36dp</dimen>
+    <dimen name="grid_10">40dp</dimen>
+    <dimen name="grid_11">44dp</dimen>
+    <dimen name="grid_12">48dp</dimen>
+    <dimen name="grid_13">52dp</dimen>
+    <dimen name="grid_14">56dp</dimen>
+    <dimen name="grid_15">60dp</dimen>
+    <dimen name="grid_16">64dp</dimen>
+    <dimen name="grid_17">68dp</dimen>
+    <dimen name="grid_18">72dp</dimen>
+    <dimen name="grid_20">80dp</dimen>
+    <dimen name="grid_26">104dp</dimen>
+    <dimen name="grid_27">108dp</dimen>
+    <dimen name="grid_28">112dp</dimen>
+    <dimen name="grid_43">172dp</dimen>
+    <dimen name="grid_44">176dp</dimen>
+    <dimen name="grid_45">180dp</dimen>
+    <dimen name="grid_46">184dp</dimen>
+    <dimen name="grid_55">220dp</dimen>
+    <dimen name="grid_57">228dp</dimen>
+    <dimen name="grid_58">232dp</dimen>
+    <dimen name="grid_90">360dp</dimen>
 </resources>

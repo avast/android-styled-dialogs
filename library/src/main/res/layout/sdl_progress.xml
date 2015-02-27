@@ -6,11 +6,11 @@
 
     <ProgressBar
         android:id="@+id/sdl_progress"
-        style="@style/SDL.Progress"/>
+        style="@style/SDL.Progress" />
 
     <TextView
-        style="@style/SDL.TextView.Message.Progress"
         android:id="@+id/sdl_message"
+        style="@style/SDL.TextView.Message.Progress"
         tools:text="Message ..." />
 
 </LinearLayout>

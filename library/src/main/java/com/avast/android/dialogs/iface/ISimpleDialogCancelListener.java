@@ -24,5 +24,5 @@ package com.avast.android.dialogs.iface;
  */
 public interface ISimpleDialogCancelListener {
 
-	public void onCancelled(int requestCode);
+    public void onCancelled(int requestCode);
 }

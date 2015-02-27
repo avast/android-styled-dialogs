@@ -24,20 +24,31 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
+import android.content.res.TypedArray;
+import android.util.TypedValue;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.Toast;
 
-import com.avast.android.dialogs.fragment.*;
-import com.avast.android.dialogs.iface.*;
+import com.avast.android.dialogs.fragment.DatePickerDialogFragment;
+import com.avast.android.dialogs.fragment.ListDialogFragment;
+import com.avast.android.dialogs.fragment.ProgressDialogFragment;
+import com.avast.android.dialogs.fragment.SimpleDialogFragment;
+import com.avast.android.dialogs.fragment.TimePickerDialogFragment;
+import com.avast.android.dialogs.iface.IDateDialogListener;
+import com.avast.android.dialogs.iface.IListDialogListener;
+import com.avast.android.dialogs.iface.IMultiChoiceListDialogListener;
+import com.avast.android.dialogs.iface.ISimpleDialogCancelListener;
+import com.avast.android.dialogs.iface.ISimpleDialogListener;
 
 public class DemoActivity extends ActionBarActivity implements
-    ISimpleDialogListener,
-    IDateDialogListener,
-    ISimpleDialogCancelListener,
-    IListDialogListener,
-    IMultiChoiceListDialogListener {
+        ISimpleDialogListener,
+        IDateDialogListener,
+        ISimpleDialogCancelListener,
+        IListDialogListener,
+        IMultiChoiceListDialogListener {
 
     private static final int REQUEST_PROGRESS = 1;
     private static final int REQUEST_LIST_SIMPLE = 9;
@@ -60,69 +71,69 @@ public class DemoActivity extends ActionBarActivity implements
             @Override
             public void onClick(View v) {
                 SimpleDialogFragment.createBuilder(c, getSupportFragmentManager())
-                    .setMessage("Love. Can know all the math in the \'verse but take a boat in the air that you don\'t " +
-                        "love? She\'ll shake you off just as sure as a turn in the worlds. Love keeps her in the air when " +
-                        "she oughtta fall down...tell you she\'s hurtin\' \'fore she keens...makes her a home.").show();
+                        .setMessage("Love. Can know all the math in the \'verse but take a boat in the air that you don\'t " +
+                                "love? She\'ll shake you off just as sure as a turn in the worlds. Love keeps her in the air when " +
+                                "she oughtta fall down...tell you she\'s hurtin\' \'fore she keens...makes her a home.").show();
             }
         });
         findViewById(R.id.message_title_dialog).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SimpleDialogFragment.createBuilder(c, getSupportFragmentManager())
-                    .setTitle("More Firefly quotes:").setMessage
-                    ("Wash: \"Psychic, though? That sounds like something out of science fiction.\"\n\nZoe: \"We live" +
-                        " " +
-                        "in a space ship, dear.\"\nWash: \"Here lies my beloved Zoe, " +
-                        ("my autumn flower ... somewhat less attractive now that she's all corpsified and gross" +
-                            ".\"\n\nRiver Tam: \"Also? I can kill you with my brain.\"\n\nKayle: \"Going on a year now, nothins twixed my neathers not run on batteries.\" \n" +
-                            "Mal: \"I can't know that.\" \n" +
-                            "Jayne: \"I can stand to hear a little more.\"\n\nWash: \"I've been under fire before. " +
-                            "Well ... I've been in a fire. Actually, I was fired. I can handle myself.\""))
-                    .setNegativeButtonText("Close")
-                    .show();
+                        .setTitle("More Firefly quotes:").setMessage
+                        ("Wash: \"Psychic, though? That sounds like something out of science fiction.\"\n\nZoe: \"We live" +
+                                " " +
+                                "in a space ship, dear.\"\nWash: \"Here lies my beloved Zoe, " +
+                                ("my autumn flower ... somewhat less attractive now that she's all corpsified and gross" +
+                                        ".\"\n\nRiver Tam: \"Also? I can kill you with my brain.\"\n\nKayle: \"Going on a year now, nothins twixed my neathers not run on batteries.\" \n" +
+                                        "Mal: \"I can't know that.\" \n" +
+                                        "Jayne: \"I can stand to hear a little more.\"\n\nWash: \"I've been under fire before. " +
+                                        "Well ... I've been in a fire. Actually, I was fired. I can handle myself.\""))
+                        .setNegativeButtonText("Close")
+                        .show();
             }
         });
         findViewById(R.id.message_title_buttons_dialog)
-            .setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    SimpleDialogFragment.createBuilder(c, getSupportFragmentManager())
-                        .setTitle("Do you like this quote?")
-                        .setMessage("Jayne: \"Shiny. Let's be bad guys.\"")
-                        .setPositiveButtonText("Love")
-                        .setNegativeButtonText("Hate")
-                        .setNeutralButtonText("WTF?")
-                        .setRequestCode(REQUEST_SIMPLE_DIALOG)
-                        .show();
-                }
-            });
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        SimpleDialogFragment.createBuilder(c, getSupportFragmentManager())
+                                .setTitle("Do you like this quote?")
+                                .setMessage("Jayne: \"Shiny. Let's be bad guys.\"")
+                                .setPositiveButtonText("Love")
+                                .setNegativeButtonText("Hate")
+                                .setNeutralButtonText("WTF?")
+                                .setRequestCode(REQUEST_SIMPLE_DIALOG)
+                                .show();
+                    }
+                });
         findViewById(R.id.long_buttons).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SimpleDialogFragment.createBuilder(c, getSupportFragmentManager()).setMessage("How will you decide?")
-                    .setPositiveButtonText("Time for some thrillin' heroics!").setNegativeButtonText("Misbehave")
-                    .setNeutralButtonText("Keep flying").show();
+                        .setPositiveButtonText("Time for some thrillin' heroics!").setNegativeButtonText("Misbehave")
+                        .setNeutralButtonText("Keep flying").show();
             }
         });
         findViewById(R.id.progress_dialog).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ProgressDialogFragment.createBuilder(c, getSupportFragmentManager())
-                    .setMessage("Mal: I\'m just waiting to see if I pass out. Long story.")
-                    .setRequestCode(REQUEST_PROGRESS)
-                    .show();
+                        .setMessage("Mal: I\'m just waiting to see if I pass out. Long story.")
+                        .setRequestCode(REQUEST_PROGRESS)
+                        .show();
             }
         });
         findViewById(R.id.list_dialog_simple).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ListDialogFragment
-                    .createBuilder(c, getSupportFragmentManager())
-                    .setTitle("Your favorite character:")
-                    .setItems(new String[]{"Jayne", "Malcolm", "Kaylee",
-                        "Wash", "Zoe", "River"})
-                    .setRequestCode(REQUEST_LIST_SIMPLE)
-                    .show();
+                        .createBuilder(c, getSupportFragmentManager())
+                        .setTitle("Your favorite character:")
+                        .setItems(new String[]{"Jayne", "Malcolm", "Kaylee",
+                                "Wash", "Zoe", "River"})
+                        .setRequestCode(REQUEST_LIST_SIMPLE)
+                        .show();
 
             }
         });
@@ -130,13 +141,13 @@ public class DemoActivity extends ActionBarActivity implements
             @Override
             public void onClick(View v) {
                 ListDialogFragment
-                    .createBuilder(c, getSupportFragmentManager())
-                    .setTitle("Your favorite character:")
-                    .setItems(new String[]{"Jayne", "Malcolm", "Kaylee",
-                        "Wash", "Zoe", "River"})
-                    .setRequestCode(REQUEST_LIST_SINGLE)
-                    .setChoiceMode(AbsListView.CHOICE_MODE_SINGLE)
-                    .show();
+                        .createBuilder(c, getSupportFragmentManager())
+                        .setTitle("Your favorite character:")
+                        .setItems(new String[]{"Jayne", "Malcolm", "Kaylee",
+                                "Wash", "Zoe", "River"})
+                        .setRequestCode(REQUEST_LIST_SINGLE)
+                        .setChoiceMode(AbsListView.CHOICE_MODE_SINGLE)
+                        .show();
 
             }
         });
@@ -144,14 +155,14 @@ public class DemoActivity extends ActionBarActivity implements
             @Override
             public void onClick(View v) {
                 ListDialogFragment
-                    .createBuilder(c, getSupportFragmentManager())
-                    .setTitle("Your favorite character:")
-                    .setItems(new String[]{"Jayne", "Malcolm", "Kaylee",
-                        "Wash", "Zoe", "River"})
-                    .setRequestCode(REQUEST_LIST_MULTIPLE)
-                    .setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE)
-                    .setCheckedItems(new int[]{1, 3})
-                    .show();
+                        .createBuilder(c, getSupportFragmentManager())
+                        .setTitle("Your favorite character:")
+                        .setItems(new String[]{"Jayne", "Malcolm", "Kaylee",
+                                "Wash", "Zoe", "River"})
+                        .setRequestCode(REQUEST_LIST_MULTIPLE)
+                        .setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE)
+                        .setCheckedItems(new int[]{1, 3})
+                        .show();
 
             }
         });
@@ -165,24 +176,24 @@ public class DemoActivity extends ActionBarActivity implements
             @Override
             public void onClick(View v) {
                 TimePickerDialogFragment
-                    .createBuilder(DemoActivity.this, getSupportFragmentManager())
-                    .setDate(new Date())
-                    .setPositiveButtonText(android.R.string.ok)
-                    .setNegativeButtonText(android.R.string.cancel)
-                    .setRequestCode(REQUEST_TIME_PICKER)
-                    .show();
+                        .createBuilder(DemoActivity.this, getSupportFragmentManager())
+                        .setDate(new Date())
+                        .setPositiveButtonText(android.R.string.ok)
+                        .setNegativeButtonText(android.R.string.cancel)
+                        .setRequestCode(REQUEST_TIME_PICKER)
+                        .show();
             }
         });
         findViewById(R.id.date_picker).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DatePickerDialogFragment
-                    .createBuilder(DemoActivity.this, getSupportFragmentManager())
-                    .setDate(new Date())
-                    .setPositiveButtonText(android.R.string.ok)
-                    .setNegativeButtonText(android.R.string.cancel)
-                    .setRequestCode(REQUEST_DATE_PICKER)
-                    .show();
+                        .createBuilder(DemoActivity.this, getSupportFragmentManager())
+                        .setDate(new Date())
+                        .setPositiveButtonText(android.R.string.ok)
+                        .setNegativeButtonText(android.R.string.cancel)
+                        .setRequestCode(REQUEST_DATE_PICKER)
+                        .show();
             }
         });
     }
@@ -233,7 +244,7 @@ public class DemoActivity extends ActionBarActivity implements
             case REQUEST_TIME_PICKER:
                 Toast.makeText(c, "Time picker cancelled", Toast.LENGTH_SHORT).show();
                 break;
-        } 
+        }
     }
 
     // ISimpleDialogListener
@@ -291,18 +302,59 @@ public class DemoActivity extends ActionBarActivity implements
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return super.onCreateOptionsMenu(menu);
+        super.onCreateOptionsMenu(menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main, menu);
+
+        if (isDarkTheme()) {
+            menu.findItem(R.id.theme_change).setTitle("Use Light Theme");
+        }
+        else {
+            menu.findItem(R.id.theme_change).setTitle("Use Dark Theme");
+        }
+        return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.about) {
-            Intent i = new Intent(Intent.ACTION_VIEW);
-            i.setData(Uri.parse("https://github.com/avast/android-styled-dialogs"));
-            startActivity(i);
-            return true;
+        switch (item.getItemId()) {
+            case R.id.theme_change:
+                if (isDarkTheme()) {
+                    setTheme(R.style.AppTheme);
+                    Toast.makeText(DemoActivity.this, "Light theme set", Toast.LENGTH_SHORT).show();
+                } else {
+                    setTheme(R.style.AppThemeDark);
+                    Toast.makeText(DemoActivity.this, "Dark theme set", Toast.LENGTH_SHORT).show();
+                }
+                invalidateOptionsMenu();
+                return true;
+            case R.id.about:
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse("https://github.com/avast/android-styled-dialogs"));
+                startActivity(i);
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
+
+    private boolean isDarkTheme() {
+        boolean darkTheme = false;
+        //Try-catch block is used to overcome resource not found exception
+        try {
+            TypedValue val = new TypedValue();
+
+            //Reading attr value from current theme
+            getTheme().resolveAttribute(com.avast.android.dialogs.R.attr.isLightTheme, val, true);
+
+            //Passing the resource ID to TypedArray to get the attribute value
+            TypedArray arr = obtainStyledAttributes(val.data, new int[]{com.avast.android.dialogs.R.attr.isLightTheme});
+            darkTheme = !arr.getBoolean(0, false);
+            arr.recycle();
+        } catch (RuntimeException e) {
+            //Resource not found , so sticking to light theme
+            darkTheme = false;
+        }
+        return darkTheme;
+    }
+
 }

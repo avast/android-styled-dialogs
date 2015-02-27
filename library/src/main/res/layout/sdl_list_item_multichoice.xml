@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<com.avast.android.dialogs.util.CheckableLinearLayout
-        style="@style/SDL.ListItem"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools">
+<com.avast.android.dialogs.util.CheckableLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/SDL.ListItem">
 
-    <CheckBox
-            style="@style/SDL.ListItemControl"
-            />
+    <CheckBox style="@style/SDL.ListItemControl" />
 
     <TextView
-            style="@style/SDL.TextView.MultiChoice"
-            android:id="@+id/sdl_text"
-            tools:text="Item"/>
+        android:id="@+id/sdl_text"
+        style="@style/SDL.TextView.MultiChoice"
+        tools:text="Item" />
 
 </com.avast.android.dialogs.util.CheckableLinearLayout>
