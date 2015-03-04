@@ -8,5 +8,5 @@ package com.avast.android.dialogs.iface;
  */
 public interface IMultiChoiceListDialogListener {
 
-    public void onListItemsSelected(String[] values, int[] selectedPositions, int requestCode);
+    public void onListItemsSelected(CharSequence[] values, int[] selectedPositions, int requestCode);
 }

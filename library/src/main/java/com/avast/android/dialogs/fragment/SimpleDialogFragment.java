@@ -65,7 +65,7 @@ public class SimpleDialogFragment extends BaseDialogFragment {
      */
     @Override
     protected BaseDialogFragment.Builder build(BaseDialogFragment.Builder builder) {
-        final String title = getTitle();
+        final CharSequence title = getTitle();
         if (!TextUtils.isEmpty(title)) {
             builder.setTitle(title);
         }
@@ -75,7 +75,7 @@ public class SimpleDialogFragment extends BaseDialogFragment {
             builder.setMessage(message);
         }
 
-        final String positiveButtonText = getPositiveButtonText();
+        final CharSequence positiveButtonText = getPositiveButtonText();
         if (!TextUtils.isEmpty(positiveButtonText)) {
             builder.setPositiveButton(positiveButtonText, new View.OnClickListener() {
                 @Override
@@ -88,7 +88,7 @@ public class SimpleDialogFragment extends BaseDialogFragment {
             });
         }
 
-        final String negativeButtonText = getNegativeButtonText();
+        final CharSequence negativeButtonText = getNegativeButtonText();
         if (!TextUtils.isEmpty(negativeButtonText)) {
             builder.setNegativeButton(negativeButtonText, new View.OnClickListener() {
                 @Override
@@ -101,7 +101,7 @@ public class SimpleDialogFragment extends BaseDialogFragment {
             });
         }
 
-        final String neutralButtonText = getNeutralButtonText();
+        final CharSequence neutralButtonText = getNeutralButtonText();
         if (!TextUtils.isEmpty(neutralButtonText)) {
             builder.setNeutralButton(neutralButtonText, new View.OnClickListener() {
                 @Override
@@ -121,20 +121,20 @@ public class SimpleDialogFragment extends BaseDialogFragment {
         return getArguments().getCharSequence(ARG_MESSAGE);
     }
 
-    protected String getTitle() {
-        return getArguments().getString(ARG_TITLE);
+    protected CharSequence getTitle() {
+        return getArguments().getCharSequence(ARG_TITLE);
     }
 
-    protected String getPositiveButtonText() {
-        return getArguments().getString(ARG_POSITIVE_BUTTON);
+    protected CharSequence getPositiveButtonText() {
+        return getArguments().getCharSequence(ARG_POSITIVE_BUTTON);
     }
 
-    protected String getNegativeButtonText() {
-        return getArguments().getString(ARG_NEGATIVE_BUTTON);
+    protected CharSequence getNegativeButtonText() {
+        return getArguments().getCharSequence(ARG_NEGATIVE_BUTTON);
     }
 
-    protected String getNeutralButtonText() {
-        return getArguments().getString(ARG_NEUTRAL_BUTTON);
+    protected CharSequence getNeutralButtonText() {
+        return getArguments().getCharSequence(ARG_NEUTRAL_BUTTON);
     }
 
     /**
@@ -173,11 +173,11 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 
     public static class SimpleDialogBuilder extends BaseDialogBuilder<SimpleDialogBuilder> {
 
-        private String mTitle;
+        private CharSequence mTitle;
         private CharSequence mMessage;
-        private String mPositiveButtonText;
-        private String mNegativeButtonText;
-        private String mNeutralButtonText;
+        private CharSequence mPositiveButtonText;
+        private CharSequence mNegativeButtonText;
+        private CharSequence mNeutralButtonText;
 
         protected SimpleDialogBuilder(Context context, FragmentManager fragmentManager, Class<? extends SimpleDialogFragment> clazz) {
             super(context, fragmentManager, clazz);
@@ -194,7 +194,7 @@ public class SimpleDialogFragment extends BaseDialogFragment {
         }
 
 
-        public SimpleDialogBuilder setTitle(String title) {
+        public SimpleDialogBuilder setTitle(CharSequence title) {
             mTitle = title;
             return this;
         }
@@ -223,7 +223,7 @@ public class SimpleDialogFragment extends BaseDialogFragment {
             return this;
         }
 
-        public SimpleDialogBuilder setPositiveButtonText(String text) {
+        public SimpleDialogBuilder setPositiveButtonText(CharSequence text) {
             mPositiveButtonText = text;
             return this;
         }
@@ -233,7 +233,7 @@ public class SimpleDialogFragment extends BaseDialogFragment {
             return this;
         }
 
-        public SimpleDialogBuilder setNegativeButtonText(String text) {
+        public SimpleDialogBuilder setNegativeButtonText(CharSequence text) {
             mNegativeButtonText = text;
             return this;
         }
@@ -243,7 +243,7 @@ public class SimpleDialogFragment extends BaseDialogFragment {
             return this;
         }
 
-        public SimpleDialogBuilder setNeutralButtonText(String text) {
+        public SimpleDialogBuilder setNeutralButtonText(CharSequence text) {
             mNeutralButtonText = text;
             return this;
         }
@@ -252,10 +252,10 @@ public class SimpleDialogFragment extends BaseDialogFragment {
         protected Bundle prepareArguments() {
             Bundle args = new Bundle();
             args.putCharSequence(SimpleDialogFragment.ARG_MESSAGE, mMessage);
-            args.putString(SimpleDialogFragment.ARG_TITLE, mTitle);
-            args.putString(SimpleDialogFragment.ARG_POSITIVE_BUTTON, mPositiveButtonText);
-            args.putString(SimpleDialogFragment.ARG_NEGATIVE_BUTTON, mNegativeButtonText);
-            args.putString(SimpleDialogFragment.ARG_NEUTRAL_BUTTON, mNeutralButtonText);
+            args.putCharSequence(SimpleDialogFragment.ARG_TITLE, mTitle);
+            args.putCharSequence(SimpleDialogFragment.ARG_POSITIVE_BUTTON, mPositiveButtonText);
+            args.putCharSequence(SimpleDialogFragment.ARG_NEGATIVE_BUTTON, mNegativeButtonText);
+            args.putCharSequence(SimpleDialogFragment.ARG_NEUTRAL_BUTTON, mNeutralButtonText);
 
             return args;
         }
