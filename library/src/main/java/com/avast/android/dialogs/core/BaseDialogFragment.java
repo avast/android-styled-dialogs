@@ -61,13 +61,6 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
     private static boolean darkTheme;
     protected int mRequestCode;
 
-    /**
-     * @return True if dark theme is to be used
-     */
-    public static boolean isDarkTheme() {
-        return darkTheme;
-    }
-
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -240,7 +233,6 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
      * This method resolves the current theme declared in the manifest
      */
     private void resolveTheme() {
-        //Try-catch block is used to overcome resource not found exception
         try {
             TypedValue val = new TypedValue();
 
@@ -405,13 +397,6 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
             View vButtonsDefault = content.findViewById(R.id.sdl_buttons_default);
             View vButtonsStacked = content.findViewById(R.id.sdl_buttons_stacked);
             ListView vList = (ListView) content.findViewById(R.id.sdl_list);
-
-
-            //Dark theme is enabled
-            if (isDarkTheme()) {
-                vTitle.setTextAppearance(mContext, R.style.SDL_TextView_Title_Dark);
-                vMessage.setTextAppearance(mContext, R.style.SDL_TextView_Message_Dark);
-            }
 
             Typeface regularFont = TypefaceHelper.get(mContext, "Roboto-Regular");
             Typeface mediumFont = TypefaceHelper.get(mContext, "Roboto-Medium");

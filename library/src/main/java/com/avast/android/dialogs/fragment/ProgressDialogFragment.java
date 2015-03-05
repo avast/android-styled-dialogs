@@ -38,11 +38,6 @@ public class ProgressDialogFragment extends BaseDialogFragment {
         final View view = inflater.inflate(R.layout.sdl_progress, null, false);
         final TextView tvMessage = (TextView) view.findViewById(R.id.sdl_message);
 
-        //Changing the textview style to dark dynamically if dark theme is in use
-        if (isDarkTheme()) {
-            tvMessage.setTextAppearance(getActivity(), R.style.SDL_TextView_Message_Progress_Dark);
-        }
-
         tvMessage.setText(getArguments().getCharSequence(ARG_MESSAGE));
 
         builder.setView(view);

@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Material colors -->
-    <color name="sdl_text_primary">#DE000000</color>
-    <!-- 87% -->
-    <color name="sdl_text_secondary">#8A000000</color>
-    <!-- 54% -->
-    <color name="sdl_divider">#1F000000</color>
-    <!-- 12% -->
-    <color name="sdl_pressed">#D5D5D5</color>
-    <color name="sdl_textColor_primary_dark">#FFFFFFFF</color>
+    <!-- colors taken from: http://www.google.com/design/spec/style/color.html#color-ui-color-application -->
+    <!-- 87% black -->
+    <color name="sdl_text_primary_light">#DE000000</color>
+    <!-- 100% white -->
+    <color name="sdl_text_primary_dark">#FFFFFFFF</color>
+    <!-- 54% black-->
+    <color name="sdl_text_secondary_light">#8A000000</color>
+    <!-- 70% white -->
+    <color name="sdl_text_secondary_dark">#B3FFFFFF</color>
+    <!-- 12 % black -->
+    <color name="sdl_divider_light">#1F000000</color>
+    <!-- 12 % white -->
+    <color name="sdl_divider_dark">#1FFFFFFF</color>
+    <!-- 16 % black -->
+    <color name="sdl_pressed_light">#29000000</color>
+    <!-- 16 % white -->
+    <color name="sdl_pressed_dark">#29FFFFFF</color>
 </resources>

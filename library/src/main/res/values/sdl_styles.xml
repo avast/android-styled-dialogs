@@ -16,6 +16,25 @@
         <item name="android:backgroundDimAmount">0.6</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
         <item name="android:windowBackground">@drawable/sdl_background</item>
+        <item name="android:listChoiceIndicatorSingle">@drawable/abc_btn_radio_material</item>
+        <item name="android:listChoiceIndicatorMultiple">@drawable/abc_btn_check_material</item>
+        <item name="sdlTextPrimaryColor">@color/sdl_text_primary_light</item>
+        <item name="sdlTextSecondaryColor">@color/sdl_text_secondary_light</item>
+        <item name="sdlDividerColor">@color/sdl_divider_light</item>
+        <item name="sdlPressedColor">@color/sdl_pressed_light</item>
+        <item name="sdlButtonBackground">@drawable/sdl_button</item>
+        <item name="sdlListSelector">@drawable/sdl_list</item>
+    </style>
+
+    <!-- Dark Theme -->
+    <style name="SDL.Dialog.Dark">
+        <item name="android:windowBackground">@drawable/sdl_background_dark</item>
+        <item name="sdlTextPrimaryColor">@color/sdl_text_primary_dark</item>
+        <item name="sdlTextSecondaryColor">@color/sdl_text_secondary_dark</item>
+        <item name="sdlDividerColor">@color/sdl_divider_dark</item>
+        <item name="sdlPressedColor">@color/sdl_pressed_dark</item>
+        <item name="sdlButtonBackground">@drawable/sdl_button_dark</item>
+        <item name="sdlListSelector">@drawable/sdl_list_dark</item>
     </style>
 
     <style name="SDL.Layout">
@@ -67,14 +86,14 @@
     <style name="SDL.TextView.Title">
         <item name="android:textSize">20sp</item>
         <item name="android:layout_width">match_parent</item>
-        <item name="android:textColor">@color/sdl_text_primary</item>
+        <item name="android:textColor">?sdlTextPrimaryColor</item>
         <!-- paddings set in code -->
     </style>
 
     <style name="SDL.TextView.Message">
         <item name="android:layout_width">match_parent</item>
         <item name="android:textSize">18sp</item>
-        <item name="android:textColor">@color/sdl_text_secondary</item>
+        <item name="android:textColor">?sdlTextSecondaryColor</item>
         <!-- paddings set in code -->
     </style>
 
@@ -87,7 +106,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:minHeight">@dimen/grid_13</item>
         <item name="android:textSize">18sp</item>
-        <item name="android:textColor">@color/sdl_text_primary</item>
+        <item name="android:textColor">?sdlTextPrimaryColor</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:paddingLeft">@dimen/grid_6</item>
         <item name="android:paddingRight">@dimen/grid_6</item>
@@ -96,7 +115,7 @@
     <style name="SDL.TextView.MultiChoice">
         <item name="android:minHeight">@dimen/grid_13</item>
         <item name="android:textSize">18sp</item>
-        <item name="android:textColor">@color/sdl_text_primary</item>
+        <item name="android:textColor">?sdlTextPrimaryColor</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:paddingRight">@dimen/grid_6</item>
     </style>
@@ -124,7 +143,7 @@
     </style>
 
     <style name="SDL.Button">
-        <item name="android:background">@drawable/sdl_button</item>
+        <item name="android:background">?sdlButtonBackground</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:minWidth">@dimen/grid_16</item>
         <item name="android:layout_height">@dimen/grid_9</item>
@@ -158,7 +177,7 @@
     <style name="SDL.Divider">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
-        <item name="android:background">@color/sdl_divider</item>
+        <item name="android:background">?sdlDividerColor</item>
     </style>
 
     <style name="SDL.Space">
@@ -192,35 +211,7 @@
         <item name="android:scrollbarStyle">outsideOverlay</item>
         <item name="android:divider">@null</item>
         <item name="android:dividerHeight">0dp</item>
-        <item name="android:listSelector">@drawable/sdl_list</item>
-    </style>
-
-
-    <!--Dark Theme-->
-    <style name="SDL.Dialog.Dark" parent="SDL.Dialog">
-        <item name="android:windowBackground">@drawable/sdl_background_dark</item>
-    </style>
-
-    <style name="SDL.TextView.Title.Dark" parent="SDL.TextView.Title">
-        <item name="android:textColor">@color/sdl_textColor_primary_dark</item>
-        <!-- paddings set in code -->
-    </style>
-
-    <style name="SDL.TextView.Message.Dark" parent="SDL.TextView.Message">
-        <item name="android:textColor">@color/sdl_textColor_primary_dark</item>
-        <!-- paddings set in code -->
-    </style>
-
-    <style name="SDL.TextView.ListItem.Dark" parent="SDL.TextView.ListItem">
-        <item name="android:textColor">@color/sdl_textColor_primary_dark</item>
-    </style>
-
-    <style name="SDL.TextView.MultiChoice.Dark" parent="SDL.TextView.MultiChoice">
-        <item name="android:textColor">@color/sdl_textColor_primary_dark</item>
-    </style>
-
-    <style name="SDL.TextView.Message.Progress.Dark" parent="SDL.TextView.Message.Progress">
-        <item name="android:textColor">@color/sdl_textColor_primary_dark</item>
+        <item name="android:listSelector">?sdlListSelector</item>
     </style>
 
 </resources>

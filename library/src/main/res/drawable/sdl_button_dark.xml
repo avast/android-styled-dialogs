@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" android:exitFadeDuration="@android:integer/config_shortAnimTime" tools:ignore="UnusedAttribute">
+    <item android:drawable="@drawable/sdl_button_pressed_dark" android:state_pressed="true" />
+    <item android:drawable="@drawable/sdl_button_normal" />
+</selector>

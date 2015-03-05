@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="StyledDialogs">
+        <attr name="sdlTextPrimaryColor" format="color|reference" />
+        <attr name="sdlTextSecondaryColor" format="color|reference" />
+        <attr name="sdlDividerColor" format="color|reference" />
+        <attr name="sdlPressedColor" format="color|reference" />
+        <attr name="sdlButtonBackground" format="reference" />
+        <attr name="sdlListSelector" format="reference" />
+    </declare-styleable>
+</resources>

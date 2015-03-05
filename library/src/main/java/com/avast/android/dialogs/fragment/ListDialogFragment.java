@@ -1,5 +1,8 @@
 package com.avast.android.dialogs.fragment;
 
+import java.util.Arrays;
+import java.util.List;
+
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -8,14 +11,10 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
 import android.util.SparseBooleanArray;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.*;
 
 import com.avast.android.dialogs.R;
 import com.avast.android.dialogs.core.BaseDialogBuilder;
@@ -24,9 +23,6 @@ import com.avast.android.dialogs.iface.IListDialogListener;
 import com.avast.android.dialogs.iface.IMultiChoiceListDialogListener;
 import com.avast.android.dialogs.iface.ISimpleDialogCancelListener;
 import com.avast.android.dialogs.util.SparseBooleanArrayParcelable;
-
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Dialog with a list of options.
@@ -76,77 +72,71 @@ public class ListDialogFragment extends BaseDialogFragment {
         super.onActivityCreated(savedInstanceState);
         if (getArguments() == null) {
             throw new IllegalArgumentException(
-                    "use SimpleListDialogBuilder to construct this dialog");
+                "use SimpleListDialogBuilder to construct this dialog");
         }
     }
 
-    private ListAdapter prepareAdapter(int itemLayoutId) {
+    private ListAdapter prepareAdapter(final int itemLayoutId) {
         return new ArrayAdapter<Object>(getActivity(),
-                itemLayoutId,
-                R.id.sdl_text,
-                getItems()) {
+            itemLayoutId,
+            R.id.sdl_text,
+            getItems()) {
 
             /**
-             * This function of list adapter class is overriden to set the dark style attrributes
-             * to the list view dynamically
-             *
-             * @param position
-             * @param convertView
-             * @param parent
-             * @return
+             * Overriding default implementation because it ignores current light/dark theme.
              */
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
-                //Dark theme is enabled
-                if (isDarkTheme()) {
-                    View v = super.getView(position, convertView, parent);
-                    TextView t = (TextView) v.findViewById(R.id.sdl_text);
-                    t.setTextColor(getResources().getColor(R.color.sdl_textColor_primary_dark));
-                    return v;
+                if (convertView == null) {
+                    convertView = LayoutInflater.from(parent.getContext()).inflate(itemLayoutId, parent, false);
                 }
-                return super.getView(position, convertView, parent);
+                TextView t = (TextView)convertView.findViewById(R.id.sdl_text);
+                if (t != null) {
+                    t.setText((CharSequence)getItem(position));
+                }
+                return convertView;
             }
         };
     }
 
     private void buildMultiChoice(Builder builder) {
         builder.setItems(
-                prepareAdapter(R.layout.sdl_list_item_multichoice),
-                asIntArray(getCheckedItems()), AbsListView.CHOICE_MODE_MULTIPLE,
-                new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        SparseBooleanArray checkedPositions = ((ListView) parent).getCheckedItemPositions();
-                        setCheckedItems(new SparseBooleanArrayParcelable(checkedPositions));
-                    }
-                });
+            prepareAdapter(R.layout.sdl_list_item_multichoice),
+            asIntArray(getCheckedItems()), AbsListView.CHOICE_MODE_MULTIPLE,
+            new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    SparseBooleanArray checkedPositions = ((ListView)parent).getCheckedItemPositions();
+                    setCheckedItems(new SparseBooleanArrayParcelable(checkedPositions));
+                }
+            });
     }
 
     private void buildSingleChoice(Builder builder) {
         builder.setItems(
-                prepareAdapter(R.layout.sdl_list_item_singlechoice),
-                asIntArray(getCheckedItems()),
-                AbsListView.CHOICE_MODE_SINGLE, new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        SparseBooleanArray checkedPositions = ((ListView) parent).getCheckedItemPositions();
-                        setCheckedItems(new SparseBooleanArrayParcelable(checkedPositions));
-                    }
-                });
+            prepareAdapter(R.layout.sdl_list_item_singlechoice),
+            asIntArray(getCheckedItems()),
+            AbsListView.CHOICE_MODE_SINGLE, new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    SparseBooleanArray checkedPositions = ((ListView)parent).getCheckedItemPositions();
+                    setCheckedItems(new SparseBooleanArrayParcelable(checkedPositions));
+                }
+            });
     }
 
     private void buildNormalChoice(Builder builder) {
         builder.setItems(
-                prepareAdapter(R.layout.sdl_list_item), -1,
-                new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        for (IListDialogListener listener : getSingleDialogListeners()) {
-                            listener.onListItemSelected(getItems()[position], position, mRequestCode);
-                        }
-                        dismiss();
+            prepareAdapter(R.layout.sdl_list_item), -1,
+            new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    for (IListDialogListener listener : getSingleDialogListeners()) {
+                        listener.onListItemSelected(getItems()[position], position, mRequestCode);
                     }
-                });
+                    dismiss();
+                }
+            });
     }
 
     @Override
@@ -415,7 +405,7 @@ public class ListDialogFragment extends BaseDialogFragment {
 
         @Override
         public ListDialogFragment show() {
-            return (ListDialogFragment) super.show();
+            return (ListDialogFragment)super.show();
         }
 
         @Override

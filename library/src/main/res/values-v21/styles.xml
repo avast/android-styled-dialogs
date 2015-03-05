@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="SDL.Dialog" parent="android:Theme.Material.Light.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowActionModeOverlay">true</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
+        <item name="android:colorAccent">?colorAccent</item>
+        <item name="android:colorPrimary">?colorPrimary</item>
+
+        <item name="sdlTextPrimaryColor">@color/sdl_text_primary_light</item>
+        <item name="sdlTextSecondaryColor">@color/sdl_text_secondary_light</item>
+        <item name="sdlDividerColor">@color/sdl_divider_light</item>
+        <item name="sdlPressedColor">@color/sdl_pressed_light</item>
+        <item name="sdlButtonBackground">@drawable/sdl_button</item>
+        <item name="sdlListSelector">@drawable/sdl_list</item>
+    </style>
+
+    <style name="SDL.Dialog.Dark" parent="android:Theme.Material.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowActionModeOverlay">true</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
+        <item name="android:colorAccent">?colorAccent</item>
+        <item name="android:colorPrimary">?colorPrimary</item>
+
+        <item name="sdlTextPrimaryColor">@color/sdl_text_primary_dark</item>
+        <item name="sdlTextSecondaryColor">@color/sdl_text_secondary_dark</item>
+        <item name="sdlDividerColor">@color/sdl_divider_dark</item>
+        <item name="sdlPressedColor">@color/sdl_pressed_dark</item>
+        <item name="sdlButtonBackground">@drawable/sdl_button_dark</item>
+        <item name="sdlListSelector">@drawable/sdl_list_dark</item>
+    </style>
+</resources>
