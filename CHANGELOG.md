@@ -1,21 +1,8 @@
 # Changelog
 
-## 2.1.0
+See newest changelog in [Releases](https://github.com/avast/android-styled-dialogs/releases)
 
-February 2, 2015
-
- - new multi-choice and single-choice modes for ListDialogFragment
- - listeners called for both activity and fragment
- - cancel listener made more general
- - broke ISimpleDialogListener into separated button listeners
- - TimePickerDialog fragment has correct default timezone and 24-hour view
- - Custom view is no longer wrapped in ScrollView
-
-## 2.0.1
-
-January 8, 2015
-
-- complete rewrite for Material design
+Older versions:
 
 ## 1.1.2
 
