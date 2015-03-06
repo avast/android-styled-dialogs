@@ -13,13 +13,14 @@ Features:
  - Same look for **Android 2.2+**
  - Built on top of standard **DialogFragment**
  - Supports stacked buttons, neutral button, callbacks even after rotation
+ - Light and dark theme
  - Contains even more specialized dialogs: List, Progress, Time&Date Picker, Custom, ...
 
 ## How to include it in your project:
 
 ```groovy
 dependencies {
-	compile 'com.avast:android-styled-dialogs:2.1.0'
+	compile 'com.avast:android-styled-dialogs:2.2.0'
 }
 ```    
 Hosted in [jcenter](https://bintray.com/avast/android/styled-dialogs/): [ ![Download](https://api.bintray.com/packages/avast/android/styled-dialogs/images/download.svg) ](https://bintray.com/avast/android/styled-dialogs/_latestVersion)
@@ -38,6 +39,8 @@ It uses standard Material colors, for example like this:
 </style>
 ```
 
+For dark theme, inherit from `Theme.AppCompat`. Or you can force dark theme per individual dialog using `useDarkTheme()` builder method.
+
 ## How to create simple dialogs:
 
 Easy:
@@ -54,13 +57,16 @@ SimpleDialogFragment.createBuilder(this, getSupportFragmentManager()).setTitle(R
 ### How to react on button press in your Activity/Fragment:
 
 Simply implement interface `ISimpleDialogListener` in your Activity/Fragment. Listener's callbacks have `requestCode` parameter - you can use it if you have more dialogs in one Activity/Fragment.
-For Fragments use setTargetFragment() method in the builder.
+
+For Fragments use `setTargetFragment()` method in the builder.
+
+It's not possible to use normal Java callbacks, because they are lost after device rotation.
 
 ### How to react on cancelling the dialog:
 
 Implement interface `ISimpleDialogCancelListener` in your Activity/Fragment.
 
-## How to create all other DialogFragments:
+## How to create custom DialogFragments:
 
 Extend `BaseDialogFragment`. 
 
