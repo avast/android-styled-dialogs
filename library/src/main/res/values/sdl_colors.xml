@@ -17,4 +17,6 @@
     <color name="sdl_pressed_light">#29000000</color>
     <!-- 16 % white -->
     <color name="sdl_pressed_dark">#29FFFFFF</color>
+    <color name="sdl_background_light">#ffeeeeee</color>
+    <color name="sdl_background_dark">#ff424242</color>
 </resources>
