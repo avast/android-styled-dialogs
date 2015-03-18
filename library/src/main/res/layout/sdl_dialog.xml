@@ -34,27 +34,28 @@
         android:id="@+id/sdl_button_divider"
         style="@style/SDL.Divider" />
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/sdl_buttons_default"
         style="@style/SDL.Layout.Buttons">
 
         <Button
             android:id="@+id/sdl_button_neutral"
-            style="@style/SDL.Button"
+            style="@style/SDL.Button.Neutral"
             tools:text="Neutral" />
 
-        <View style="@style/SDL.Expander" />
-
-        <Button
-            android:id="@+id/sdl_button_negative"
-            style="@style/SDL.Button"
-            tools:text="Negative" />
-
-        <Button
-            android:id="@+id/sdl_button_positive"
-            style="@style/SDL.Button"
-            tools:text="Positive" />
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/sdl_buttons_default_right"
+            style="@style/SDL.Layout.Buttons.Right">
+            <Button
+                android:id="@+id/sdl_button_negative"
+                style="@style/SDL.Button"
+                tools:text="Negative" />
+            <Button
+                android:id="@+id/sdl_button_positive"
+                style="@style/SDL.Button"
+                tools:text="Positive" />
+        </LinearLayout>
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/sdl_buttons_stacked"

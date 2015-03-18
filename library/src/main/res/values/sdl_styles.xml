@@ -53,11 +53,19 @@
     </style>
 
     <style name="SDL.Layout.Buttons">
-        <item name="android:orientation">horizontal</item>
         <item name="android:layout_height">@dimen/grid_12</item>
-        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_width">match_parent</item>
         <item name="android:paddingLeft">@dimen/grid_3</item>
         <item name="android:paddingRight">@dimen/grid_3</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="SDL.Layout.Buttons.Right">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_alignParentRight">true</item>
     </style>
 
     <style name="SDL.Layout.Buttons.Stacked">
@@ -147,7 +155,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:minWidth">@dimen/grid_16</item>
         <item name="android:layout_height">@dimen/grid_9</item>
-        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
         <item name="android:paddingRight">@dimen/grid_2</item>
         <item name="android:paddingLeft">@dimen/grid_2</item>
         <item name="android:layout_marginRight">@dimen/grid_1</item>
@@ -156,6 +164,11 @@
         <item name="android:textAllCaps" tools:ignore="NewApi">true</item>
         <item name="android:singleLine">true</item>
         <item name="android:textColor">?colorAccent</item>
+    </style>
+
+    <style name="SDL.Button.Neutral" parent="@style/SDL.Button">
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:layout_centerVertical">true</item>
     </style>
 
     <style name="SDL.Button.Stacked">
