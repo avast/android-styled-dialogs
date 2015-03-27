@@ -72,6 +72,9 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
             if (args.getBoolean(BaseDialogBuilder.ARG_USE_DARK_THEME)) {
                 //Developer is explicitly using the dark theme
                 darkTheme = true;
+            } else if (args.getBoolean(BaseDialogBuilder.ARG_USE_LIGHT_THEME)) {
+                //Developer is explicitly using the light theme
+                darkTheme = false;
             } else {
                 //Dynamically detecting the theme declared in manifest
                 resolveTheme();

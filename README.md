@@ -40,6 +40,7 @@ It uses standard Material colors, for example like this:
 ```
 
 For dark theme, inherit from `Theme.AppCompat`. Or you can force dark theme per individual dialog using `useDarkTheme()` builder method.
+You can also force light theme per individual dialog using `useLightTheme()` builder method.
 
 ## How to create simple dialogs:
 
