@@ -2,6 +2,6 @@ language: android
 script: "./gradlew assembleDebug"
 android:
   components:
-    - build-tools-20.0.0
-    - android-21
+    - build-tools-22
+    - android-22
     - extra-android-m2repository
