@@ -22,7 +22,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -214,7 +213,7 @@ public class DemoActivity extends ActionBarActivity implements
                         .setNegativeButtonText(android.R.string.cancel)
                         .setRequestCode(REQUEST_INPUT_DIALOG)
                         .setHint(R.string.hint);
-                mInputDialogFragment =  mInputDialogBuilder.create();
+                mInputDialogFragment = mInputDialogBuilder.create();
                 mInputDialogBuilder.show();
             }
         });
@@ -280,8 +279,7 @@ public class DemoActivity extends ActionBarActivity implements
             Toast.makeText(c, "Positive button clicked", Toast.LENGTH_SHORT).show();
         } else if (requestCode == REQUEST_INPUT_DIALOG) {
             StringBuffer text = mInputDialogFragment.getInput();
-            Log.d("input", "input3 " + text);
-            if(TextUtils.isEmpty(text)) {
+            if (TextUtils.isEmpty(text)) {
                 Toast.makeText(c, "Input cannot empty", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(c, text, Toast.LENGTH_SHORT).show();

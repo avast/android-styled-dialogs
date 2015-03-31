@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -30,9 +29,8 @@ public class InputDialogFragment extends BaseDialogFragment {
     protected final static String ARG_POSITIVE_BUTTON = "positive_button";
     protected final static String ARG_NEGATIVE_BUTTON = "negative_button";
     protected final static String ARG_NEUTRAL_BUTTON = "neutral_button";
-
-    private EditText vEditText;
     private static StringBuffer inputText = new StringBuffer("");
+    private EditText vEditText;
 
     public static InputDialogBuilder createBuilder(Context context, FragmentManager fragmentManager) {
         return new InputDialogBuilder(context, fragmentManager, InputDialogFragment.class);
@@ -62,7 +60,6 @@ public class InputDialogFragment extends BaseDialogFragment {
                 @Override
                 public void onClick(View view) {
                     inputText = builder.getInput();
-                    Log.d("input", "input2 " + inputText);
                     for (IPositiveButtonDialogListener listener : getPositiveButtonDialogListeners()) {
                         listener.onPositiveButtonClicked(mRequestCode);
                     }
@@ -100,25 +97,6 @@ public class InputDialogFragment extends BaseDialogFragment {
                 }
             });
         }
-        /*vEditText = builder.getEditText();
-        TextWatcher mTextWatcher = new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                inputText = editable.toString();
-                Log.d("input", "input3 " + inputText);
-            }
-        };
-        vEditText.addTextChangedListener(mTextWatcher);*/
         return builder;
     }
 
@@ -175,6 +153,9 @@ public class InputDialogFragment extends BaseDialogFragment {
         return getDialogListeners(INeutralButtonDialogListener.class);
     }
 
+    public StringBuffer getInput() {
+        return inputText;
+    }
 
     public static class InputDialogBuilder extends BaseDialogBuilder<InputDialogBuilder> {
 
@@ -256,11 +237,6 @@ public class InputDialogFragment extends BaseDialogFragment {
             return this;
         }
 
-    }
-
-    public StringBuffer getInput() {
-        Log.d("input", "333 " + inputText);
-        return inputText;
     }
 
 }

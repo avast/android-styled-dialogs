@@ -30,7 +30,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,8 +62,8 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
 
     //True then use dark theme , else by default make use of light theme
     private static boolean darkTheme;
-    protected int mRequestCode;
     private static StringBuffer inputText = new StringBuffer("");
+    protected int mRequestCode;
     private EditText vEditext;
 
     @NonNull
@@ -253,6 +252,10 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
             //Resource not found , so sticking to light theme
             darkTheme = false;
         }
+    }
+
+    public StringBuffer getInput() {
+        return inputText;
     }
 
     /**
@@ -447,7 +450,6 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
                 @Override
                 public void afterTextChanged(Editable editable) {
                     BaseDialogFragment.inputText = new StringBuffer(editable.toString());
-                    Log.d("input", "input " + inputText);
                 }
             };
             vEditText.addTextChangedListener(mTextWatcher);
@@ -543,14 +545,8 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
         }
 
         public StringBuffer getInput() {
-            Log.d("input", "111 " + inputText);
             return BaseDialogFragment.inputText;
         }
-    }
-
-    public StringBuffer getInput() {
-        Log.d("input", "222" + inputText);
-        return inputText;
     }
 
 }
