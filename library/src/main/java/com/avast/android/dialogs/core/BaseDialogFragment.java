@@ -27,7 +27,10 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +38,7 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
@@ -60,6 +64,8 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
     //True then use dark theme , else by default make use of light theme
     private static boolean darkTheme;
     protected int mRequestCode;
+    private static StringBuffer inputText = new StringBuffer("");
+    private EditText vEditext;
 
     @NonNull
     @Override
@@ -252,7 +258,7 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
     /**
      * Custom dialog builder
      */
-    protected static class Builder {
+    public static class Builder {
 
         private final Context mContext;
 
@@ -276,6 +282,8 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
 
         private CharSequence mMessage;
 
+        private CharSequence mEditTextHint;
+
         private View mCustomView;
 
         private ListAdapter mListAdapter;
@@ -287,6 +295,8 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
         private int[] mListCheckedItemMultipleIds;
 
         private AdapterView.OnItemClickListener mOnItemClickListener;
+
+        private EditText vEditText;
 
         public Builder(Context context, LayoutInflater inflater, ViewGroup container) {
             this.mContext = context;
@@ -354,6 +364,18 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
             return this;
         }
 
+        public Builder setEditTextHint(int hintId) {
+            mEditTextHint = mContext.getText(hintId);
+            return this;
+
+        }
+
+        public Builder setEditTextHint(CharSequence hint) {
+            mEditTextHint = hint;
+            return this;
+
+        }
+
         public Builder setItems(ListAdapter listAdapter, int[] checkedItemIds, int choiceMode, final AdapterView.OnItemClickListener listener) {
             mListAdapter = listAdapter;
             mListCheckedItemMultipleIds = checkedItemIds;
@@ -382,6 +404,10 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
             return this;
         }
 
+        public EditText getEditText() {
+            return vEditText;
+        }
+
         public View create() {
 
             LinearLayout content = (LinearLayout) mInflater.inflate(R.layout.sdl_dialog, mContainer, false);
@@ -397,13 +423,34 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
             View vButtonsDefault = content.findViewById(R.id.sdl_buttons_default);
             View vButtonsStacked = content.findViewById(R.id.sdl_buttons_stacked);
             ListView vList = (ListView) content.findViewById(R.id.sdl_list);
+            vEditText = (EditText) content.findViewById(R.id.sdl_edit_text);
 
             Typeface regularFont = TypefaceHelper.get(mContext, "Roboto-Regular");
             Typeface mediumFont = TypefaceHelper.get(mContext, "Roboto-Medium");
 
             set(vTitle, mTitle, mediumFont);
             set(vMessage, mMessage, regularFont);
+            set(vEditText, mEditTextHint, regularFont);
             setPaddingOfTitleAndMessage(vTitle, vMessage);
+
+            TextWatcher mTextWatcher = new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+                    BaseDialogFragment.inputText = new StringBuffer(editable.toString());
+                    Log.d("input", "input " + inputText);
+                }
+            };
+            vEditText.addTextChangedListener(mTextWatcher);
 
             if (mCustomView != null) {
                 vCustomView.addView(mCustomView);
@@ -484,5 +531,26 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
                 textView.setVisibility(View.GONE);
             }
         }
+
+
+        private void set(EditText editText, CharSequence text, Typeface font) {
+            if (text != null) {
+                editText.setHint(text);
+                editText.setTypeface(font);
+            } else {
+                editText.setVisibility(View.GONE);
+            }
+        }
+
+        public StringBuffer getInput() {
+            Log.d("input", "111 " + inputText);
+            return BaseDialogFragment.inputText;
+        }
     }
+
+    public StringBuffer getInput() {
+        Log.d("input", "222" + inputText);
+        return inputText;
+    }
+
 }

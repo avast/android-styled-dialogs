@@ -105,6 +105,13 @@
         <!-- paddings set in code -->
     </style>
 
+    <style name="SDL.EditText" parent="Theme.AppCompat.Light">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/grid_6</item>
+        <item name="android:layout_marginRight">@dimen/grid_6</item>
+    </style>
+
     <style name="SDL.TextView.Message.Progress">
         <item name="android:paddingRight">@dimen/grid_4</item>
     </style>

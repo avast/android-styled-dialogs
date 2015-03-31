@@ -65,5 +65,10 @@
             style="@style/Button"
             android:layout_marginBottom="@dimen/grid_3"
             android:text="Custom dialog" />
+
+        <Button
+            android:id="@+id/input_dialog"
+            style="@style/Button"
+            android:text="Input dialog" />
     </LinearLayout>
 </ScrollView>

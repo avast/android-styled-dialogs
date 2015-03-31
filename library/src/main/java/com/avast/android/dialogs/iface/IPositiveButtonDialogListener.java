@@ -9,4 +9,5 @@ package com.avast.android.dialogs.iface;
 public interface IPositiveButtonDialogListener {
 
     public void onPositiveButtonClicked(int requestCode);
+
 }

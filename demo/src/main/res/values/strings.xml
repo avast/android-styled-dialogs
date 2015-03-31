@@ -2,4 +2,5 @@
 <resources>
 	<string name="app_name">StyledDialogs Demo</string>
     <string name="about">About</string>
+    <string name="hint">hint</string>
 </resources>

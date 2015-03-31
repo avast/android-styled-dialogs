@@ -20,6 +20,11 @@
                 tools:text="Lorem ipsum doler samet Jane is awesome guy and Kaylee is so hot." />
         </ScrollView>
 
+        <EditText
+            android:id="@+id/sdl_edit_text"
+            style="@style/SDL.EditText"
+            android:inputType="text" />
+
         <FrameLayout
             android:id="@+id/sdl_custom"
             style="@style/SDL.Layout.Custom" />

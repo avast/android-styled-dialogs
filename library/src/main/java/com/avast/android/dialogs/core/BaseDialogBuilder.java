@@ -73,7 +73,7 @@ public abstract class BaseDialogBuilder<T extends BaseDialogBuilder<T>> {
         return self();
     }
 
-    private BaseDialogFragment create() {
+    public BaseDialogFragment create() {
         final Bundle args = prepareArguments();
 
         final BaseDialogFragment fragment = (BaseDialogFragment) Fragment.instantiate(mContext, mClass.getName(), args);

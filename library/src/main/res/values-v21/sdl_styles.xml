@@ -39,4 +39,5 @@
         <item name="sdlButtonBackground">@drawable/sdl_button_dark</item>
         <item name="sdlListSelector">@drawable/sdl_list_dark</item>
     </style>
+
 </resources>

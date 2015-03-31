@@ -16,23 +16,24 @@
 
 package com.avast.dialogs;
 
-import java.text.DateFormat;
-import java.util.Date;
-
 import android.content.Intent;
+import android.content.res.TypedArray;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
-import android.content.res.TypedArray;
+import android.text.TextUtils;
+import android.util.Log;
 import android.util.TypedValue;
+import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.Toast;
 
+import com.avast.android.dialogs.core.BaseDialogFragment;
 import com.avast.android.dialogs.fragment.DatePickerDialogFragment;
+import com.avast.android.dialogs.fragment.InputDialogFragment;
 import com.avast.android.dialogs.fragment.ListDialogFragment;
 import com.avast.android.dialogs.fragment.ProgressDialogFragment;
 import com.avast.android.dialogs.fragment.SimpleDialogFragment;
@@ -42,6 +43,9 @@ import com.avast.android.dialogs.iface.IListDialogListener;
 import com.avast.android.dialogs.iface.IMultiChoiceListDialogListener;
 import com.avast.android.dialogs.iface.ISimpleDialogCancelListener;
 import com.avast.android.dialogs.iface.ISimpleDialogListener;
+
+import java.text.DateFormat;
+import java.util.Date;
 
 public class DemoActivity extends ActionBarActivity implements
         ISimpleDialogListener,
@@ -57,8 +61,12 @@ public class DemoActivity extends ActionBarActivity implements
     private static final int REQUEST_DATE_PICKER = 12;
     private static final int REQUEST_TIME_PICKER = 13;
     private static final int REQUEST_SIMPLE_DIALOG = 42;
+    private static final int REQUEST_INPUT_DIALOG = 43;
 
     DemoActivity c = this;
+
+    private InputDialogFragment.InputDialogBuilder mInputDialogBuilder;
+    private BaseDialogFragment mInputDialogFragment;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -196,6 +204,20 @@ public class DemoActivity extends ActionBarActivity implements
                         .show();
             }
         });
+        findViewById(R.id.input_dialog).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mInputDialogBuilder = InputDialogFragment
+                        .createBuilder(DemoActivity.this, getSupportFragmentManager())
+                        .setTitle("This is a editText dialog")
+                        .setPositiveButtonText(android.R.string.ok)
+                        .setNegativeButtonText(android.R.string.cancel)
+                        .setRequestCode(REQUEST_INPUT_DIALOG)
+                        .setHint(R.string.hint);
+                mInputDialogFragment =  mInputDialogBuilder.create();
+                mInputDialogBuilder.show();
+            }
+        });
     }
 
     // IListDialogListener
@@ -230,6 +252,9 @@ public class DemoActivity extends ActionBarActivity implements
             case REQUEST_SIMPLE_DIALOG:
                 Toast.makeText(c, "Dialog cancelled", Toast.LENGTH_SHORT).show();
                 break;
+            case REQUEST_INPUT_DIALOG:
+                Toast.makeText(c, "Nothing input", Toast.LENGTH_LONG).show();
+                break;
             case REQUEST_PROGRESS:
                 Toast.makeText(c, "Progress dialog cancelled", Toast.LENGTH_SHORT).show();
                 break;
@@ -253,6 +278,14 @@ public class DemoActivity extends ActionBarActivity implements
     public void onPositiveButtonClicked(int requestCode) {
         if (requestCode == REQUEST_SIMPLE_DIALOG) {
             Toast.makeText(c, "Positive button clicked", Toast.LENGTH_SHORT).show();
+        } else if (requestCode == REQUEST_INPUT_DIALOG) {
+            StringBuffer text = mInputDialogFragment.getInput();
+            Log.d("input", "input3 " + text);
+            if(TextUtils.isEmpty(text)) {
+                Toast.makeText(c, "Input cannot empty", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(c, text, Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -308,8 +341,7 @@ public class DemoActivity extends ActionBarActivity implements
 
         if (isDarkTheme()) {
             menu.findItem(R.id.theme_change).setTitle("Use Light Theme");
-        }
-        else {
+        } else {
             menu.findItem(R.id.theme_change).setTitle("Use Dark Theme");
         }
         return true;
