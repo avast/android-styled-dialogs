@@ -69,6 +69,7 @@ public class InputDialogFragment extends BaseDialogFragment {
                     //if input is empty, click is invalid
                     if (!TextUtils.isEmpty(inputText)) {
                         dismiss();
+                        inputText.setLength(0);
                     }
                 }
             });
