@@ -99,7 +99,7 @@
     </style>
 
     <style name="SDL.TextView.Message">
-        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_width">fill_parent</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">?sdlTextSecondaryColor</item>
         <!-- paddings set in code -->
