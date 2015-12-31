@@ -36,7 +36,7 @@
         <item name="sdlTextSecondaryColor">@color/sdl_text_secondary_dark</item>
         <item name="sdlDividerColor">@color/sdl_divider_dark</item>
         <item name="sdlPressedColor">@color/sdl_pressed_dark</item>
-        <item name="sdlButtonBackground">@drawable/sdl_button_dark</item>
-        <item name="sdlListSelector">@drawable/sdl_list_dark</item>
+        <item name="sdlButtonBackground">@drawable/sdl_button</item>
+        <item name="sdlListSelector">@drawable/sdl_list</item>
     </style>
 </resources>

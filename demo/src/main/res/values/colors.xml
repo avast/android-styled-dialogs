@@ -4,4 +4,11 @@
     <color name="primary">#3C4655</color>
     <color name="primary_dark">#0E0E0E</color>
     <color name="accent">#F4982E</color>
+
+    <!-- custom jayne's hat dialog theme: -->
+    <color name="jayne_text_primary_light">#e8ffb300</color>
+    <color name="jayne_text_secondary_light">#e9b65b00</color>
+    <color name="jayne_divider_light">#1fff002b</color>
+    <color name="jayne_pressed_light">#c74e2c00</color>
+    <color name="jayne_accent">#f42e35</color>
 </resources>
