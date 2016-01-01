@@ -17,6 +17,14 @@
         <item name="actionOverflowButtonStyle">@style/OverFlow</item>
     </style>
 
+    <style name="JayneHatDialogTheme" parent="SDL.Dialog">
+        <item name="sdlTextPrimaryColor">@color/jayne_text_primary_light</item>
+        <item name="sdlTextSecondaryColor">@color/jayne_text_secondary_light</item>
+        <item name="sdlDividerColor">@color/jayne_divider_light</item>
+        <item name="sdlPressedColor">@color/jayne_pressed_light</item>
+        <item name="colorAccent">@color/jayne_accent</item>
+    </style>
+
     <style name="OverFlow" parent="Widget.AppCompat.ActionButton.Overflow">
         <item name="android:src">@drawable/ic_menu</item>
     </style>

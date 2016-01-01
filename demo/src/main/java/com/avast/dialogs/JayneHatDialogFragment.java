@@ -37,8 +37,14 @@ public class JayneHatDialogFragment extends SimpleDialogFragment {
     }
 
     @Override
+    public int getTheme() {
+        return R.style.JayneHatDialogTheme;
+    }
+
+    @Override
     public BaseDialogFragment.Builder build(BaseDialogFragment.Builder builder) {
         builder.setTitle("Jayne's hat");
+        builder.setMessage("A man walks down the street in that hat, people know he's not afraid of anything.");
         builder.setView(LayoutInflater.from(getActivity()).inflate(R.layout.view_jayne_hat, null));
         builder.setPositiveButton("I want one", new View.OnClickListener() {
             @Override
