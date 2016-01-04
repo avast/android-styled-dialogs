@@ -326,7 +326,7 @@ public class DemoActivity extends ActionBarActivity implements
                     setTheme(R.style.AppThemeDark);
                     Toast.makeText(DemoActivity.this, "Dark theme set", Toast.LENGTH_SHORT).show();
                 }
-                invalidateOptionsMenu();
+                supportInvalidateOptionsMenu();
                 return true;
             case R.id.about:
                 Intent i = new Intent(Intent.ACTION_VIEW);
