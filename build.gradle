@@ -15,7 +15,7 @@ allprojects {
 }
 
 ext {
-    VERSION_NAME = "2.3.1-SNAPSHOT"
+    VERSION_NAME = "2.3.1"
     VERSION_CODE = 11
 }
 
