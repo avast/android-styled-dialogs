@@ -53,8 +53,8 @@
     <style name="SDL.Layout.Buttons">
         <item name="android:layout_height">@dimen/grid_12</item>
         <item name="android:layout_width">match_parent</item>
-        <item name="android:paddingLeft">@dimen/grid_3</item>
-        <item name="android:paddingRight">@dimen/grid_3</item>
+        <item name="android:paddingLeft">@dimen/grid_2</item>
+        <item name="android:paddingRight">@dimen/grid_2</item>
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:gravity">center_vertical</item>
     </style>
@@ -64,6 +64,8 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:orientation">horizontal</item>
         <item name="android:layout_alignParentRight">true</item>
+        <item name="android:paddingLeft">0dp</item>
+        <item name="android:paddingRight">0dp</item>
     </style>
 
     <style name="SDL.Layout.Buttons.Stacked">
