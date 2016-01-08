@@ -2,5 +2,5 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
     <corners android:radius="2dp" />
-    <solid android:color="?sdlPressedColor" />
+    <solid android:color="@color/sdl_pressed_light" />
 </shape>
