@@ -15,8 +15,8 @@ allprojects {
 }
 
 ext {
-    VERSION_NAME = "2.3.1"
-    VERSION_CODE = 11
+    VERSION_NAME = "2.3.2-SNAPSHOT"
+    VERSION_CODE = 12
 }
 
 apply plugin: 'android-reporting'
