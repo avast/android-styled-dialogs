@@ -2,7 +2,6 @@ package com.avast.android.dialogs.fragment;
 
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
-import android.view.LayoutInflater;
 import android.widget.TimePicker;
 
 import com.avast.android.dialogs.R;
@@ -31,7 +30,7 @@ public class TimePickerDialogFragment extends DatePickerDialogFragment {
     @Override
     protected BaseDialogFragment.Builder build(BaseDialogFragment.Builder builder) {
         builder = super.build(builder);
-        mTimePicker = (TimePicker) LayoutInflater.from(getActivity()).inflate(R.layout.sdl_timepicker, null);
+        mTimePicker = (TimePicker) builder.getLayoutInflater().inflate(R.layout.sdl_timepicker, null);
         mTimePicker.setIs24HourView(getArguments().getBoolean(ARG_24H));
         builder.setView(mTimePicker);
 
