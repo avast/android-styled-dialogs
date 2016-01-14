@@ -16,6 +16,10 @@
 
 package com.avast.android.dialogs.core;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -46,10 +50,6 @@ import android.widget.TextView;
 import com.avast.android.dialogs.R;
 import com.avast.android.dialogs.iface.ISimpleDialogCancelListener;
 import com.avast.android.dialogs.util.TypefaceHelper;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Base dialog fragment for all your dialogs, styleable and same design on Android 2.2+.
@@ -239,7 +239,7 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
             }
         }
 
-        return useLightTheme ? R.style.SDL_Dialog : R.style.SDL_Dialog_Dark;
+        return useLightTheme ? R.style.SDL_Dialog : R.style.SDL_Dark_Dialog;
     }
 
     /**

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="SDL" parent="android:Theme.Holo.Light.Dialog" />
+
+    <style name="SDL.Dark" parent="android:Theme.Holo.Dialog" />
+</resources>
