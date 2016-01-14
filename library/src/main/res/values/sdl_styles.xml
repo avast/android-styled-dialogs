@@ -13,17 +13,18 @@
         <item name="android:windowCloseOnTouchOutside" tools:ignore="NewApi">true</item>
         <item name="android:backgroundDimAmount">0.6</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
-        <item name="android:windowBackground">@drawable/sdl_background</item>
         <item name="android:listChoiceIndicatorSingle">@drawable/abc_btn_radio_material</item>
         <item name="android:listChoiceIndicatorMultiple">@drawable/abc_btn_check_material</item>
         <item name="android:colorAccent" tools:targetApi="lollipop">?colorAccent</item>
         <item name="android:colorPrimary" tools:targetApi="lollipop">?colorPrimary</item>
+        <item name="sdlButtonBackground">@drawable/sdl_button</item>
+        <item name="sdlListSelector">@drawable/sdl_list</item>
+        <!-- Light theme specific: -->
         <item name="sdlTextPrimaryColor">@color/sdl_text_primary_light</item>
         <item name="sdlTextSecondaryColor">@color/sdl_text_secondary_light</item>
         <item name="sdlDividerColor">@color/sdl_divider_light</item>
         <item name="sdlPressedColor">@color/sdl_pressed_light</item>
-        <item name="sdlButtonBackground">@drawable/sdl_button</item>
-        <item name="sdlListSelector">@drawable/sdl_list</item>
+        <item name="android:windowBackground">@drawable/sdl_background</item>
     </style>
 
     <!-- Dark Theme -->
@@ -44,11 +45,12 @@
         <item name="android:colorPrimary" tools:targetApi="lollipop">?colorPrimary</item>
         <item name="sdlButtonBackground">@drawable/sdl_button</item>
         <item name="sdlListSelector">@drawable/sdl_list</item>
-        <item name="android:windowBackground">@drawable/sdl_background_dark</item>
+        <!-- Dark theme specific: -->
         <item name="sdlTextPrimaryColor">@color/sdl_text_primary_dark</item>
         <item name="sdlTextSecondaryColor">@color/sdl_text_secondary_dark</item>
         <item name="sdlDividerColor">@color/sdl_divider_dark</item>
         <item name="sdlPressedColor">@color/sdl_pressed_dark</item>
+        <item name="android:windowBackground">@drawable/sdl_background_dark</item>
     </style>
 
     <style name="SDL.Layout">
