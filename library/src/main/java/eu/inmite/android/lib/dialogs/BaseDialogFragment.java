@@ -330,7 +330,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
 		    .obtainStyledAttributes(null, R.styleable.DialogStyle, R.attr.sdlDialogStyle,
 			    0);
 	    mTitleTextColor = a
-		    .getColor(R.styleable.DialogStyle_titleTextColor, defaultTitleTextColor);
+		    .getColor(R.styleable.DialogStyle_titleDialogTextColor, defaultTitleTextColor);
 	    mTitleSeparatorColor = a.getColor(R.styleable.DialogStyle_titleSeparatorColor,
 		    defaultTitleSeparatorColor);
 	    mMessageTextColor = a

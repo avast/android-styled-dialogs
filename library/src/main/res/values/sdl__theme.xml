@@ -39,7 +39,7 @@
 
 	<style name="DialogStyleLight">
 		<item name="dialogBackground">@drawable/sdl_background_light</item>
-		<item name="titleTextColor">@color/sdl_title_text_light</item>
+		<item name="titleDialogTextColor">@color/sdl_title_text_light</item>
 		<item name="titleSeparatorColor">@color/sdl_title_separator_light</item>
 		<item name="messageTextColor">@color/sdl_message_text_light</item>
 		<item name="buttonTextColor">@color/sdl_button_text_light</item>

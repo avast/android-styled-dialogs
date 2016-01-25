@@ -9,7 +9,7 @@
 
 	<declare-styleable name="DialogStyle">
 		<attr name="dialogBackground" format="reference" />
-		<attr name="titleTextColor" format="color|reference" />
+		<attr name="titleDialogTextColor" format="color|reference" />
 		<attr name="titleSeparatorColor" format="color|reference" />
 		<attr name="messageTextColor" format="color|reference" />
 		<attr name="buttonTextColor" format="color|reference" />
