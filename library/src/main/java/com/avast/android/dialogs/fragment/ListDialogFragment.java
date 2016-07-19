@@ -132,7 +132,7 @@ public class ListDialogFragment extends BaseDialogFragment {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     for (IListDialogListener listener : getSingleDialogListeners()) {
-                        listener.onListItemSelected(getItems()[position], position, mRequestCode);
+                        listener.onListItemSelected(getItems()[position], position, ListDialogFragment.this);
                     }
                     dismiss();
                 }
@@ -151,7 +151,7 @@ public class ListDialogFragment extends BaseDialogFragment {
                 @Override
                 public void onClick(View view) {
                     for (ISimpleDialogCancelListener listener : getCancelListeners()) {
-                        listener.onCancelled(mRequestCode);
+                        listener.onCancelled(ListDialogFragment.this);
                     }
                     dismiss();
                 }
@@ -177,8 +177,8 @@ public class ListDialogFragment extends BaseDialogFragment {
                                 }
                             }
 
-                            for (IMultiChoiceListDialogListener listener : getMutlipleDialogListeners()) {
-                                listener.onListItemsSelected(checkedValues, checkedPositions, mRequestCode);
+                            for (IMultiChoiceListDialogListener listener : getMultipleDialogListeners()) {
+                                listener.onListItemsSelected(checkedValues, checkedPositions, ListDialogFragment.this);
                             }
                             dismiss();
                         }
@@ -203,11 +203,12 @@ public class ListDialogFragment extends BaseDialogFragment {
                             // either item is selected or dialog is cancelled
                             if (selectedPosition != -1) {
                                 for (IListDialogListener listener : getSingleDialogListeners()) {
-                                    listener.onListItemSelected(items[selectedPosition], selectedPosition, mRequestCode);
+                                    listener.onListItemSelected(items[selectedPosition], selectedPosition,
+                                        ListDialogFragment.this);
                                 }
                             } else {
                                 for (ISimpleDialogCancelListener listener : getCancelListeners()) {
-                                    listener.onCancelled(mRequestCode);
+                                    listener.onCancelled(ListDialogFragment.this);
                                 }
                             }
                             dismiss();
@@ -263,7 +264,7 @@ public class ListDialogFragment extends BaseDialogFragment {
      * @return Dialog listeners
      * @since 2.1.0
      */
-    private List<IMultiChoiceListDialogListener> getMutlipleDialogListeners() {
+    private List<IMultiChoiceListDialogListener> getMultipleDialogListeners() {
         return getDialogListeners(IMultiChoiceListDialogListener.class);
     }
 

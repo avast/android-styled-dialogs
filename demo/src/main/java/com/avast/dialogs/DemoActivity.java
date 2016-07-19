@@ -32,6 +32,7 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.Toast;
 
+import com.avast.android.dialogs.core.BaseDialogFragment;
 import com.avast.android.dialogs.fragment.DatePickerDialogFragment;
 import com.avast.android.dialogs.fragment.ListDialogFragment;
 import com.avast.android.dialogs.fragment.ProgressDialogFragment;
@@ -201,15 +202,16 @@ public class DemoActivity extends ActionBarActivity implements
     // IListDialogListener
 
     @Override
-    public void onListItemSelected(CharSequence value, int number, int requestCode) {
+    public void onListItemSelected(CharSequence value, int number, BaseDialogFragment dialog) {
+        final int requestCode = dialog.getRequestCode();
         if (requestCode == REQUEST_LIST_SIMPLE || requestCode == REQUEST_LIST_SINGLE) {
             Toast.makeText(c, "Selected: " + value, Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
-    public void onListItemsSelected(CharSequence[] values, int[] selectedPositions, int requestCode) {
-        if (requestCode == REQUEST_LIST_MULTIPLE) {
+    public void onListItemsSelected(CharSequence[] values, int[] selectedPositions, BaseDialogFragment dialog) {
+        if (dialog.getRequestCode() == REQUEST_LIST_MULTIPLE) {
             StringBuilder sb = new StringBuilder();
             for (CharSequence value : values) {
                 if (sb.length() > 0) {
@@ -225,8 +227,8 @@ public class DemoActivity extends ActionBarActivity implements
     // ISimpleDialogCancelListener
 
     @Override
-    public void onCancelled(int requestCode) {
-        switch (requestCode) {
+    public void onCancelled(BaseDialogFragment dialog) {
+        switch (dialog.getRequestCode()) {
             case REQUEST_SIMPLE_DIALOG:
                 Toast.makeText(c, "Dialog cancelled", Toast.LENGTH_SHORT).show();
                 break;
@@ -250,22 +252,22 @@ public class DemoActivity extends ActionBarActivity implements
     // ISimpleDialogListener
 
     @Override
-    public void onPositiveButtonClicked(int requestCode) {
-        if (requestCode == REQUEST_SIMPLE_DIALOG) {
+    public void onPositiveButtonClicked(BaseDialogFragment dialog) {
+        if (dialog.getRequestCode() == REQUEST_SIMPLE_DIALOG) {
             Toast.makeText(c, "Positive button clicked", Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
-    public void onNegativeButtonClicked(int requestCode) {
-        if (requestCode == REQUEST_SIMPLE_DIALOG) {
+    public void onNegativeButtonClicked(BaseDialogFragment dialog) {
+        if (dialog.getRequestCode() == REQUEST_SIMPLE_DIALOG) {
             Toast.makeText(c, "Negative button clicked", Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
-    public void onNeutralButtonClicked(int requestCode) {
-        if (requestCode == REQUEST_SIMPLE_DIALOG) {
+    public void onNeutralButtonClicked(BaseDialogFragment dialog) {
+        if (dialog.getRequestCode() == REQUEST_SIMPLE_DIALOG) {
             Toast.makeText(c, "Neutral button clicked", Toast.LENGTH_SHORT).show();
         }
     }
@@ -273,11 +275,12 @@ public class DemoActivity extends ActionBarActivity implements
     // IDateDialogListener
 
     @Override
-    public void onNegativeButtonClicked(int resultCode, Date date) {
+    public void onNegativeButtonClicked(BaseDialogFragment dialog, Date date) {
         String text = "";
-        if (resultCode == REQUEST_DATE_PICKER) {
+        final int requestCode = dialog.getRequestCode();
+        if (requestCode == REQUEST_DATE_PICKER) {
             text = "Date ";
-        } else if (resultCode == REQUEST_TIME_PICKER) {
+        } else if (requestCode == REQUEST_TIME_PICKER) {
             text = "Time ";
         }
 
@@ -286,11 +289,12 @@ public class DemoActivity extends ActionBarActivity implements
     }
 
     @Override
-    public void onPositiveButtonClicked(int resultCode, Date date) {
+    public void onPositiveButtonClicked(BaseDialogFragment dialog, Date date) {
         String text = "";
-        if (resultCode == REQUEST_DATE_PICKER) {
+        final int requestCode = dialog.getRequestCode();
+        if (requestCode == REQUEST_DATE_PICKER) {
             text = "Date ";
-        } else if (resultCode == REQUEST_TIME_PICKER) {
+        } else if (requestCode == REQUEST_TIME_PICKER) {
             text = "Time ";
         }
 

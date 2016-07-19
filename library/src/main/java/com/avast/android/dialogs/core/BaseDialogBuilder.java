@@ -16,6 +16,7 @@ public abstract class BaseDialogBuilder<T extends BaseDialogBuilder<T>> {
 
     public final static String ARG_REQUEST_CODE = "request_code";
     public final static String ARG_CANCELABLE_ON_TOUCH_OUTSIDE = "cancelable_oto";
+    public final static String ARG_EXTRAS = "extras";
     public final static String DEFAULT_TAG = "simple_dialog";
     private String mTag = DEFAULT_TAG;
     public final static int DEFAULT_REQUEST_CODE = -42;
@@ -30,6 +31,7 @@ public abstract class BaseDialogBuilder<T extends BaseDialogBuilder<T>> {
     private boolean mCancelableOnTouchOutside = true;
     private boolean mUseDarkTheme = false;
     private boolean mUseLightTheme = false;
+    private Bundle mExtras;
 
     public BaseDialogBuilder(Context context, FragmentManager fragmentManager, Class<? extends BaseDialogFragment> clazz) {
         mFragmentManager = fragmentManager;
@@ -80,6 +82,11 @@ public abstract class BaseDialogBuilder<T extends BaseDialogBuilder<T>> {
         return self();
     }
 
+    public T setExtras(Bundle extras) {
+        mExtras = extras == null ? null : new Bundle(extras);
+        return self();
+    }
+
     private BaseDialogFragment create() {
         final Bundle args = prepareArguments();
 
@@ -96,6 +103,12 @@ public abstract class BaseDialogBuilder<T extends BaseDialogBuilder<T>> {
         } else {
             args.putInt(ARG_REQUEST_CODE, mRequestCode);
         }
+
+        final Bundle extras = mExtras;
+        if (extras != null) {
+            args.putBundle(ARG_EXTRAS, extras);
+        }
+
         fragment.setCancelable(mCancelable);
         return fragment;
     }
