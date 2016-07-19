@@ -177,7 +177,7 @@ public class ListDialogFragment extends BaseDialogFragment {
                                 }
                             }
 
-                            for (IMultiChoiceListDialogListener listener : getMutlipleDialogListeners()) {
+                            for (IMultiChoiceListDialogListener listener : getMultipleDialogListeners()) {
                                 listener.onListItemsSelected(checkedValues, checkedPositions, ListDialogFragment.this);
                             }
                             dismiss();
@@ -264,7 +264,7 @@ public class ListDialogFragment extends BaseDialogFragment {
      * @return Dialog listeners
      * @since 2.1.0
      */
-    private List<IMultiChoiceListDialogListener> getMutlipleDialogListeners() {
+    private List<IMultiChoiceListDialogListener> getMultipleDialogListeners() {
         return getDialogListeners(IMultiChoiceListDialogListener.class);
     }
 
