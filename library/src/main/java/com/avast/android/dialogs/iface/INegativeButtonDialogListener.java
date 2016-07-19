@@ -1,5 +1,7 @@
 package com.avast.android.dialogs.iface;
 
+import com.avast.android.dialogs.core.BaseDialogFragment;
+
 /**
  * Implement this interface in Activity or Fragment to react to negative dialog buttons.
  *
@@ -8,5 +10,5 @@ package com.avast.android.dialogs.iface;
  */
 public interface INegativeButtonDialogListener {
 
-    public void onNegativeButtonClicked(int requestCode);
+    void onNegativeButtonClicked(BaseDialogFragment dialog);
 }

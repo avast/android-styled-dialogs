@@ -58,7 +58,7 @@ import com.avast.android.dialogs.util.TypefaceHelper;
  */
 public abstract class BaseDialogFragment extends DialogFragment implements DialogInterface.OnShowListener {
 
-    protected int mRequestCode;
+    private int mRequestCode;
 
     @NonNull
     @Override
@@ -144,8 +144,12 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
     public void onCancel(DialogInterface dialog) {
         super.onCancel(dialog);
         for (ISimpleDialogCancelListener listener : getCancelListeners()) {
-            listener.onCancelled(mRequestCode);
+            listener.onCancelled(this);
         }
+    }
+
+    public final int getRequestCode() {
+        return mRequestCode;
     }
 
     /**

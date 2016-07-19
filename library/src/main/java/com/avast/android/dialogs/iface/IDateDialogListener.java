@@ -18,6 +18,8 @@ package com.avast.android.dialogs.iface;
 
 import java.util.Date;
 
+import com.avast.android.dialogs.core.BaseDialogFragment;
+
 /**
  * Implement this interface in Activity or Fragment to react to positive and negative buttons of date/time dialog.
  *
@@ -25,7 +27,7 @@ import java.util.Date;
  */
 public interface IDateDialogListener {
 
-    public void onPositiveButtonClicked(int requestCode, Date date);
+    void onPositiveButtonClicked(BaseDialogFragment dialog, Date date);
 
-    public void onNegativeButtonClicked(int requestCode, Date date);
+    void onNegativeButtonClicked(BaseDialogFragment dialog, Date date);
 }

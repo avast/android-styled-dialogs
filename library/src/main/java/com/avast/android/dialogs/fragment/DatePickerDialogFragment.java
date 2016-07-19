@@ -1,5 +1,10 @@
 package com.avast.android.dialogs.fragment;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.TimeZone;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -12,11 +17,6 @@ import com.avast.android.dialogs.R;
 import com.avast.android.dialogs.core.BaseDialogBuilder;
 import com.avast.android.dialogs.core.BaseDialogFragment;
 import com.avast.android.dialogs.iface.IDateDialogListener;
-
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.TimeZone;
 
 /**
  * Dialog with a date picker.
@@ -66,7 +66,7 @@ public class DatePickerDialogFragment extends BaseDialogFragment {
                 @Override
                 public void onClick(View view) {
                     for (IDateDialogListener listener : getDialogListeners()) {
-                        listener.onPositiveButtonClicked(mRequestCode, getDate());
+                        listener.onPositiveButtonClicked(DatePickerDialogFragment.this, getDate());
                     }
                     dismiss();
                 }
@@ -80,7 +80,7 @@ public class DatePickerDialogFragment extends BaseDialogFragment {
                 @Override
                 public void onClick(View view) {
                     for (IDateDialogListener listener : getDialogListeners()) {
-                        listener.onNegativeButtonClicked(mRequestCode, getDate());
+                        listener.onNegativeButtonClicked(DatePickerDialogFragment.this, getDate());
                     }
                     dismiss();
                 }

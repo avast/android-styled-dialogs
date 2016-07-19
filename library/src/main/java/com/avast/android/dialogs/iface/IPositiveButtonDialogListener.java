@@ -1,5 +1,7 @@
 package com.avast.android.dialogs.iface;
 
+import com.avast.android.dialogs.core.BaseDialogFragment;
+
 /**
  * Implement this interface in Activity or Fragment to react to positive dialog buttons.
  *
@@ -8,5 +10,5 @@ package com.avast.android.dialogs.iface;
  */
 public interface IPositiveButtonDialogListener {
 
-    public void onPositiveButtonClicked(int requestCode);
+    void onPositiveButtonClicked(BaseDialogFragment dialog);
 }

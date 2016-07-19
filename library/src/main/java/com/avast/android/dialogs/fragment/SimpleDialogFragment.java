@@ -16,6 +16,8 @@
 
 package com.avast.android.dialogs.fragment;
 
+import java.util.List;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -29,8 +31,6 @@ import com.avast.android.dialogs.core.BaseDialogFragment;
 import com.avast.android.dialogs.iface.INegativeButtonDialogListener;
 import com.avast.android.dialogs.iface.INeutralButtonDialogListener;
 import com.avast.android.dialogs.iface.IPositiveButtonDialogListener;
-
-import java.util.List;
 
 
 /**
@@ -81,7 +81,7 @@ public class SimpleDialogFragment extends BaseDialogFragment {
                 @Override
                 public void onClick(View view) {
                     for (IPositiveButtonDialogListener listener : getPositiveButtonDialogListeners()) {
-                        listener.onPositiveButtonClicked(mRequestCode);
+                        listener.onPositiveButtonClicked(SimpleDialogFragment.this);
                     }
                     dismiss();
                 }
@@ -94,7 +94,7 @@ public class SimpleDialogFragment extends BaseDialogFragment {
                 @Override
                 public void onClick(View view) {
                     for (INegativeButtonDialogListener listener : getNegativeButtonDialogListeners()) {
-                        listener.onNegativeButtonClicked(mRequestCode);
+                        listener.onNegativeButtonClicked(SimpleDialogFragment.this);
                     }
                     dismiss();
                 }
@@ -107,7 +107,7 @@ public class SimpleDialogFragment extends BaseDialogFragment {
                 @Override
                 public void onClick(View view) {
                     for (INeutralButtonDialogListener listener : getNeutralButtonDialogListeners()) {
-                        listener.onNeutralButtonClicked(mRequestCode);
+                        listener.onNeutralButtonClicked(SimpleDialogFragment.this);
                     }
                     dismiss();
                 }

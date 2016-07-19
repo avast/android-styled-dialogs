@@ -1,5 +1,7 @@
 package com.avast.android.dialogs.iface;
 
+import com.avast.android.dialogs.core.BaseDialogFragment;
+
 /**
  * Interface for ListDialogFragment in modes: CHOICE_MODE_MULTIPLE
  * Implement it in Activity or Fragment to react to item selection.
@@ -8,5 +10,5 @@ package com.avast.android.dialogs.iface;
  */
 public interface IMultiChoiceListDialogListener {
 
-    public void onListItemsSelected(CharSequence[] values, int[] selectedPositions, int requestCode);
+    void onListItemsSelected(CharSequence[] values, int[] selectedPositions, BaseDialogFragment dialog);
 }
