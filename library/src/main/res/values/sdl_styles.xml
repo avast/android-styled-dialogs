@@ -109,6 +109,11 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
+    <style name="SDL.CheckBox" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
     <style name="SDL.TextView.Title">
         <item name="android:textSize">20sp</item>
         <item name="android:layout_width">match_parent</item>
@@ -118,6 +123,14 @@
 
     <style name="SDL.TextView.Message">
         <item name="android:layout_width">fill_parent</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">?sdlTextSecondaryColor</item>
+        <!-- paddings set in code -->
+    </style>
+
+    <style name="SDL.CheckBox.Text">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:singleLine">false</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">?sdlTextSecondaryColor</item>
         <!-- paddings set in code -->

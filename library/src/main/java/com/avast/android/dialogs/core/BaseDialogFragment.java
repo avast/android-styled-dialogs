@@ -40,6 +40,8 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
@@ -278,6 +280,12 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
 
         private CharSequence mTitle = null;
 
+        private CharSequence mCheckBoxText;
+
+        private boolean mIsCheckBoxChecked;
+
+        private CompoundButton.OnCheckedChangeListener mCheckBoxChangedListener;
+
         private CharSequence mPositiveButtonText;
 
         private View.OnClickListener mPositiveButtonListener;
@@ -321,6 +329,19 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
 
         public Builder setTitle(CharSequence title) {
             this.mTitle = title;
+            return this;
+        }
+
+        public Builder setCheckBox(int titleId, final boolean isChecked,
+                                   final CompoundButton.OnCheckedChangeListener listener) {
+            return setCheckBox(mContext.getText(titleId), isChecked, listener);
+        }
+
+        public Builder setCheckBox(CharSequence title, final boolean isChecked,
+                                   final CompoundButton.OnCheckedChangeListener listener) {
+            this.mCheckBoxText = title;
+            this.mIsCheckBoxChecked = isChecked;
+            this.mCheckBoxChangedListener = listener;
             return this;
         }
 
@@ -404,6 +425,7 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
             TextView vTitle = (TextView) content.findViewById(R.id.sdl_title);
             TextView vMessage = (TextView) content.findViewById(R.id.sdl_message);
             FrameLayout vCustomView = (FrameLayout) content.findViewById(R.id.sdl_custom);
+            CheckBox vCheckBox = (CheckBox) content.findViewById(R.id.sdl_checkbox);
             Button vPositiveButton = (Button) content.findViewById(R.id.sdl_button_positive);
             Button vNegativeButton = (Button) content.findViewById(R.id.sdl_button_negative);
             Button vNeutralButton = (Button) content.findViewById(R.id.sdl_button_neutral);
@@ -419,7 +441,8 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
 
             set(vTitle, mTitle, mediumFont);
             set(vMessage, mMessage, regularFont);
-            setPaddingOfTitleAndMessage(vTitle, vMessage);
+            set(vCheckBox, mIsCheckBoxChecked, mCheckBoxText, regularFont, mCheckBoxChangedListener);
+            setPaddingOfTitleAndMessage(vTitle, vMessage, vCheckBox);
 
             if (mCustomView != null) {
                 vCustomView.addView(mCustomView);
@@ -462,12 +485,20 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
         /**
          * Padding is different if there is only title, only message or both.
          */
-        private void setPaddingOfTitleAndMessage(TextView vTitle, TextView vMessage) {
+        private void setPaddingOfTitleAndMessage(TextView vTitle, TextView vMessage, CheckBox vCheckBox) {
             int grid6 = mContext.getResources().getDimensionPixelSize(R.dimen.grid_6);
             int grid4 = mContext.getResources().getDimensionPixelSize(R.dimen.grid_4);
             if (!TextUtils.isEmpty(mTitle) && !TextUtils.isEmpty(mMessage)) {
                 vTitle.setPadding(grid6, grid6, grid6, grid4);
                 vMessage.setPadding(grid6, 0, grid6, grid4);
+                if (!TextUtils.isEmpty(mCheckBoxText)) {
+                    // paddings don't work for CheckBox, as they affect only text, not the stateful icon though
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT);
+                    params.setMargins(grid6, 0, grid6, grid4);
+                    vCheckBox.setLayoutParams(params);
+                }
             } else if (TextUtils.isEmpty(mTitle)) {
                 vMessage.setPadding(grid6, grid4, grid6, grid4);
             } else if (TextUtils.isEmpty(mMessage)) {
@@ -498,6 +529,20 @@ public abstract class BaseDialogFragment extends DialogFragment implements Dialo
                 textView.setTypeface(font);
             } else {
                 textView.setVisibility(View.GONE);
+            }
+        }
+
+        private void set(CheckBox checkBox, boolean checkedState, CharSequence text, Typeface font,
+                         CompoundButton.OnCheckedChangeListener listener) {
+            if (text != null) {
+                checkBox.setText(text);
+                checkBox.setTypeface(font);
+                checkBox.setChecked(checkedState);
+            } else {
+                checkBox.setVisibility(View.GONE);
+            }
+            if (listener != null) {
+                checkBox.setOnCheckedChangeListener(listener);
             }
         }
     }

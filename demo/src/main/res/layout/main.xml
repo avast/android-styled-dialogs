@@ -26,6 +26,11 @@
             android:text="Simple dialog: 3 buttons &amp; callbacks" />
 
         <Button
+            android:id="@+id/message_title_buttons_and_checkbox_dialog"
+            style="@style/Button"
+            android:text="Simple dialog: 3 buttons &amp; checkbox &amp; callbacks" />
+
+        <Button
             android:id="@+id/long_buttons"
             style="@style/Button"
             android:text="Simple dialog: stacked buttons" />

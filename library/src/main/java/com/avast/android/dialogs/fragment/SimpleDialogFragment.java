@@ -23,9 +23,11 @@ import android.text.Html;
 import android.text.SpannedString;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.CompoundButton;
 
 import com.avast.android.dialogs.core.BaseDialogBuilder;
 import com.avast.android.dialogs.core.BaseDialogFragment;
+import com.avast.android.dialogs.iface.ICheckBoxDialogListener;
 import com.avast.android.dialogs.iface.INegativeButtonDialogListener;
 import com.avast.android.dialogs.iface.INeutralButtonDialogListener;
 import com.avast.android.dialogs.iface.IPositiveButtonDialogListener;
@@ -44,6 +46,8 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 
     protected final static String ARG_MESSAGE = "message";
     protected final static String ARG_TITLE = "title";
+    protected final static String ARG_CHECKBOX = "checkbox";
+    protected final static String ARG_CHECKBOX_STATE = "checkbox_state";
     protected final static String ARG_POSITIVE_BUTTON = "positive_button";
     protected final static String ARG_NEGATIVE_BUTTON = "negative_button";
     protected final static String ARG_NEUTRAL_BUTTON = "neutral_button";
@@ -73,6 +77,18 @@ public class SimpleDialogFragment extends BaseDialogFragment {
         final CharSequence message = getMessage();
         if (!TextUtils.isEmpty(message)) {
             builder.setMessage(message);
+        }
+
+        final CharSequence checkBoxText = getCheckBoxText();
+        if (!TextUtils.isEmpty(checkBoxText)) {
+            builder.setCheckBox(checkBoxText, getCheckBoxState(), new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    for (ICheckBoxDialogListener listener : getCheckBoxDialogListeners()) {
+                        listener.onCheckBoxChanged(mRequestCode, isChecked);
+                    }
+                }
+            });
         }
 
         final CharSequence positiveButtonText = getPositiveButtonText();
@@ -125,6 +141,14 @@ public class SimpleDialogFragment extends BaseDialogFragment {
         return getArguments().getCharSequence(ARG_TITLE);
     }
 
+    protected CharSequence getCheckBoxText() {
+        return getArguments().getCharSequence(ARG_CHECKBOX);
+    }
+
+    protected boolean getCheckBoxState() {
+        return getArguments().getBoolean(ARG_CHECKBOX_STATE);
+    }
+
     protected CharSequence getPositiveButtonText() {
         return getArguments().getCharSequence(ARG_POSITIVE_BUTTON);
     }
@@ -146,6 +170,17 @@ public class SimpleDialogFragment extends BaseDialogFragment {
      */
     protected List<IPositiveButtonDialogListener> getPositiveButtonDialogListeners() {
         return getDialogListeners(IPositiveButtonDialogListener.class);
+    }
+
+    /**
+     * Get check box changed listeners.
+     * There might be more than one listener.
+     *
+     * @return Dialog listeners
+     * @since 2.1.0
+     */
+    protected List<ICheckBoxDialogListener> getCheckBoxDialogListeners() {
+        return getDialogListeners(ICheckBoxDialogListener.class);
     }
 
     /**
@@ -175,6 +210,8 @@ public class SimpleDialogFragment extends BaseDialogFragment {
 
         private CharSequence mTitle;
         private CharSequence mMessage;
+        private CharSequence mCheckBoxText;
+        private boolean mIsCheckBoxChecked;
         private CharSequence mPositiveButtonText;
         private CharSequence mNegativeButtonText;
         private CharSequence mNeutralButtonText;
@@ -218,6 +255,12 @@ public class SimpleDialogFragment extends BaseDialogFragment {
             return this;
         }
 
+        public SimpleDialogBuilder setCheckBoxTextAndState(CharSequence text, boolean isChecked) {
+            mCheckBoxText = text;
+            mIsCheckBoxChecked = isChecked;
+            return this;
+        }
+
         public SimpleDialogBuilder setPositiveButtonText(int textResourceId) {
             mPositiveButtonText = mContext.getString(textResourceId);
             return this;
@@ -253,6 +296,8 @@ public class SimpleDialogFragment extends BaseDialogFragment {
             Bundle args = new Bundle();
             args.putCharSequence(SimpleDialogFragment.ARG_MESSAGE, mMessage);
             args.putCharSequence(SimpleDialogFragment.ARG_TITLE, mTitle);
+            args.putCharSequence(SimpleDialogFragment.ARG_CHECKBOX, mCheckBoxText);
+            args.putBoolean(SimpleDialogFragment.ARG_CHECKBOX_STATE, mIsCheckBoxChecked);
             args.putCharSequence(SimpleDialogFragment.ARG_POSITIVE_BUTTON, mPositiveButtonText);
             args.putCharSequence(SimpleDialogFragment.ARG_NEGATIVE_BUTTON, mNegativeButtonText);
             args.putCharSequence(SimpleDialogFragment.ARG_NEUTRAL_BUTTON, mNeutralButtonText);
