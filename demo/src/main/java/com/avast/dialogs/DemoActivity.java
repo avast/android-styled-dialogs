@@ -37,6 +37,7 @@ import com.avast.android.dialogs.fragment.ListDialogFragment;
 import com.avast.android.dialogs.fragment.ProgressDialogFragment;
 import com.avast.android.dialogs.fragment.SimpleDialogFragment;
 import com.avast.android.dialogs.fragment.TimePickerDialogFragment;
+import com.avast.android.dialogs.iface.ICheckBoxDialogListener;
 import com.avast.android.dialogs.iface.IDateDialogListener;
 import com.avast.android.dialogs.iface.IListDialogListener;
 import com.avast.android.dialogs.iface.IMultiChoiceListDialogListener;
@@ -48,7 +49,8 @@ public class DemoActivity extends ActionBarActivity implements
         IDateDialogListener,
         ISimpleDialogCancelListener,
         IListDialogListener,
-        IMultiChoiceListDialogListener {
+        IMultiChoiceListDialogListener,
+        ICheckBoxDialogListener {
 
     private static final int REQUEST_PROGRESS = 1;
     private static final int REQUEST_LIST_SIMPLE = 9;
@@ -94,19 +96,34 @@ public class DemoActivity extends ActionBarActivity implements
             }
         });
         findViewById(R.id.message_title_buttons_dialog)
-                .setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        SimpleDialogFragment.createBuilder(c, getSupportFragmentManager())
-                                .setTitle("Do you like this quote?")
-                                .setMessage("Jayne: \"Shiny. Let's be bad guys.\"")
-                                .setPositiveButtonText("Love")
-                                .setNegativeButtonText("Hate")
-                                .setNeutralButtonText("WTF?")
-                                .setRequestCode(REQUEST_SIMPLE_DIALOG)
-                                .show();
-                    }
-                });
+            .setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    SimpleDialogFragment.createBuilder(c, getSupportFragmentManager())
+                        .setTitle("Do you like this quote?")
+                        .setMessage("Jayne: \"Shiny. Let's be bad guys.\"")
+                        .setPositiveButtonText("Love")
+                        .setNegativeButtonText("Hate")
+                        .setNeutralButtonText("WTF?")
+                        .setRequestCode(REQUEST_SIMPLE_DIALOG)
+                        .show();
+                }
+            });
+        findViewById(R.id.message_title_buttons_and_checkbox_dialog)
+            .setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    SimpleDialogFragment.createBuilder(c, getSupportFragmentManager())
+                        .setTitle("Do you like this quote?")
+                        .setMessage("Jayne: \"Shiny. Let's be bad guys.\"")
+                        .setCheckBoxTextAndState("Another stupid string here...", true)
+                        .setPositiveButtonText("Love")
+                        .setNegativeButtonText("Hate")
+                        .setNeutralButtonText("WTF?")
+                        .setRequestCode(REQUEST_SIMPLE_DIALOG)
+                        .show();
+                }
+            });
         findViewById(R.id.long_buttons).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -298,6 +315,13 @@ public class DemoActivity extends ActionBarActivity implements
         Toast.makeText(this, text + "Success! " + dateFormat.format(date), Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void onCheckBoxChanged(int requestCode, boolean isChecked) {
+        if (requestCode == REQUEST_SIMPLE_DIALOG) {
+            Toast.makeText(c, "CheckBox checked state changed to " + isChecked, Toast.LENGTH_SHORT).show();
+        }
+    }
+
     // menu
 
     @Override
@@ -356,5 +380,4 @@ public class DemoActivity extends ActionBarActivity implements
         }
         return darkTheme;
     }
-
 }

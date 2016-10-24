@@ -20,6 +20,11 @@
                 tools:text="Lorem ipsum doler samet Jane is awesome guy and Kaylee is so hot." />
         </ScrollView>
 
+        <CheckBox
+            android:id="@+id/sdl_checkbox"
+            style="@style/SDL.CheckBox.Text"
+            tools:text="Lorem ipsum doler samet Jane is awesome guy and Kaylee is so hot." />
+
         <FrameLayout
             android:id="@+id/sdl_custom"
             style="@style/SDL.Layout.Custom" />
