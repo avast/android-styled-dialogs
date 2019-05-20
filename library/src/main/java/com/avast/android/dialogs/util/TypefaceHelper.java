@@ -2,7 +2,8 @@ package com.avast.android.dialogs.util;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import android.support.v4.util.SimpleArrayMap;
+
+import androidx.collection.SimpleArrayMap;
 
 /*
     Taken from:

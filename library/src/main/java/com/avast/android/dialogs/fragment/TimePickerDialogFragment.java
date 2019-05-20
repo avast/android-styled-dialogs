@@ -1,7 +1,8 @@
 package com.avast.android.dialogs.fragment;
 
 import android.content.Context;
-import android.support.v4.app.FragmentManager;
+import androidx.fragment.app.FragmentManager;
+
 import android.widget.TimePicker;
 
 import com.avast.android.dialogs.R;

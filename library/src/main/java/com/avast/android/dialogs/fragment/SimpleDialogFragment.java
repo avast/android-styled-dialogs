@@ -18,7 +18,8 @@ package com.avast.android.dialogs.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
+import androidx.fragment.app.FragmentManager;
+
 import android.text.Html;
 import android.text.SpannedString;
 import android.text.TextUtils;

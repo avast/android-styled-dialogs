@@ -2,7 +2,8 @@ package com.avast.android.dialogs.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
+import androidx.fragment.app.FragmentManager;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -14,7 +15,7 @@ import com.avast.android.dialogs.core.BaseDialogFragment;
 /**
  * Simple progress dialog that shows indeterminate progress bar together with message and dialog title (optional).<br/>
  * <p>
- * To show the dialog, start with {@link #createBuilder(android.content.Context, android.support.v4.app.FragmentManager)}.
+ * To show the dialog, start with {@link #createBuilder(android.content.Context, androidx.fragment.app.FragmentManager)}.
  * </p>
  * <p>
  * Dialog can be cancelable - to listen to cancellation, activity or target fragment must implement {@link com.avast.android.dialogs.iface.ISimpleDialogCancelListener}
