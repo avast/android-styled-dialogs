@@ -1,16 +1,18 @@
 package com.avast.android.dialogs.fragment;
 
-import android.content.Context;
-import androidx.fragment.app.FragmentManager;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
 
+import android.content.Context;
 import android.widget.TimePicker;
+
+import androidx.fragment.app.FragmentManager;
 
 import com.avast.android.dialogs.R;
 import com.avast.android.dialogs.core.BaseDialogFragment;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.TimeZone;
+
 
 /**
  * Dialog with a time picker.

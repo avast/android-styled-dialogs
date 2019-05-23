@@ -2,11 +2,11 @@ package com.avast.android.dialogs.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import androidx.fragment.app.FragmentManager;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.fragment.app.FragmentManager;
 
 import com.avast.android.dialogs.R;
 import com.avast.android.dialogs.core.BaseDialogBuilder;

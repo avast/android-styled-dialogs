@@ -16,14 +16,16 @@
 
 package com.avast.android.dialogs.fragment;
 
+import java.util.List;
+
 import android.content.Context;
 import android.os.Bundle;
-import androidx.fragment.app.FragmentManager;
-
 import android.text.Html;
 import android.text.SpannedString;
 import android.text.TextUtils;
 import android.view.View;
+
+import androidx.fragment.app.FragmentManager;
 
 import com.avast.android.dialogs.core.BaseDialogBuilder;
 import com.avast.android.dialogs.core.BaseDialogFragment;
@@ -31,7 +33,6 @@ import com.avast.android.dialogs.iface.INegativeButtonDialogListener;
 import com.avast.android.dialogs.iface.INeutralButtonDialogListener;
 import com.avast.android.dialogs.iface.IPositiveButtonDialogListener;
 
-import java.util.List;
 
 
 /**
