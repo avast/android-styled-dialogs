@@ -1,13 +1,14 @@
 package com.avast.android.dialogs.util;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Checkable;
 import android.widget.LinearLayout;
 
-import java.util.HashSet;
-import java.util.Set;
 
 public class CheckableLinearLayout extends LinearLayout implements Checkable {
     private static final int[] CHECKED_STATE_SET = {android.R.attr.state_checked};
